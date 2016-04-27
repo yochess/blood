@@ -2,5 +2,4 @@
 # added by GitSavvy
 /blood.pem
 client/lib
-# added by GitSavvy
-/node_modules/
+node_modules/
