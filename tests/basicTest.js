@@ -11,9 +11,9 @@ describe('MyController', function(){
     //It injects $controller into the test, which allows resolving registered controllers
     it('should handle names correctly', inject(function($controller){
       //Scopes are just JS objects, so we create a scope here.
-      var scope = {};
+      let scope = {};
       //Creates an instance of the controller to use as the test subject
-      var myController = $controller('MyController', {
+      let myController = $controller('MyController', {
         $scope: scope
       });
 
@@ -26,8 +26,8 @@ describe('MyController', function(){
 
   describe('addSong()', function(){
   it('should add songs', inject(function($controller) {
-    var scope = {};
-    var myController = $controller('MyController', {
+    let scope = {};
+    let myController = $controller('MyController', {
       $scope: scope
     });
 

@@ -11,7 +11,7 @@
         self.firstName = '';
         self.lastName = '';
 
-        self.getFullName = function(){
+        self.getFullName = () => {
           return self.firstName + ' ' + self.lastName;
         };
 
@@ -19,7 +19,7 @@
         'Here Comes The Sun'
         ];
 
-        $scope.addSong = function(song) {
+        $scope.addSong = (song) => {
           $scope.songs.push(song);
         };
 
