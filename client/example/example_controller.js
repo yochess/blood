@@ -1,8 +1,5 @@
 (function(){
-  angular.module('my-module', []);
-
-  angular
-    .module('my-module')
+  angular.module('my-module', [])
     .controller('MyController', [
       '$scope',
       function($scope){
@@ -12,7 +9,7 @@
         self.lastName = '';
 
         self.getFullName = () => {
-          return self.firstName + ' ' + self.lastName;
+          return `${self.firstName} ${self.lastName}`;
         };
 
         $scope.songs = [
