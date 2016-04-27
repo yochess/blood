@@ -1,1 +1,1 @@
-var app = angular.module('blood', []);
+let app = angular.module('blood', []);
