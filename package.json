@@ -4,7 +4,6 @@
   "description": "blood donation app",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bower install",
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "repository": {
