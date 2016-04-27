@@ -1,0 +1,20 @@
+{
+  "name": "blood",
+  "homepage": "https://github.com/Jboucherie/blood",
+  "authors": [
+    "John Boucherie <jvboucherie@gmail.com>"
+  ],
+  "description": "Blood donation",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
