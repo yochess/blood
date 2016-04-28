@@ -1,22 +1,21 @@
 <!DOCTYPE html>
   <html>
     <head>
-
       <script src="lib/angular/angular.js"></script>
       <script src="lib/angular-route/angular-route.js"></script>
       <script src="app.js"></script>
       <script src="bloodMap/bloodMap_controller.js"></script>
-      <script src="profile/profile_controller.js"></script>
       <script src="profile/profile_service.js"></script>
+      <script src="profile/profile_controller.js"></script>
     </head>
     <body ng-app='blood'>
       <div id='main'>
-       <div ng-include src="bloodMap/bloodMap.html"></div>
-       <div ng-include src="profile/profile.html"></div>
+      <h1>Titlebar</h1>
         <div ng-view></div>
-     <a href="/">Blood Map</a> |
-     <a href="/#/profile">Profile</a> |
- 
+        <div>
+          <a href="/">Blood Map</a> |
+          <a href="#profile">Profile</a> |
+        </div>
       </div>
     </body>
   </html>
