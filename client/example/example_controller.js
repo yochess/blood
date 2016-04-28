@@ -3,20 +3,20 @@
     .controller('MyController', [
       '$scope',
       function($scope){
-        let self = this;
+        var self = this;
 
         self.firstName = '';
         self.lastName = '';
 
-        self.getFullName = () => {
-          return `${self.firstName} ${self.lastName}`;
+        self.getFullName = function() {
+          return self.firstName + ' ' + self.lastName;
         };
 
         $scope.songs = [
         'Here Comes The Sun'
         ];
 
-        $scope.addSong = (song) => {
+        $scope.addSong = function(song) {
           $scope.songs.push(song);
         };
 
