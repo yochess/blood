@@ -3,3 +3,6 @@
 /blood.pem
 client/lib
 node_modules/
+
+# added by GitSavvy
+/server/dump.rdb
