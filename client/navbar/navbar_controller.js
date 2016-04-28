@@ -1,31 +1,49 @@
 (() => {
-  app.controller('NavController', ['$scope', ($scope, $http) => {
+  app.controller('NavController', ['$window', '$http', function($window, $http) {
     let NavCtrl = this;
-    let accountType = $window.localStorage.getItem('type');
 
+    // dummy properties for now
+    let id = $window.localStorage.getItem('id');
+    // let accountType = $window.localStorage.getItem('type');
     NavCtrl.isLoggedIn = id ? true : false;
-    if (accountType === 'user') {
-      NavCtrl.profileLink = '/'
-    } else {
-      NavCtrl.profileLink = '/login'
-    }
+    NavCtrl.displayBtn = NavCtrl.isLoggedIn ? 'Logout' : 'Login';
 
-    NavCtrl.logout = () => {
-      $http({
-        method: 'GET',
-        url: '/logout'
-      })
-      .then(() => {
-        $window.localStorage.setItem('id', '');
-        NavCtrl.isLoggedIn = false;
-        $window.location.assign('/signin');
-      });
+    NavCtrl.logInOrOut = () => {
+      NavCtrl.isLoggedIn ? logout() : login();
     };
+
+    let login = () => {
+      // $http({
+      //   method: 'GET',
+      //   url: '/'
+      // })
+      // .then(() => {
+        $window.localStorage.setItem('id', 'something');
+        // $window.localStorage.setItem('type', 'something');
+        NavCtrl.isLoggedIn = true;
+        NavCtrl.displayBtn = 'Logout';
+      // });
+    };
+
+    let logout = () => {
+      // $http({
+      //   method: 'GET',
+      //   url: '/'
+      // })
+      // .then(() => {
+        $window.localStorage.setItem('id', '');
+        // $window.localStorage.setItem('type', '');
+        NavCtrl.isLoggedIn = false;
+        NavCtrl.displayBtn = 'Login';
+      // });
+    };
+
+    return NavCtrl;
   }])
   .directive('navbar', () => {
     return {
       restrict: 'E',
-      templateUrl: './navbar.html',
+      templateUrl: './navbar/navbar.html',
       controller: 'NavController',
       controllerAs: 'NavCtrl',
       replace: true
