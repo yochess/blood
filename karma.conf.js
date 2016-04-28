@@ -18,7 +18,8 @@ module.exports = function(config) {
       'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
       'client/example/example_controller.js',
-      'tests/*.js'
+      'tests/*.js',
+      'client/*/*.tests.js'
     ],
 
 
@@ -58,7 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
 
     // Continuous Integration mode

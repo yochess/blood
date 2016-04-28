@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Jboucherie/blood.git"
   },
   "scripts": {
-   "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+   "test": "./node_modules/.bin/karma start --single-run --browsers Firefox"
   },
   "author": "",
   "license": "ISC",
