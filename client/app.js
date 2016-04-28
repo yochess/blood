@@ -1,6 +1,4 @@
-let app = angular.module('blood', [
-  'ngRoute'
-  ])
+let app = angular.module('blood', ['ngRoute'])
 
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider
@@ -16,7 +14,7 @@ let app = angular.module('blood', [
       controllerAs: 'ProfileCtrl'
   })
 
-    .otherwise({
+  .otherwise({
       redirectTo: '/'
   });
 
