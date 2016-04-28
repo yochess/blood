@@ -4,14 +4,11 @@
   "description": "blood donation app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jboucherie/blood.git"
-  },
-  "scripts": {
-   "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +17,11 @@
   },
   "homepage": "https://github.com/Jboucherie/blood#readme",
   "dependencies": {
-    "express": "^4.13.4",
     "chai": "^3.5.0",
+    "express": "^4.13.4",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
     "mocha": "^2.4.5"
   }

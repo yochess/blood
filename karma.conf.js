@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai', 'es6-shim'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -18,7 +18,8 @@ module.exports = function(config) {
       'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
       'client/example/example_controller.js',
-      'tests/*.js'
+      'tests/*.js',
+      'client/*/*.tests.js'
     ],
 
 
@@ -30,10 +31,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'client/lib/angular/angular.js': ['babel'],
-        'client/lib/angular-mocks/angular-mocks.js': ['babel'],
-        'client/example/example_controller.js': ['babel', 'es6-shim'],
-        'tests/*.js': ['babel']
     },
 
 
@@ -62,7 +59,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
 
     // Continuous Integration mode
