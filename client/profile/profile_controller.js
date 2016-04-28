@@ -5,8 +5,6 @@ app.controller('ProfileController', ['$routeParams', function($routeParams, Prof
     email: ''
   };
 
-  ProfileCtrl.user = {};
-
   ProfileCtrl.addUser = () => {
     console.log('addUser');
     Profile.addUser(ProfileCtrl.user)
