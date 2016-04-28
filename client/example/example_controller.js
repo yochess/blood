@@ -3,7 +3,7 @@
     .controller('MyController', [
       '$scope',
       function($scope){
-        let self = this;
+        var self = this;
 
         self.firstName = '';
         self.lastName = '';
