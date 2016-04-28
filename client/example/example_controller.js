@@ -1,26 +1,24 @@
-(function(){
-  angular.module('my-module', [])
-    .controller('MyController', [
-      '$scope',
-      function($scope){
-        let self = this;
 
-        self.firstName = '';
-        self.lastName = '';
+angular.module('my-module', [])
+  .controller('MyController', [
+    '$scope'],
+    function($scope){
+      let self = this;
 
-        self.getFullName = () => {
-          return `${self.firstName} ${self.lastName}`;
-        };
+      self.firstName = '';
+      self.lastName = '';
 
-        $scope.songs = [
-        'Here Comes The Sun'
-        ];
+      self.getFullName = () => {
+        return `${self.firstName} ${self.lastName}`;
+      };
 
-        $scope.addSong = (song) => {
-          $scope.songs.push(song);
-        };
+      $scope.songs = [
+      'Here Comes The Sun'
+      ];
 
-        return self;
-      }
-  ]);
-})();
+      $scope.addSong = (song) => {
+        $scope.songs.push(song);
+      };
+
+      return self;
+    });
