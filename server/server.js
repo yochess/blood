@@ -6,7 +6,6 @@ let bodyParser = require('body-parser');
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
 let mysql = require('mysql');
-let fbconfig = require(__dirname + '/configuration/fbConfig.js');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let app = express();
