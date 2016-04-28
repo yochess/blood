@@ -1,13 +1,12 @@
 app.factory('Profile', ($http) => {
-  //Just Post for profile
-
+  
   let getUser = () => {
     return $http({
       method: 'GET',
       url: '/api/profile'
     })
     .then((resp) => {
-      console.log('get response' ,resp.data);
+      console.log('get response', resp.data);
       return resp.data;
     });
   };
