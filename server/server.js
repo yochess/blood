@@ -33,7 +33,8 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
   clientID: fbconfig.facebook_api_key,
   clientSecret: fbconfig.facebook_api_secret ,
-  callbackURL: fbconfig.callback_url
+  callbackURL: fbconfig.callback_url,
+  profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
@@ -84,8 +85,9 @@ app.get('/auth/facebook/callback',
   });
 
 app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+  req.session.destroy(function (err) {
+    res.redirect('/'); //Inside a callback… bulletproof!
+  });
 });
 
 app.listen(8080, () => {
