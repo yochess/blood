@@ -9,7 +9,7 @@
         self.lastName = '';
 
         self.getFullName = () => {
-          return self.firstName + ' ' + self.lastName;
+          return `${self.firstName} ${self.lastName}`;
         };
 
         $scope.songs = [
