@@ -1,6 +1,14 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <link rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.css'>
+      <link rel='stylesheet' href='styles.css'>
+    </head>
+    <body ng-app='blood'>
+      <navbar></navbar>
+      <div id='main'>
+        <div ng-view></div>
+      </div>
       <script src="http://maps.googleapis.com/maps/api/js"></script>
       <script src="lib/angular/angular.js"></script>
       <script src="lib/angular-route/angular-route.js"></script>
@@ -9,16 +17,6 @@
       <script src="profile/profile_service.js"></script>
       <script src="profile/profile_controller.js"></script>
       <script src="navbar/navbar_controller.js"></script>
-    </head>
-    <body ng-app='blood'>
-      <navbar></navbar>
-      <div id='main'>
-      <h1>Blood</h1>
-        <div>
-          <a href="#/">Blood Map</a> |
-          <a href="#profile">Profile</a> |
-        </div>
-        <div ng-view></div>
-      </div>
+      <script src="landing/landing_controller.js"></script>
     </body>
   </html>

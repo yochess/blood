@@ -15,6 +15,12 @@ let app = angular.module('blood', ['ngRoute'])
       controller: 'ProfileController',
       controllerAs: 'ProfileCtrl'
   })
+  .when('/landing', {
+    templateUrl: 'landing/landing.html',
+    controller: 'LandingController',
+    controllerAs: 'LandingCtrl'
+
+  })
 
   .otherwise({
       redirectTo: '/'
