@@ -3,9 +3,11 @@ let app = angular.module('blood', ['ngRoute'])
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider
 
+
   .when('/', {
     templateUrl: 'bloodMap/bloodMap.html',
     controller: 'BloodMapController',
+    controllerAs: 'BloodMapCtrl'
   })
 
   .when('/profile', {
