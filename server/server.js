@@ -1,5 +1,6 @@
 'use strict'
 
+/* Dependencies */
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
@@ -8,47 +9,14 @@ let FacebookStrategy = require('passport-facebook').Strategy;
 let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
-let Sequelize = require('sequelize');
 let app = express();
 
-var sequelize = new Sequelize('blood', process.env.sqluid, process.env.sqlpw);
+/* Controllers */
+let controllers = require('./controllers/controller.js');
+let Donor = controllers.Donor;
 
-var Donor = sequelize.define('donor', {
-  uid: {type:Sequelize.STRING, primaryKey: true},
-  name: Sequelize.STRING,
-  email: Sequelize.STRING,
-  photo: Sequelize.STRING,
-  lat: Sequelize.FLOAT,
-  long: Sequelize.FLOAT,
-  bloodtype: Sequelize.STRING,
-});
-
-sequelize.sync();
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-passport.use(new FacebookStrategy({
-  clientID: process.env.fbapikey,
-  clientSecret: process.env.fbapisecret,
-  callbackURL: 'http://ec2-52-24-119-211.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos', 'email']
-},
-function(accessToken, refreshToken, profile, done) {
-  process.nextTick(function () {
-      //Check whether the User exists or not using profile.id
-      //Further DB code.
-      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile.photos[0].value}})
-      .spread(function(user, created) {
-        done(null, user);
-      });
-    });
-}
-));
+/* Routes */
+let profileRouter = require('./routes/profile.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -65,19 +33,30 @@ var isAuth = (req, res, next) => {
   res.redirect('/login');
 };
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
 });
 
-app.get('/api/profile', (req, res) => {
-  console.log(req.data);
-  res.send('Profile Page');
-});
-
-app.post('/api/profile', (req, res) => {
-  console.log('Post Profile',req.data);
-  response.status(201).end();
-});
+passport.use(new FacebookStrategy({
+  clientID: process.env.fbapikey,
+  clientSecret: process.env.fbapisecret,
+  callbackURL: 'http://ec2-52-24-119-211.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'photos', 'email']
+},
+function(accessToken, refreshToken, profile, done) {
+  process.nextTick(() => {
+      //Check whether the User exists or not using profile.id
+      //Further DB code.
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile.photos[0].value}})
+      .spread(function(user, created) {
+        done(null, user);
+      });
+    });
+}
+));
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
@@ -85,16 +64,18 @@ app.get('/auth/facebook/callback',
    successRedirect : '/',
    failureRedirect: '/login'
  }),
-  function(req, res) {
+  (req, res) => {
     res.redirect('/');
   });
 
-app.get('/logout', function(req, res){
-  req.session.destroy(function (err) {
-    res.redirect('/'); //Inside a callback… bulletproof!
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    res.redirect('/');
   });
 });
 
+app.use('/api/profile', profileRouter);
+
 app.listen(8080, () => {
-  console.log('Example app listening on port 8080!');
+  console.log('Blood app listening on port 8080!');
 });
