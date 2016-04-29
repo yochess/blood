@@ -11,7 +11,7 @@ let session = require('express-session');
 let Sequelize = require('sequelize');
 let app = express();
 
-var sequelize = new Sequelize('blood', 'process.env.sqluid', 'sqlpw');
+var sequelize = new Sequelize('blood', process.env.sqluid, process.env.sqlpw);
 
 var Donor = sequelize.define('donor', {
   uid: {type:Sequelize.STRING, primaryKey: true},
@@ -22,6 +22,8 @@ var Donor = sequelize.define('donor', {
   long: Sequelize.FLOAT,
   bloodtype: Sequelize.STRING,
 });
+
+sequelize.sync();
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -40,9 +42,9 @@ function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.name, email: profile.email, photo: profile.photos[0].val}})
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile.photos[0].value}})
       .spread(function(user, created) {
-        console.log(user);
+        done(null, user);
       });
     });
 }
