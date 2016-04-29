@@ -4,7 +4,7 @@
 
     // dummy properties for now
     let id = $window.localStorage.getItem('id');
-    // let accountType = $window.localStorage.getItem('type');
+    // let accountType = $window.localStorNage.getItem('type');
     NavCtrl.isLoggedIn = id ? true : false;
     NavCtrl.displayBtn = NavCtrl.isLoggedIn ? 'Logout' : 'Login';
 
@@ -19,7 +19,7 @@
       // })
       // .then(() => {
         $window.localStorage.setItem('id', 'something');
-        // $window.localStorage.setItem('type', 'something');
+        $window.localStorage.setItem('type', 'something');
         NavCtrl.isLoggedIn = true;
         NavCtrl.displayBtn = 'Logout';
       // });
