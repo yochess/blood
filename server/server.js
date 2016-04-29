@@ -8,19 +8,20 @@ let FacebookStrategy = require('passport-facebook').Strategy;
 let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+let Sequelize = require('sequelize');
 let app = express();
 
-// var connection = mysql.createConnection({
-//   host     : config.host,
-//   user     : config.username,
-//   password : config.password,
-//   database : config.database
-// });
+var sequelize = new Sequelize('blood', 'process.env.sqluid', 'sqlpw');
 
-// if(config.use_database==='true')
-// {
-//   connection.connect();
-// }
+var Donor = sequelize.define('donor', {
+  uid: {type:Sequelize.STRING, primaryKey: true},
+  name: Sequelize.STRING,
+  email: Sequelize.STRING,
+  photo: Sequelize.STRING,
+  lat: Sequelize.FLOAT,
+  long: Sequelize.FLOAT,
+  bloodtype: Sequelize.STRING,
+});
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -39,7 +40,10 @@ function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      return done(null, profile);
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.name, email: profile.email, photo: profile.photos[0].val}}), function(err, user) {
+        if (err) { return done(err); }
+        done(null, user);
+      });
     });
 }
 ));
