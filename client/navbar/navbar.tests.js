@@ -28,7 +28,7 @@ describe('NavController', () => {
       });
 
       navController.logInOrOut();
-      localStorage.getItem('id').should.equal('');
+      expect(localStorage.getItem('id')).to.have.length(0);
       localStorage.clear();      
     }));
   });

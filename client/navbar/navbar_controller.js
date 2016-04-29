@@ -19,7 +19,7 @@
       // })
       // .then(() => {
         $window.localStorage.setItem('id', 'something');
-        $window.localStorage.setItem('type', 'something');
+        // $window.localStorage.setItem('type', 'something');
         NavCtrl.isLoggedIn = true;
         NavCtrl.displayBtn = 'Logout';
       // });
