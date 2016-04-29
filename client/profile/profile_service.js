@@ -1,4 +1,4 @@
-app.factory('Profile', ($http) => {
+app.factory('Profile', function($http) {
   
   let getUser = () => {
     return $http({
@@ -17,16 +17,17 @@ app.factory('Profile', ($http) => {
       url: '/api/profile',
       data: {
         name: user.name,
-        email: user.email
+        email: user.email,
+        group: user.group
       }
     })
-    .then((resp) =>{
+    .then((resp) => {
       return resp.data;
     });
   };
 
   return {
-    get: getUser,
+    // get: getUser,
     addUser: addUser
   };
 });
