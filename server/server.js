@@ -10,9 +10,6 @@ let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let app = express();
 
-let fbConfigPath = __dirname + '/../fbConfig.js';
-let fbConfig = require(fbConfigPath);
-
 // var connection = mysql.createConnection({
 //   host     : config.host,
 //   user     : config.username,
@@ -33,8 +30,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new FacebookStrategy({
-  clientID: fbConfig.facebook_api_key,
-  clientSecret: fbConfig.facebook_api_secret,
+  clientID: process.env.fbapikey,
+  clientSecret: process.env.fbapisecret,
   callbackURL: 'http://ec2-52-24-119-211.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
