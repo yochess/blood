@@ -15,10 +15,10 @@ let app = angular.module('blood', ['ngRoute'])
       controller: 'ProfileController',
       controllerAs: 'ProfileCtrl'
   })
-  .when('/landing', {
-    templateUrl: 'landing/landing.html',
-    controller: 'LandingController',
-    controllerAs: 'LandingCtrl'
+  .when('/splash', {
+    templateUrl: 'splash/splash.html',
+    controller: 'SplashController',
+    controllerAs: 'SplashCtrl'
 
   })
 
