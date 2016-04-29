@@ -5,10 +5,13 @@
       <script src="lib/angular/angular.js"></script>
       <script src="lib/angular-route/angular-route.js"></script>
       <script src="app.js"></script>
+      <link rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.css'>
+      <link rel='stylesheet' href='styles.css'>
       <script src="bloodMap/bloodMap_controller.js"></script>
       <script src="profile/profile_service.js"></script>
       <script src="profile/profile_controller.js"></script>
       <script src="navbar/navbar_controller.js"></script>
+      <script src="landing/landing_controller.js"></script>
     </head>
     <body ng-app='blood'>
       <navbar></navbar>
@@ -17,7 +20,7 @@
         <div>
           <a href="#/">Blood Map</a> |
           <a href="#profile">Profile</a> |
-          <a href='/#/landing'>Landing </a> | 
+          <a href='#landing'>Landing </a> | 
         </div>
         <div ng-view></div>
       </div>
