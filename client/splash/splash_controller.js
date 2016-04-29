@@ -1,7 +1,7 @@
-app.controller('LandingController', ['$routeParams', function($routeParams) {
-  let LandingCtrl = this;
+app.controller('SplashController', ['$routeParams', function($routeParams) {
+  let SplashCtrl = this;
 
-  LandingCtrl.github = 'Github??'
+  SplashCtrl.github = 'Github??'
 }]);
 
 
