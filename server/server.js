@@ -40,9 +40,9 @@ function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.name, email: profile.email, photo: profile.photos[0].val}}), function(err, user) {
-        if (err) { return done(err); }
-        done(null, user);
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.name, email: profile.email, photo: profile.photos[0].val}})
+      .spread(function(user, created) {
+        console.log(user);
       });
     });
 }
