@@ -17,7 +17,11 @@ module.exports = function(config) {
     files: [
       'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
+      'client/lib/angular-route/angular-route.js',
+      '../node_modules/node-localstorage/LocalStorage.js',
+      'client/app.js',
       'client/example/example_controller.js',
+      'client/navbar/navbar_controller.js',
       'tests/*.js',
       'client/*/*.tests.js'
     ],
