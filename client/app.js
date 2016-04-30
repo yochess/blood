@@ -36,6 +36,11 @@ let app = angular.module('blood', ['ngRoute'])
     controller: 'HospitalAuthController',
     controllerAs: 'HospitalAuthCtrl'
   })
+  .when('/stock', {
+    templateUrl: 'stock/stock.html',
+    controller: 'StockController',
+    controllerAs: 'StockCtrl'
+  })
   .otherwise({
       redirectTo: '/'
   });
