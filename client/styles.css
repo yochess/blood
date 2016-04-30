@@ -37,24 +37,37 @@ header {
 text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
 
 }
+/* ----------------------------- */
+
+
 
 /* Second section of Splash page which will contain info about our application*/
 #about {
   padding-top: 150px;
   padding-bottom: 150px;
 }
+/* ----------------------------- */
+
+
+
 
 /* Services is the section of the splash page that has icons with small descriptions*/
 #services {
   padding-top: 150px;
   padding-bottom: 150px;
 }
+/* ----------------------------- */
+
+
 
 /* Blood Stock Level styles*/
 
 .stockGreeter {
   text-align: center;
 }
+/* ----------------------------- */
+
+
 /* Styling for bar graph in blood stock levels */
 
 .chart {
@@ -63,7 +76,6 @@ text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
   margin:60px auto;
   position:relative;
   list-style:none;
-  /*padding:0;*/
 }
 
 .chartYAxis {
@@ -82,8 +94,24 @@ text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
 }
 
 .chartBar {
+  height: 0px;
   background: #700000;
   position: absolute;
   bottom: 0;
   color: white;
+  transition-duration: 1s;
 }
+/* ----------------------------- */
+
+/* re-colors navbar to match site theme */
+.navbar{
+  margin: -1px -1px -1px -1px;
+  background-color: #700000
+}
+
+.navbar > .nav > li > a {
+  color: white;
+}
+/* ----------------------------- */
+
+
