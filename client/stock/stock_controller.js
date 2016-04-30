@@ -21,7 +21,7 @@ app.controller('StockController', ['$routeParams', function($routeParams) {
 
   StockCtrl.max = 0;
 
-  StockCtrl.handleClick = function (keyName) {
+  StockCtrl.handleClick = (keyName) => {
     StockCtrl.currentSelectedType = keyName;
   }
 
@@ -31,7 +31,7 @@ app.controller('StockController', ['$routeParams', function($routeParams) {
     }
   }
 
-  StockCtrl.setTypeLevel = function (type) {
+  StockCtrl.setTypeLevel = (type) => {
     StockCtrl.levels[StockCtrl.currentSelectedType] = StockCtrl.setLevel;
   }
 }]);
