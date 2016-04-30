@@ -6,6 +6,7 @@ let path = require('path');
 let bodyParser = require('body-parser');
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
+let LocalStrategy = require('passport-local').Strategy;
 let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
@@ -58,6 +59,50 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
+passport.use('local-signup', new LocalStrategy(function(req, username, password, done) {
+  process.nextTick(function() {
+
+    Hospital.findOne({username: username}, function(err, user) {
+      if (err)
+        return done(err);
+
+      if (user) {
+        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+      } else {
+        var newHospital = new Hospital();
+
+        Hospital.local.username = username;
+        Hospital.local.password = Hospital.generateHash(password);
+
+        Hospital.save(function(err) {
+          if (err)
+            throw err;
+          return done(null, Hospital);
+        });
+      }
+
+    });
+
+  });
+}));
+
+passport.use('local-login', new LocalStrategy(function(req, username, password, done) {
+  Hospital.findOne({username: username}, function(err, hospital) {
+    if (err)
+      return done(err);
+
+    if (!Hospital) {
+      return done(null, false, req.flash('loginMessage', 'No Hospital found.'));
+    }
+
+    if (!Hospital.validPassword(password)) {
+      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+    }
+
+    return done(null, hospital);
+  });
+}));
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
@@ -73,6 +118,16 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
   });
 });
+
+app.post('/hospital/login', passport.authenticate('local-login', {
+  successRedirect: '/hospital/profile',
+  failureRedirect: '/hospital/login'
+}));
+
+app.post('/hospital/signup', passport.authenticate('local-signup', {
+  successRedirect: '/hospital/profile',
+  failureRedirect: '/hospital/login'
+}));
 
 app.use('/api/profile', profileRouter);
 
