@@ -4,19 +4,31 @@
     let signup = (user) => {
       return $http({
         method: 'POST',
-        url: '/api/something',
+        url: '/auth/hospital/signup',
         data: user
       })
-      .then(res => { return res; })
+      .then(res => {
+        if (res.status === 200) {
+          window.location.assign('#hospital/edit');
+        } else {
+          window.location.assign('#hospital/signup');
+        }
+      });
     };
 
     let login = (user) => {
       return $http({
         method: 'POST',
-        url: '/api/something_else',
+        url: '/auth/hospital/login',
         data: user
       })
-      .then(res => { return res; });
+      .then(res => {
+        if (res.status === 200) {
+          window.location.assign('#hospital/edit');
+        } else {
+          window.location.assign('#hospital/signup');
+        }
+      });
     };
 
     let edit = (data) => {
