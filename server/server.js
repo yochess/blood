@@ -10,6 +10,7 @@ let LocalStrategy = require('passport-local').Strategy;
 let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+let bcrypt = require('bcrypt');
 let app = express();
 
 /* Controllers */
@@ -63,14 +64,12 @@ function(accessToken, refreshToken, profile, done) {
 passport.use('local-signup', new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
 
-    Hospital.findOne({username: username}, function(err, user) {
-      if (err)
-        return done(err);
-
-      if (user) {
+    Hospital.findOne({where: {username: username}}
+    .then(function(hospital) {
+      if (hospital) {
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
       } else {
-        Hospital.create({username: username, password: Hospital.generateHash(password)})
+        Hospital.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)})
         .then((hospital) => {
           return done(null, hospital);
         });
@@ -82,15 +81,13 @@ passport.use('local-signup', new LocalStrategy(function(username, password, done
 }));
 
 passport.use('local-login', new LocalStrategy(function(req, username, password, done) {
-  Hospital.findOne({username: username}, function(err, hospital) {
-    if (err)
-      return done(err);
-
-    if (!Hospital) {
+  Hospital.findOne({where: {username: username}})
+   .then(function(hospital) {
+    if (!hospital) {
       return done(null, false, req.flash('loginMessage', 'No Hospital found.'));
     }
 
-    if (!Hospital.validPassword(password)) {
+    if (!bcrypt.compareSync(password, hospital.password)) {
       return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
     }
 
