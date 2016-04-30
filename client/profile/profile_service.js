@@ -21,8 +21,9 @@ app.factory('Profile', function($http) {
         name: user.name,
         email: user.email,
         photo:user.photo,
+        address:user.address,
         lat:user.lat,
-        long:user.lat,
+        long:user.long,
         bloodtype: user.bloodtype
       }
     })
