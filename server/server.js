@@ -68,7 +68,7 @@ passport.use('local-signup', new LocalStrategy(function(username, password, done
     Hospital.findOne({where: {username: username}})
     .then(function(hospital) {
       if (hospital) {
-        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+        return done(null, false);
       } else {
         Hospital.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)})
         .then((hospital) => {
@@ -81,15 +81,15 @@ passport.use('local-signup', new LocalStrategy(function(username, password, done
   });
 }));
 
-passport.use('local-login', new LocalStrategy(function(req, username, password, done) {
+passport.use('local-login', new LocalStrategy(function(username, password, done) {
   Hospital.findOne({where: {username: username}})
-   .then(function(hospital) {
+  .then(function(hospital) {
     if (!hospital) {
-      return done(null, false, req.flash('loginMessage', 'No Hospital found.'));
+      return done(null, false);
     }
 
     if (!bcrypt.compareSync(password, hospital.password)) {
-      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+      return done(null, false);
     }
 
     return done(null, hospital);
@@ -107,20 +107,19 @@ app.get('/auth/facebook/callback',
   });
 
 app.get('/logout', (req, res) => {
-  req.session.destroy(err => {
+    req.logout();
     res.redirect('/');
-  });
 });
 
-app.post('/hospital/login', passport.authenticate('local-login', {
-  successRedirect: '/hospital/profile',
-  failureRedirect: '/hospital/login'
-}));
+app.post('/auth/hospital/login', passport.authenticate('local-login'),
+  (req, res) => {
+    res.send(req.user);
+  });
 
-app.post('/hospital/signup', passport.authenticate('local-signup', {
-  successRedirect: '/hospital/profile',
-  failureRedirect: '/hospital/login'
-}));
+app.post('/auth/hospital/signup', passport.authenticate('local-signup'),
+  (req, res) => {
+    res.send(req.user);
+  });
 
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
