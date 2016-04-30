@@ -20,6 +20,7 @@ let Hospital = controllers.Hospital;
 
 /* Routes */
 let profileRouter = require('./routes/profile.js');
+let hospitalRouter = require('./routes/hospital.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -122,6 +123,7 @@ app.post('/hospital/signup', passport.authenticate('local-signup', {
 }));
 
 app.use('/api/profile', profileRouter);
+app.use('/api/hospital', hospitalRouter);
 
 app.listen(8080, () => {
   console.log('Blood app listening on port 8080!');

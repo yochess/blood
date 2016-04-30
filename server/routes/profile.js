@@ -1,9 +1,6 @@
 'use strict'
-let path = require('path');
-let controllerPath = path.resolve(__dirname + '/../controllers/controller.js');
 let profileRouter = require('express').Router();
-
-let controllers = require(controllerPath);
+let controllers = require('../controllers/controller.js');
 let Donor = controllers.Donor;
 
 profileRouter.route('/')
