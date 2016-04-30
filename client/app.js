@@ -4,7 +4,7 @@ let app = angular.module('blood', ['ngRoute'])
   $routeProvider
 
 
-  .when('/', {
+  .when('/bloodmap', {
     templateUrl: 'bloodMap/bloodMap.html',
     controller: 'BloodMapController',
     controllerAs: 'BloodMapCtrl'
