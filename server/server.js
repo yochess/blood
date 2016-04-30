@@ -60,7 +60,7 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-passport.use('local-signup', new LocalStrategy(function(req, username, password, done) {
+passport.use('local-signup', new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
 
     Hospital.findOne({username: username}, function(err, user) {
@@ -70,15 +70,9 @@ passport.use('local-signup', new LocalStrategy(function(req, username, password,
       if (user) {
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
       } else {
-        var newHospital = new Hospital();
-
-        Hospital.local.username = username;
-        Hospital.local.password = Hospital.generateHash(password);
-
-        Hospital.save(function(err) {
-          if (err)
-            throw err;
-          return done(null, Hospital);
+        Hospital.create({username: username, password: Hospital.generateHash(password)})
+        .then((hospital) => {
+          return done(null, hospital);
         });
       }
 
