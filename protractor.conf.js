@@ -20,7 +20,7 @@ exports.config = {
 
   // add more dependencies 
   specs: [
-    'client/navbar/navbar.e2e_tests.js'
+    'client/**/*.e2e_tests.js'
 
 
 
