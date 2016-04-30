@@ -1,0 +1,46 @@
+<div id="hospital-edit-container">
+  <h3>Initial Hospital Setup</h3>
+  <form ng-submit="HospitalAuthCtrl.edit()">
+    <p>
+      Enter your hospital name
+      <input type="text" ng-model="HospitalAuthCtrl.name" required/>
+    </p>
+    <p>
+      Enter your hospital location
+      <input type="text" ng-model="HospitalAuthCtrl.location" required/>
+    </p>
+    <p>
+      Rank blood A+
+      <input type="text" ng-model="HospitalAuthCtrl.blood.aP" required/>
+    </p>
+    <p>
+      Rank blood A-
+      <input type="text" ng-model="HospitalAuthCtrl.blood.aN" required/>
+    </p>
+    <p>
+      Rank blood B+
+      <input type="text" ng-model="HospitalAuthCtrl.blood.bP" required/>
+    </p>
+    <p>
+      Rank blood B-
+      <input type="text" ng-model="HospitalAuthCtrl.blood.bN" required/>
+    </p>
+    <p>
+      Rank blood AB+
+      <input type="text" ng-model="HospitalAuthCtrl.blood.abP" required/>
+    </p>
+    <p>
+      Rank blood AB-
+      <input type="text" ng-model="HospitalAuthCtrl.blood.abN" required/>
+    </p>
+    <p>
+      Rank blood O+
+      <input type="text" ng-model="HospitalAuthCtrl.blood.oP" required/>
+    </p>
+    <p>
+      Rank blood O-
+      <input type="text" ng-model="HospitalAuthCtrl.blood.oN" required/>
+    </p>
+    <button>Submit</button>
+  </form>
+</div>
