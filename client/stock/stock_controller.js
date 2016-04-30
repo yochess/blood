@@ -33,6 +33,12 @@ app.controller('StockController', ['$routeParams', function($routeParams) {
 
   StockCtrl.setTypeLevel = (type) => {
     StockCtrl.levels[StockCtrl.currentSelectedType] = StockCtrl.setLevel;
+
+    for (key in StockCtrl.levels ) {
+      if (StockCtrl.levels[key] > StockCtrl.max) {
+        StockCtrl.max = StockCtrl.levels[key];
+      }
+    }
   }
 }]);
 
