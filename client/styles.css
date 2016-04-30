@@ -24,18 +24,12 @@
 /* Overrides for Bootstrap header tags*/
 header {
   position: relative;
-  /*background-size: cover;*/
   background-position: center;
   background: url('assests/donor.png') no-repeat;
-   -webkit-background-size: 100% auto;
-   -moz-background-size: 100% auto;
-   -o-background-size: 100% auto;
-    background-size: 100% auto;
-    height: 600px;
   text-align: center;
   color: white;
-text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
-
+  text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
+  background-size: cover;
 }
 /* ----------------------------- */
 
@@ -112,15 +106,23 @@ text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
   color: white;
 }
 
-.navbar > .nav > li > a:active {
-  color: gray;
+.navbar > .nav > li > a:focus{
+  color: red;
 }
 
 .navbar > .nav > li > a:hover {
   color: gray;
 }
 
+.navbar {
+  border-radius: 0 !important;
+}
+
 /* ----------------------------- */
 
+/* Controls styling for bloodmap page */
 
+.bloodmap {
+  text-align: center;
+  margin: 25px auto;
 }
