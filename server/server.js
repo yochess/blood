@@ -6,17 +6,21 @@ let path = require('path');
 let bodyParser = require('body-parser');
 let passport = require('passport');
 let FacebookStrategy = require('passport-facebook').Strategy;
+let LocalStrategy = require('passport-local').Strategy;
 let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+let bcrypt = require('bcrypt');
 let app = express();
 
 /* Controllers */
 let controllers = require('./controllers/controller.js');
 let Donor = controllers.Donor;
+let Hospital = controllers.Hospital;
 
 /* Routes */
 let profileRouter = require('./routes/profile.js');
+let hospitalRouter = require('./routes/hospital.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -58,6 +62,40 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
+passport.use('local-signup', new LocalStrategy(function(username, password, done) {
+  process.nextTick(function() {
+
+    Hospital.findOne({where: {username: username}})
+    .then(function(hospital) {
+      if (hospital) {
+        return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+      } else {
+        Hospital.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)})
+        .then((hospital) => {
+          return done(null, hospital);
+        });
+      }
+
+    });
+
+  });
+}));
+
+passport.use('local-login', new LocalStrategy(function(req, username, password, done) {
+  Hospital.findOne({where: {username: username}})
+   .then(function(hospital) {
+    if (!hospital) {
+      return done(null, false, req.flash('loginMessage', 'No Hospital found.'));
+    }
+
+    if (!bcrypt.compareSync(password, hospital.password)) {
+      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+    }
+
+    return done(null, hospital);
+  });
+}));
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
@@ -74,7 +112,18 @@ app.get('/logout', (req, res) => {
   });
 });
 
+app.post('/hospital/login', passport.authenticate('local-login', {
+  successRedirect: '/hospital/profile',
+  failureRedirect: '/hospital/login'
+}));
+
+app.post('/hospital/signup', passport.authenticate('local-signup', {
+  successRedirect: '/hospital/profile',
+  failureRedirect: '/hospital/login'
+}));
+
 app.use('/api/profile', profileRouter);
+app.use('/api/hospital', hospitalRouter);
 
 app.listen(8080, () => {
   console.log('Blood app listening on port 8080!');

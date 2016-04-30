@@ -13,6 +13,14 @@ let Donor = sequelize.define('donor', {
   bloodtype: Sequelize.STRING,
 });
 
+let Hospital = sequelize.define('hospital', {
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  lat: Sequelize.FLOAT,
+  long: Sequelize.FLOAT
+});
+
 sequelize.sync();
 
 module.exports.Donor = Donor;
+module.exports.Hospital = Hospital;
