@@ -23,8 +23,9 @@ module.exports = function(config) {
       'client/example/example_controller.js',
       //Add tests below this line
       'client/navbar/navbar_controller.js',
+      'client/hospital_auth/**/*.js',
       //above this line. Don't forget commas at the end!
-      'client/*/*.tests.js'
+      'client/**/*.tests.js'
     ],
 
 
