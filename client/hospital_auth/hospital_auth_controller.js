@@ -1,6 +1,9 @@
 (() => {
   app.controller('HospitalAuthController', ['$window', 'HospitalAuth', function($window, HospitalAuth) {
     let HospitalAuthCtrl = this;
+    HospitalAuthCtrl.name = '';
+    HospitalAuthCtrl.location = '';
+    HospitalAuthCtrl.blood = {};
 
     HospitalAuthCtrl.signup = () => {
       let user = {
@@ -35,6 +38,10 @@
           console.error('This will obviously log'); 
         });
     };
+
+    HospitalAuthCtrl.edit = () => {
+      console.log('HI');
+    }
 
   }]);
 })();
