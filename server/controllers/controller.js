@@ -23,3 +23,4 @@ let Hospital = sequelize.define('hospital', {
 sequelize.sync();
 
 module.exports.Donor = Donor;
+module.exports.Hospital = Hospital;
