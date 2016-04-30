@@ -21,9 +21,9 @@ module.exports = function(config) {
       '../node_modules/node-localstorage/LocalStorage.js',
       'client/app.js',
       'client/example/example_controller.js',
+      //Add tests below this line
       'client/**/*controller.js',
       'client/**/*service.js',
-      //Add tests below this line
       'client/**/*.tests.js'
       //above this line. Don't forget commas at the end!
     ],
