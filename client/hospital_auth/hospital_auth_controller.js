@@ -1,46 +1,47 @@
 (() => {
   app.controller('HospitalAuthController', ['$window', 'HospitalAuth', function($window, HospitalAuth) {
     let HospitalAuthCtrl = this;
-    HospitalAuthCtrl.name = '';
-    HospitalAuthCtrl.location = '';
-    HospitalAuthCtrl.blood = {};
+    HospitalAuthCtrl.signupObj = {};
+    HospitalAuthCtrl.loginObj = {};
+    HospitalAuthCtrl.editObj = {
+      bloodObj: {}
+    };
 
     HospitalAuthCtrl.signup = () => {
-      let user = {
-        email: HospitalAuthCtrl.email,
-        password: HospitalAuthCtrl.password
-      };
-
       HospitalAuth
-        .signup(user)
+        .signup(HospitalAuthCtrl.signupObj)
         .then(res => { 
-          $window.localStorage.setItem('id', res.id);
-          $window.location.assign('/');
+          // $window.localStorage.setItem('resObj', res);
+          // $window.location.assign('#/');
         })
-        .catch(() => { 
-          console.error('This will obviously log'); 
+        .catch(err => {
+          console.error(err);
         });
     };
 
+    // travis will reroute on the server side
     HospitalAuthCtrl.login = () => {
-      let user = {
-        email: HospitalAuthCtrl.email,
-        password: HospitalAuthCtrl.password
-      };
-
       HospitalAuth
-        .signup(user)
+        .login(HospitalAuthCtrl.loginObj)
         .then(res => { 
-          $window.localStorage.setItem('id', res.id);
-          $window.location.assign('/');
+          // $window.localStorage.setItem('id', res.id);
+          // $window.location.assign('#');
         })
-        .catch(() => { 
-          console.error('This will obviously log'); 
-        });
+        .catch(err => {
+          console.error(err);
+        }); 
     };
 
     HospitalAuthCtrl.edit = () => {
-      console.log('HI');
+      HospitalAuth
+        .edit(HospitalAuthCtrl.editObj)
+        .then(res => {
+          // $window.localStorage.setItem('id', res.id);
+          // $window.location.assign('#');
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
 
   }]);
