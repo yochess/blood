@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'sinon-chai'],
 
 
     // list of files / patterns to load in the browser
@@ -21,10 +21,9 @@ module.exports = function(config) {
       '../node_modules/node-localstorage/LocalStorage.js',
       'client/app.js',
       'client/example/example_controller.js',
-
+      //Add tests below this line
       'client/**/*controller.js',
       'client/**/*service.js',
-      //Add tests below this line
       'client/**/*.tests.js'
       //above this line. Don't forget commas at the end!
     ],

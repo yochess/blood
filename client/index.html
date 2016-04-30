@@ -3,9 +3,10 @@
     <head>
       <link rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.css'>
       <link rel='stylesheet' href='styles.css'>
+      <link rel='stylesheet' href='lib/normalize-css/normalize.css' href='normalize.css'>
     </head>
     <body ng-app='blood'>
-      <navbar></navbar>
+      <navbar class='navbar navbar-default'></navbar>
       <div id='main'>
         <div ng-view></div>
       </div>
@@ -20,6 +21,7 @@
       <script src="splash/splash_controller.js"></script>
       <script src="hospital_auth/hospital_auth_service.js"></script>
       <script src="hospital_auth/hospital_auth_controller.js"></script>
+      <script src="stock/stock_controller.js"></script>
     </body>
   </html>
   
