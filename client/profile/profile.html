@@ -1,13 +1,34 @@
 <div id='container'>
   <h1> User Profile</h1>
-  <h3>Update User Profile</h3>
+
   <div>
-    <form ng-submit="ProfileCtrl.addUser()" novalidate class="simple-form">
-      Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
-      E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-      Blood group: <input type="text" ng-model="ProfileCtrl.user.group" /><br />
-      <input type="submit" id="submit" value="Submit" /> 
-    </form>
+    <button ng-click="ProfileCtrl.Edit()">Edit user</button>
+  </div>
+
+  <div ng-show="ProfileCtrl.Edit">
+    <ul>
+    <li>User: {{displayuser.name}} </li>
+    <li>Email: {{displayuser.email}} </li>
+    <li>Location : {{displayuser.location}} </li>
+    <li>Bloodgroup: {{displayuser.group}} </li>
+    </ul>
+
+  </div>
+
+<!-- <div>
+  <h3>Edit Profile: <input type="checkbox"  ng-model="checked"></h3>
+</div> -->
+
+  <div>
+    <div ng-hide="ProfileCtrl.Edit">
+      <form ng-submit="ProfileCtrl.updateUser()" novalidate class="simple-form">
+        Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
+        E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
+        Location: <input type="text" ng-model="ProfileCtrl.user.location" /><br />
+        Blood group: <input type="text" ng-model="ProfileCtrl.user.group" /><br />
+        <input type="submit" id="submit" value="Submit" /> 
+      </form>
+    </div>
   </div>
 </div>
 
