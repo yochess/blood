@@ -21,7 +21,16 @@ let app = angular.module('blood', ['ngRoute'])
     controllerAs: 'SplashCtrl'
 
   })
-
+  .when('/hospital/signup', {
+    templateUrl: 'hospital_auth/signup/signup.html',
+    controller: 'HospitalAuthController',
+    controllerAs: 'HospitalAuthCtrl'
+  })
+  .when('/hospital/login', {
+    templateUrl: 'hospital_auth/login/login.html',
+    controller: 'HospitalAuthController',
+    controllerAs: 'HospitalAuthCtrl'
+  })
   .otherwise({
       redirectTo: '/'
   });
