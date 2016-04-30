@@ -1,9 +1,9 @@
-app.factory('Profile', ($http) => {
+app.factory('Profile', function($http) {
   
   let getUser = () => {
     return $http({
       method: 'GET',
-      url: '/api/profile'
+      url: '/api/profile',
     })
     .then((resp) => {
       console.log('get response', resp.data);
@@ -11,22 +11,28 @@ app.factory('Profile', ($http) => {
     });
   };
 
-  let addUser = (user) => {
+
+  let updateUser = (user) => {
+    console.log(user);
     return $http({
-      method: 'POST',
+      method: 'PUT',
       url: '/api/profile',
       data: {
         name: user.name,
-        email: user.email
+        email: user.email,
+        photo:user.photo,
+        lat:user.lat,
+        long:user.lat,
+        bloodtype: user.bloodtype
       }
     })
-    .then((resp) =>{
+    .then((resp) => {
       return resp.data;
     });
   };
 
   return {
-    get: getUser,
-    addUser: addUser
+    getUser, 
+    updateUser
   };
 });
