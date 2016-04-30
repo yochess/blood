@@ -64,7 +64,7 @@ function(accessToken, refreshToken, profile, done) {
 passport.use('local-signup', new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
 
-    Hospital.findOne({where: {username: username}}
+    Hospital.findOne({where: {username: username}})
     .then(function(hospital) {
       if (hospital) {
         return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
