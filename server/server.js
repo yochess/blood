@@ -15,6 +15,7 @@ let app = express();
 /* Controllers */
 let controllers = require('./controllers/controller.js');
 let Donor = controllers.Donor;
+let Hospital = controllers.Hospital;
 
 /* Routes */
 let profileRouter = require('./routes/profile.js');
