@@ -19,6 +19,7 @@ app.controller('StockController', ['$routeParams', function($routeParams) {
   StockCtrl.yAxis = 'Amount';
   StockCtrl.xAxis = 'Types';
 
+  StockCtrl.maxType = 'oPos';
   StockCtrl.max = 0;
 
   StockCtrl.handleClick = (keyName) => {
@@ -34,6 +35,12 @@ app.controller('StockController', ['$routeParams', function($routeParams) {
   StockCtrl.setTypeLevel = (type) => {
     StockCtrl.levels[StockCtrl.currentSelectedType] = StockCtrl.setLevel;
 
+    //Reset max if the previous max is the same blood type as the one being changed.
+    if ( StockCtrl.maxType === StockCtrl.currentSelectedType ) {
+      StockCtrl.max = StockCtrl.levels[StockCtrl.currentSelectedType];
+    }
+    
+    //Then see which type is the new maximum.
     for (key in StockCtrl.levels ) {
       if (StockCtrl.levels[key] > StockCtrl.max) {
         StockCtrl.max = StockCtrl.levels[key];
