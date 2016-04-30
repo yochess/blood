@@ -20,10 +20,10 @@ app.factory('Profile', function($http) {
       data: {
         name: user.name,
         email: user.email,
-        photo:'',
+        photo:user.photo,
         lat:user.lat,
         long:user.lat,
-        group: user.group
+        bloodtype: user.bloodtype
       }
     })
     .then((resp) => {
@@ -32,7 +32,7 @@ app.factory('Profile', function($http) {
   };
 
   return {
-    getUser: getUser,
-    updateUser: updateUser
+    getUser, 
+    updateUser
   };
 });
