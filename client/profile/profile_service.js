@@ -4,7 +4,6 @@ app.factory('Profile', function($http) {
     return $http({
       method: 'GET',
       url: '/api/profile',
-      params: {id:id}
     })
     .then((resp) => {
       console.log('get response', resp.data);
@@ -13,14 +12,17 @@ app.factory('Profile', function($http) {
   };
 
 
-  let addUser = (user) => {
+  let updateUser = (user) => {
+    console.log(user);
     return $http({
-      method: 'POST',
+      method: 'PUT',
       url: '/api/profile',
       data: {
         name: user.name,
         email: user.email,
-        location:user.location,
+        photo:'',
+        lat:user.lat,
+        long:user.lat,
         group: user.group
       }
     })
@@ -30,7 +32,7 @@ app.factory('Profile', function($http) {
   };
 
   return {
-    // get: getUser,
-    addUser: addUser
+    getUser: getUser,
+    updateUser: updateUser
   };
 });

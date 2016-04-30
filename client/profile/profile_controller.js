@@ -1,56 +1,56 @@
 app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', function($routeParams, Profile, $rootScope) {
   let ProfileCtrl = this;
 
-  let sampleuser =[ 
+  let sampleuser =
             {
-        id:0,
+        uid:0,
         name: 'Donor',
         email: 'Donor@gmail.com',
-        location: 'HackReactor, Sanfransisco',
-        group: 'O+'
-      }
-  ];
+        photo: 'http://www.who.int/campaigns/world-blood-donor-day/2013/promotional/tshirt_red_logo1.jpg?ua=1',
+        lat: 'HackReactor, Sanfransisco',
+        long: '',
+        bloodtype: 'O+'
+      };
+ 
 
   ProfileCtrl.user = {
-    id:'',
+    uid:'',
     name: '',
     email: '',
-    location: '',
-    group: ''
+    photo:'',
+    lat: '',
+    long:'',
+    bloodtype: ''
   };
 
-  ProfileCtrl.Edit = true;
-    ProfileCtrl.Edit = function() {
-        ProfileCtrl.Edit = !ProfileCtrl.Edit;
-    };
+  ProfileCtrl.edit = true;
+  ProfileCtrl.Edit = function() {
+    ProfileCtrl.edit = !ProfileCtrl.edit;
+  };
  
 
   ProfileCtrl.updateUser = () => {
-    console.log('updateUser', ProfileCtrl.user);
-    sampleuser.push(ProfileCtrl.user);
-    console.log(sampleuser);
-    // Profile.addUser(ProfileCtrl.user)
-    //   .then((profile) => {
-    //     ProfileCtrl.user = profile;
-    //   })
-    //   .catch((error) =>{
-    //     console.error(error);
-    //   });
+    // console.log('updateUser', ProfileCtrl.user);
+    // sampleuser.push(ProfileCtrl.user);
+    // console.log(sampleuser);
+    Profile.updateUser(ProfileCtrl.user)
+      .then((profile) => {
+        ProfileCtrl.user = profile;
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
   };
 
 
    let displayUser = function () {
 
-    $rootScope.displayuser = {};
-    // console.log(sampleuser[0]);
+    ProfileCtrl.user = sampleuser;
+    // Profile.getUser()
 
-    $rootScope.displayuser = sampleuser[0];
-    console.log($rootScope.displayuser);
-
-    // Profile.getUser($rootScope.displayuser.id)
     // .then(function (user) {
-    //   ProfileCtrl.displayuser = user[0];
-    //   console.log();
+    //   // ProfileCtrl.user = user;
+    //   console.log(ProfileCtrl.user);
 
     // })
     // .catch(function (error) {
