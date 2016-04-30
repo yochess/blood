@@ -8,7 +8,6 @@
         data: user
       })
       .then(res => { return res; })
-      .catch(err => { return err; });
     };
 
     let login = (user) => {
@@ -17,12 +16,7 @@
         url: '/api/something_else',
         data: user
       })
-      .then(res => { 
-        return res; 
-      })
-      .catch(err => { 
-        return err; 
-      });
+      .then(res => { return res; });
     };
 
     let edit = (data) => {
@@ -31,8 +25,7 @@
         url: 'api/coolio',
         data: data
       })
-      .then(res => { return res; })
-      .catch(err => { return err; });
+      .then(res => { return res; });
     }
 
     return {
