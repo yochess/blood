@@ -1,18 +1,21 @@
 <div id='container'>
   <h1> User Profile</h1>
 
-  <div>
-    <button ng-click="ProfileCtrl.Edit()">Edit user</button>
-  </div>
 
-  <div ng-show="ProfileCtrl.Edit">
+  <div ng-show="ProfileCtrl.edit">
+    <div  style="height:100px;width:200px;">
+      <img ng-src="{{ProfileCtrl.user.photo}}" height="100" width="100">
+    </div>
     <ul>
-    <li>User: {{displayuser.name}} </li>
-    <li>Email: {{displayuser.email}} </li>
-    <li>Location : {{displayuser.location}} </li>
-    <li>Bloodgroup: {{displayuser.group}} </li>
+    <li>User: {{ProfileCtrl.user.name}} </li>
+    <li>Email: {{ProfileCtrl.user.email}} </li>
+    <li>Location : {{ProfileCtrl.user.lat}} </li>
+    <li>Bloodtype: {{ProfileCtrl.user.bloodtype}} </li>
     </ul>
 
+  </div>
+   <div>
+    <button ng-click="ProfileCtrl.Edit()">Edit user</button>
   </div>
 
 <!-- <div>
@@ -20,12 +23,15 @@
 </div> -->
 
   <div>
-    <div ng-hide="ProfileCtrl.Edit">
+    <div ng-hide="ProfileCtrl.edit">
+    <div style="height:100px;width:200px;">
+      <img ng-model=ProfileCtrl.user.photo height="100" width="100">
+    </div>
       <form ng-submit="ProfileCtrl.updateUser()" novalidate class="simple-form">
         Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
         E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-        Location: <input type="text" ng-model="ProfileCtrl.user.location" /><br />
-        Blood group: <input type="text" ng-model="ProfileCtrl.user.group" /><br />
+        Location: <input type="text" ng-model="ProfileCtrl.user.lat" /><br />
+        Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
         <input type="submit" id="submit" value="Submit" /> 
       </form>
     </div>
