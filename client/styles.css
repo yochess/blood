@@ -2,6 +2,7 @@
   background-color: #700000;
 }
 
+/* Header Content tag which contains all header materials*/
 .header-content {
   text-align: center;
   position: relative;
@@ -10,17 +11,7 @@
   padding-top: 90px;
 }
 
-
-.header-content-inner h1{
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 0;
-  vertical-align: middle;
-  display: inline-block;
-  line-height: 200px;
-}
-
+/* Text inside the header */
 .header-content-inner p {
   font-weight: 300;
   color: fade(white, 70%);
@@ -30,6 +21,7 @@
   display: inline-block;
 }
 
+/* Overrides for Bootstrap header tags*/
 header {
   position: relative;
   /*background-size: cover;*/
@@ -46,12 +38,52 @@ text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;
 
 }
 
+/* Second section of Splash page which will contain info about our application*/
 #about {
   padding-top: 150px;
   padding-bottom: 150px;
 }
 
+/* Services is the section of the splash page that has icons with small descriptions*/
 #services {
   padding-top: 150px;
   padding-bottom: 150px;
+}
+
+/* Blood Stock Level styles*/
+
+.stockGreeter {
+  text-align: center;
+}
+/* Styling for bar graph in blood stock levels */
+
+.chart {
+  border-left:1px solid black;
+  border-bottom:1px solid black;
+  margin:60px auto;
+  position:relative;
+  list-style:none;
+  /*padding:0;*/
+}
+
+.chartYAxis {
+  position:absolute;
+  transform:rotate(-90deg);
+  transform-origin: bottom left;
+  bottom:0;
+  padding:5px;
+}
+
+.chartXAxis {
+  position:absolute;
+  top:100%;
+  width:100%;
+  padding:5px;
+}
+
+.chartBar {
+  background: #700000;
+  position: absolute;
+  bottom: 0;
+  color: white;
 }
