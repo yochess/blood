@@ -1,5 +1,4 @@
-(() => {
-  app.controller('HospitalAuthController', ['$window', 'HospitalAuth', function($window, HospitalAuth) {
+app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScope',  'HospitalAuth', function($window, HospitalAuth) {
     let HospitalAuthCtrl = this;
     HospitalAuthCtrl.signupObj = {};
     HospitalAuthCtrl.loginObj = {};
@@ -32,17 +31,6 @@
         }); 
     };
 
-    HospitalAuthCtrl.edit = () => {
-      HospitalAuth
-        .edit(HospitalAuthCtrl.editObj)
-        .then(res => {
-          // $window.localStorage.setItem('id', res.id);
-          // $window.location.assign('#');
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    }
 
   }]);
-})();
+
