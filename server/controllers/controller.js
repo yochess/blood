@@ -7,6 +7,7 @@ let Donor = sequelize.define('donor', {
   uid: {type:Sequelize.STRING, primaryKey: true},
   name: Sequelize.STRING,
   email: Sequelize.STRING,
+  address: Sequelize.STRING,
   photo: Sequelize.STRING,
   latitude: Sequelize.FLOAT,
   longitude: Sequelize.FLOAT,

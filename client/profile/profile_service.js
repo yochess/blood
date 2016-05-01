@@ -1,13 +1,12 @@
 app.factory('Profile', function($http) {
-  
+
   let getUser = () => {
     return $http({
       method: 'GET',
       url: '/api/profile',
     })
-    .then((resp) => {
-      console.log('get response', resp.data);
-      return resp.data;
+    .then((res) => {
+      return res.data;
     });
   };
 
@@ -22,8 +21,8 @@ app.factory('Profile', function($http) {
         email: user.email,
         photo:user.photo,
         address:user.address,
-        lat:user.lat,
-        long:user.long,
+        latitude:user.latitude,
+        longitude:user.longitude,
         bloodtype: user.bloodtype
       }
     })
@@ -33,7 +32,7 @@ app.factory('Profile', function($http) {
   };
 
   return {
-    getUser, 
+    getUser,
     updateUser
   };
 });

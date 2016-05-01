@@ -1,36 +1,23 @@
 app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', function($routeParams, Profile, $rootScope) {
   let ProfileCtrl = this;
 
-  let sampleuser =
-            {
-        uid:0,
-        name: 'Donor',
-        email: 'Donor@gmail.com',
-        photo: 'http://www.who.int/campaigns/world-blood-donor-day/2013/promotional/tshirt_red_logo1.jpg?ua=1',
-        address: '944 Market Street, San Francisco, CA 94102',
-        lat :'37.783697',
-        long: '-122.408966',
-        bloodtype: 'O+'
-      };
- 
-
   ProfileCtrl.user = {
     uid:'',
     name: '',
     email: '',
     photo:'',
     address:'',
-    lat: '',
-    long:'',
+    latitude: '',
+    longitude:'',
     bloodtype: ''
   };
 
-  ProfileCtrl.edit = true;
+  ProfileCtrl.edit = false;
   ProfileCtrl.Edit = function() {
     ProfileCtrl.edit = !ProfileCtrl.edit;
   };
 
- 
+
   ProfileCtrl.getlatlong = () => {
     let address = document.getElementById('address').value;
     console.log(address);
@@ -45,8 +32,8 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
         }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               console.log(results);
-              ProfileCtrl.user.lat = results[0].geometry.location.lat();
-              ProfileCtrl.user.long = results[0].geometry.location.lng();
+              ProfileCtrl.user.latitude = results[0].geometry.location.lat();
+              ProfileCtrl.user.longitude = results[0].geometry.location.lng();
             }
         });
     }
@@ -60,6 +47,7 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
     Profile.updateUser(ProfileCtrl.user)
       .then((profile) => {
         ProfileCtrl.user = profile;
+        ProfileCtrl.Edit();
       })
       .catch((error) => {
         console.error(error);
@@ -68,21 +56,16 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
 
 
    let displayUser = function () {
-
-    ProfileCtrl.user = sampleuser;
-    // Profile.getUser()
-
-    // .then(function (user) {
-    //   // ProfileCtrl.user = user;
-    //   console.log(ProfileCtrl.user);
-
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    Profile.getUser()
+    .then((user) => {
+      // ProfileCtrl.user = user;
+      ProfileCtrl.user = user;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
-
   displayUser();
-  
+
 }]);
