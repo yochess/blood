@@ -8,16 +8,26 @@ let Donor = sequelize.define('donor', {
   name: Sequelize.STRING,
   email: Sequelize.STRING,
   photo: Sequelize.STRING,
-  lat: Sequelize.FLOAT,
-  long: Sequelize.FLOAT,
+  latitude: Sequelize.FLOAT,
+  longitude: Sequelize.FLOAT,
   bloodtype: Sequelize.STRING,
+  lastcontacted: Sequelize.DATE,
 });
 
 let Hospital = sequelize.define('hospital', {
   username: Sequelize.STRING,
   password: Sequelize.STRING,
-  lat: Sequelize.FLOAT,
-  long: Sequelize.FLOAT
+  name: Sequelize.STRING,
+  latitude: Sequelize.FLOAT,
+  longitude: Sequelize.FLOAT,
+  opos: {type: Sequelize.INTEGER, defaultValue: 20},
+  oneg: {type: Sequelize.INTEGER, defaultValue: 20},
+  apos: {type: Sequelize.INTEGER, defaultValue: 20},
+  aneg: {type: Sequelize.INTEGER, defaultValue: 20},
+  bpos: {type: Sequelize.INTEGER, defaultValue: 20},
+  bneg: {type: Sequelize.INTEGER, defaultValue: 20},
+  abpos: {type: Sequelize.INTEGER, defaultValue: 20},
+  abneg: {type: Sequelize.INTEGER, defaultValue: 20},
 });
 
 sequelize.sync();

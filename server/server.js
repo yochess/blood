@@ -47,7 +47,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
   clientID: process.env.fbapikey,
   clientSecret: process.env.fbapisecret,
-  callbackURL: 'http://ec2-52-24-119-211.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
+  callbackURL: 'http://ec2-52-36-156-213.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function(accessToken, refreshToken, profile, done) {

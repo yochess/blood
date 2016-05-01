@@ -1,4 +1,4 @@
-app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScope',  'HospitalAuth', function($window, HospitalAuth) {
+app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScope',  'HospitalAuth', function($window, $routeParams, $rootScope, HospitalAuth) {
     let HospitalAuthCtrl = this;
     HospitalAuthCtrl.signupObj = {};
     HospitalAuthCtrl.loginObj = {};
@@ -9,7 +9,7 @@ app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScop
     HospitalAuthCtrl.signup = () => {
       HospitalAuth
         .signup(HospitalAuthCtrl.signupObj)
-        .then(res => { 
+        .then(res => {
           // $window.localStorage.setItem('resObj', res);
           // $window.location.assign('#/');
         })
@@ -22,13 +22,13 @@ app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScop
     HospitalAuthCtrl.login = () => {
       HospitalAuth
         .login(HospitalAuthCtrl.loginObj)
-        .then(res => { 
+        .then(res => {
           // $window.localStorage.setItem('id', res.id);
           // $window.location.assign('#');
         })
         .catch(err => {
           console.error(err);
-        }); 
+        });
     };
 
 
