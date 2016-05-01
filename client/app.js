@@ -33,8 +33,8 @@ let app = angular.module('blood', ['ngRoute'])
   })
   .when('/hospital/edit', {
     templateUrl: '/hospital_edit/edit.html',
-    controller: 'HospitalAuthController',
-    controllerAs: 'HospitalAuthCtrl'
+    controller: 'HospitalEditController',
+    controllerAs: 'HospitalEditCtrl'
   })
   .when('/stock', {
     templateUrl: 'stock/stock.html',
