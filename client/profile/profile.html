@@ -9,7 +9,10 @@
     <ul>
     <li>User: {{ProfileCtrl.user.name}} </li>
     <li>Email: {{ProfileCtrl.user.email}} </li>
-    <li>Location : {{ProfileCtrl.user.lat}} </li>
+    <li>Location : {{ProfileCtrl.user.address}} </li>
+    <li>Lat : {{ProfileCtrl.user.lat}} </li>
+    <li>Long : {{ProfileCtrl.user.long}} </li>
+
     <li>Bloodtype: {{ProfileCtrl.user.bloodtype}} </li>
     </ul>
 
@@ -30,12 +33,16 @@
       <form ng-submit="ProfileCtrl.updateUser()" novalidate class="simple-form">
         Name: <input type="text" ng-model="ProfileCtrl.user.name" /><br />
         E-mail: <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-        Location: <input type="text" ng-model="ProfileCtrl.user.lat" /><br />
+        Location: <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/><br />
+        <p>Latitude:{{ProfileCtrl.user.lat}}</p>
+        <p>Longitude:{{ProfileCtrl.user.long}}</p>
         Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
         <input type="submit" id="submit" value="Submit" /> 
       </form>
     </div>
   </div>
 </div>
+
+
 
 
