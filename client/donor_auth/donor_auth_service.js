@@ -13,6 +13,9 @@
         } else {
           $window.location.assign('#donor/signup');
         }
+      })
+      .catch(error => {
+        console.log("donor cannot sign-up");
       });
     };
 
@@ -30,7 +33,7 @@
         }
       })
       .catch(error => {
-        console.log("user does not exists");
+        console.log("donor does not exist");
       });
     };
 
