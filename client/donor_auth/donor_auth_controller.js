@@ -6,12 +6,9 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
     DonorAuthCtrl.signup = () => {
       DonorAuth.signup(DonorAuthCtrl.signupObj)
       .then((donor) => {
-        console.log('hi>>>', donor);
         $rootScope.NavCtrl.login();
 
       });
-    //   $rootScope.NavCtrl.login();
-    //   $window.location.assign('#profile');
      };
 
     DonorAuthCtrl.login = () => {
@@ -20,8 +17,6 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
       .then((donor) => {
         $rootScope.NavCtrl.login();
 
-      });
-      
+      });   
     };
-
   }]);
