@@ -1,6 +1,6 @@
 app.factory('Profile', function($http) {
 
-  let getUser = () => {
+  let get = () => {
     return $http({
       method: 'GET',
       url: '/api/profile',
@@ -11,7 +11,7 @@ app.factory('Profile', function($http) {
   };
 
 
-  let updateUser = (user) => {
+  let update = (user) => {
     console.log(user);
     return $http({
       method: 'PUT',
@@ -31,8 +31,5 @@ app.factory('Profile', function($http) {
     });
   };
 
-  return {
-    getUser,
-    updateUser
-  };
+  return {get, update};
 });

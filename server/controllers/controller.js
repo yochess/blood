@@ -19,6 +19,8 @@ let Hospital = sequelize.define('hospital', {
   username: Sequelize.STRING,
   password: Sequelize.STRING,
   name: Sequelize.STRING,
+  address: Sequelize.STRING,
+  email: Sequelize.STRING,
   latitude: Sequelize.FLOAT,
   longitude: Sequelize.FLOAT,
   opos: {type: Sequelize.INTEGER, defaultValue: 20},

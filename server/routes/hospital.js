@@ -11,7 +11,7 @@ hosptialRouter.route('/profile')
   Hospital.findOne({where: {id: req.user.id}})
   .then(hospital => {
     hospital.update(req.body)
-    .then(() => res.end());
+    .then(() => res.send(hospital));
   });
 });
 
