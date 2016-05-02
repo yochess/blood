@@ -148,6 +148,16 @@ app.post('/auth/hospital/signup', passport.authenticate('hospital-signup'),
     res.send(req.user);
   });
 
+app.post('/auth/donor/login', passport.authenticate('donor-login'),
+  (req, res) => {
+    res.send(req.user);
+  });
+
+app.post('/auth/donor/signup', passport.authenticate('donor-signup'),
+  (req, res) => {
+    res.send(req.user);
+  });
+
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 
