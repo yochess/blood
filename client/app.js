@@ -36,6 +36,16 @@ let app = angular.module('blood', ['ngRoute'])
     controller: 'HospitalEditController',
     controllerAs: 'HospitalEditCtrl'
   })
+  .when('/donor/login', {
+    templateUrl: '/donor_auth/login/login.html',
+    controller: 'DonorAuthController',
+    controllerAs: 'DonorAuthCtrl'
+  })
+  .when('/donor/signup', {
+    templateUrl: '/donor_auth/signup/signup.html',
+    controller: 'DonorAuthController',
+    controllerAs: 'DonorAuthCtrl'
+  })
   .when('/stock', {
     templateUrl: 'stock/stock.html',
     controller: 'StockController',
