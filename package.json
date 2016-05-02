@@ -45,7 +45,6 @@
     "passport-local": "^1.0.0",
     "protractor": "^3.3.0",
     "sequelize": "^3.22.0",
-    "protractor": "^3.3.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   }
