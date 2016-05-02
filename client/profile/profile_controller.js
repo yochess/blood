@@ -41,9 +41,6 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
 
 
   ProfileCtrl.updateUser = () => {
-    // console.log('updateUser', ProfileCtrl.user);
-    // sampleuser.push(ProfileCtrl.user);
-    // console.log(sampleuser);
     Profile.update(ProfileCtrl.user)
       .then((profile) => {
         ProfileCtrl.user = profile;
@@ -58,7 +55,6 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
    let displayUser = function () {
     Profile.get()
     .then((user) => {
-      // ProfileCtrl.user = user;
       ProfileCtrl.user = user;
     })
     .catch((error) => {
