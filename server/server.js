@@ -15,6 +15,7 @@ let profileRouter = require('./routes/profile.js');
 let hospitalRouter = require('./routes/hospital.js');
 let postRouter = require('./routes/post.js');
 let authRouter = auth.authRouter;
+let calendarRouter = require('./routes/calendar.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -28,6 +29,7 @@ app.use(passport.session());
 
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
+app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
 app.use('/auth', authRouter);
 
