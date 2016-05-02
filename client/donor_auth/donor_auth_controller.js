@@ -4,22 +4,19 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
     DonorAuthCtrl.loginObj = {};
 
     DonorAuthCtrl.signup = () => {
-      DonorAuth.signup(DonorAuthCtrl.signupObj);
-      $rootScope.NavCtrl.login();
-      $window.location.assign('#profile');
-    };
+      DonorAuth.signup(DonorAuthCtrl.signupObj)
+      .then((donor) => {
+        $rootScope.NavCtrl.login();
+
+      });
+     };
 
     DonorAuthCtrl.login = () => {
-      DonorAuth.login(DonorAuthCtrl.loginObj);
-      // $http({
-      //   method: 'GET',
-      //   url: '/something'
-      // })
-      // .then(() => {
+      console.log('inside controller');
+      DonorAuth.login(DonorAuthCtrl.loginObj)
+      .then((donor) => {
         $rootScope.NavCtrl.login();
-        $window.location.assign('#bloodmap');
-      // });
-      
-    };
 
+      });   
+    };
   }]);
