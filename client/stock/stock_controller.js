@@ -33,24 +33,6 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
   StockCtrl.maxType = 'opos';
   StockCtrl.max = 0;
 
-   StockCtrl.get = () => {
-    return $http({
-      method: 'GET',
-      url: '/api/hospital/profile',
-    })
-    .then((res) => {
-      for(key in res.data){
-        if(StockCtrl.levels[key]){
-          StockCtrl.levels[key] = res.data[key];
-        }
-        if (StockCtrl.levels[key] > StockCtrl.max ){
-          StockCtrl.max = StockCtrl.levels[key];
-        }
-      }
-      return res.data;
-    });
-  };
-
   StockCtrl.put = (data) => {
     return $http({
       method: 'PUT',
@@ -58,7 +40,6 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
       data: data
     })
     .then((res) => {
-      console.log(res.data);
       return res.data;
     });
   };
@@ -77,7 +58,6 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
           StockCtrl.max = StockCtrl.levels[key];
         }
       }
-      console.log(res.data);
       return res.data;
     });
   };
@@ -108,7 +88,6 @@ app.controller('StockController', ['$routeParams', '$http', function($routeParam
     let saveData = {
     }
     saveData[StockCtrl.currentSelectedType] = parseInt(StockCtrl.setLevel);
-    console.log(saveData);
     StockCtrl.put(saveData);
   }
 
