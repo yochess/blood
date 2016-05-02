@@ -16,7 +16,7 @@
     <div class='chartXAxis'> {{StockCtrl.xAxis}} </div>
     <div ng-repeat='(key, value) in StockCtrl.levels' ng-click='StockCtrl.handleClick(this.key)' class='chartBar'
     style="height: {{value / StockCtrl.max * 200}}px; width:{{400 / 8}}px; left: {{$index / 6 * 400}}px;">
-      {{key}}: 
+      {{StockCtrl.rename[key]}}: 
 
       <div class='chartBarValue'>
         {{value}}
