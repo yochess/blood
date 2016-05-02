@@ -22,5 +22,4 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
       
     };
 
-
   }]);

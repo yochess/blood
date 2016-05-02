@@ -3,8 +3,7 @@
     let NavCtrl = this;
     let id = $window.localStorage.getItem('id');
 
-    NavCtrl.isLoggedout = true;
-    NavCtrl.isLoggedin = false;
+    NavCtrl.isLoggedIn = false;
 
     NavCtrl.login = () => {
       // $http({
@@ -13,8 +12,7 @@
       // })
       // .then(() => {
         $window.localStorage.setItem('id', 'something');
-        NavCtrl.isLoggedout = false;
-        NavCtrl.isLoggedin = true;
+        NavCtrl.isLoggedIn = true;
       // });
     };
 
@@ -25,8 +23,7 @@
       // })
       // .then(() => {
         $window.localStorage.setItem('id', '');
-        NavCtrl.isLoggedout = true;
-        NavCtrl.isLoggedin = false;
+        NavCtrl.isLoggedIn = false;
       // });
     };
 
