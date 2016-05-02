@@ -54,7 +54,7 @@ function(accessToken, refreshToken, profile, done) {
   process.nextTick(() => {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
+      Donor.findOrCreate({where: {fbid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
       .spread(function(user, created) {
         done(null, user);
       });
@@ -62,7 +62,7 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-passport.use('local-signup', new LocalStrategy(function(username, password, done) {
+passport.use('hospital-signup', new LocalStrategy(function(username, password, done) {
   process.nextTick(function() {
 
     Hospital.findOne({where: {username: username}})
@@ -81,7 +81,7 @@ passport.use('local-signup', new LocalStrategy(function(username, password, done
   });
 }));
 
-passport.use('local-login', new LocalStrategy(function(username, password, done) {
+passport.use('hospital-login', new LocalStrategy(function(username, password, done) {
   Hospital.findOne({where: {username: username}})
   .then(function(hospital) {
     if (!hospital) {
@@ -111,12 +111,12 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.post('/auth/hospital/login', passport.authenticate('local-login'),
+app.post('/auth/hospital/login', passport.authenticate('hospital-login'),
   (req, res) => {
     res.send(req.user);
   });
 
-app.post('/auth/hospital/signup', passport.authenticate('local-signup'),
+app.post('/auth/hospital/signup', passport.authenticate('hospital-signup'),
   (req, res) => {
     res.send(req.user);
   });

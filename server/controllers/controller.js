@@ -4,7 +4,9 @@ let Sequelize = require('sequelize');
 let sequelize = new Sequelize('blood', process.env.sqluid, process.env.sqlpw);
 
 let Donor = sequelize.define('donor', {
-  uid: {type:Sequelize.STRING, primaryKey: true},
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  fbid: Sequelize.STRING,
   name: Sequelize.STRING,
   email: Sequelize.STRING,
   address: Sequelize.STRING,
