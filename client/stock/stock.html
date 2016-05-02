@@ -3,21 +3,23 @@
 
   Need to make an update? Click on a bar to select that type, then edit it here: 
   
-    <div style='text-align: center;'>{{StockCtrl.currentSelectedType}} </div>        <input type="text" ng-model="StockCtrl.setLevel" />        <button ng-click="StockCtrl.setTypeLevel()" type="button">Set Level</button>
+    <div style='text-align: center;'>
+      {{StockCtrl.currentSelectedType}} 
+    </div>
+    <input type="text" ng-model="StockCtrl.setLevel" />
+    <button ng-click="StockCtrl.setTypeLevel()" type="button">Set Level</button>
 
 </div>
-
-
 
   <div class='chart' style='width: 550px; height: 300px;'>
     <div class='chartYAxis' style='width: 400px;'>{{StockCtrl.yAxis}}</div>
     <div class='chartXAxis'> {{StockCtrl.xAxis}} </div>
     <div ng-repeat='(key, value) in StockCtrl.levels' ng-click='StockCtrl.handleClick(this.key)' class='chartBar'
     style="height: {{value / StockCtrl.max * 200}}px; width:{{400 / 8}}px; left: {{$index / 6 * 400}}px;">
-      {{key}}: 
+      {{StockCtrl.rename[key]}}: 
 
-      <div class='chartBarValue'>{{value}}</div>
-    </div>
-    <div>
+      <div class='chartBarValue'>
+        {{value}}
+      </div>
     </div>
   </div>
