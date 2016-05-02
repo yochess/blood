@@ -1,4 +1,4 @@
-app.controller('HospitalAuthController', ['$window','$routeParams' ,  '$rootScope',  'HospitalAuth', function($window, $routeParams, $rootScope, HospitalAuth) {
+app.controller('HospitalAuthController', ['$window','$routeParams' , '$rootScope',  'HospitalAuth', function($window, $routeParams, $rootScope, HospitalAuth) {
     let HospitalAuthCtrl = this;
     HospitalAuthCtrl.signupObj = {};
     HospitalAuthCtrl.loginObj = {};
