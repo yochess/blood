@@ -1,9 +1,14 @@
-<div id="donor-login">
-  <h3>Login for donors</h3>
+<div id="hospital-login">
+  <h3>Login for hospitals</h3>
   <form ng-submit="DonorAuthCtrl.login()">
+    <p>
+      Enter your username: 
+      <input type="text" ng-model="DonorAuthCtrl.loginObj.username" required/>
+    </p>
+    <p>
+      Enter your password: 
+      <input type="text" ng-model="DonorAuthCtrl.loginObj.password" required/>
+    </p>
     <button>Login</button>
   </form>
-  <p>No Account? 
-    <a href="#donor/signup">Sign up!</a>
-  </p>
 </div>
