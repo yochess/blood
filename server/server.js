@@ -96,6 +96,33 @@ passport.use('hospital-login', new LocalStrategy(function(username, password, do
   });
 }));
 
+passport.use('donor-signup', new LocalStrategy(function(username, password, done) {
+  Donor.findOne({where: {username: username}})
+  .then(function(donor) {
+    if (donor) {
+      return done(null,false);
+    } else {
+      Donor.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(9), null)})
+      .then((donor) => {
+        return done(null, donor);
+      });
+    }
+  });
+}));
+
+passport.use('donor-login', new LocalStrategy(function(username, password, done){
+  Donor.findOne({where: {username: username}})
+  .then(function(donor) {
+    if (!donor) {
+      return done(null,false);
+    }
+    if (!bcrypt.compareSync(password, donor.password)) {
+      return done(null, false);
+    }
+    return done(null, donor);
+  });
+}));
+
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
