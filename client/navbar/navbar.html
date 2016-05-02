@@ -7,10 +7,11 @@
       <a href="#profile">Profile</a>
     </li>
     <li>
-      <a href="/" ng-click="NavCtrl.logInOrOut()">{{NavCtrl.displayBtn}}</a>
+      <a ng-hide="NavCtrl.isLoggedIn" href="#donor/login">Login</a>
+      <a ng-show="NavCtrl.isLoggedIn" ng-click="NavCtrl.logout()" href="#donor/login">Logout</a>
     </li>
     <li>
-      <a href='#splash'> Splash</a>
+      <a href='#splash'>Splash</a>
     </li>
     <li>
       <a href='#stock'>Blood Stocks</a>
