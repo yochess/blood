@@ -1,4 +1,4 @@
-app.controller('DonorAuthController', ['$window','$routeParams' ,  '$rootScope',  'DonorAuth', function($window, $routeParams, $rootScope, DonorAuth) {
+app.controller('DonorAuthController', ['$window','$rootScope', 'DonorAuth', function($window, $rootScope, DonorAuth) {
     let DonorAuthCtrl = this;
     DonorAuthCtrl.signupObj = {};
     DonorAuthCtrl.loginObj = {};
@@ -12,6 +12,8 @@ app.controller('DonorAuthController', ['$window','$routeParams' ,  '$rootScope',
 
     DonorAuthCtrl.login = () => {
       DonorAuth.login(DonorAuthCtrl.loginObj);
+      $rootScope.NavCtrl.logInOrOut();
+      $window.location.assign('#bloodmap');
     };
 
 
