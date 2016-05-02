@@ -31,19 +31,6 @@
       });
     };
 
-    let edit = (data) => {
-      return $http({
-        method: 'POST',
-        url: 'api/coolio',
-        data: data
-      })
-      .then(res => { return res; });
-    }
-
-    return {
-      signup: signup,
-      login: login,
-      edit: edit
-    };
-  })
+    return {signup, login};
+  });
 })();

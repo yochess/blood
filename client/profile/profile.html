@@ -2,7 +2,7 @@
   <h1> User Profile</h1>
 
 
-  <div ng-show="ProfileCtrl.edit">
+  <div ng-hide="ProfileCtrl.edit">
     <div  style="height:100px;width:200px;">
       <img ng-src="{{ProfileCtrl.user.photo}}" height="100" width="100">
     </div>
@@ -10,8 +10,8 @@
     <li>User: {{ProfileCtrl.user.name}} </li>
     <li>Email: {{ProfileCtrl.user.email}} </li>
     <li>Location : {{ProfileCtrl.user.address}} </li>
-    <li>Lat : {{ProfileCtrl.user.lat}} </li>
-    <li>Long : {{ProfileCtrl.user.long}} </li>
+    <li>Lat : {{ProfileCtrl.user.latitude}} </li>
+    <li>Long : {{ProfileCtrl.user.longitude}} </li>
 
     <li>Bloodtype: {{ProfileCtrl.user.bloodtype}} </li>
     </ul>
@@ -26,7 +26,7 @@
 </div> -->
 
   <div>
-    <div ng-hide="ProfileCtrl.edit">
+    <div ng-show="ProfileCtrl.edit">
     <div style="height:100px;width:200px;">
       <img ng-model=ProfileCtrl.user.photo height="100" width="100">
     </div>
@@ -37,7 +37,7 @@
         <p>Latitude:{{ProfileCtrl.user.lat}}</p>
         <p>Longitude:{{ProfileCtrl.user.long}}</p>
         Blood Type: <input type="text" ng-model="ProfileCtrl.user.bloodtype" /><br />
-        <input type="submit" id="submit" value="Submit" /> 
+        <input type="submit" id="submit" value="Submit" />
       </form>
     </div>
   </div>

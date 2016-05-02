@@ -1,18 +1,17 @@
 app.factory('Profile', function($http) {
-  
-  let getUser = () => {
+
+  let get = () => {
     return $http({
       method: 'GET',
       url: '/api/profile',
     })
-    .then((resp) => {
-      console.log('get response', resp.data);
-      return resp.data;
+    .then((res) => {
+      return res.data;
     });
   };
 
 
-  let updateUser = (user) => {
+  let update = (user) => {
     console.log(user);
     return $http({
       method: 'PUT',
@@ -22,8 +21,8 @@ app.factory('Profile', function($http) {
         email: user.email,
         photo:user.photo,
         address:user.address,
-        lat:user.lat,
-        long:user.long,
+        latitude:user.latitude,
+        longitude:user.longitude,
         bloodtype: user.bloodtype
       }
     })
@@ -32,8 +31,5 @@ app.factory('Profile', function($http) {
     });
   };
 
-  return {
-    getUser, 
-    updateUser
-  };
+  return {get, update};
 });

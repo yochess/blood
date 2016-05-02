@@ -14,7 +14,7 @@ profileRouter.route('/')
   Donor.findOne({where: {uid: req.user.uid}})
   .then(user => {
     user.update(req.body)
-    .then(() => res.end());
+    .then(() => res.send(user));
   });
 });
 
