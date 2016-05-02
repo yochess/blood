@@ -11,6 +11,7 @@ let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let bcrypt = require('bcrypt');
+let _ = require('lodash');
 let app = express();
 
 /* Controllers */
@@ -38,7 +39,10 @@ var isAuth = (req, res, next) => {
 };
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  let type = user instanceof Donor.Instance ? 'donor' : 'hospital';
+  let oldUser = Object.assign({}, user.dataValues);
+  let extendedUser = _.assign(oldUser, {type: type});
+  done(null, extendedUser);
 });
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
@@ -134,8 +138,8 @@ app.get('/auth/facebook/callback',
   });
 
 app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
 app.post('/auth/hospital/login', passport.authenticate('hospital-login'),
