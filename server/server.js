@@ -48,13 +48,13 @@ passport.use(new FacebookStrategy({
   clientID: process.env.fbapikey,
   clientSecret: process.env.fbapisecret,
   callbackURL: 'http://ec2-52-36-156-213.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos', 'email']
+  profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(() => {
       //Check whether the User exists or not using profile.id
       //Further DB code.
-      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile.photos[0].value}})
+      Donor.findOrCreate({where: {uid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
       .spread(function(user, created) {
         done(null, user);
       });
