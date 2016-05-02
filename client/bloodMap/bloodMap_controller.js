@@ -1,5 +1,5 @@
 
-app.controller('BloodMapController', ['$routeParams', function($routeParams, $rootScope) {
+app.controller('BloodMapController', ['$routeParams', '$rootScope', function($routeParams, $rootScope) {
 
   let BloodMapCtrl = this;
 
