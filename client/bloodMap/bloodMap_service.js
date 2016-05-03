@@ -4,13 +4,13 @@ app.factory('BloodMap', function($http) {
     return $http({
       method: 'GET',
       url: '/api/hospital/geo',
-       query: 'geoobj'// {H: xd, j: qd}
+      params: geoobj// {H: xd, j: qd}
     })
-    .then((res) => {
+    .then((res) => {  
       return res.data;
     });
   };
 
-  return getmap;
+  return {getmap};
 
 });
