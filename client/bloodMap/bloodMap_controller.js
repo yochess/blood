@@ -60,8 +60,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
   let gethospitals = (bounds) => {
      geoobj.minLat = $scope.bounds.H.H;
      geoobj.maxLat = $scope.bounds.H.j;
-     geoobj.minLong= $scope.bounds.j.H;
-     geoobj.maxLong= $scope.bounds.j.j;
+     geoobj.minLong= $scope.bounds.j.j;
+     geoobj.maxLong= $scope.bounds.j.H;
      // console.log(geoobj);
     BloodMap.getMap(geoobj)
     .then(function (list) {
