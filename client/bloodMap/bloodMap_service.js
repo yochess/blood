@@ -1,6 +1,6 @@
 app.factory('BloodMap', function($http) {
 
-  let getmap = (geoobj) => {
+  let getMap = (geoobj) => {
     return $http({
       method: 'GET',
       url: '/api/hospital/geo',
@@ -11,6 +11,6 @@ app.factory('BloodMap', function($http) {
     });
   };
 
-  return {getmap};
+  return {getMap};
 
 });
