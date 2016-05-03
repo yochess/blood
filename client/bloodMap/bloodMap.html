@@ -1,5 +1,17 @@
-<div id="container-home" class='bloodmap'>
-  <span id="blood-map">'Blood Map'</span>
-  <div id="googleMap" class='bloodmap' style="width:500px;height:380px;"></div>
+<div class="container-home">
+  <div class="blooodmap col-md-9">
+    <span>'Blood Map'</span>
+    <div id="googleMap" class='bloodmap' style="width:500px;height:380px;"></div>
+  </div>
+  <div class="feed col-md-3" ng-controller="FeedController as FeedCtrl">
+    <label for="post-content">Content</label>
+    <input name="post-content" id="post-content" type="text" ng-model="FeedCtrl.content">
+    <a href="" ng-click=FeedCtrl.submit()>Post</a>
+    <div ng-repeat="post in FeedCtrl.posts">
+      <img ng-src="{{post.donor.photo}}" alt="Poster Photo">
+      <span class="poster-name">{{post.donor.name || post.hospital.name}}</span>
+      <p>{{post.content}}</p>
+    </div>
+  </div>
 </div>
 
