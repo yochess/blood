@@ -63,7 +63,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
      geoobj.minLong= $scope.bounds.j.H;
      geoobj.maxLong= $scope.bounds.j.j;
      // console.log(geoobj);
-    BloodMap.getmap(geoobj)
+    BloodMap.getMap(geoobj)
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals.push(list);
