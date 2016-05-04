@@ -13,8 +13,8 @@ postRouter.route('/')
   let minLong = queries.minLong || -1000;
   let maxLat = queries.maxLat || 1000;
   let maxLong = queries.maxLong || 1000;
-  let createdAt = queries.createdAt || 0;
-  let limit = createdAt ? null : 20;
+  let lastUpdated = queries.lastUpdated || 0;
+  let limit = lastUpdated ? null : 20;
 
   Post.findAll({
     where: {
@@ -27,7 +27,7 @@ postRouter.route('/')
         $lt: maxLong
       },
       createdAt: {
-        $gt: createdAt
+        $gt: lastUpdated
       }
     },
     include: [Donor, Hospital],
