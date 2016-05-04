@@ -3,7 +3,7 @@
   <div ng-hide="HospitalEditCtrl.edit">
 
     <ul>
-      <li>Hospital: {{HospitalEditCtrl.editObj.name}} </li>
+      <li>Hospital: {{HospitalEditCtrl.editObj.username}} </li>
       <li>Email: {{HospitalEditCtrl.editObj.email}} </li>
       <li>Location: {{HospitalEditCtrl.editObj.address}} </li>
       <li>Lat: {{HospitalEditCtrl.editObj.latitude}} </li>
@@ -28,7 +28,7 @@
       </p>
       <p>
         Enter your hospital location
-        <input type="text" id="address" ng-model="HospitalEditCtrl.editObj.address" name="address" ng-change="HospitalCtrl.getlatlong()" required/>
+        <input type="text" id="address" ng-model="HospitalEditCtrl.editObj.address" name="address" ng-change="HospitalEditCtrl.getlatlong()" required/>
       </p>
       <p ng-repeat="bloodType in HospitalEditCtrl.bloodTypes">
         Enter {{bloodType.display}} blood stock level

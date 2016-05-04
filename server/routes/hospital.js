@@ -27,12 +27,14 @@ hospitalRouter.route('/profile/:id')
 hospitalRouter.route('/geo')
 .get((req, res) => {
   let queries = url.parse(req.url, true).query;
-
   Hospital.findAll({where: {
     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
   }})
-  .then(hospitals => res.send(hospitals));
+
+  .then(hospitals => {
+    res.send(hospitals);
+  });
 });
 
 module.exports = hospitalRouter

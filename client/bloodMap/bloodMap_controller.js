@@ -38,9 +38,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
     let GeoMarker = new GeolocationMarker(BloodMapCtrl.map);
     GeoMarker.setCircleOptions({fillColor: '#808080'});
-     let bounds;
-     
-
+   
     google.maps.event.addDomListener(window, 'load', initializeMaps);
     google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);}, 400));
     google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});   
@@ -48,8 +46,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
    
     GeoMarker.setMap(BloodMapCtrl.map);  
     setZoom(BloodMapCtrl.map, sites);
-    setMarkers(BloodMapCtrl.map, sites);
-     
+    setMarkers(BloodMapCtrl.map, sites);     
     
   };
 
@@ -60,16 +57,14 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
   let gethospitals = (bounds) => {
      geoobj.minLat = $scope.bounds.H.H;
      geoobj.maxLat = $scope.bounds.H.j;
-     geoobj.minLong= $scope.bounds.j.H;
-     geoobj.maxLong= $scope.bounds.j.j;
-     // console.log(geoobj);
+     geoobj.minLong= $scope.bounds.j.j;
+     geoobj.maxLong= $scope.bounds.j.H;
     BloodMap.getMap(geoobj)
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
-      BloodMapCtrl.hospitals.push(list);
-      // console.log(BloodMapCtrl.hospitals);
-    //   setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
-    // setMarkers(BloodMapCtrl.map, BloodMapCtrl.hospitals);
+      BloodMapCtrl.hospitals = list;
+      // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
+      setMarkers(BloodMapCtrl.map, BloodMapCtrl.hospitals);
     })
     .catch(function (error) {
       console.error(error);
@@ -81,7 +76,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
  let showLocation = (position) => {
     $scope.latitude = position.coords.latitude;
-     $scope.longitude = position.coords.longitude;
+    $scope.longitude = position.coords.longitude;
   };
 
   let errorHandler = (err) => {
@@ -90,32 +85,28 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       }
    };
 
-
+   BloodMapCtrl.markerIDs = {};
 
   let setMarkers = (map, markers) => {
-  for (var i = 0; i < markers.length; i++) {
-    var site = markers[i];
-    var siteLatLng = new google.maps.LatLng(site[1], site[2]);
-    
-    var marker = new google.maps.Marker({
+  for (let i = 0; i < markers.length; i++) {
+    let site = markers[i];
+    // var siteLatLng = new google.maps.LatLng(site[1], site[2]);
+    let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
+    let marker = new google.maps.Marker({
       position: siteLatLng,
-      map: map,
-      title: site[0],
-      // Markers drop on the map
-      animation: google.maps.Animation.DROP
+      map: map
     });
-    
-  
   }
 };
 /*
 Set the zoom to fit comfortably all the markers in the map
 */
 let setZoom = (map, markers) => {
-  var boundbox = new google.maps.LatLngBounds();
-  for ( var i = 0; i < markers.length; i++ )
+  let boundbox = new google.maps.LatLngBounds();
+  for ( let i = 0; i < markers.length; i++ )
   {
     boundbox.extend(new google.maps.LatLng(markers[i][1], markers[i][2]));
+    //boundbox.extend(new google.maps.LatLng(markers[i].latitude, markers[i].longitude));
   }
   map.setCenter(boundbox.getCenter());
   map.fitBounds(boundbox);
