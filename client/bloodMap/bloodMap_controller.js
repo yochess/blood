@@ -89,6 +89,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
     for (let i = 0; i < markers.length; i++) {
       let site = markers[i];
+      console.log(site);
       
       let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
 
@@ -99,11 +100,20 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       let marker = new google.maps.Marker({
         position: siteLatLng,
         map: map,
-        title: site.name
+        title: site.name,
+        html: site.hospitalurl
       });
 
+      let iwContent = '<div id="iw_container">' +
+      '<div class="iw_title">' + site.name + '</div>' +
+      '<div class="iw_content">' + site.phonenum + '</div>' +
+      '<div class="iw_content">' + site.openhours + '</div>' +
+      '<div class="iw_content">' + site.address + '</div>' +
+      '<div class="iw_content">' + '<a href=marker.html >' +marker.html+ '</div></div>';
+
+
       marker.addListener('click', function() {
-      infowindow.setContent(marker.title);
+      infowindow.setContent(iwContent);
       infowindow.open(map, marker);
     });
   }
