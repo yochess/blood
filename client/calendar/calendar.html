@@ -1,0 +1,28 @@
+<div id="calendar-container">
+  <h3>Schedule an Appointment!</h3>
+
+  <p>
+    You must be signed into google to see your information
+    <button ng-click="CalendarCtrl.googleLogin()">Sign in with google</button>
+  </p>
+
+  <form ng-submit="CalendarCtrl.createEvent()">
+    <p>
+      Choose a date: 
+      <input type="datetime-local" ng-model="CalendarCtrl.dateTime"/>
+      <button>Schedule it!</button>
+    </p>
+  </form>
+  <p>
+    If you deleted an event from your calendar, click
+    <button ng-click="CalendarCtrl.reload()">refresh</button>
+  </p>
+  <div id="calendar"></div>
+  <script type='text/javascript'>
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        events: '/api/calendar/'
+      });
+    });
+  </script>
+</div>

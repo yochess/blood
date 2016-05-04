@@ -21,6 +21,41 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+// start of google auth requirements
+const GOOGLE_ID = process.env.calendarid;
+const GOOGLE_SECRET = process.env.calendarsecret;
+const GOOGLE_REDIRECT = process.env.calendarurl;
+
+let google = require('googleapis');
+let OAuth2 = google.auth.OAuth2;
+let oauth2Client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
+
+const URL = oauth2Client.generateAuthUrl({
+  access_type: 'offline',
+  scope: 'https://www.googleapis.com/auth/calendar'
+});
+// end of google auth requirements
+
+// start of google auth routes
+authRouter.route('/url')
+  .get((req, res) => {
+    res.send(URL)
+  });
+
+authRouter.route('/googleToken')
+  .get((req, res) => {
+    let code = req.query.code;
+    oauth2Client.getToken(code, (err, tokens) => {
+      if (err) {
+        return console.error('an error has occured in setting the token: ' + err);
+      }
+      oauth2Client.setCredentials(tokens);
+      google.options({ auth: oauth2Client }); // set auth as a global default
+      res.send('authenticated!');
+    });
+});
+// end of google auth routes
+
 passport.use(new FacebookStrategy({
   clientID: process.env.fbapikey,
   clientSecret: process.env.fbapisecret,
