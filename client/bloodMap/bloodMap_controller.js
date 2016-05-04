@@ -3,8 +3,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
   let BloodMapCtrl = this;
 
- let infowindow = null;
-
   let sites = [
       ['American Red Cross', 37.788513, -122.399940, 1, ],
       ['LapCorp', 37.788405, -122.409769, 2, ],
@@ -85,17 +83,31 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       }
    };
 
-   BloodMapCtrl.markerIDs = {};
+  
 
   let setMarkers = (map, markers) => {
+
+
   for (let i = 0; i < markers.length; i++) {
     let site = markers[i];
+    console.log('site',site);
     // var siteLatLng = new google.maps.LatLng(site[1], site[2]);
     let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
+
+    let infowindow = new google.maps.InfoWindow({
+      content: "Hospital near you"
+    });
+
     let marker = new google.maps.Marker({
       position: siteLatLng,
-      map: map
+      map: map,
+      title: site.name
     });
+
+    marker.addListener('click', function() {
+    infowindow.setContent(marker.title);
+    infowindow.open(map, marker);
+  });
   }
 };
 /*
