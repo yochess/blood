@@ -7,8 +7,10 @@ let geolib = require('geolib');
 let Donor = controllers.Donor;
 let Hospital = controllers.Hospital;
 
+let config = require('../../serverconfig.js');
+
 // create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport(`smtps://britishchickenblood@gmail.com:${process.env.emailpw}@smtp.gmail.com`);
+var transporter = nodemailer.createTransport(`smtps://britishchickenblood@gmail.com:${config.emailpw}@smtp.gmail.com`);
 
 /* min inteval (ms) before contacting donor again */
 const CONTACTCOOLDOWN = 180000;
