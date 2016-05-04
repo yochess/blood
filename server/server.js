@@ -8,7 +8,6 @@ let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let app = express();
 let auth = require('./routes/auth');
-let googleAuth = require('./routes/googleAuth.js');
 let passport = auth.passport;
 
 /* Routes */
@@ -29,7 +28,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/oauthcallback', express.static(__dirname + '/../oauthcallback.html'));
-app.use('/googleAuth', googleAuth);
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/api/calendar', calendarRouter);
