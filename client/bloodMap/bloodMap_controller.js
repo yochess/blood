@@ -87,27 +87,25 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
   let setMarkers = (map, markers) => {
 
+    for (let i = 0; i < markers.length; i++) {
+      let site = markers[i];
+      
+      let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
 
-  for (let i = 0; i < markers.length; i++) {
-    let site = markers[i];
-    console.log('site',site);
-    // var siteLatLng = new google.maps.LatLng(site[1], site[2]);
-    let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
+      let infowindow = new google.maps.InfoWindow({
+        content: "Hospital near you"
+      });
 
-    let infowindow = new google.maps.InfoWindow({
-      content: "Hospital near you"
+      let marker = new google.maps.Marker({
+        position: siteLatLng,
+        map: map,
+        title: site.name
+      });
+
+      marker.addListener('click', function() {
+      infowindow.setContent(marker.title);
+      infowindow.open(map, marker);
     });
-
-    let marker = new google.maps.Marker({
-      position: siteLatLng,
-      map: map,
-      title: site.name
-    });
-
-    marker.addListener('click', function() {
-    infowindow.setContent(marker.title);
-    infowindow.open(map, marker);
-  });
   }
 };
 /*
