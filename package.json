@@ -35,6 +35,7 @@
     "karma-mocha": "^0.2.2",
     "karma-sinon": "^1.0.4",
     "karma-sinon-chai": "^1.2.0",
+    "lodash": "^4.11.2",
     "lolex": "^1.4.0",
     "mocha": "^2.4.5",
     "mysql": "^2.10.2",

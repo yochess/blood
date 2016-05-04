@@ -37,4 +37,4 @@ hospitalRouter.route('/geo')
   });
 });
 
-module.exports = hospitalRouter
+module.exports = hospitalRouter;

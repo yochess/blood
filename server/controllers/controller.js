@@ -35,7 +35,17 @@ let Hospital = sequelize.define('hospital', {
   abneg: {type: Sequelize.INTEGER, defaultValue: 20},
 });
 
+let Post = sequelize.define('post', {
+  content: Sequelize.TEXT('medium'),
+  latitude: Sequelize.FLOAT,
+  longitude: Sequelize.FLOAT
+});
+
+Post.belongsTo(Donor);
+Post.belongsTo(Hospital);
+
 sequelize.sync();
 
 module.exports.Donor = Donor;
 module.exports.Hospital = Hospital;
+module.exports.Post = Post;

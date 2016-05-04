@@ -11,6 +11,7 @@ let mysql = require('mysql');
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let bcrypt = require('bcrypt');
+let _ = require('lodash');
 let app = express();
 
 /* Controllers */
@@ -21,6 +22,7 @@ let Hospital = controllers.Hospital;
 /* Routes */
 let profileRouter = require('./routes/profile.js');
 let hospitalRouter = require('./routes/hospital.js');
+let postRouter = require('./routes/post.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -38,7 +40,10 @@ var isAuth = (req, res, next) => {
 };
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  let type = user instanceof Donor.Instance ? 'donor' : 'hospital';
+  let oldUser = Object.assign({}, user.dataValues);
+  let extendedUser = _.assign(oldUser, {type: type});
+  done(null, extendedUser);
 });
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
@@ -47,7 +52,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
   clientID: process.env.fbapikey,
   clientSecret: process.env.fbapisecret,
-  callbackURL: 'http://ec2-52-36-156-213.us-west-2.compute.amazonaws.com:8080/auth/facebook/callback',
+  callbackURL: 'http://52.39.22.12:8080/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
 },
 function(accessToken, refreshToken, profile, done) {
@@ -134,8 +139,8 @@ app.get('/auth/facebook/callback',
   });
 
 app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.redirect('/');
 });
 
 app.post('/auth/hospital/login', passport.authenticate('hospital-login'),
@@ -160,6 +165,7 @@ app.post('/auth/donor/signup', passport.authenticate('donor-signup'),
 
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
+app.use('/api/post', postRouter);
 
 app.listen(8080, () => {
   console.log('Blood app listening on port 8080!');
