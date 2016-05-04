@@ -171,6 +171,7 @@ header {
   width: 100%;
 }
 
+
 .feed input[type="submit"] {
   background-color: #700000;
   padding: 5px 20px;
@@ -194,4 +195,26 @@ header {
 }
 
 
+
+  #iw_container .iw_title {
+   font-family: 'Open Sans Condensed', sans-serif;
+   font-size: 14px;
+   font-weight: 200;
+   padding: 4px;
+   background-color: #e64d00;
+   color: white; 
+   }
+
+
+  .gm-style-iw {
+    position: relative;
+   width: 260px ;
+   top: 0px ;
+   left: 115px ;
+   background-color: #fff;
+   border: 1px solid rgba(72, 181, 233, 0.6);
+   border-radius: 1px 1px 0 0;
+}
+
+.gm-style-iw + div {display: none;} + div {display: none;}
 
