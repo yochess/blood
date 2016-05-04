@@ -24,6 +24,7 @@
       // .then(() => {
         $window.localStorage.setItem('id', '');
         NavCtrl.isLoggedIn = false;
+        window.location='/auth/logout';
       // });
     };
 

@@ -26,16 +26,6 @@ app.use(session({secret: 'lolwut', key: 'sid'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var isAuth = (req, res, next) => {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
-};
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/api/post', postRouter);
