@@ -33,6 +33,49 @@ app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
 app.use('/auth', authRouter);
 
+
+
+
+// google auth
+let google = require('googleapis');
+let googleAuth = require('google-auth-library');
+let OAuth2 = google.auth.OAuth2;
+let oauth2Client = new OAuth2(process.env.calendarid, process.env.calendarsecret, process.env.calendarurl);
+
+let scopes = [
+  'https://www.googleapis.com/auth/plus.me',
+  'https://www.googleapis.com/auth/calendar'
+];
+
+let url = oauth2Client.generateAuthUrl({
+  access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)
+  scope: scopes // If you only need one scope you can pass it as string
+});
+
+app.use('/oauthcallback', express.static(__dirname + '/../oauthcallback.html'));
+
+app.get('/url', (req, res) => {
+  res.send(url)
+});
+
+app.get('/googleToken', (req, res) => {
+  let code = req.query.code;
+  oauth2Client.getToken(code, (err, tokens) => {
+    if(!err) {
+      // console.log('>>', 'hi from server');
+      // console.log(google._options);
+      oauth2Client.setCredentials(tokens);
+      google.options({ auth: oauth2Client }); // set auth as a global default
+      res.send('authenticated!');
+    }
+  });
+});
+
+//end of google auth
+
+
+
+
 app.listen(8080, () => {
   console.log('Blood app listening on port 8080!');
 });
