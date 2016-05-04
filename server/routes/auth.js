@@ -11,6 +11,8 @@ let controllers = require('../controllers/controller.js');
 let Donor = controllers.Donor;
 let Hospital = controllers.Hospital;
 
+let config = require('../../serverconfig.js');
+
 passport.serializeUser(function(user, done) {
   let type = user instanceof Donor.Instance ? 'donor' : 'hospital';
   let oldUser = Object.assign({}, user.dataValues);
@@ -22,9 +24,9 @@ passport.deserializeUser(function(obj, done) {
 });
 
 // start of google auth requirements
-const GOOGLE_ID = process.env.calendarid;
-const GOOGLE_SECRET = process.env.calendarsecret;
-const GOOGLE_REDIRECT = process.env.calendarurl;
+const GOOGLE_ID = config.calendarid;
+const GOOGLE_SECRET = config.calendarsecret;
+const GOOGLE_REDIRECT = config.calendarurl;
 
 let google = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
@@ -57,8 +59,8 @@ authRouter.route('/googleToken')
 // end of google auth routes
 
 passport.use(new FacebookStrategy({
-  clientID: process.env.fbapikey,
-  clientSecret: process.env.fbapisecret,
+  clientID: config.fbapikey,
+  clientSecret: config.fbapisecret,
   callbackURL: 'http://52.39.22.12:8080/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
 },
