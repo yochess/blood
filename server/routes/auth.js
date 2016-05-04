@@ -11,7 +11,6 @@ let controllers = require('../controllers/controller.js');
 let Donor = controllers.Donor;
 let Hospital = controllers.Hospital;
 
-
 passport.serializeUser(function(user, done) {
   let type = user instanceof Donor.Instance ? 'donor' : 'hospital';
   let oldUser = Object.assign({}, user.dataValues);
@@ -137,6 +136,12 @@ authRouter.route('/donor/signup')
   (req, res) => {
     res.send(req.user);
   });
+
+authRouter.route('/auth/logout')
+.get((req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports.passport = passport;
 module.exports.authRouter = authRouter;
