@@ -3,7 +3,7 @@
     let CalendarCtrl = this;
 
     CalendarCtrl.googleLogin = () => {
-      $http.get('/url').then(res => {
+      $http.get('/googleAuth/url').then(res => {
         let url = res.data;
         let newWindow = $window.open(url, 'AuthPage', 'width=500px,height=700px');
 
@@ -14,7 +14,7 @@
           let code = urlWithCode.substring(index + 5).replace('#', '');
           newWindow.close();
 
-          $http.get('/googleToken?code=' + code).then(res => {
+          $http.get('/googleAuth/googleToken?code=' + code).then(res => {
             console.log('You are authenticated!');
             $window.location.assign('#calendar');
           });
