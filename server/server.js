@@ -28,6 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/oauthcallback', express.static(__dirname + '/../oauthcallback.html'));
+
 app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/api/calendar', calendarRouter);

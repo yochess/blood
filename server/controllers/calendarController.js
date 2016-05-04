@@ -29,20 +29,18 @@ module.exports = {
       if (events.length == 0) {
         res.send('No upcoming events found.');
       } else {
-        let retArray = [];
-        response.items.forEach((item) => {
-          let obj = {};
-          obj.title = item.summary;
-          obj.kind = item.kind;
-          obj.etag = item.etag;
-          obj.id = item.id;
-          obj.status = item.status;
-          obj.url = item.htmlLink;
-          obj.start = item.start.dateTime;
-          obj.end = item.end.dateTime;
-          retArray.push(obj);
-        });
-        res.send(retArray);
+        res.send(events.map(item => {
+          return {
+            title: item.summary,
+            kind: item.kind,
+            etag: item.etag,
+            id: item.id,
+            status: item.status,
+            url: item.htmlLink,
+            start: item.start.dateTime,
+            end: item.end.dateTime
+          }
+        }));
       }
     });
 
