@@ -3,8 +3,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
   let BloodMapCtrl = this;
 
- let infowindow = null;
-
   let sites = [
       ['American Red Cross', 37.788513, -122.399940, 1, ],
       ['LapCorp', 37.788405, -122.409769, 2, ],
@@ -85,17 +83,59 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       }
    };
 
-   BloodMapCtrl.markerIDs = {};
+  let lastOpenedInfoWindow;
 
   let setMarkers = (map, markers) => {
-  for (let i = 0; i < markers.length; i++) {
-    let site = markers[i];
-    // var siteLatLng = new google.maps.LatLng(site[1], site[2]);
-    let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
-    let marker = new google.maps.Marker({
-      position: siteLatLng,
-      map: map
-    });
+
+    for (let i = 0; i < markers.length; i++) {
+      let site = markers[i];
+      console.log(site);
+      
+      let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
+
+      let infowindow = new google.maps.InfoWindow({
+        content: "Hospital near you"
+      });
+
+      let marker = new google.maps.Marker({
+        position: siteLatLng,
+        map: map,
+        title: site.name,
+        html: site.hospitalurl
+      });
+      
+      //Content in the infowindow
+      let iwContent = '<div id="iw_container">' +
+      '<div class="iw_title">' + site.name + '</div>' +
+      '<div class="iw_content">' + site.address + '</div>' +
+      '<div class="iw_content">' +marker.html+ '</div>' +
+      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + "Make Appointment" +'</button></div>' +
+      '<div class="iw_content">' + "Open: "+site.openhours + '</div></div>';
+      
+      //Remove div around the InfoWindow
+      google.maps.event.addListener(infowindow, 'domready', function() {
+         var iwOuter = $('.gm-style-iw'); 
+         var iwBackground = iwOuter.prev();  
+         iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+         iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      });
+      
+      //Open the infowindow on click and close the previous one
+      marker.addListener('click', function() {
+        closeLastOpenedInfoWindow();  
+        infowindow.setContent(iwContent);
+        infowindow.open(map, marker);
+        lastOpenedInfoWindow = infowindow;
+        
+      });
+    }
+  };
+
+
+
+let closeLastOpenedInfoWindow = () => {
+  if (lastOpenedInfoWindow) {
+      lastOpenedInfoWindow.close();
   }
 };
 /*
