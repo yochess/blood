@@ -174,7 +174,7 @@ authRouter.route('/donor/signup')
     res.send(req.user);
   });
 
-authRouter.route('/auth/logout')
+authRouter.route('/logout')
 .get((req, res) => {
   req.logout();
   res.redirect('/');

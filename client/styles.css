@@ -140,6 +140,11 @@ header {
   height: 80vh;
 }
 
+.feed {
+  overflow: hidden;
+  padding-right: 0;
+}
+
 .feed-content, .feed-new {
   color: #eee;
   border: 1px solid #333;
@@ -151,6 +156,7 @@ header {
   overflow-y: scroll;
   border-radius: 0 0 5px 5px;
   padding: 0 20px;
+  width: calc(100% + 17px);
 }
 
 .feed-new {
