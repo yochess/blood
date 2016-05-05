@@ -83,7 +83,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       }
    };
 
-  
+  let lastOpenedInfoWindow;
 
   let setMarkers = (map, markers) => {
 
@@ -103,19 +103,39 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         title: site.name,
         html: site.hospitalurl
       });
-
+      
+      //Content in the infowindow
       let iwContent = '<div id="iw_container">' +
       '<div class="iw_title">' + site.name + '</div>' +
-      '<div class="iw_content">' + site.phonenum + '</div>' +
-      '<div class="iw_content">' + site.openhours + '</div>' +
       '<div class="iw_content">' + site.address + '</div>' +
-      '<div class="iw_content">' + '<a href=marker.html >' +marker.html+ '</div></div>';
-
-
+      '<div class="iw_content">' +marker.html+ '</div>' +
+      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + "Make Appointment" +'</button></div>' +
+      '<div class="iw_content">' + "Open: "+site.openhours + '</div></div>';
+      
+      //Remove div around the InfoWindow
+      google.maps.event.addListener(infowindow, 'domready', function() {
+         var iwOuter = $('.gm-style-iw'); 
+         var iwBackground = iwOuter.prev();  
+         iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+         iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      });
+      
+      //Open the infowindow on click and close the previous one
       marker.addListener('click', function() {
-      infowindow.setContent(iwContent);
-      infowindow.open(map, marker);
-    });
+        closeLastOpenedInfoWindow();  
+        infowindow.setContent(iwContent);
+        infowindow.open(map, marker);
+        lastOpenedInfoWindow = infowindow;
+        
+      });
+    }
+  };
+
+
+
+let closeLastOpenedInfoWindow = () => {
+  if (lastOpenedInfoWindow) {
+      lastOpenedInfoWindow.close();
   }
 };
 /*
