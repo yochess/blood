@@ -1,9 +1,10 @@
 app.factory('HospitalProfile', function($http) {
 
-  let get = () => {
+  let get = (id) => {
+    let url = id ? `/api/hospital/profile/${id}` : 'api/hospital/profile';
     return $http({
       method: 'GET',
-      url: '/api/hospital/profile',
+      url: url
     })
     .then((res) => {
       return res.data;

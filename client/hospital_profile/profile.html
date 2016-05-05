@@ -1,0 +1,60 @@
+<div id="hospital-edit-container">
+
+  <div ng-hide="HospitalProfileCtrl.edit">
+     <div  style="height:100px;width:200px;">
+      <img ng-src="{{HospitalProfileCtrl.editObj.photo}} || "http://www.bloodcenters.org/" height="100" width="100">
+    </div>
+    <ul>
+      <li>Hospital: {{HospitalProfileCtrl.editObj.username}} </li>
+      <li>Email: {{HospitalProfileCtrl.editObj.email}} </li>
+      <li>Contact number: {{HospitalProfileCtrl.editObj.phonenum}} </li>
+      <li>Open hours: {{HospitalProfileCtrl.editObj.openhours}} </li>
+      <li>Website: {{HospitalProfileCtrl.editObj.hospitalurl}} </li>
+      <li>Location: {{HospitalProfileCtrl.editObj.address}} </li>
+      <li>Lat: {{HospitalProfileCtrl.editObj.latitude}} </li>
+      <li>Long: {{HospitalProfileCtrl.editObj.longitude}} </li>
+    </ul>
+
+  </div>
+  <div>
+    <button ng-click="HospitalProfileCtrl.Edit()">Edit Hospital</button>
+  </div>
+
+  <div ng-show="HospitalProfileCtrl.edit">
+    <h3>Initial Hospital Setup</h3>
+    <div style="height:100px;width:200px;">
+      <img ng-model=HospitalProfileCtrl.editObj.photo height="100" width="100">
+    </div>
+    <form ng-submit="HospitalProfileCtrl.update()">
+      <p>
+        Enter your hospital name
+        <input type="text" ng-model="HospitalProfileCtrl.editObj.name" required/>
+      </p>
+      <p>
+        Enter your hospital email
+        <input type="text" ng-model="HospitalProfileCtrl.editObj.email" required/>
+      </p>
+      <p>
+        Enter your hospital location
+        <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" required/>
+      </p>
+      <p>
+        Enter your hospital phonenum
+        <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" required/>
+      </p>
+      <p>
+        Enter your hospital openhours
+        <input type="text"  ng-model="HospitalProfileCtrl.editObj.openhours" required/>
+      </p>
+      <p>
+        Enter your hospital website
+        <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" required/>
+      </p>
+      <p ng-repeat="bloodType in HospitalProfileCtrl.bloodTypes">
+        Enter {{bloodType.display}} blood stock level
+        <input type="text" ng-model="HospitalProfileCtrl.editObj[bloodType.code]" required>
+      </p>
+      <button ng-click="HospitalProfileCtrl.Edit()">Submit</button>
+    </form>
+  </div>
+</div>

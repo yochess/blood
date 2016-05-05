@@ -1,6 +1,8 @@
 app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', function($routeParams, Profile, $rootScope) {
   let ProfileCtrl = this;
 
+  if ($routeParams.donorid) ProfileCtrl.id = $routeParams.donorid;
+
   ProfileCtrl.user = {
     uid:'',
     name: '',
@@ -53,7 +55,7 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
 
 
    let displayUser = function () {
-    Profile.get()
+    Profile.get(ProfileCtrl.id)
     .then((user) => {
       ProfileCtrl.user = user;
     })
