@@ -15,6 +15,11 @@ let app = angular.module('blood', ['ngRoute'])
       controller: 'ProfileController',
       controllerAs: 'ProfileCtrl'
   })
+  .when('/profile/:donorid', {
+      templateUrl: '/profile/profile_public.html',
+      controller: 'ProfileController',
+      controllerAs: 'ProfileCtrl'
+  })
   .when('/hospital/signup', {
     templateUrl: 'hospital_auth/signup/signup.html',
     controller: 'HospitalAuthController',
@@ -25,10 +30,15 @@ let app = angular.module('blood', ['ngRoute'])
     controller: 'HospitalAuthController',
     controllerAs: 'HospitalAuthCtrl'
   })
-  .when('/hospital/edit', {
-    templateUrl: '/hospital_edit/edit.html',
-    controller: 'HospitalEditController',
-    controllerAs: 'HospitalEditCtrl'
+  .when('/hospital/profile', {
+    templateUrl: '/hospital_profile/profile.html',
+    controller: 'HospitalProfileController',
+    controllerAs: 'HospitalProfileCtrl'
+  })
+  .when('/hospital/profile/:hospitalid', {
+    templateUrl: '/hospital_profile/profile_public.html',
+    controller: 'HospitalProfileController',
+    controllerAs: 'HospitalProfileCtrl'
   })
   .when('/donor/login', {
     templateUrl: '/donor_auth/login/login.html',

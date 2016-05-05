@@ -1,9 +1,10 @@
 app.factory('Profile', function($http) {
 
-  let get = () => {
+  let get = (id) => {
+    let url = id ? `/api/profile/${id}` : 'api/profile';
     return $http({
       method: 'GET',
-      url: '/api/profile',
+      url: url
     })
     .then((res) => {
       return res.data;
