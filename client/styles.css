@@ -245,6 +245,11 @@ header {
  width: 260px;
   
 }
+.gm-style-iw {
+   overflow: hidden !important; 
+   line-height: 1.35;
+   white-space: nowrap;
+}
 
 
 

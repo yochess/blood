@@ -118,6 +118,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
          var iwBackground = iwOuter.prev();  
          iwBackground.children(':nth-child(2)').css({'display' : 'none'});
          iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+         iwOuter.children(':nth-child(0)').css({'display' : 'none','overflow': 'hidden'});
       });
       
       //Open the infowindow on click and close the previous one
@@ -130,8 +131,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       });
     }
   };
-
-
 
 let closeLastOpenedInfoWindow = () => {
   if (lastOpenedInfoWindow) {
