@@ -102,6 +102,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         map: map,
         title: site.name,
         html: site.hospitalurl
+
       });
       
       //Content in the infowindow
@@ -109,7 +110,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       '<div class="iw_title">' + site.name + '</div>' +
       '<div class="iw_content">' + site.address + '</div>' +
       '<div class="iw_content">' +marker.html+ '</div>' +
-      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + "Make Appointment" +'</button></div>' +
+      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + `<a href="#calendar/${site.id}">`+
+      'Make Appointment</a>' +'</button></div>' +
       '<div class="iw_content">' + "Open: "+site.openhours + '</div></div>';
       
       //Remove div around the InfoWindow
@@ -118,6 +120,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
          var iwBackground = iwOuter.prev();  
          iwBackground.children(':nth-child(2)').css({'display' : 'none'});
          iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+         iwOuter.children(':nth-child(0)').css({'display' : 'none','overflow': 'hidden'});
       });
       
       //Open the infowindow on click and close the previous one
@@ -130,8 +133,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       });
     }
   };
-
-
 
 let closeLastOpenedInfoWindow = () => {
   if (lastOpenedInfoWindow) {
