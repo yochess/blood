@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Jboucherie/blood#readme",
   "dependencies": {
+    "angular-nvd3": "^1.0.7",
     "babel": "^6.5.2",
     "bcrypt": "^0.8.6",
     "chai": "^3.5.0",

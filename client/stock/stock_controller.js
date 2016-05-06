@@ -12,10 +12,6 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
     abneg: 'AB Neg'
   }
 
-  ////////////////////////////////////////
-  //          D3 shit goes here
-  ////////////////////////////////////////
-
   $scope.options = {
             chart: {
                 type: 'discreteBarChart',
@@ -83,9 +79,6 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
         ];
 
         let d3DataValues = $scope.data[0].values;
-////////////////////////////////////////
-//      end d3 shit
-////////////////////////////////////////
 
   StockCtrl.setLevel = 0;
 
