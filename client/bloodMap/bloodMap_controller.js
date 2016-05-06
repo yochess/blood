@@ -41,7 +41,77 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);}, 400));
     google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});   
    
-   
+    ////////////////////////////////////////
+    //       BEHOLD, THE FORBIDDEN ZONE.
+    ////////////////////////////////////////
+
+
+    $scope.options = {
+      chart: {
+        type: 'discreteBarChart',
+        height: 200,
+        x: function(d){return d.label;},
+        y: function(d){return d.value;},
+        showValues: true,
+        color: function(){return '#700000';},
+        valueFormat: function(d){ return d3.format(',f')(d); },
+        dispatch: {
+        
+        },
+        discretebar: {
+          dispatch: {
+            elementClick: function(e) {$scope.$apply();}
+            }
+          },
+        callback: function(e){console.log('! callback !')}
+      }
+    };
+
+    $scope.data = [
+      {
+        key: "Blood Levels",
+        values: [
+                {
+                  "label" : "O+" ,
+                  "value" : 6
+                },
+                {
+                  "label" : "O-" ,
+                  "value" : 5
+                },
+                {
+                  "label" : "A+" ,
+                  "value" : 18
+                },
+                {
+                  "label" : "A-" ,
+                  "value" : 8
+                },
+                {
+                  "label" : "B+" ,
+                  "value" : 17
+                },
+                {
+                  "label" : "B-" ,
+                  "value" : 7
+                },
+                {
+                  "label" : "AB+" ,
+                  "value" : 16
+                },
+                {
+                  "label" : "AB-" ,
+                  "value" : 6
+                }
+        ]
+      }
+    ];
+
+    ////////////////////////////////////////
+    //  FAREWELL, FROM THE FORBIDDEN ZONE.
+    ////////////////////////////////////////
+
+
     GeoMarker.setMap(BloodMapCtrl.map);  
     setZoom(BloodMapCtrl.map, sites);
     setMarkers(BloodMapCtrl.map, sites);     
@@ -62,6 +132,25 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals = list;
       // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
+
+      //Each time new hospitals are loaded in, reset all blood
+      //level data to 0.
+      for(var j = 0; j < $scope.data[0].values.length; j++){
+        $scope.data[0].values[j].value = 0;
+      }
+
+      //For each hospital, add their blood stocks to the data object
+      //so we can get the total for every hospital in the area.
+      for(var i = 0; i < BloodMapCtrl.hospitals.length; i++) {
+        $scope.data[0].values[0].value += BloodMapCtrl.hospitals[i].opos;
+        $scope.data[0].values[1].value += BloodMapCtrl.hospitals[i].oneg;
+        $scope.data[0].values[2].value += BloodMapCtrl.hospitals[i].apos;
+        $scope.data[0].values[3].value += BloodMapCtrl.hospitals[i].aneg;
+        $scope.data[0].values[4].value += BloodMapCtrl.hospitals[i].bpos;
+        $scope.data[0].values[5].value += BloodMapCtrl.hospitals[i].bneg;
+        $scope.data[0].values[6].value += BloodMapCtrl.hospitals[i].abpos;
+        $scope.data[0].values[7].value += BloodMapCtrl.hospitals[i].abneg;
+      }
       setMarkers(BloodMapCtrl.map, BloodMapCtrl.hospitals);
     })
     .catch(function (error) {
@@ -89,7 +178,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
     for (let i = 0; i < markers.length; i++) {
       let site = markers[i];
-      console.log(site);
       
       let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
 
