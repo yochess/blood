@@ -102,6 +102,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         map: map,
         title: site.name,
         html: site.hospitalurl
+
       });
       
       //Content in the infowindow
@@ -109,7 +110,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       '<div class="iw_title">' + site.name + '</div>' +
       '<div class="iw_content">' + site.address + '</div>' +
       '<div class="iw_content">' +marker.html+ '</div>' +
-      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + "Make Appointment" +'</button></div>' +
+      '<div class="iw_content">'+"Call: " + site.phonenum + '<button type="button" class="btn btn-default">' + `<a href="#calendar/${site.id}">`+
+      'Make Appointment</a>' +'</button></div>' +
       '<div class="iw_content">' + "Open: "+site.openhours + '</div></div>';
       
       //Remove div around the InfoWindow
