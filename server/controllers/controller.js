@@ -3,7 +3,7 @@
 let config = require('../../serverconfig.js');
 
 let Sequelize = require('sequelize');
-let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw, {logging: false});
+let sequelize = new Sequelize('blood', config.sqluid, config.sqlpw, {logging: true});
 
 let Donor = sequelize.define('donor', {
   username: Sequelize.STRING,
@@ -17,6 +17,7 @@ let Donor = sequelize.define('donor', {
   longitude: Sequelize.FLOAT,
   bloodtype: Sequelize.STRING,
   lastcontacted: Sequelize.DATE,
+  latestappointment: Sequelize.DATE
 });
 
 let Hospital = sequelize.define('hospital', {
@@ -54,6 +55,9 @@ let Schedule = sequelize.define('schedule', {
   closehours: Sequelize.INTEGER
 });
 
+Hospital.hasMany(Schedule);
+Schedule.belongsTo(Hospital);
+
 let Post = sequelize.define('post', {
   content: Sequelize.TEXT('medium'),
   latitude: Sequelize.FLOAT,
@@ -62,8 +66,14 @@ let Post = sequelize.define('post', {
 
 Post.belongsTo(Donor);
 Post.belongsTo(Hospital);
-Hospital.hasMany(Schedule);
-Schedule.belongsTo(Hospital);
+
+let Event = sequelize.define('event', {
+  time: Sequelize.DATE,
+});
+
+Event.belongsTo(Hospital);
+Hospital.hasMany(Event);
+Event.belongsToMany(Donor, {through: 'donorsevents'});
 
 sequelize.sync();
 
@@ -72,3 +82,4 @@ module.exports.Hospital = Hospital;
 module.exports.Post = Post;
 module.exports.Review = Review;
 module.exports.Schedule = Schedule;
+module.exports.Event = Event;
