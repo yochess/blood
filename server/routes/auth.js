@@ -23,36 +23,47 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-// start of google auth requirements
+// start of google auth
 const GOOGLE_ID = config.calendarid;
 const GOOGLE_SECRET = config.calendarsecret;
 const GOOGLE_REDIRECT = config.calendarurl;
-
+const SCOPES = [
+  'https://www.googleapis.com/auth/userinfo.email',
+  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/calendar'
+];
 let google = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
-let oauth2Client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
-const URL = oauth2Client.generateAuthUrl({
-  access_type: 'offline',
-  scope: 'https://www.googleapis.com/auth/calendar'
-});
-// end of google auth requirements
+let getAuthClient = () => {
+  return new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
+};
 
-// start of google auth routes
+let getAuthUrl = () => {
+  let oauth2Client = getAuthClient();
+  var url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES
+  });
+  return url;
+};
+
+
 authRouter.route('/url')
   .get((req, res) => {
-    res.send(URL)
+    res.send(getAuthUrl())
   });
 
 authRouter.route('/googleToken')
   .get((req, res) => {
-    let code = req.query.code;
-    oauth2Client.getToken(code, (err, tokens) => {
+    let oauth2Client = getAuthClient();
+    oauth2Client.getToken(req.query.code, (err, tokens) => {
       if (err) {
-        return console.error('an error has occured in setting the token: ' + err);
+        console.log('an error has occured: ', err);
+        return res.send(401);
       }
       oauth2Client.setCredentials(tokens);
-      google.options({ auth: oauth2Client }); // set auth as a global default
+      req.session['tokens'] = tokens;
       res.send('authenticated!');
     });
 });
@@ -182,3 +193,4 @@ authRouter.route('/logout')
 
 module.exports.passport = passport;
 module.exports.authRouter = authRouter;
+module.exports.getAuthClient = getAuthClient;

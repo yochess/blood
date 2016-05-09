@@ -10,19 +10,6 @@
       timezone: 'local',
       displayEventEnd: true,
       eventSources: ['/api/calendar'],
-      // events: [
-      //   {
-      //     title: 'hi',
-      //     start: new Date(),
-      //     end: new Date() 
-      //   },
-      //   {
-      //     title: 'bye',
-      //     start: new Date()
-      //   }
-      // ],
-      // eventOverlap: false,
-      // overlap: false,
       eventClick: (calEvent, jsEvent, view) => {
         if (calEvent.title === 'Schedule an appointment!') {
           CalendarCtrl.createEvent(calEvent.start, calEvent.end);
@@ -112,11 +99,14 @@
 
             for (let currentHour = startHour; currentHour < endHour; currentHour++) {
               isOverlap = false;
-
+              let endHour, endMinutes;
               for (let googleEvent of googleEvents) {
+                googleEvent._end ? endHour = googleEvent._end.hour() : googleEvent._start.hour();
+                googleEvent._end ? endMinutes = googleEvent._end.minutes() : googleEvent._start.minutes();
+
                 if ((current.getDate() === googleEvent._start.date()) && (current.getMonth() === googleEvent._start.month()) &&
                   ((currentHour >= googleEvent._start.hour() + googleEvent._start.minutes() / 60) || (currentHour+0.75 >= googleEvent._start.hour() + googleEvent._start.minutes() / 60)) &&
-                  ((currentHour <= googleEvent._end.hour() + googleEvent._end.minutes() / 60) || (currentHour+0.75 <= googleEvent._end.hour() + googleEvent._end.minutes() / 60))) {
+                  ((currentHour <= endHour + endMinutes / 60) || (currentHour+0.75 <= endHour + endMinutes / 60))) {
                   isOverlap = true;
 console.log('im in!');
                   break;
