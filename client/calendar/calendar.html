@@ -3,28 +3,52 @@
 
   <p>
     You must be signed into google to see your information
-    <button ng-click="CalendarCtrl.googleLogin(CalendarCtrl.dateTime)">Sign in with google</button>
+    <button ng-click="CalendarCtrl.googleSignin()">Sign in with google</button>
   </p>
 
-  <form ng-submit="CalendarCtrl.createEvent()">
+<!--   <form ng-submit="CalendarCtrl.createEvent()">
     <p>
-      Choose a date: 
+      Choose a date:
       <input type="datetime-local" ng-model="CalendarCtrl.dateTime"/>
       <button>Schedule it!</button>
     </p>
   </form>
- 
+
+  </form> -->
   <p>
-    If you deleted an event from your calendar, click
-    <button ng-click="CalendarCtrl.reload()">refresh</button>
+    <!-- If you deleted an event from your calendar, click -->
+    <!-- <button ng-click="CalendarCtrl.reload()">refresh</button> -->
   </p>
 
   <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button>
 
-  <div class="fb-share-button" 
-    data-href="http://52.39.22.12:8080/#/" 
+  <div class="fb-share-button"
+    data-href="http://52.39.22.12:8080/#/"
     data-layout="button_count">
  </div>
 
+  <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
   <div id="calendar"></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="confirm-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Schedule an Appointment</h4>
+        </div>
+        <div class="modal-body">
+          <p>Schedule and set an appointment for {{CalendarCtrl.time.print}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.makeEvent()">Make appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

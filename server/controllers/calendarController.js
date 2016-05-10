@@ -5,6 +5,7 @@ let getAuthClient = require('../routes/auth.js').getAuthClient;
 
 module.exports = {
   showEvents: (req, res) => {
+    console.log('inside shoeEvents');
     let authClient = getAuthClient();
     if (!req.session['tokens']) {
       console.log('no tokens present!');
@@ -12,25 +13,31 @@ module.exports = {
     }
     authClient.setCredentials(req.session['tokens']);
     let now = new Date();
+    let later = new Date();
+    later.setMonth(later.getMonth() + 1);
 
     calendar.events.list({
       auth: authClient,
       calendarId: 'primary',
       timeMin: now.toISOString(),
-      timeMax: new Date(now.setYear(2017)).toISOString(),
+      timeMax: later.toISOString(),
       singleEvents: true,
       orderBy: 'startTime'
     }, (err, response) => {
       if (err) {
-        console.log('The API returned an error: ' + err);
-        return res.send(404);
+        console.log('There was an error on the server side: ' + err);
+        return res.send(500);
       }
       if (response.items.length == 0) {
-        res.send('No upcoming events found.');
+        console.log('No upcoming events found in the 1 month.');
+        res.send(200);
       } else {
         // this will need to be fixed
         // i currently dunno the behavior of the start and end properties
         let events = response.items.filter(event => {
+          if (!event.start.dateTime || !event.end.dateTime) {
+            console.log('!!!!!bug in code: ', event);
+          }
           return event.start.dateTime && event.end.dateTime;
         });
 
@@ -53,6 +60,11 @@ module.exports = {
 
   addEvent: (req, res) => {
     let authClient = getAuthClient();
+    if (!req.session.tokens) {
+      console.log('no tokens present!');
+      return res.send(401);
+    }
+
     authClient.setCredentials(req.session['tokens']);
     calendar.events.insert({
       auth: authClient,
@@ -61,7 +73,7 @@ module.exports = {
     }, (err, event) => {
       if (err) {
         console.log('There was an error contacting the Calendar service: ' + err);
-        return res.send(404);
+        return res.send(500);
       }
       res.status(201).send('event created!');
     });
