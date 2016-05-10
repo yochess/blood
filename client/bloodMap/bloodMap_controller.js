@@ -111,9 +111,9 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     ////////////////////////////////////////
     //  FAREWELL, FROM THE FORBIDDEN ZONE.
     ////////////////////////////////////////
- var donordata = [
+ $scope.donordata = [
            {
-            key: 'Series1',
+            key: "Donor bloodrank",
             values: [
                 {
                     "label" : "Donor1" ,
@@ -144,22 +144,24 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         chart = nv.models.multiBarHorizontalChart()
             .x(function(d) { return d.label })
             .y(function(d) { return d.value })
-            .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
-            .barColor(d3.scale.category20().range())
+            // .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
+            .barColor(function(){return '#700000';})
+            //.barColor(d3.scale.category20().range())
             .duration(250)
             .margin({left: 100})
-            .stacked(true);
+            .stacked(true)
+            .showControls(false);
         chart.yAxis.tickFormat(d3.format(',.2f'));
-        chart.yAxis.axisLabel('Y Axis');
-        chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
+        chart.yAxis.axisLabel('Number of Donations');
+        chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
         d3.select('#chart1 svg')
-            .datum(donordata)
+            .datum($scope.donordata)
             .call(chart);
-        nv.utils.windowResize(chart.update);
-        chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
-        chart.state.dispatch.on('change', function(state){
-            nv.log('state', JSON.stringify(state));
-        });
+        // nv.utils.windowResize(chart.update);
+        // chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+        // chart.state.dispatch.on('change', function(state){
+        //     nv.log('state', JSON.stringify(state));
+        // });
         return chart;
     });
 
