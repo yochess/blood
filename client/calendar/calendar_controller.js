@@ -6,7 +6,28 @@
     CalendarCtrl.possibleEvents = [];
     CalendarCtrl.googleEvents = [];
     CalendarCtrl.time = {};
-    // CalendarCtrl.isLoggedin = false;
+    CalendarCtrl.isLoggedin = false;
+
+    $calendar.fullCalendar({
+      timezone: 'local',
+      displayEventEnd: true,
+      // eventSources: ['/api/calendar'],
+      eventClick: (calEvent, jsEvent, view) => {
+        // console.log(calEvent);
+        if (!CalendarCtrl.isLoggedin) {
+          return console.log('make a log in modal');
+        }
+
+        if (calEvent.title === 'Slot Available') {
+          let modal = $('.modal');
+          // console.log(calEvent.start);
+          modal.find(".modal-title").html(event.title);
+          CalendarCtrl.setView(calEvent);
+          $scope.$apply();
+          modal.modal();
+        }
+      }
+    });
 
     CalendarCtrl.populateDates = () => {
       $calendar.fullCalendar('removeEventSource');
@@ -34,7 +55,9 @@
     };
 
     CalendarCtrl.populateHospitalDates = (hospitalEvents) => {
-
+      if (!hospitalEvents) {
+        return;
+      }
       let current = new Date();
       let day, dayIndex, startHour, endHour;
       let id = 1;
@@ -70,6 +93,7 @@
 
     CalendarCtrl.googleSignin = () => {
       // if (CalendarCtrl.isLoggedin) {
+
         // return console.log('you are already logged in!');
       // }
 
@@ -87,7 +111,7 @@
           $http.get('/auth/googleToken?code=' + code).then(res => {
             console.log('You are authenticated!');
             CalendarCtrl.getGoogleData();
-            // CalendarCtrl.isLoggedin = true;
+            CalendarCtrl.isLoggedin = true;
             // $window.localStorage.setItem('signedin', true);
           });
         };
@@ -97,7 +121,7 @@
     CalendarCtrl.getGoogleData = () => {
       $http.get('/api/calendar').then(res => {
         $calendar.fullCalendar('addEventSource', res.data);
-
+        CalendarCtrl.isLoggedin = true;
         res.data.forEach(event => {
           // CalendarCtrl.googleEvents.push(event);
           CalendarCtrl.checkOverlap(event);
@@ -142,23 +166,6 @@
 
       CalendarCtrl.time.print = `${month}/${day} @ ${hour}:${minute}`;
     };
-
-    $calendar.fullCalendar({
-      timezone: 'local',
-      displayEventEnd: true,
-      // eventSources: ['/api/calendar'],
-      eventClick: (calEvent, jsEvent, view) => {
-        // console.log(calEvent);
-        if (calEvent.title === 'Slot Available') {
-          let modal = $('.modal');
-          // console.log(calEvent.start);
-          modal.find(".modal-title").html(event.title);
-          CalendarCtrl.setView(calEvent);
-          $scope.$apply();
-          modal.modal();
-        }
-      }
-    });
 
     CalendarCtrl.makeEvent = () => {
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
