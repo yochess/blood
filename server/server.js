@@ -24,6 +24,9 @@ let eventRouter = require('./routes/event.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
+app.set('view engine', 'ejs');
+app.set('views', clientPath);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -40,6 +43,10 @@ app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
 app.use('/api/event', eventRouter);
 app.use('/auth', authRouter);
+
+app.get('/', function(req, res) {
+  res.render('index');
+});
 
 if (config.production) {
 

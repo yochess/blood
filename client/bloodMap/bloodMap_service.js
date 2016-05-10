@@ -1,4 +1,4 @@
-app.factory('BloodMap', function($http) {
+app.factory('BloodMap', ['$http', function($http) {
 
   let getMap = (geoobj) => {
     return $http({
@@ -6,11 +6,11 @@ app.factory('BloodMap', function($http) {
       url: '/api/hospital/geo',
       params: geoobj
     })
-    .then((res) => {  
+    .then((res) => {
       return res.data;
     });
   };
 
   return {getMap};
 
-});
+}]);

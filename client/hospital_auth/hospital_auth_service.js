@@ -1,5 +1,5 @@
 (() => {
-  app.factory('HospitalAuth', function($http) {
+  app.factory('HospitalAuth', ['$http', function($http) {
 
     let signup = (user) => {
       return $http({
@@ -32,5 +32,5 @@
     };
 
     return {signup, login};
-  });
+  }]);
 })();
