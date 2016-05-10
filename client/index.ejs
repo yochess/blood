@@ -24,6 +24,9 @@
   <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.1/gcal.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+  <% if (process.env.build === "production") { %>
+  <script src="dist/build_min.js"></script>
+  <% } else { %>
   <script src="app.js"></script>
   <script src="bloodMap/bloodMap_service.js"></script>
   <script src="bloodMap/bloodMap_controller.js"></script>
@@ -45,6 +48,7 @@
   <script src="calendar/calendar_controller.js"></script>
   <script src="events/event_service.js"></script>
   <script src="events/event_controller.js"></script>
+  <% } %>
   <script src="lib/d3/d3.js"></script>
   <script src="lib/nvd3/build/nv.d3.js"></script>
   <script src="lib/angular-nvd3/dist/angular-nvd3.js"></script>

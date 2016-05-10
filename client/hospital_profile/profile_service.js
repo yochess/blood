@@ -1,4 +1,4 @@
-app.factory('HospitalProfile', function($http) {
+app.factory('HospitalProfile', ['$http', function($http) {
 
   let get = (id) => {
     let url = id ? `/api/hospital/profile/${id}` : 'api/hospital/profile';
@@ -45,4 +45,4 @@ app.factory('HospitalProfile', function($http) {
   };
 
   return {get, update, getReviews, postReview};
-});
+}]);

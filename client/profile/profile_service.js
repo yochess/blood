@@ -1,4 +1,4 @@
-app.factory('Profile', function($http) {
+app.factory('Profile', ['$http', function($http) {
 
   let get = (id) => {
     let url = id ? `/api/profile/${id}` : 'api/profile';
@@ -33,4 +33,4 @@ app.factory('Profile', function($http) {
   };
 
   return {get, update};
-});
+}]);

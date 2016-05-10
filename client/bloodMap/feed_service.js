@@ -1,4 +1,4 @@
-app.factory('Feed', function($http) {
+app.factory('Feed', ['$http', function($http) {
   let get = (minLat, minLong, maxLat, maxLong, lastUpdated = 0) => {
     return $http({
       method: 'GET',
@@ -11,4 +11,4 @@ app.factory('Feed', function($http) {
   };
 
   return {get};
-});
+}]);

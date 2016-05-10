@@ -1,5 +1,5 @@
 (() => {
-  app.factory('DonorAuth', function($http, $window) {
+  app.factory('DonorAuth', ['$http', '$window', function($http, $window) {
 
     let signup = (user) => {
       return $http({
@@ -38,5 +38,5 @@
     };
 
     return {signup, login};
-  });
+  }]);
 })();

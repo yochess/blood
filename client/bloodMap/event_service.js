@@ -1,4 +1,4 @@
-app.factory('MapEvent', function($http) {
+app.factory('MapEvent', ['$http', function($http) {
   let get = (minLat, minLong, maxLat, maxLong, lastUpdated = 0) => {
     return $http({
       method: 'GET',
@@ -11,4 +11,4 @@ app.factory('MapEvent', function($http) {
   };
 
   return {get};
-});
+}]);
