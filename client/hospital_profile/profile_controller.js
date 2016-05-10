@@ -23,51 +23,49 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
   HospitalProfileCtrl.schedule = [
     {
-      
+
       day: 1,
       openhours: 9,
       closehours: 17,
     },
-    { 
-      
+    {
+
       day: 2,
       openhours: 9,
       closehours: 17,
     },
     {
-      
+
       day: 3,
       openhours: 9,
       closehours: 17,
     },
     {
-      
+
       day: 4,
       openhours: 9,
       closehours: 17,
     },
     {
-      
+
       day: 5,
       openhours: 9,
       closehours: 17,
     },
     {
-      
+
       day: 6,
       openhours: 9,
       closehours: 17,
     },
     {
-      
+
       day: 7,
       openhours: 9,
       closehours: 17,
     }
-
-
   ];
- 
+
 
 
 
@@ -152,7 +150,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
           color: function(){return '#700000';},
           valueFormat: function(d){ return d3.format(',f')(d); },
           dispatch: {
-          
+
           },
           discretebar: {
             dispatch: {
