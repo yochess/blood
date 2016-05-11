@@ -36,11 +36,11 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
     let GeoMarker = new GeolocationMarker(BloodMapCtrl.map);
     GeoMarker.setCircleOptions({fillColor: '#808080'});
-   
+
     google.maps.event.addDomListener(window, 'load', initializeMaps);
     google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);}, 400));
-    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});   
-   
+    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});
+
     ////////////////////////////////////////
     //       BEHOLD, THE FORBIDDEN ZONE.
     ////////////////////////////////////////
@@ -56,7 +56,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         color: function(){return '#700000';},
         valueFormat: function(d){ return d3.format(',f')(d); },
         dispatch: {
-        
+
         },
         discretebar: {
           dispatch: {
@@ -112,10 +112,10 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     ////////////////////////////////////////
 
 
-    GeoMarker.setMap(BloodMapCtrl.map);  
+    GeoMarker.setMap(BloodMapCtrl.map);
     setZoom(BloodMapCtrl.map, sites);
-    setMarkers(BloodMapCtrl.map, sites);     
-    
+    setMarkers(BloodMapCtrl.map, sites);
+
   };
 
   let setBounds = () => {
@@ -131,7 +131,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals = list;
-      console.log('Sample hospital',BloodMapCtrl.hospitals[0]);
       // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
 
       //Each time new hospitals are loaded in, reset all blood
@@ -179,7 +178,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
     for (let i = 0; i < markers.length; i++) {
       let site = markers[i];
-      
+
       let siteLatLng = new google.maps.LatLng(site.latitude, site.longitude);
 
       let infowindow = new google.maps.InfoWindow({
@@ -207,15 +206,15 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       '<div class="iw_content">' + '<button type="button" class="btn btn-default">' + `<a href="#calendar/${site.id}">`+
       'Make Appointment</a>' +'</button></div></div>' +
       '<div id="street"  style="width:100px;height:100px">' + '</div></div>';
-      
+
       //Remove div around the InfoWindow
       google.maps.event.addListener(infowindow, 'domready', function() {
-       var iwOuter = $('.gm-style-iw'); 
-       var iwBackground = iwOuter.prev();  
+       var iwOuter = $('.gm-style-iw');
+       var iwBackground = iwOuter.prev();
        iwBackground.children(':nth-child(2)').css({'display' : 'none'});
        iwBackground.children(':nth-child(4)').css({'display' : 'none'});
        iwOuter.children(':nth-child(0)').css({'display' : 'none','overflow': 'auto'});
-       
+
         streetimg = new google.maps.StreetViewPanorama(document.getElementById("street"), {
           zoom:3,
           navigationControl: true,
@@ -226,14 +225,14 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         streetimg.bindTo("position", marker);
         streetimg.setVisible(true);
       });
-      
+
       //Open the infowindow on click and close the previous one
       marker.addListener('click', function() {
-        closeLastOpenedInfoWindow();  
+        closeLastOpenedInfoWindow();
         infowindow.setContent(iwContent);
         infowindow.open(map, marker);
         lastOpenedInfoWindow = infowindow;
-        
+
       });
     }
   };
@@ -255,7 +254,7 @@ let setZoom = (map, markers) => {
   }
   map.setCenter(boundbox.getCenter());
   map.fitBounds(boundbox);
-  
+
 };
 
   initializeMaps();
