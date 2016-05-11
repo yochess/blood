@@ -73,7 +73,7 @@ passport.use(new FacebookStrategy({
   clientID: config.fbapikey,
   clientSecret: config.fbapisecret,
   callbackURL: 'https://bloodshare.io/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
+  profileFields: ['id', 'displayName', 'picture.type(large)', 'email', 'friends']
 },
 function(accessToken, refreshToken, profile, done) {
   process.nextTick(() => {
@@ -81,7 +81,10 @@ function(accessToken, refreshToken, profile, done) {
       //Further DB code.
       Donor.findOrCreate({where: {fbid: profile.id}, defaults: {name: profile.displayName, email: profile.email, photo: profile._json.picture.data.url}})
       .spread(function(user, created) {
-        done(null, user);
+        let friendIds = profile._json.friends.data.map(friend => friend.id);
+        Donor.findAll({where: {fbid: {$in: friendIds}}})
+        .then(friends => user.setFriends(friends))
+        .then(() => done(null, user));
       });
     });
 }
@@ -150,7 +153,7 @@ passport.use('donor-login', new LocalStrategy({usernameField: 'email', passwordF
 
 
 authRouter.route('/facebook')
-.get(passport.authenticate('facebook'));
+.get(passport.authenticate('facebook', {scope: ['email', 'user_friends']}));
 
 authRouter.route('/facebook/callback')
 .get(passport.authenticate('facebook', {

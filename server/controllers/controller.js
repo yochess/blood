@@ -19,6 +19,8 @@ let Donor = sequelize.define('donor', {
   latestappointment: Sequelize.DATE
 });
 
+Donor.belongsToMany(Donor, {as: 'friends', through: 'friends'});
+
 let Hospital = sequelize.define('hospital', {
   password: Sequelize.STRING,
   name: Sequelize.STRING,
