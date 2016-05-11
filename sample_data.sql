@@ -1,6 +1,6 @@
 use blood;
 
-insert into hospitals 
+insert into hospitals
 (username, password, name, address, email, phonenum, hospitalurl, createdat, updatedat)
 values
 ('drake', 'password', 'drake hospital', '123 fake street', 'drake@hospital.com', '1111111111', 'www.drake.com', now(), now())
@@ -17,3 +17,72 @@ values
 (6, 11, 12, now(), now(), 1),
 (7, null, null, now(), now(), 1)
 ;
+
+-- insert into appointments
+--   (time , createdAt, updatedAt, hospitalId, donorId )
+--   values
+--   (now(), now(), now(),32 , 19),
+--   (now(), now(), now(),33 , 19),
+--   (now(), now(), now(),32 , 19),
+--   (now(), now(), now(),32 , 19),
+--   (now(), now(), now(),32 , 19),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 20),
+--   (now(), now(), now(),32 , 21),
+--   (now(), now(), now(),32 , 21),
+--   (now(), now(), now(),32 , 21),
+--   (now(), now(), now(),32 , 23),
+--   (now(), now(), now(),32 , 23),
+--   (now(), now(), now(),32 , 22),
+--   (now(), now(), now(),32 , 23),
+--   (now(), now(), now(),32 , 23),
+--   (now(), now(), now(),32 , 24),
+--   (now(), now(), now(),32 , 24),
+--   (now(), now(), now(),33 , 24);
+
+  insert into appointments
+  (time , createdAt, updatedAt, hospitalId, donorId )
+  values
+  (now(), now(), now(),32 , 25),
+  (now(), now(), now(),33 , 25),
+  (now(), now(), now(),32 , 25),
+  (now(), now(), now(),32 , 25),
+  (now(), now(), now(),32 , 25),
+  (now(), now(), now(),32 , 26),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 28),
+  (now(), now(), now(),32 , 28),
+  (now(), now(), now(),32 , 28),
+  (now(), now(), now(),32 , 26),
+  (now(), now(), now(),32 , 26),
+  (now(), now(), now(),32 , 22),
+  (now(), now(), now(),32 , 26),
+  (now(), now(), now(),32 , 26),
+  (now(), now(), now(),32 , 19),
+  (now(), now(), now(),32 , 19),
+  (now(), now(), now(),33 , 19);
+
+
+  insert into donors
+    (username, password, name, email, address, latitude, longitude, bloodtype,createdAt, updatedAt)
+    values
+    ('User8', 'user8', 'User8', 'user8.mail.com', '375 11th St
+San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now()),
+    ('User9', 'user9', 'User9', 'user9.mail.com', '375 11th St
+San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now()),
+    ('User10', 'user10', 'User10', 'user10.mail.com', '375 11th St
+San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now()),
+    ('User11', 'user11', 'User11', 'user11.mail.com', '375 11th St
+San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now());
+
+
+
+
