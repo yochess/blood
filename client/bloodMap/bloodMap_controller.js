@@ -111,6 +111,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     ////////////////////////////////////////
     //  FAREWELL, FROM THE FORBIDDEN ZONE.
     ////////////////////////////////////////
+    ///Donor bloor rank chart
  $scope.donordata = [
            {
             key: "Donor bloodrank",
@@ -212,6 +213,21 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       console.error(error);
     });
 
+
+  };
+
+//getdonors function to get the top 5 donors
+  let getdonors = (bounds) => {
+    geoobj.minLat = $scope.bounds.H.H;
+    geoobj.maxLat = $scope.bounds.H.j;
+    geoobj.minLong= $scope.bounds.j.j;
+    geoobj.maxLong= $scope.bounds.j.H;
+    BloodMap.getDonors(geoobj)
+    .then(function (donors) {
+      console.log(donors);
+      //Assign the top 5 donors name to the $scope.data[0].values[i].label
+      //Assign the top 5 donors donotion count to the $scope.data[0].values[i].value
+    });
 
   };
 
