@@ -37,6 +37,19 @@ let getDonorById = (req, res) => {
   });
 };
 
+// let getDonorsByLocation = (req, res) => {
+//   console.log(req);
+//   let queries = url.parse(req.url, true).query;
+//   Donor.findAll({where: {
+//     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
+//     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
+//   }})
+//   .then(donors => {
+//     res.send(donors);
+//   });
+// };
+
+
 module.exports.getCurrentDonor = getCurrentDonor;
 module.exports.updateCurrentDonor = updateCurrentDonor;
 module.exports.getDonorById = getDonorById;
