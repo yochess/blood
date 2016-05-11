@@ -1,5 +1,5 @@
 (() => {
-  app.controller('CalendarController', ['$http', '$window', '$routeParams', '$scope', 'Calendar', function($http, $window, $routeParams, $scope, Calendar) {
+  app.controller('CalendarController', ['$scope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', function($scope, $controller, $http, $window, $routeParams, Calendar, Event) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
 
@@ -170,15 +170,35 @@
       let $input2 = $('.checkbox.input2').find('input');
 
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+      CalendarCtrl.processRequest($input1, $input2);
+    };
 
+    // this will need refactoring and modularizing!!
+    CalendarCtrl.processRequest = ($input1, $input2) => {
+
+      // save appointment
+      $http.post('/api/appointment', {hospitalId: $routeParams.hospitalid}).then(res => {
+        console.log('appointment res: ', res);
+      }).catch(err => {
+        console.log('error: ', err);
+      })
+
+      // send email to both parties
+
+      // share to facebook if checked
       if ($input1.is(':checked')) {
-        console.log($input1.val());
+        console.log('todo: share on facebook');
       };
 
+      // save event if checked
       if ($input2.is(':checked')) {
-        console.log($input2.val());
+        $http.post('/api/event', {hospitalId: $routeParams.hospitalid}).then(res => {
+          console.log('event res: ', res);
+        }).catch(err => {
+          console.log('error: ', err);
+        })
       }
-    };
+    }
 
 
   }]);
