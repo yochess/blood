@@ -87,6 +87,7 @@ Donor.hasMany(Appointment);
 
 sequelize.sync();
 
+module.exports.sequelize = sequelize;
 module.exports.Donor = Donor;
 module.exports.Hospital = Hospital;
 module.exports.Post = Post;
