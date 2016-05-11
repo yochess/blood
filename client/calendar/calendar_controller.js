@@ -18,13 +18,16 @@
           return console.log('make a log in modal');
         }
 
+        // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
-          let modal = $('.modal');
-          // console.log(calEvent.start);
-          modal.find(".modal-title").html(event.title);
+          let $box1 = $('.modal.box1');
+          // console.log(calEvent.title);
+          // modal.find('.modal-title').html('Schedule an Appointment');
           CalendarCtrl.setView(calEvent);
           $scope.$apply();
-          modal.modal();
+          $box1.modal();
+          // modal.find('.modal-title').html('Schedule an Appointment').modal();
+
         }
       }
     });
@@ -168,8 +171,24 @@
     };
 
     CalendarCtrl.makeEvent = () => {
-      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+      let $box2 = $('.modal.box2');
+      let $inputs = $('.modal').find('input');
+
+      $inputs.each((index, input) => {
+        input.checked = false;
+      });
+
+      $box2.modal();
     };
+
+    CalendarCtrl.reallyMakeEvent = () => {
+      let $input1 = $('.checkbox.input1');
+      let $input2 = $('.checkbox.input2');
+
+      // console.log($input1.find('input'));
+      // console.log($input2.find('input'));
+      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+    }
 
     CalendarCtrl.createEvent = (startDate, endDate) => {
       startDate = startDate || CalendarCtrl.dateTime;
