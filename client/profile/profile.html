@@ -67,31 +67,22 @@
         <h2>History</h2>
         <div class="event" ng-repeat="event in ProfileCtrl.user.events | filter:ProfileCtrl.past">
           <img src="assests/heart.png" />
-           <span>You donated blood at <a ng-href="#hospital/profile/{{event.hospital.id}}">{{event.hospital.name}}</a>. Good job, you did it!</span>
+          <span>You donated blood at <a ng-href="#hospital/profile/{{event.hospital.id}}">{{event.hospital.name}}</a>. Good job, you did it!</span>
         </div>
       </div>
     </div>
     <div class="col-md-4 friend-col-outer center-block">
       <div class="col-md-3 pull-left friends-col">
-        <div class="table friends-table table-condensed">
+        <div class="friends-table table-condensed">
           <h4>Friends</h4>
-          <div>
-           <img src="assests/friend.png" /><a href=''>Mack</a>
-         </div>
-         <div>
-          <img src="assests/friend.png" /><a href=''>Steve</a>
+          <div ng-repeat="friend in ProfileCtrl.user.friends">
+            <img ng-src="{{friend.photo}}" /><a ng-href='#profile/{{friend.id}}'>{{friend.name}}</a>
+          </div>
         </div>
-        <div>
-          <img src="assests/friend.png" /><a href=''>Bill</a>
+        <div class="favorite-hospital">
+          <h4>Favorite Hospitals</h4>
+          <a class="hospital" ng-href="#hospital/profile/{{hospital.model.id}} | limitTo:5" ng-repeat="hospital in ProfileCtrl.hospitals">{{hospital.model.name}}</a>
         </div>
-        <div>
-          <img src="assests/friend.png" /><a href=''>Mark</a>
-        </div>
-      </div>
-      <div class="favorite-hospital">
-        <h4>Favorite Hospitals</h4>
-        <a class="hospital" ng-href="#hospital/profile/{{hospital.model.id}} | limitTo:5" ng-repeat="hospital in ProfileCtrl.hospitals">{{hospital.model.name}}</a>
       </div>
     </div>
   </div>
-</div>
