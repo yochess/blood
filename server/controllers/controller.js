@@ -6,7 +6,6 @@ let Sequelize = require('sequelize');
 let sequelize = new Sequelize('blood', config.sqluid || 'root', config.sqlpw || '', {logging: false});
 
 let Donor = sequelize.define('donor', {
-  username: Sequelize.STRING,
   password: Sequelize.STRING,
   fbid: Sequelize.STRING,
   name: Sequelize.STRING,
@@ -21,7 +20,6 @@ let Donor = sequelize.define('donor', {
 });
 
 let Hospital = sequelize.define('hospital', {
-  username: Sequelize.STRING,
   password: Sequelize.STRING,
   name: Sequelize.STRING,
   address: Sequelize.STRING,

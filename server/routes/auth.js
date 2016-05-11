@@ -87,15 +87,15 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-passport.use('hospital-signup', new LocalStrategy(function(username, password, done) {
+passport.use('hospital-signup', new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(username, password, done) {
   process.nextTick(function() {
 
-    Hospital.findOne({where: {username: username}})
+    Hospital.findOne({where: {email: username}})
     .then(function(hospital) {
       if (hospital) {
         return done(null, false);
       } else {
-        Hospital.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)})
+        Hospital.create({email: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)})
         .then((hospital) => {
           return done(null, hospital);
         });
@@ -106,8 +106,8 @@ passport.use('hospital-signup', new LocalStrategy(function(username, password, d
   });
 }));
 
-passport.use('hospital-login', new LocalStrategy(function(username, password, done) {
-  Hospital.findOne({where: {username: username}})
+passport.use('hospital-login', new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(username, password, done) {
+  Hospital.findOne({where: {email: username}})
   .then(function(hospital) {
     if (!hospital) {
       return done(null, false);
@@ -121,13 +121,13 @@ passport.use('hospital-login', new LocalStrategy(function(username, password, do
   });
 }));
 
-passport.use('donor-signup', new LocalStrategy(function(username, password, done) {
-  Donor.findOne({where: {username: username}})
+passport.use('donor-signup', new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(username, password, done) {
+  Donor.findOne({where: {email: username}})
   .then(function(donor) {
     if (donor) {
       return done(null,false);
     } else {
-      Donor.create({username: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(9), null)})
+      Donor.create({email: username, password: bcrypt.hashSync(password, bcrypt.genSaltSync(9), null)})
       .then((donor) => {
         return done(null, donor);
       });
@@ -135,8 +135,8 @@ passport.use('donor-signup', new LocalStrategy(function(username, password, done
   });
 }));
 
-passport.use('donor-login', new LocalStrategy(function(username, password, done){
-  Donor.findOne({where: {username: username}})
+passport.use('donor-login', new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(username, password, done){
+  Donor.findOne({where: {email: username}})
   .then(function(donor) {
     if (!donor) {
       return done(null,false);

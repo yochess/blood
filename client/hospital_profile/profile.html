@@ -47,7 +47,7 @@
             <form ng-submit="HospitalProfileCtrl.update()" style="color: gray;">
               <p>
                 Enter your hospital name
-                <input type="text" ng-model="HospitalProfileCtrl.editObj.name" required/>
+                <input type="text" ng-model="HospitalProfileCtrl.editObj.name" />
               </p>
               <p>
                 Enter your hospital email
@@ -55,11 +55,11 @@
               </p>
               <p>
                 Enter your hospital location
-                <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" required/>
+                <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" />
               </p>
               <p>
                 Enter your hospital phonenum
-                <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" required/>
+                <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" />
               </p>
               <p>
                 Enter your hospital openhours
@@ -75,11 +75,11 @@
               </p>
               <p>
                 Enter your hospital website
-                <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" required/>
+                <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" />
               </p>
               <p ng-repeat="bloodType in HospitalProfileCtrl.bloodTypes">
                 Enter {{bloodType.display}} blood stock level
-                <input type="text" ng-model="HospitalProfileCtrl.editObj[bloodType.code]" required>
+                <input type="text" ng-model="HospitalProfileCtrl.editObj[bloodType.code]" required />
               </p>
               <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Submit</button>
 
