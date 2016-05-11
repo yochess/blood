@@ -12,9 +12,10 @@ app.factory('BloodMap', ['$http', function($http) {
   };
 
   let getDonors = (geoobj) => {
+    console.log(geoobj);
     return $http({
       method: 'GET',
-      url: '/api/donor/geo',
+      url: '/api/profile/geo',
       params: geoobj
     })
     .then((res) => {
