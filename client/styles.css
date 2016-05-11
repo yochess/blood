@@ -481,8 +481,6 @@ hr {
 }
 /* -----------------------------*/
 
-/* ----------------------------- */
-
 /* Login page styling */
 
 .login-panel {
@@ -524,6 +522,16 @@ svg {
   margin: 0px;
   padding: 0px;
   height: 100%;
-  width: 100%;
+  width: 50%;
+  float: right;
+  font: 18px sans-serif;
+}
+
+ #chart {
+  overflow: hidden;
+  color: #eee;
+  border: 1px solid #333;
+  background-color: rgba(0, 0, 0, 0.8);
+
 }
 
