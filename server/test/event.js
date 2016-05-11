@@ -21,7 +21,6 @@ describe('Events', function() {
       Donor.create({name: 'testdonor'})
       .then(donor => {
         testDonor = donor;
-        console.log('finshed creating donor');
         done();
       });
     });
@@ -39,13 +38,10 @@ describe('Events', function() {
       request.user = {id: testDonor.id};
 
       response.on('end', function() {
-        console.log('response ended');
         Event.destroy({where: {id: response._getData().id}});
-        console.log('response: ', response._getData().id);
         expect(response._getData().id).to.be.above(0);
         done();
       });
-      console.log('sending request');
       eventControllers.postEvent(request, response);
     });
 
