@@ -3,6 +3,8 @@ let db = require('../controllers/controller.js');
 let Donor = db.Donor;
 let Event = db.Event;
 let Hospital = db.Hospital;
+let Appointment = db.Appointment;
+let sequelize =db.sequelize;
 
 let getCurrentDonor = (req, res) => {
   Donor.findOne({
@@ -37,19 +39,42 @@ let getDonorById = (req, res) => {
   });
 };
 
-// let getDonorsByLocation = (req, res) => {
-//   console.log(req);
-//   let queries = url.parse(req.url, true).query;
-//   Donor.findAll({where: {
-//     latitude: {$gt: queries.minLat, $lt: queries.maxLat},
-//     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
-//   }})
-//   .then(donors => {
-//     res.send(donors);
-//   });
-// };
+let getDonorsByLocation = (req, res) => {
+  console.log('donor url',req.url);
+  console.log(req.query);
+  let queries = req.query;
+  Donor.findAll({where: {
+    latitude: {$gt: queries.minLat, $lt: queries.maxLat},
+    longitude: {$gt: queries.minLong, $lt: queries.maxLong}
+  },
+  include:[Appointment],
+  // attributes: [
+  //       'Donor.*',
+  //       [sequelize.literal('(SELECT COUNT(*) FROM Appointments WHERE Appointments.donorId = Donor.id)'), 'AppointmentCount']
+  //    ],
+
+  // sequelize.literal('COUNT((Appointments))), 'AppointmentCount'
+  //order: [[sequelize.literal('AppointmentCount'), 'DESC']],
+  //attributes: ['Donor.*', 'Appointment.*', [db.sequelize.fn('COUNT', db.sequelize.col('Appointment.id')), 'AppointmentCount']],
+  //order: 'AppointmentCount',
+  //limit: 5
+  })
+  .then(donors => {
+    donors.sort(function(a,b){
+      if (a.appointments.length > b.appointments.length) {
+        return -1;
+      }
+      if (a.appointments.length < b.appointments.length) {
+        return 1;
+      }
+      return 0;
+    }),
+    res.send(donors.slice(0,5));
+  });
+};
 
 
 module.exports.getCurrentDonor = getCurrentDonor;
 module.exports.updateCurrentDonor = updateCurrentDonor;
 module.exports.getDonorById = getDonorById;
+module.exports.getDonorsByLocation = getDonorsByLocation;
