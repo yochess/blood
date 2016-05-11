@@ -166,7 +166,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         // });
         return chart;
     });
-
+    ///Donor bloor rank chart
+//////////
 
     GeoMarker.setMap(BloodMapCtrl.map);
     setZoom(BloodMapCtrl.map, sites);
@@ -215,7 +216,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
 
   };
-
+    ///Donor bloor rank chart
 //getdonors function to get the top 5 donors
   let getdonors = (bounds) => {
     geoobj.minLat = $scope.bounds.H.H;
@@ -230,6 +231,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     });
 
   };
+  ///Donor bloor rank chart
 
 
  let showLocation = (position) => {
