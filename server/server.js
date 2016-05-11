@@ -21,6 +21,7 @@ let postRouter = require('./routes/post.js');
 let authRouter = auth.authRouter;
 let calendarRouter = require('./routes/calendar.js');
 let eventRouter = require('./routes/event.js');
+let appointmentRouter = require('./routes/appointment.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
@@ -41,8 +42,10 @@ app.use('/api/profile', profileRouter);
 app.use('/api/hospital', hospitalRouter);
 app.use('/api/calendar', calendarRouter);
 app.use('/api/post', postRouter);
+app.use('/api/appointment', appointmentRouter);
 app.use('/api/event', eventRouter);
 app.use('/auth', authRouter);
+
 
 app.get('/', function(req, res) {
   res.render('index');
