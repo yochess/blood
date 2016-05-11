@@ -17,7 +17,7 @@
   </form> -->
   <p>
     <!-- If you deleted an event from your calendar, click -->
-    <!-- <button ng-click="CalendarCtrl.reload()">refresh</button> -->
+    <button ng-click="CalendarCtrl.reload()">refresh</button>
   </p>
 
   <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
@@ -45,7 +45,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.makeEvent()">Make appointment</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.firstModal()">Make appointment</button>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
               <label><input type="checkbox" /> Create an Event</label>
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.reallyMakeEvent()">Make appointment</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="CalendarCtrl.secondModal()">Make appointment</button>
           </form>
         </div>
       </div>
