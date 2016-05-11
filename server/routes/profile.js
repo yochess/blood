@@ -6,7 +6,11 @@ profileRouter.route('/')
 .get(profileControllers.getCurrentDonor)
 .put(profileControllers.updateCurrentDonor);
 
+// profileRouter.route('/geo')
+// .get(profileControllers.getDonorsByLocation);
+
 profileRouter.route('/:id')
 .get(profileControllers.getDonorById);
+
 
 module.exports = profileRouter;
