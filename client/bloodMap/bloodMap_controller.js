@@ -117,15 +117,15 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
             values: [
                 {
                     "label" : "Donor1" ,
-                    "value" : 20
-                } ,
-                {
-                    "label" : "Donor2" ,
                     "value" : 15
                 } ,
                 {
-                    "label" : "Donor3" ,
+                    "label" : "Donor2" ,
                     "value" : 10
+                } ,
+                {
+                    "label" : "Donor3" ,
+                    "value" : 8
                 } ,
                 {
                     "label" : "Donor4" ,
@@ -142,17 +142,18 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     let chart;
     nv.addGraph(function() {
         chart = nv.models.multiBarHorizontalChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
+            .x(function(d) { return d.label})
+            .y(function(d) { return d.value})
+            .height(180)
             // .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
             .barColor(function(){return '#700000';})
             //.barColor(d3.scale.category20().range())
-            .duration(250)
+            // .duration(250)
             .margin({left: 100})
-            .stacked(true)
+            //.stacked(false)
             .showControls(false);
         chart.yAxis.tickFormat(d3.format(',.2f'));
-        chart.yAxis.axisLabel('Number of Donations');
+        chart.yAxis.axisLabel('Number of Donations').axisLabelDistance(5);
         chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
         d3.select('#chart1 svg')
             .datum($scope.donordata)
