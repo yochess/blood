@@ -165,12 +165,19 @@
     };
 
     CalendarCtrl.secondModal = () => {
-      let $input1 = $('.checkbox.input1');
-      let $input2 = $('.checkbox.input2');
 
-      // console.log($input1.find('input'));
-      // console.log($input2.find('input'));
+      let $input1 = $('.checkbox.input1').find('input');
+      let $input2 = $('.checkbox.input2').find('input');
+
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+
+      if ($input1.is(':checked')) {
+        console.log($input1.val());
+      };
+
+      if ($input2.is(':checked')) {
+        console.log($input2.val());
+      }
     };
 
 
