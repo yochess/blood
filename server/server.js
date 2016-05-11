@@ -52,11 +52,10 @@ app.get('/', function(req, res) {
 });
 
 if (config.production) {
-
   let options = {
-    key: fs.readFileSync('../tls/key.pem'),
-    cert: fs.readFileSync('../tls/cert.pem'),
-    ca: fs.readFileSync('../tls/fullchain.pem')
+    key: fs.readFileSync('./tls/key.pem'),
+    cert: fs.readFileSync('./tls/cert.pem'),
+    ca: fs.readFileSync('./tls/fullchain.pem')
   };
 
   let server = https.createServer(options, app);
