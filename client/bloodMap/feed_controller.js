@@ -1,4 +1,4 @@
-app.controller('FeedController', function($scope, Feed) {
+app.controller('FeedController', ['$scope', 'Feed', function($scope, Feed) {
   let FeedCtrl = this;
   FeedCtrl.posts = [];
 
@@ -17,4 +17,4 @@ app.controller('FeedController', function($scope, Feed) {
     Feed.submit(FeedCtrl.content, {latitude: $scope.latitude, longitude: $scope.longitude});
     updatePosts();
   };
-});
+}]);
