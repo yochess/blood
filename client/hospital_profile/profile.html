@@ -67,8 +67,7 @@
             <p>
               Hospital Hours
               <p ng-repeat="schedule in HospitalProfileCtrl.schedule">
-                <span>{{schedule.day}} :</span>
-                Open from:
+                <span>{{schedule.name}} :</span>
                 <rzslider rz-slider-model="schedule.openhours"
                 rz-slider-high="schedule.closehours"
                 rz-slider-options="slider.options"></rzslider>

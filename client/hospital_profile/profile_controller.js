@@ -20,49 +20,49 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   {
 
     day: 1,
-    name: 'Sunday',
-    openhours: 9,
-    closehours: 17,
-  },
-  {
-
-    day: 2,
     name: 'Monday',
     openhours: 9,
     closehours: 17,
   },
   {
 
-    day: 3,
+    day: 2,
     name: 'Tuesday',
     openhours: 9,
     closehours: 17,
   },
   {
 
-    day: 4,
+    day: 3,
     name: 'Wednesday',
     openhours: 9,
     closehours: 17,
   },
   {
 
-    day: 5,
+    day: 4,
     name: 'Thursday',
     openhours: 9,
     closehours: 17,
   },
   {
 
-    day: 6,
+    day: 5,
     name: 'Friday',
     openhours: 9,
     closehours: 17,
   },
   {
 
-    day: 7,
+    day: 6,
     name: 'Saturday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
+
+    day: 7,
+    name: 'Sunday',
     openhours: 9,
     closehours: 17,
   }];
@@ -101,6 +101,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   let displayHospital = () => {
     HospitalProfile.get(HospitalProfileCtrl.id)
     .then((hospital) => {
+      console.log(hospital);
       HospitalProfileCtrl.editObj = hospital;
       $scope.data[0].values[0].value = HospitalProfileCtrl.editObj.opos;
       $scope.data[0].values[1].value = HospitalProfileCtrl.editObj.oneg;
@@ -119,7 +120,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
     if (HospitalProfileCtrl.id || HospitalProfileCtrl.editObj.id) {
       if(!HospitalProfileCtrl.id) {
         HospitalProfileCtrl.id = HospitalProfileCtrl.editObj.id;
-        console.log(HospitalProfileCtrl.editObj)
       }
       HospitalProfile.getReviews(HospitalProfileCtrl.id)
       .then(reviews => HospitalProfileCtrl.reviews = reviews);

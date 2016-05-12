@@ -320,6 +320,10 @@ header {
   fill: white !important;
 }
 
+.hospital-profile, .profile {
+  margin-top: 20px;
+}
+
 .panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text {
   fill: white !important;
 }
@@ -495,9 +499,9 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 }
 
 svg.nvd3-svg {
-  width: 125% !important;
+  width: 115% !important;
   position: relative;
-  right: 15%;
+  right: 10%;
 }
 
 .hospital-profile input {
