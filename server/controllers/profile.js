@@ -48,16 +48,6 @@ let getDonorsByLocation = (req, res) => {
     longitude: {$gt: queries.minLong, $lt: queries.maxLong}
   },
   include:[Appointment],
-  // attributes: [
-  //       'Donor.*',
-  //       [sequelize.literal('(SELECT COUNT(*) FROM Appointments WHERE Appointments.donorId = Donor.id)'), 'AppointmentCount']
-  //    ],
-
-  // sequelize.literal('COUNT((Appointments))), 'AppointmentCount'
-  //order: [[sequelize.literal('AppointmentCount'), 'DESC']],
-  //attributes: ['Donor.*', 'Appointment.*', [db.sequelize.fn('COUNT', db.sequelize.col('Appointment.id')), 'AppointmentCount']],
-  //order: 'AppointmentCount',
-  //limit: 5
   })
   .then(donors => {
     donors.sort(function(a,b){
