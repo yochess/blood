@@ -71,6 +71,47 @@ values
   (now(), now(), now(),33 , 19);
 
 
+
+  insert into appointments
+  (time , createdAt, updatedAt, hospitalId, donorId )
+  values
+  (now(), now(), now(),32 , 23),
+  (now(), now(), now(),33 , 29),
+  (now(), now(), now(),32 , 29),
+  (now(), now(), now(),32 , 29),
+  (now(), now(), now(),32 , 30),
+  (now(), now(), now(),32 , 30),
+  (now(), now(), now(),32 , 31),
+  (now(), now(), now(),32 , 31),
+  (now(), now(), now(),32 , 27),
+  (now(), now(), now(),32 , 30),
+  (now(), now(), now(),32 , 31),
+  (now(), now(), now(),32 , 31),
+  (now(), now(), now(),32 , 29),
+  (now(), now(), now(),32 , 29);
+
+
+
+
+  insert into appointments
+  (time , createdAt, updatedAt, hospitalId, donorId )
+  values
+  (now(), now(), now(),32 , 33),
+  (now(), now(), now(),33 , 34),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 36),
+  (now(), now(), now(),32 , 33),
+  (now(), now(), now(),32 , 34),
+  (now(), now(), now(),32 , 34),
+  (now(), now(), now(),32 , 34),
+  (now(), now(), now(),32 , 33),
+  (now(), now(), now(),32 , 33);
+
+
   insert into donors
     (username, password, name, email, address, latitude, longitude, bloodtype,createdAt, updatedAt)
     values
@@ -82,6 +123,21 @@ San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now()),
 San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now()),
     ('User11', 'user11', 'User11', 'user11.mail.com', '375 11th St
 San Francisco, CA 94103', 37.7837, -122.409, 'oneg',now(), now());
+
+
+
+
+ insert into donors
+    (username, password, name, email, address, latitude, longitude, bloodtype,createdAt, updatedAt)
+    values
+    ('User15', 'user15', 'User15', 'user15.mail.com', '50 Hagiwara Tea Garden Dr
+San Francisco, CA 94118', 37.771516, -122.468647, 'oneg',now(), now()),
+    ('User16', 'user16', 'User16', 'user16.mail.com', '50 Hagiwara Tea Garden Dr
+San Francisco, CA 94118', 37.771516, -122.468647, 'oneg',now(), now()),
+    ('User17', 'user17', 'User17', 'user17.mail.com', '50 Hagiwara Tea Garden Dr
+San Francisco, CA 94118', 37.771516, -122.468647, 'oneg',now(), now()),
+    ('User18', 'user18', 'User18', 'user18.mail.com', '50 Hagiwara Tea Garden Dr
+San Francisco, CA 94118', 37.771516, -122.468647, 'oneg',now(), now());
 
 
 
