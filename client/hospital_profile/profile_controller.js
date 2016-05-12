@@ -10,61 +10,62 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
     HospitalProfileCtrl.edit = !HospitalProfileCtrl.edit;
   };
 
-  HospitalProfileCtrl.bloodTypes = [
-  {display: 'A+', code: 'apos'},
-  {display: 'A-', code: 'aneg'},
-  {display: 'B+', code: 'bpos'},
-  {display: 'B-', code: 'bneg'},
-  {display: 'AB+', code: 'abpos'},
-  {display: 'AB-', code: 'abneg'},
-  {display: '0+', code: 'opos'},
-  {display: 'O-', code: 'oneg'}
-  ];
+  HospitalProfileCtrl.sliderOptions = {
+    floor: 0,
+    ceil: 24,
+    step: 1
+  };
 
   HospitalProfileCtrl.schedule = [
-    {
+  {
 
-      day: 1,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 1,
+    name: 'Monday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 2,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 2,
+    name: 'Tuesday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 3,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 3,
+    name: 'Wednesday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 4,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 4,
+    name: 'Thursday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 5,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 5,
+    name: 'Friday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 6,
-      openhours: 9,
-      closehours: 17,
-    },
-    {
+    day: 6,
+    name: 'Saturday',
+    openhours: 9,
+    closehours: 17,
+  },
+  {
 
-      day: 7,
-      openhours: 9,
-      closehours: 17,
-    }
-  ];
+    day: 7,
+    name: 'Sunday',
+    openhours: 9,
+    closehours: 17,
+  }];
 
 
 
@@ -100,6 +101,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   let displayHospital = () => {
     HospitalProfile.get(HospitalProfileCtrl.id)
     .then((hospital) => {
+      console.log(hospital);
       HospitalProfileCtrl.editObj = hospital;
       $scope.data[0].values[0].value = HospitalProfileCtrl.editObj.opos;
       $scope.data[0].values[1].value = HospitalProfileCtrl.editObj.oneg;
@@ -118,7 +120,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
     if (HospitalProfileCtrl.id || HospitalProfileCtrl.editObj.id) {
       if(!HospitalProfileCtrl.id) {
         HospitalProfileCtrl.id = HospitalProfileCtrl.editObj.id;
-        console.log(HospitalProfileCtrl.editObj)
       }
       HospitalProfile.getReviews(HospitalProfileCtrl.id)
       .then(reviews => HospitalProfileCtrl.reviews = reviews);
@@ -155,53 +156,53 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
           discretebar: {
             dispatch: {
               elementClick: function(e) {$scope.$apply();}
-              }
-            },
+            }
+          },
           callback: function(e){console.log('! callback !')}
         }
       };
 
       $scope.data = [
+      {
+        key: "Blood Levels",
+        values: [
         {
-          key: "Blood Levels",
-          values: [
-                  {
-                    "label" : "O+" ,
-                    "value" : 6
-                  },
-                  {
-                    "label" : "O-" ,
-                    "value" : 5
-                  },
-                  {
-                    "label" : "A+" ,
-                    "value" : 18
-                  },
-                  {
-                    "label" : "A-" ,
-                    "value" : 8
-                  },
-                  {
-                    "label" : "B+" ,
-                    "value" : 17
-                  },
-                  {
-                    "label" : "B-" ,
-                    "value" : 7
-                  },
-                  {
-                    "label" : "AB+" ,
-                    "value" : 16
-                  },
-                  {
-                    "label" : "AB-" ,
-                    "value" : 6
-                  }
-          ]
+          "label" : "O+" ,
+          "value" : 6
+        },
+        {
+          "label" : "O-" ,
+          "value" : 5
+        },
+        {
+          "label" : "A+" ,
+          "value" : 18
+        },
+        {
+          "label" : "A-" ,
+          "value" : 8
+        },
+        {
+          "label" : "B+" ,
+          "value" : 17
+        },
+        {
+          "label" : "B-" ,
+          "value" : 7
+        },
+        {
+          "label" : "AB+" ,
+          "value" : 16
+        },
+        {
+          "label" : "AB-" ,
+          "value" : 6
         }
+        ]
+      }
       ];
 
       ////////////////////////////////////////
       //  FAREWELL, FROM THE FORBIDDEN ZONE.
       ////////////////////////////////////////
-}]);
+    }]);
