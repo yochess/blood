@@ -51,13 +51,13 @@
       });
     };
 
-    return {
-      getCalendarEvents: getCalendarEvents,
-      getHospitalProfile: getHospitalProfile,
-      getToken: getToken,
-      getUrl: getUrl,
-      postCalendarEvent: postCalendarEvent
-    };
+    return [
+      getCalendarEvents,
+      getHospitalProfile,
+      getToken,
+      getUrl,
+      postCalendarEvent
+    ];
 
   }]);
 })();
