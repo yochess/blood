@@ -56,7 +56,9 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controllerAs: 'StockCtrl'
   })
   .when('/splash', {
-    templateUrl: 'splash/splash.html'
+    templateUrl: 'splash/splash.html',
+    controller: 'SplashController',
+    controllerAs: 'SplashCtrl'
   })
   .when('/calendar', {
     templateUrl: 'calendar/calendar.html',
