@@ -18,6 +18,38 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     maxLong:''
   };
 
+  let chart;
+
+  nv.addGraph(function() {
+    chart = nv.models.multiBarHorizontalChart()
+        .x(function(d) { return d.label})
+        .y(function(d) { return d.value})
+        .height(180)
+        .barColor(function(){return '#700000';})
+        .margin({left: 100})
+        .showValues(true)
+        .showControls(false);
+    chart.yAxis.tickFormat(d3.format(',.2f'));
+    chart.yAxis.axisLabel('Number of Donations').axisLabelDistance(5);
+    chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
+    update();
+    nv.utils.windowResize(chart.update);
+    $scope.$emit('chartinit');
+    return chart;
+  });
+
+  let update = () => {
+    d3.select('#chart1 svg')
+      .datum($scope.donordata)
+      .call(chart);
+  };
+
+  $scope.$watch('$scope.donordata', function() {
+      update();
+  });
+
+  $scope.$on('chartinit', update);
+
 
   let initializeMaps = function () {
 
@@ -34,12 +66,12 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
           };
     BloodMapCtrl.map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-    // let GeoMarker = new GeolocationMarker(BloodMapCtrl.map);
-    // GeoMarker.setCircleOptions({fillColor: '#808080'});
+    let GeoMarker = new GeolocationMarker(BloodMapCtrl.map);
+    GeoMarker.setCircleOptions({fillColor: '#808080'});
 
     google.maps.event.addDomListener(window, 'load', initializeMaps);
-    google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds); getdonors($scope.bounds);}, 400));
-    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});
+    google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);getdonors($scope.bounds);}, 400));
+    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);getdonors($scope.bounds);});
 
     ////////////////////////////////////////
     //       BEHOLD, THE FORBIDDEN ZONE.
@@ -140,57 +172,11 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
           }
 
      ];
-    let chart;
-    var update = function() {
-          d3.select('#chart1 svg')
-            .datum($scope.donordata)
-            .call(chart);
-        };
 
-         $scope.$watch(function() { return angular.toJson($scope.donordata); }, function() {
-
-          if (chart) {
-            update();
-          }
-        });
-
-        // The chart can not be rendered at once, since the chart
-        // creation is asynchronous.
-        $scope.$on('chartinit', update);
-
-    nv.addGraph(function() {
-        chart = nv.models.multiBarHorizontalChart()
-            .x(function(d) { return d.label})
-            .y(function(d) { return d.value})
-            .height(180)
-            // .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
-            .barColor(function(){return '#700000';})
-            //.barColor(d3.scale.category20().range())
-            // .duration(250)
-            .margin({left: 100})
-            //.stacked(false)
-            .showControls(false);
-        chart.yAxis.tickFormat(d3.format(',.2f'));
-        chart.yAxis.axisLabel('Number of Donations').axisLabelDistance(5);
-        chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
-        // d3.select('#chart1 svg')
-        //     .datum($scope.donordata)
-        //     .call(chart);
-        update();
-        // nv.utils.windowResize(chart.update);
-        // chart.dispatch.on('stateChange', function(e) {nv.log('New State:', JSON.stringify(e)); });
-        // chart.state.dispatch.on('change', function(state){
-        //   // $scope.$apply();
-        //     nv.log('state', JSON.stringify(state));
-        // });
-
-        $scope.$emit('chartinit');
-        return chart;
-    });
     ///Donor bloor rank chart
 //////////
 
-    // GeoMarker.setMap(BloodMapCtrl.map);
+    GeoMarker.setMap(BloodMapCtrl.map);
     setZoom(BloodMapCtrl.map, sites);
     setMarkers(BloodMapCtrl.map, sites);
 
@@ -237,7 +223,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
 
   };
-    ///Donor bloor rank chart
+   ///Donor bloor rank chart
 //getdonors function to get the top 5 donors
   let getdonors = (bounds) => {
     geoobj.minLat = $scope.bounds.H.H;
@@ -246,19 +232,23 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     geoobj.maxLong= $scope.bounds.j.H;
     BloodMap.getDonors(geoobj)
     .then(function (donors) {
-      console.log('Get 5 donors');
-
       for(let i=0; i<5; i++){
-        $scope.donordata[0].values[i].value = donors[i].appointments.length;
-        $scope.donordata[0].values[i].label = donors[i].name;
-      };
-      update();
-        console.log($scope.donordata[0].values);
-
+          console.log($scope.donordata[0].values[i].value);
+          $scope.donordata[0].values[i].value = 0;
+          $scope.donordata[0].values[i].label = '';
+        }
       //Assign the top 5 donors name to the $scope.data[0].values[i].label
       //Assign the top 5 donors donotion count to the $scope.data[0].values[i].value
-    });
+      if(donors.length > 0) {
+        for(let i=0; i< donors.length; i++){
+          $scope.donordata[0].values[i].value = donors[i].appointments.length;
+          $scope.donordata[0].values[i].label = donors[i].name;
+        }
+        update();
+      }
+      update();
 
+    });
   };
   ///Donor bloor rank chart
 
