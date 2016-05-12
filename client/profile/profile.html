@@ -10,23 +10,23 @@
           <div ng-hide="ProfileCtrl.edit" class="table-user-information">
             <div>
               <span class="profile-info-labels">Username:</span>
-              <span>{{ProfileCtrl.user.username}}</span>
+              <p>{{ProfileCtrl.user.username}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Display Name:</span>
-              <span>{{ProfileCtrl.user.name}}</span>
+              <p>{{ProfileCtrl.user.name}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Email:</span>
-              <span>{{ProfileCtrl.user.email}}</span>
+              <p>{{ProfileCtrl.user.email}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Blood Type:</span>
-              <span>{{ProfileCtrl.user.bloodtype}}</span>
+              <p>{{ProfileCtrl.user.bloodtype}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Address:</span>
-              <span>{{ProfileCtrl.user.address}}</span>
+              <p>{{ProfileCtrl.user.address}}</p>
             </div>
           </div>
           <div>
@@ -71,11 +71,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 friend-col-outer center-block">
-      <div class="col-md-3 pull-left friends-col">
-        <div class="friends-table table-condensed">
+    <div class="col-md-4 center-block">
+      <div class="connections">
+        <div class="friends">
           <h4>Friends</h4>
-          <div ng-repeat="friend in ProfileCtrl.user.friends">
+          <div class="friend" ng-repeat="friend in ProfileCtrl.user.friends">
             <img ng-src="{{friend.photo}}" /><a ng-href='#profile/{{friend.id}}'>{{friend.name}}</a>
           </div>
         </div>
