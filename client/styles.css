@@ -527,11 +527,4 @@ svg {
   font: 18px sans-serif;
 }
 
- #chart {
-  overflow: hidden;
-  color: #eee;
-  border: 1px solid #333;
-  background-color: rgba(0, 0, 0, 0.8);
-
-}
 
