@@ -21,6 +21,7 @@ module.exports = function(config) {
       'client/lib/d3/d3.js',
       'client/lib/nvd3/build/nv.d3.js',
       'client/lib/angular-nvd3/dist/angular-nvd3.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.13.0/rzslider.min.js',
       '../node_modules/node-localstorage/LocalStorage.js',
       'client/app.js',
       'client/example/example_controller.js',
