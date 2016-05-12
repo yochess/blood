@@ -35,10 +35,11 @@ module.exports = {
         // this will need to be fixed
         // i currently dunno the behavior of the start and end properties
         let events = response.items.filter(event => {
-          if (!event.start.dateTime || !event.end.dateTime) {
-            console.log('!!!!!bug in code: ', event);
+          // perhaps this is never true
+          if (!event.end) {
+            console.log('!!!!!no end date: ', event);
           }
-          return event.start.dateTime && event.end.dateTime;
+          return event.end;
         });
 
         res.send(events.map(item => {
@@ -49,8 +50,8 @@ module.exports = {
             id: item.id,
             status: item.status,
             url: item.htmlLink,
-            start: item.start.dateTime,
-            end: item.end.dateTime
+            start: item.start.dateTime || item.start.date,
+            end: item.end.dateTime || item.end.date
           }
         }));
       }
