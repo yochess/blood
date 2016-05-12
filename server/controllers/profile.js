@@ -3,6 +3,7 @@ let db = require('../controllers/controller.js');
 let Donor = db.Donor;
 let Event = db.Event;
 let Hospital = db.Hospital;
+let Appointment = db.Appointment;
 
 let getCurrentDonor = (req, res) => {
   Donor.findOne({
@@ -37,6 +38,32 @@ let getDonorById = (req, res) => {
   });
 };
 
+let getDonorsByLocation = (req, res) => {
+  console.log('donor url',req.url);
+  console.log(req.query);
+  let queries = req.query;
+  Donor.findAll({where: {
+    latitude: {$gt: queries.minLat, $lt: queries.maxLat},
+    longitude: {$gt: queries.minLong, $lt: queries.maxLong}
+  },
+  include:[Appointment],
+  })
+  .then(donors => {
+    donors.sort(function(a,b){
+      if (a.appointments.length > b.appointments.length) {
+        return -1;
+      }
+      if (a.appointments.length < b.appointments.length) {
+        return 1;
+      }
+      return 0;
+    }),
+    res.send(donors.slice(0,5));
+  });
+};
+
+
 module.exports.getCurrentDonor = getCurrentDonor;
 module.exports.updateCurrentDonor = updateCurrentDonor;
 module.exports.getDonorById = getDonorById;
+module.exports.getDonorsByLocation = getDonorsByLocation;

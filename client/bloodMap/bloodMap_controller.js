@@ -18,6 +18,38 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     maxLong:''
   };
 
+  let chart;
+
+  nv.addGraph(function() {
+    chart = nv.models.multiBarHorizontalChart()
+        .x(function(d) { return d.label})
+        .y(function(d) { return d.value})
+        .height(180)
+        .barColor(function(){return '#700000';})
+        .margin({left: 100})
+        .showValues(true)
+        .showControls(false);
+    chart.yAxis.tickFormat(d3.format(',.2f'));
+    chart.yAxis.axisLabel('Number of Donations').axisLabelDistance(5);
+    chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
+    update();
+    nv.utils.windowResize(chart.update);
+    $scope.$emit('chartinit');
+    return chart;
+  });
+
+  let update = () => {
+    d3.select('#chart1 svg')
+      .datum($scope.donordata)
+      .call(chart);
+  };
+
+  $scope.$watch('$scope.donordata', function() {
+      update();
+  });
+
+  $scope.$on('chartinit', update);
+
 
   let initializeMaps = function () {
 
@@ -38,8 +70,8 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     GeoMarker.setCircleOptions({fillColor: '#808080'});
 
     google.maps.event.addDomListener(window, 'load', initializeMaps);
-    google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);}, 400));
-    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);});
+    google.maps.event.addListener(BloodMapCtrl.map, 'bounds_changed', _.throttle(function() { setBounds(); gethospitals($scope.bounds);getdonors($scope.bounds);}, 400));
+    google.maps.event.addListenerOnce(BloodMapCtrl.map, 'tilesloaded', function(){setBounds(); gethospitals($scope.bounds);getdonors($scope.bounds);});
 
     ////////////////////////////////////////
     //       BEHOLD, THE FORBIDDEN ZONE.
@@ -70,6 +102,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     $scope.data = [
       {
         key: "Blood Levels",
+        "color": "#1f77b4",
         values: [
                 {
                   "label" : "O+" ,
@@ -110,7 +143,38 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     ////////////////////////////////////////
     //  FAREWELL, FROM THE FORBIDDEN ZONE.
     ////////////////////////////////////////
+    ///Donor bloor rank chart
+ $scope.donordata = [
+           {
+            key: "Donor's donations",
+            values: [
+                {
+                    "label" : "Donor1" ,
+                    "value" : 15
+                } ,
+                {
+                    "label" : "Donor2" ,
+                    "value" : 10
+                } ,
+                {
+                    "label" : "Donor3" ,
+                    "value" : 8
+                } ,
+                {
+                    "label" : "Donor4" ,
+                    "value" : 5
+                } ,
+                {
+                    "label" : "Donor5" ,
+                    "value" : 2
+                }
+            ]
+          }
 
+     ];
+
+    ///Donor bloor rank chart
+//////////
 
     GeoMarker.setMap(BloodMapCtrl.map);
     setZoom(BloodMapCtrl.map, sites);
@@ -159,6 +223,34 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
 
   };
+   ///Donor bloor rank chart
+//getdonors function to get the top 5 donors
+  let getdonors = (bounds) => {
+    geoobj.minLat = $scope.bounds.H.H;
+    geoobj.maxLat = $scope.bounds.H.j;
+    geoobj.minLong= $scope.bounds.j.j;
+    geoobj.maxLong= $scope.bounds.j.H;
+    BloodMap.getDonors(geoobj)
+    .then(function (donors) {
+      for(let i=0; i<5; i++){
+          console.log($scope.donordata[0].values[i].value);
+          $scope.donordata[0].values[i].value = 0;
+          $scope.donordata[0].values[i].label = '';
+        }
+      //Assign the top 5 donors name to the $scope.data[0].values[i].label
+      //Assign the top 5 donors donotion count to the $scope.data[0].values[i].value
+      if(donors.length > 0) {
+        for(let i=0; i< donors.length; i++){
+          $scope.donordata[0].values[i].value = donors[i].appointments.length;
+          $scope.donordata[0].values[i].label = donors[i].name;
+        }
+        update();
+      }
+      update();
+
+    });
+  };
+  ///Donor bloor rank chart
 
 
  let showLocation = (position) => {

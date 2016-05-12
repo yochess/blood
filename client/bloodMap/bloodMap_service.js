@@ -11,6 +11,17 @@ app.factory('BloodMap', ['$http', function($http) {
     });
   };
 
-  return {getMap};
+  let getDonors = (geoobj) => {
+    return $http({
+      method: 'GET',
+      url: '/api/profile/geo',
+      params: geoobj
+    })
+    .then((res) => {
+      return res.data;
+    });
+  };
+
+  return {getMap , getDonors};
 
 }]);

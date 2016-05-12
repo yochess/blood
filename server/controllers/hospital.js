@@ -12,9 +12,9 @@ let getCurrentHospital = (req, res) => {
 };
 
 let updateCurrentHospital = (req, res) => {
-  Hospital.findOne({where: {id: req.user.id}, include: [Schedule]}) 
-  .then((hospital) => { 
-    hospital.update(req.body) 
+  Hospital.findOne({where: {id: req.user.id}, include: [Schedule]})
+  .then((hospital) => {
+    hospital.update(req.body)
     .then(hospital => {
       req.body.schedules.forEach((schedule) => {
       Schedule.findOne({where: {hospitalId: req.user.id}})

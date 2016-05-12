@@ -252,7 +252,7 @@ header {
   text-align: right;
  }
 
-#iw_container {
+ #iw_container {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 11px;
 }
@@ -343,6 +343,8 @@ header {
   line-height: 30px;
   padding-left: 10px;
 }
+
+
 
 .iwf{
   border:1px solid #700000 ;
@@ -477,8 +479,7 @@ hr {
     margin: 0 auto !important;
   }
 }
-
-/* ----------------------------- */
+/* -----------------------------*/
 
 /* Login page styling */
 
@@ -512,5 +513,15 @@ hr {
 
 .facebutton-img {
   padding-right: 5px;
-
 }
+
+#chart1 svg {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 50%;
+  float: right;
+  font: 18px sans-serif;
+}
+
+
