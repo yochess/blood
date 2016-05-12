@@ -2,6 +2,7 @@
 let nodemailer = require('nodemailer');
 let controllers = require('../controllers/controller.js');
 let config = require('../../serverconfig.js');
+let moment = require('moment');
 
 let Sequelize = require('sequelize');
 
@@ -24,50 +25,64 @@ Appointment.findAll().then(appointments => {
         let appointmentTime = appointment.createdAt.getTime();
 
         if (appointmentTime + TIME_INTERVAL > currentTime) {
-          email(donor, hospital);
+          email(donor, hospital, appointment);
         }
       });
     });
   }
 });
 
-function email(donor, hospital) {
+function email(donor, hospital, appointment) {
   console.log('sending mail!');
+
+  let day = moment(appointment.time).format('dddd');
+  let date = moment(appointment.time).format('MMMM Do YYYY');
+  let time = moment(appointment.time).format('h:ss a');
 
   let mailOptions1 = {
     from: 'britishchickenblood@gmail.com',
     to: donor.email,
     subject: 'Appointment Scheduled',
-    text: [
-      `You have scheduled an appointment with ${hospital.name}.`,
-      `The location of the hospital is at ${hospital.location}.`,
-      `If you have any questions regarding your appointment, you can reach the hospital at ${hospital.email}.`,
-      `Thank you!`
-    ].join(),
+    // text: [
+    //   `You have scheduled an appointment with ${hospital.name}.`,
+    //   `The location of the hospital is at ${hospital.location}.`,
+    //   `If you have any questions regarding your appointment, you can reach the hospital at ${hospital.email}.`,
+    //   `Thank you!`
+    // ].join(),
     html: [
-      `<p>You have scheduled an appointment with ${hospital.name}.</p>`,
-      `<p>The location of the hospital is at ${hospital.location}.</p>`,
-      `<p>If you have any questions regarding your appointment, you can reach the hospital at ${hospital.email}.</p>`,
-      `<p>Thank you!</p>`
-    ].join()
+      `<h1>Hello ${donor.name}!</h1><br/>`,
+      `<p>You have scheduled an appointment to donate blood to ${hospital.name} `,
+      `on ${day}, ${date} at ${time}.</p>`,
+      `<p>The hospital is located at ${hospital.address}. If you have any further questions `,
+      `regarding your appointment, you can visit the hospital's website at ${hospital.hospitalurl} `,
+      `or send them an email directly at ${hospital.email}.</p>`,
+      `<p>To view information about this hospital on our system, visit `,
+      `their home page at ${hospital.hospitalurl} or their `,
+      `<a href="https://bloodshare.io/#/hospital/profile/${hospital.id}">`,
+      `profile page.</a></p><br/>`,
+      `<p>Thank you!</p>`,
+      `<p>  -- britishchickenblood`
+    ].join('')
   };
 
   let mailOptions2 = {
     from: 'britishchickenblood@gmail.com',
     to: hospital.email,
     subject: 'Appointment Scheduled',
-    text: [
-      `${donor.name} has scheduled an appointment with you!`,
-      `The user's blood type is ${donor.bloodtype}.`,
-      `If you have any questions regarding your appointment, you can reach the donor at ${donor.email}.`,
-      `Thank you!`
-    ].join(' '),
+    // text: [
+    //   `${donor.name} has scheduled an appointment with you!`,
+    //   `The user's blood type is ${donor.bloodtype}.`,
+    //   `If you have any questions regarding your appointment, you can reach the donor at ${donor.email}.`,
+    //   `Thank you!`
+    // ].join(' '),
     html: [
-      `<p>${donor.name} has scheduled an appointment with you!</p>`,
-      `<p>The user's blood type is ${donor.bloodtype}.</p>`,
-      `<p>If you have any questions regarding your appointment, you can reach the donor at ${donor.email}.</p>`,
-      `<p>Thank you!</p>`
-    ].join(' ')
+      `<h1>Hello ${hospital.name}!</h1><br/>`,
+      `<p>${donor.name} has scheduled an appointment to donate `,
+      `blood type of ${donor.bloodtype} on ${day}, ${date} at ${time}.</p>`,
+      `<p>If you have any questions, you may contact the donor directly at ${donor.email}</p>`,
+      `<p>Thank you!</p>`,
+      `<p>  -- britishchickenblood`
+    ].join('')
   };
 
   transporter.sendMail(mailOptions1, function(error, info) {

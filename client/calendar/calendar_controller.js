@@ -175,9 +175,11 @@
 
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
-
       // save appointment
-      $http.post('/api/appointment', {hospitalId: $routeParams.hospitalid}).then(res => {
+      $http.post('/api/appointment', {
+        hospitalId: $routeParams.hospitalid,
+        time: CalendarCtrl.time.start
+      }).then(res => {
         console.log('appointment res: ', res);
       }).catch(err => {
         console.log('error: ', err);
