@@ -12,7 +12,10 @@ const FIFTYSIXDAYS = 5E9; // basically
 let postEvent = (req, res) => {
   console.log('in controller');
   Promise.all([
-    Event.create({time: req.body.time}),
+    Event.create({
+      time: req.body.time,
+      hospitalId: req.body.hospitalId
+    }),
     Donor.findOne({where: {id: req.user.id}})
     ]).then(results => {
       console.log('made event and donor');
