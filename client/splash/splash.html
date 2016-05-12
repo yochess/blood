@@ -1,67 +1,102 @@
 <div id='container'>
 </div>
-  <header>
-        <div class="header-content">
-            <div class="header-content-inner">
-                <img src='assests/bcb.png'/>
-                <hr>
-                <p>Perform your voodoo rituals with confidence with British Chicken Blood. 210% more pure than standard chicken blood, British Chicken Blood ensures that you will summon Shog'Moroth as intended, instead of T'ylaneu, the Construct of Malice. The guests at your next dinner party will thank you.</p>
-            </div>
+<header>
+    <div class="header-content">
+        <div class="header-content-inner">
+            <img src='assests/bcb.png'/>
+            <hr>
+            <p>
+                With BloodShare, we connect donors to hospitals to set up appointments when that donors blood type is in particular need. We've optimized the process as much as possible, ensuring that donors will only receive notifications when they want them and that donors can easily make appointments that are convenient for both the donor and the facility drawing the blood.
+            </p>
         </div>
-    </header>
+    </div>
+</header>
 
-    <section class="bg-primary" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Clean, pure, blood solutions</h2>
-                    <hr class="light">
-                    <p class="text-faded">Perform your voodoo rituals with confidence with British Chicken Blood. 210% more pure than standard chicken blood, British Chicken Blood ensures that you will summon Shog'Moroth as intended, instead of T'ylaneu, the Construct of Malice. The guests at your next dinner party will thank you.</p>
-                    <a href="#services" class="page-scroll btn btn-default btn-xl">Wow!</a>
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">We help you help others!</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <img src='assests/medical.png'/>
+                    <h3>What's Going On?</h3>
+                    <p class="text-muted">Our map shows local events like blood drives, messages from other users and even a leaderboard for the most donations.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <img src='assests/voodoo-doll.png'/>
+                    <h3>All in One Place</h3>
+                    <p class="text-muted">Sometimes your local hospital isn't the one with the biggest need. We help you locate a place to donate that helps the most.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <img src='assests/octuber-31.png' />
+                    <h3>Easy Appointments!</h3>
+                    <p class="text-muted">Log in with google calendar, and your favorite hospitals available time slots that coincide with your available times populate our calendar. Pick a time, confirm. Done! That's all it takes.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <img src='assests/holding-hands-in-a-circle.png' />
+                    <h3>Find a Blood Buddy</h3>
+                    <p class="text-muted">Many people choose not to donate because they're afraid of needles, find a Blood Buddy and donate together to help each other through that fear.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">We're here to help</h2>
-                    <hr class="primary">
-                </div>
+<section id="splash-data-viz">
+    <div class="container data-viz-header">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">See how you can make a difference through BloodShare</h2>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <img src='assests/medical.png'/>
-                        <h3>Quality Blood</h3>
-                        <p class="text-muted">Our blood is guaranteed to perform as you expect or your money back</p>
-                    </div>
+    </div>
+    <div class="container data-viz col-lg-10 col-lg-offset-2">
+        <div class="row visualizations">
+            <div class="col-lg-3 donations">
+        <svg id="fillgauge2" width="100%" height="100%"></svg>
+                <span> AWESOME! BLOODMETER! BLOODMETER! BLOODMETER! BLOODMETER! </span>
+            </div>
+            <div class="col-lg-3">
+                <div id="splash-blood-panel">
+                    <nvd3 options="options" data="data" api="api"></nvd3>
                 </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <img src='assests/voodoo-doll.png'/>
-                        <h3>Our Voodoo Shamans Work With You</h3>
-                        <p class="text-muted">Don't worry about working with a witch doctor, we do the work for you.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <img src='assests/octuber-31.png' />
-                        <h3>Stay Current</h3>
-                        <p class="text-muted">With calendar integration, never miss an important ritual.</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box">
-                        <img src='assests/holding-hands-in-a-circle.png' />
-                        <h3>Share With Facebook!</h3>
-                        <p class="text-muted">Dangerous cults are more fun with friends!</p>
-                    </div>
-                </div>
+                <span>This is the current blood stock level of blood facilities in our home town of San Francisco, displayed in days of supply. When you're signed in you can see the data for your area appear on our map!</span>
+            </div>
+            <div class="col-lg-3">
+                This graph represents the top donors for our home in San Francisco. Compete to be the top lifesaver by becoming a regular donor!
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">How this all works</h2>
+                <hr class="light">
+                <p class="text-faded" style="font-size: 1.2em">
+                    As a donor, you will set your blood type and a threshold. When the blood level of your favorite hospital or blood center falls under that threshold, we send you a single email which contains instructions on how to set up an appointment. The appointment process takes less than 5 clicks. You'll receive this email only once and we won't bother you again for a month.
+
+                    </p>
+                    <br />
+                    <p class="text-faded" style="font-size: 1.2em">                    As a hospital, we give you controls to report your blood levels for users to see, as well as tools to set up events like blood drives. By setting your hours of operation and availability, users can quickly and easily make appointments after receiving notification of your needs.
+                </p>
+                <a href="#services" class="page-scroll btn btn-default btn-xl">Wow!</a>
+            </div>
+        </div>
+    </div>
+</section>
+

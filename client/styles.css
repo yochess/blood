@@ -8,6 +8,8 @@ h1, h2, h3, h4, h5, p, div {
   background-color: #700000;
 }
 
+
+
 .clearfix:after {
   clear: both;
   content: ".";
@@ -18,6 +20,14 @@ h1, h2, h3, h4, h5, p, div {
 }
 
 /* Header Content tag which contains all header materials*/
+
+section {
+  height: 100vh;
+}
+header {
+  height: 100vh;
+}
+
 .header-content {
   text-align: center;
   position: relative;
@@ -66,8 +76,27 @@ header {
 }
 /* ----------------------------- */
 
+/* Section of the splash page for data viz */
 
+.data-viz {
+  padding-top: 5%;
+}
 
+.data-viz-header {
+  padding-top: 5%;
+}
+
+#splash-blood-panel {
+  margin-top: -10%;
+  margin-left: -50px;
+  margin-bottom: -20px;
+  color: white;
+  fill: white !important;
+}
+
+#fillgauge2 {
+  margin-left: -30px;
+}
 /* Blood Stock Level styles*/
 
 .stockGreeter {
@@ -328,8 +357,7 @@ header {
 .hospital-profile, .profile {
   margin-top: 20px;
 }
-
-.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text {
+.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text, #splash-blood-panel text {
   fill: white !important;
 }
 
@@ -551,6 +579,11 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 #chart1 svg {
   height: 100%;
   font: 18px sans-serif;
+}
+
+#splash-data-viz {
+  background-color: #333333;
+  color: white;
 }
 
 
