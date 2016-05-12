@@ -515,9 +515,6 @@ hr {
   padding-right: 5px;
 }
 
-svg {
-  display: block;
-}
 #chart1 svg {
   margin: 0px;
   padding: 0px;
