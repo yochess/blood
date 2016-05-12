@@ -4,7 +4,6 @@ let Donor = db.Donor;
 let Event = db.Event;
 let Hospital = db.Hospital;
 let Appointment = db.Appointment;
-let sequelize =db.sequelize;
 
 let getCurrentDonor = (req, res) => {
   Donor.findOne({
