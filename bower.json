@@ -24,6 +24,7 @@
     "fullcalendar": "^2.7.1",
     "angular-nvd3": "^1.0.6",
     "d3": "^3.5.17",
-    "nvd3": "^1.8.3"
+    "nvd3": "^1.8.3",
+    "geolocation-marker": "https://github.com/ChadKillingsworth/geolocation-marker/releases/download/v2.0.4/geolocation-marker.tgz"
   }
 }
