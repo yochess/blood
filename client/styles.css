@@ -281,6 +281,11 @@ header {
   color: white;
 }
 
+.map-page .donor-chart {
+  margin-top: 20px;
+  border: 1px solid #700000;
+}
+
 .event {
   padding: 10px 0;
 }
@@ -498,7 +503,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   }
 }
 
-svg.nvd3-svg {
+.hospital-profile svg.nvd3-svg {
   width: 115% !important;
   position: relative;
   right: 10%;
@@ -544,11 +549,7 @@ svg.nvd3-svg {
 }
 
 #chart1 svg {
-  margin: 0px;
-  padding: 0px;
   height: 100%;
-  width: 50%;
-  float: right;
   font: 18px sans-serif;
 }
 
