@@ -11,28 +11,24 @@
         <div class="col-md-6 userInfo-table">
           <div class="table-user-information">
             <div>
-              <span class="profile-info-labels">Username:</span>
-              <br />
-              <span>{{HospitalProfileCtrl.editObj.username}}</span>
-            </div>
-            <div>
               <span class="profile-info-labels">Display Name:</span> <br/>
-              <span>{{HospitalProfileCtrl.editObj.name}}</span>
+              <p{{HospitalProfileCtrl.editObj.name}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Email:</span> <br/>
-              <span>{{HospitalProfileCtrl.editObj.email}}</span>
+              <p>{{HospitalProfileCtrl.editObj.email}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Address:</span>
-              <span>{{HospitalProfileCtrl.editObj.address}}</span>
+              <p>{{HospitalProfileCtrl.editObj.address}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Website:</span><br/>
-              <span>{{HospitalProfileCtrl.editObj.hospitalurl}}</span>
+              <p>{{HospitalProfileCtrl.editObj.hospitalurl}}</p>
             </div>
             <div>
-              <span class="profile-info-labels">Phone Number:</span><br/> <span>{{HospitalProfileCtrl.editObj.phonenum}}</span>
+              <span class="profile-info-labels">Phone Number:</span>
+              <p>{{HospitalProfileCtrl.editObj.phonenum}}</p>
             </div>
           </div>
           <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn" style="color: white;">Edit Info</button>
@@ -70,7 +66,7 @@
                 <span>{{schedule.name}} :</span>
                 <rzslider rz-slider-model="schedule.openhours"
                 rz-slider-high="schedule.closehours"
-                rz-slider-options="slider.options"></rzslider>
+                rz-slider-options="HospitalProfileCtrl.sliderOptions"></rzslider>
               </p>
             </p>
           </div>

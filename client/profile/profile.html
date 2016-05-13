@@ -7,10 +7,6 @@
       <div class="col-md-6 userInfo-table">
         <div ng-hide="ProfileCtrl.edit" class="table-user-information">
           <div>
-            <span class="profile-info-labels">Username:</span>
-            <p>{{ProfileCtrl.user.username}}</p>
-          </div>
-          <div>
             <span class="profile-info-labels">Display Name:</span>
             <p>{{ProfileCtrl.user.name}}</p>
           </div>
@@ -33,18 +29,16 @@
           </button>
           <div ng-show="ProfileCtrl.edit">
             <form ng-submit="ProfileCtrl.updateUser()"  class="simple-form profile-edit-form">
-              <span>Display Name:</span>
-              <input type="text" ng-model="ProfileCtrl.user.name" />
-              <br />
-              <span>E-mail:</span>
-              <br />
-              <input type="email" ng-model="ProfileCtrl.user.email" /><br />
-              <span>Location:</span>
-              <input type="text" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/>
-              <br />
-              <span>Blood Type:</span>
-              <input type="text" ng-model="ProfileCtrl.user.bloodtype" />
-              <br />
+              <label for="name">Display Name:</label>
+              <input type="text" name="name" ng-model="ProfileCtrl.user.name" />
+              <label for="email">Email</label>
+              <input type="email" name="email" ng-model="ProfileCtrl.user.email" />
+              <label for="location">Location:</label>
+              <input type="text" name="location" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/>
+              <label for="bloodtype">Blood Type:</label>
+              <select name="bloodtype" ng-model="profile.user.bloodtype">
+                <option ng-repeat="type in ProfileCtrl.bloodTypes" value="{{type.code}}">{{type.display}}</option>
+              </select>
               <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
             </form>
             <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" class="profile-button btn">
