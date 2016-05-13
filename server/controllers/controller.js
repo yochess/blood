@@ -78,6 +78,11 @@ Donor.belongsToMany(Event, {through: 'donorsevents'});
 
 let Appointment = sequelize.define('appointment', {
   time: Sequelize.DATE,
+  /* appointment type options */
+  /* 1: normal appointment */
+  /* 2: event appointment */
+  /* 3: appointment with bloodbuddy */
+  type: Sequelize.INTEGER
 });
 
 Appointment.belongsTo(Hospital);

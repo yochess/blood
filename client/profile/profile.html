@@ -56,16 +56,29 @@
     </div>
     <div class="panel-body panel-lower events">
       <h2>Upcoming</h2>
-      <div class="event" ng-repeat="event in ProfileCtrl.user.events | filter:ProfileCtrl.upcoming">
-        <img src="assests/heart.png" />
-        <span>You have <a ng-href="#event/{{event.id}}">an appointment</a> to donoate blood at <a ng-href="#hospital/profile/{{event.hospital.id}}">{{event.hospital.name}}</a>.</span>
+      <div class="event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.upcoming">
+        <p>
+          You have an appointment to donate blood at <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>.
+        </p>
+        <p>
+          Your appointment time is at {{appointment.time | date:'medium'}}. Way to go!
+        </p>
       </div>
     </div>
     <div class="panel-body panel-lower events">
       <h2>History</h2>
-      <div class="event" ng-repeat="event in ProfileCtrl.user.events | filter:ProfileCtrl.past">
+      <div class="event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.past">
         <img src="assests/heart.png" />
-        <span>You donated blood at <a ng-href="#hospital/profile/{{event.hospital.id}}">{{event.hospital.name}}</a>. Good job, you did it!</span>
+        <time>{{appointment.time | date:'medium'}}</time>
+        <p ng-show="{{appointment.type === 1}}">
+          You donated blood at <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. The clot thickens!
+        </p>
+        <p ng-show="{{appointment.type === 2}}">
+          You participated in an event <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. Way to pool your efforts!
+        </p>
+        <p ng-show="{{appointment.type === 3}}">
+          You drew blood from a stone and helped a blood-buddy get over his fear of needles!
+        </p>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ let Appointment = db.Appointment;
 let makeAppointment = (req, res) => {
   Donor.findOne({where: {id: req.user.id}})
   .then(donor => {
-    Appointment.create({time: req.body.time, donorId: donor.id, hospitalId: req.body.hospitalId})
+    Appointment.create({time: req.body.time, donorId: donor.id, hospitalId: req.body.hospitalId, type: req.body.type})
     .then(appointment => res.send(appointment));
   });
 };
