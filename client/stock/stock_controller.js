@@ -2,14 +2,14 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
   let StockCtrl = this;
 
   StockCtrl.rename = {
-    opos: 'O Pos',
-    oneg: 'O Neg',
-    apos: 'A Pos',
-    aneg: 'A Neg',
-    bpos: 'B Pos',
-    bneg: 'B Neg',
-    abpos: 'AB Pos',
-    abneg: 'AB Neg'
+    opos: 'O+',
+    oneg: 'O-',
+    apos: 'A+',
+    aneg: 'A-',
+    bpos: 'B+',
+    bneg: 'B-',
+    abpos: 'AB+',
+    abneg: 'AB-'
   }
 
   $scope.options = {
@@ -22,15 +22,13 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
                 color: function(){return '#700000';},
                 valueFormat: function(d){ return d3.format(',f')(d); },
                 dispatch: {
-                
+
                 },
                 discretebar: {
                   dispatch: {
-                    //chartClick: function(e) {console.log("! chart Click !")},
                     elementClick: function(e) {
                       StockCtrl.currentSelectedType = e.data.label;
                       $scope.$apply();
-                      // console.log(StockCtrl.currentSelectedType);
                     }
                   }
                 },
@@ -128,7 +126,6 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
     }
     saveData[StockCtrl.currentSelectedType] = parseInt(StockCtrl.setLevel);
     StockCtrl.put(saveData);
-    // $scope.api.refresh();
   }
 
   StockCtrl.get();
