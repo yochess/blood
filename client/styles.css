@@ -94,6 +94,7 @@ header {
 
 #fillgauge2 {
   margin-left: -30px;
+  text-align: center;
 }
 /* Blood Stock Level styles*/
 
@@ -414,6 +415,10 @@ header {
   color: white;
 }
 
+.profile label {
+  display: block;
+}
+
 .img-profile {
   height: 200px;
   width: 200px;
@@ -518,6 +523,11 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: #6e99e1;
 }
 
+.profile select {
+  display: block;
+  margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 990px) {
   .friend-col-outer {
     margin: 0 auto;
@@ -590,6 +600,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 #splash-data-viz {
   background-color: #333333;
+  text-align: center;
   color: white;
   padding: 5% 0;
 }

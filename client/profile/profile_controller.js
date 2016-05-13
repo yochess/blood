@@ -14,6 +14,32 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
     bloodtype: ''
   };
 
+  ProfileCtrl.bloodTypes = [{
+    display: 'A+',
+    code: 'apos'
+  }, {
+    display: 'A-',
+    code: 'aneg'
+  }, {
+    display: 'B+',
+    code: 'bpos'
+  }, {
+    display: 'A-',
+    code: 'bneg'
+  }, {
+    display: 'AB+',
+    code: 'abpos'
+  }, {
+    display: 'AB-',
+    code: 'abneg'
+  }, {
+    display: 'O+',
+    code: 'opos'
+  }, {
+    display: 'O-',
+    code: 'oneg'
+  }];
+
   ProfileCtrl.hospitals = [];
 
   ProfileCtrl.edit = false;
