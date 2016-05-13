@@ -100,6 +100,7 @@ header {
 
 .stockGreeter {
   text-align: center;
+  margin: 20px 30px;
 }
 /* ----------------------------- */
 
@@ -356,7 +357,7 @@ header {
 .hospital-profile, .profile {
   margin-top: 20px;
 }
-.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text, #splash-blood-panel text {
+.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text, #splash-blood-panel text, .stocks text {
   fill: white !important;
 }
 
@@ -488,9 +489,14 @@ header {
 .profile-button {
   background: #700000;
   color: white;
+  border: 0.5px solid white;
 }
 
 .profile-button:hover {
+  color: gray;
+}
+
+.profile-button:focus {
   color: gray;
 }
 
@@ -651,7 +657,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 @media only screen and (max-width: 1000px) {
  .visualizer {
-  width: 50%;
+  /*width: 30%;*/
   margin: 10px auto;
  }
  .first-viz {
@@ -663,12 +669,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   text-align: center;
   width: 100%;
  }
+.first-viz {
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
 }
 
 @media only screen and (max-width: 991px) {
-  .first-viz {
-    margin: 0 auto;
-    margin-bottom: 40px;
+  .visualizer {
+    width: 80%;
+    max-width: 300px;
   }
 }
 .splash-btn-bottom {
@@ -684,3 +694,20 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 .nv-legend-symbol {
   display: none;
 }
+
+/* Blood Stocks page */
+.stocks {
+  color: white;
+  fill: white;
+  margin: 3% auto;
+}
+
+.bloodstocks-levels {
+  margin: 5% 10%;
+}
+
+.stocks-setlevel {
+  color: black;
+}
+
+
