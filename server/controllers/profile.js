@@ -18,7 +18,7 @@ let getCurrentDonor = (req, res) => {
       as: 'friends',
       through: 'friends'
     }, {
-      model: Event,
+      model: Appointment,
       include: [Hospital]
     }]})
   .then(user => {
