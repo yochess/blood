@@ -651,7 +651,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 @media only screen and (max-width: 1000px) {
  .visualizer {
-  width: 50%;
+  /*width: 30%;*/
   margin: 10px auto;
  }
  .first-viz {
@@ -663,12 +663,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   text-align: center;
   width: 100%;
  }
+.first-viz {
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
 }
 
 @media only screen and (max-width: 991px) {
-  .first-viz {
-    margin: 0 auto;
-    margin-bottom: 40px;
+  .visualizer {
+    width: 80%;
+    max-width: 300px;
   }
 }
 .splash-btn-bottom {
