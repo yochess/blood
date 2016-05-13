@@ -31,7 +31,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         .showControls(false);
     chart.yAxis.tickFormat(d3.format(',.2f'));
     chart.yAxis.axisLabel('Number of Donations').axisLabelDistance(5);
-    chart.xAxis.axisLabel('Donors').axisLabelDistance(10);
     update();
     nv.utils.windowResize(chart.update);
     $scope.$emit('chartinit');
@@ -146,7 +145,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     ///Donor bloor rank chart
  $scope.donordata = [
            {
-            key: "Donor's donations",
+            key: "",
             values: [
                 {
                     "label" : "Donor1" ,

@@ -4,9 +4,15 @@ h1, h2, h3, h4, h5, p, div {
   line-height: 1.5;
 }
 
+.col-lg-4 {
+  /*float: none;*/
+}
+
 .bg-primary {
   background-color: #700000;
 }
+
+
 
 .clearfix:after {
   clear: both;
@@ -18,12 +24,14 @@ h1, h2, h3, h4, h5, p, div {
 }
 
 /* Header Content tag which contains all header materials*/
+
 .header-content {
   text-align: center;
   position: relative;
   margin-left: 18%;
   margin-right: 18%;
   padding-top: 90px;
+  padding-bottom: 3%;
 }
 
 /* Text inside the header */
@@ -61,13 +69,32 @@ header {
 
 /* Services is the section of the splash page that has icons with small descriptions*/
 #services {
-  padding-top: 150px;
-  padding-bottom: 150px;
+  margin-top: 10%;
+  margin-bottom: 15%;
 }
 /* ----------------------------- */
 
+/* Section of the splash page for data viz */
 
+.data-viz {
+  padding-top: 5%;
+}
 
+.data-viz-header {
+  padding-top: 5%;
+}
+
+#splash-blood-panel {
+  margin-top: -10%;
+  margin-left: -50px;
+  margin-bottom: -20px;
+  color: white;
+  fill: white !important;
+}
+
+#fillgauge2 {
+  margin-left: -30px;
+}
 /* Blood Stock Level styles*/
 
 .stockGreeter {
@@ -328,8 +355,7 @@ header {
 .hospital-profile, .profile {
   margin-top: 20px;
 }
-
-.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text {
+.panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text, #splash-blood-panel text {
   fill: white !important;
 }
 
@@ -546,6 +572,12 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .facebutton-img {
   padding-right: 5px;
+  height: 35px;
+  width: 42px;
+}
+
+.signup-text {
+  margin: 5px 10px;
 }
 
 #chart1 svg {
@@ -553,4 +585,83 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   font: 18px sans-serif;
 }
 
+#splash-data-viz {
+  background-color: #333333;
+  color: white;
+  padding: 5% 0;
+}
 
+.visualizer {
+  width: 60%;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.first-viz {
+  margin-left: 20%;
+}
+
+.splash-signup {
+  border: 2px solid #700000;
+  height: 60px;
+  width: 200px;
+  background-color: #ffffff;
+  font-family: 'Open sans';
+  font-size: 1.2em;
+  color: #700000;
+}
+
+.splash-signup:hover {
+  transition: 0.5s;
+  background-color: #700000;
+  border: 2px solid #ffffff;
+  color: white;
+}
+#splash-leaderboard-panel {
+  width: 150%;
+  fill: white;
+  text: white;
+  margin-left: -80px;
+}
+
+.splash path {
+  margin: 0 auto;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+ .visualizer {
+  width: 50%;
+  margin: 10px auto;
+ }
+ .first-viz {
+  margin-bottom: 40px;
+  margin-right: 50px;
+ }
+ #fillgauge2 {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+ }
+}
+
+@media only screen and (max-width: 991px) {
+  .first-viz {
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
+}
+.splash-btn-bottom {
+  margin-top: 50px;
+  height: 50px;
+}
+
+.splash-btn-bottom p {
+  margin-top: 6px;
+  font-size: 1.2em;
+}
+
+.nv-legend-symbol {
+  display: none;
+}
