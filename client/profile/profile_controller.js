@@ -68,7 +68,7 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
   };
 
   let findFavoriteHospitals = (user) => {
-    user.events.forEach(event => {
+    user.appointments.forEach(event => {
       let hospitalIndex = ProfileCtrl.hospitals.findIndex(hospital => hospital.model.name === event.hospital.name);
       if (hospitalIndex > -1) {
         ProfileCtrl.hospitals[hospitalIndex].numVisits++;

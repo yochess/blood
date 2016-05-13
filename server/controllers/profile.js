@@ -12,11 +12,14 @@ let getCurrentDonor = (req, res) => {
     },
     include: [{
       model: Event,
-      include: [Hospital, ]
+      include: [Hospital]
     }, {
       model: Donor,
       as: 'friends',
       through: 'friends'
+    }, {
+      model: Appointment,
+      include: [Hospital]
     }]})
   .then(user => {
     res.send(user);

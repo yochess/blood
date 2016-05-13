@@ -1,7 +1,7 @@
 <div class="container profile">
   <div class="col-md-8">
     <div class="panel-body">
-    <div class="col-md-6">
+      <div class="col-md-6">
         <img ng-src="{{ProfileCtrl.user.photo}}" class="img-circle center-block img-profile"/>
       </div>
       <div class="col-md-6 userInfo-table">
@@ -79,7 +79,9 @@
       </div>
       <div class="favorite-hospital">
         <h4>Favorite Hospitals</h4>
-        <a class="hospital" ng-href="#hospital/profile/{{hospital.model.id}} | limitTo:5" ng-repeat="hospital in ProfileCtrl.hospitals">{{hospital.model.name}}</a>
+        <p ng-repeat="hospital in ProfileCtrl.hospitals">
+          <a class="hospital" ng-href="#hospital/profile/{{hospital.model.id}} | limitTo:5" >{{hospital.model.name}}</a>
+        </p>
       </div>
     </div>
   </div>
