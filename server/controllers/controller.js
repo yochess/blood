@@ -92,6 +92,8 @@ Appointment.belongsTo(Donor);
 Hospital.hasMany(Appointment);
 Donor.hasMany(Appointment);
 
+
+
 sequelize.sync();
 
 module.exports.Donor = Donor;
