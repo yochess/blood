@@ -3,7 +3,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
   if ($routeParams.hospitalid) HospitalProfileCtrl.id = $routeParams.hospitalid;
 
-  HospitalProfileCtrl.editObj = {};
+  HospitalProfileCtrl.editObj = {events: []};
 
   HospitalProfileCtrl.edit = false;
   HospitalProfileCtrl.Edit = function() {
@@ -72,17 +72,14 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
   HospitalProfileCtrl.getlatlong = () => {
     let address = document.getElementById('address').value;
-    console.log(address);
     // Initialize the Geocoder
     let geocoder = new google.maps.Geocoder();
     if (geocoder) {
-      console.log(geocoder);
 
       geocoder.geocode({
         'address': address
       }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          console.log(results);
           HospitalProfileCtrl.editObj.latitude = results[0].geometry.location.lat();
           HospitalProfileCtrl.editObj.longitude = results[0].geometry.location.lng();
         }
@@ -93,7 +90,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
   HospitalProfileCtrl.update = () => {
     HospitalProfileCtrl.editObj.schedules = HospitalProfileCtrl.schedule;
-    console.log(HospitalProfileCtrl.editObj);
     HospitalProfile.update(HospitalProfileCtrl.editObj)
     .then(hospital => {HospitalProfileCtrl.editObj = hospital; displayHospital();});
   };
@@ -101,7 +97,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   let displayHospital = () => {
     HospitalProfile.get(HospitalProfileCtrl.id)
     .then((hospital) => {
-      console.log(hospital);
       HospitalProfileCtrl.editObj = hospital;
       $scope.data[0].values[0].value = HospitalProfileCtrl.editObj.opos;
       $scope.data[0].values[1].value = HospitalProfileCtrl.editObj.oneg;

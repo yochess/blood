@@ -4,10 +4,19 @@ let Hospital = controllers.Hospital;
 let Donor = controllers.Donor;
 let Review = controllers.Review;
 let Schedule = controllers.Schedule;
+let Event = controllers.Event;
 let url = require('url');
 
 let getCurrentHospital = (req, res) => {
-  Hospital.findOne({where: {id: req.user.id}})
+  Hospital.findOne({
+    where: {
+      id: req.user.id
+    },
+    include: [{
+      model: Event,
+      include: [Donor]
+    }]
+  })
   .then(hospital => res.send(hospital));
 };
 
@@ -17,7 +26,7 @@ let updateCurrentHospital = (req, res) => {
     hospital.update(req.body)
     .then(hospital => {
       req.body.schedules.forEach((schedule) => {
-      Schedule.findOne({where: {hospitalId: req.user.id}})
+        Schedule.findOne({where: {hospitalId: req.user.id}})
         .then(sch => {
           if(sch) {
             Schedule.update({
@@ -28,19 +37,19 @@ let updateCurrentHospital = (req, res) => {
             } ,{where: {day: schedule.day}});
 
           } else {
-              Schedule.create({
-                hospitalId: req.user.id,
-                day: schedule.day,
-                openhours: schedule.openhours,
-                closehours: schedule.closehours
-              });
-            }
+            Schedule.create({
+              hospitalId: req.user.id,
+              day: schedule.day,
+              openhours: schedule.openhours,
+              closehours: schedule.closehours
+            });
+          }
         });
 
       });
     })
     .then(() => res.send(hospital));
-    });
+  });
 };
 
 let getHospitalById = (req, res) => {
