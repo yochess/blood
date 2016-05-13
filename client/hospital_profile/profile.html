@@ -75,32 +75,12 @@
         </form>
       </div>
     </div>
-    <div class="col-md-3 panel-body panel-lower" style="width: 100%;">
-      <div class="table profile-table table-condensed">
-        <div>
-          <hr>
-          <img src="assests/heart.png" />
-          <span>You are hosting a blood drive at [SUBJECT HOMETOWN HERE] Park on October 31st, 2016. So far, [NUMBER] people have responded to say they will be attending.</span>
-        </div>
-        <hr>
-        <div>
-          <img src="assests/buddy.png" />
-          <span>You and your BLOOD BUDDY went and donated blood together! What a true friend you are.</span>
-        </div>
-        <hr>
-        <div>
-          <img src="assests/kraken.png" />
-          <span>Your potent virgin blood helped to summon C'thulhu, may his madness envelope the world. Thanks for your help!</span>
-        </div>
-        <hr>
-        <div>
-          <img src="assests/pizza.png" />
-          <span>A piece of pizza was afraid of needles and didn't want to donate, but you convinced them by sharing your experiences! Wow-wee, all that rich pizza blood will come in handy.</span>
-        </div>
-        <hr>
-        <div>
-          <img src="assests/ghost.png">
-          <span>You donated blood to a man who was later found guilty of murder, and since you're a part of that man now, the spiteful spirit of his victim now haunts you. Bummer! Better luck next time!</span>
+    <div class="col-md-3 panel-body panel-lower">
+      <div class="events">
+        <div class="event" ng-repeat="event in HospitalProfileCtrl.editObj.events">
+          <p>
+            You are hosting an event on {{event.time | date:'medium'}}. {{event.donors.length}} donors are currently confirmed to attend.
+          </p>
         </div>
       </div>
     </div>

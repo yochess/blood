@@ -301,7 +301,7 @@ header {
 }
 
 
-.events {
+.profile .events {
   margin-top: 20px;
   border: 1px solid #333;
   background-color: rgba(0, 0, 0, 0.8);
@@ -504,7 +504,7 @@ header {
   color: gray;
 }
 
-.profile .events {
+.profile .events, .hospital-profile .events {
   color: white;
 }
 
