@@ -600,6 +600,11 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin-right: 30px;
 }
 
+.fc-content:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 .first-viz {
   margin-left: 20%;
 }
