@@ -10,5 +10,16 @@ app.factory('Feed', ['$http', function($http) {
     });
   };
 
-  return {get};
+  let submit = (content, location) => {
+    return $http({
+      method: 'POST',
+      url: '/api/post',
+      data: {content, location}
+    })
+    .then((resp) => {
+      return resp.data;
+    });
+  };
+
+  return {get, submit};
 }]);
