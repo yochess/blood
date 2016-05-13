@@ -70,7 +70,7 @@ header {
 /* Services is the section of the splash page that has icons with small descriptions*/
 #services {
   margin-top: 10%;
-  margin-bottom: 20%;
+  margin-bottom: 15%;
 }
 /* ----------------------------- */
 
@@ -576,6 +576,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   width: 42px;
 }
 
+.signup-text {
+  margin: 5px 10px;
+}
+
 #chart1 svg {
   height: 100%;
   font: 18px sans-serif;
@@ -620,6 +624,12 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin-left: -80px;
 }
 
+.splash path {
+  margin: 0 auto;
+}
+
+
+
 @media only screen and (max-width: 1000px) {
  .visualizer {
   width: 50%;
@@ -627,10 +637,20 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
  }
  .first-viz {
   margin-bottom: 40px;
+  margin-right: 50px;
  }
  #fillgauge2 {
   margin: 0 auto;
+  text-align: center;
+  width: 100%;
  }
+}
+
+@media only screen and (max-width: 991px) {
+  .first-viz {
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
 }
 .splash-btn-bottom {
   margin-top: 50px;
