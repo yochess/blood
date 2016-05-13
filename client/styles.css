@@ -574,6 +574,8 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .facebutton-img {
   padding-right: 5px;
+  height: 35px;
+  width: 42px;
 }
 
 #chart1 svg {
@@ -586,4 +588,43 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: white;
 }
 
+.visualizations  .col-lg-3 {
+  margin-left: 30px;
+  margin-right: 30px;
+}
 
+.splash-signup {
+  border: 2px solid #700000;
+  height: 60px;
+  width: 200px;
+  background-color: #ffffff;
+  font-family: 'Open sans';
+  font-size: 1.2em;
+  color: #700000;
+}
+
+.splash-signup:hover {
+  transition: 0.5s;
+  background-color: #700000;
+  border: 2px solid #ffffff;
+  color: white;
+}
+#splash-leaderboard-panel {
+  width: 150%;
+  fill: white;
+  text: white;
+  margin-left: -80px;
+}
+
+.splash-btn-bottom {
+  margin-top: 50px;
+  height: 50px;
+}
+
+.splash-btn-bottom p {
+  margin-top: 8px;
+}
+
+.nv-legend-symbol {
+  display: none;
+}

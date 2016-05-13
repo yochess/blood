@@ -9,6 +9,9 @@
                 With BloodShare, we connect donors to hospitals to set up appointments when that donors blood type is in particular need. We've optimized the process as much as possible, ensuring that donors will only receive notifications when they want them and that donors can easily make appointments that are convenient for both the donor and the facility drawing the blood.
             </p>
         </div>
+        <a href="#donor/signup">
+            <button class="splash-signup btn profile-button">Cool, sign me up!</button>
+        </a>
     </div>
 </header>
 
@@ -63,11 +66,11 @@
             </div>
         </div>
     </div>
-    <div class="container data-viz col-lg-10 col-lg-offset-2">
+    <div class="container data-viz col-lg-11 col-lg-offset-1">
         <div class="row visualizations">
             <div class="col-lg-3 donations">
-        <svg id="fillgauge2" width="100%" height="100%"></svg>
-                <span> AWESOME! BLOODMETER! BLOODMETER! BLOODMETER! BLOODMETER! </span>
+                <svg id="fillgauge2" width="110%"></svg>
+                <span> The filled in part of the circle here represents how many pints of blood have been donated this month through donors capable of donating. For perspective, 5% of capable donors in the United States donate blood.</span>
             </div>
             <div class="col-lg-3">
                 <div id="splash-blood-panel">
@@ -76,7 +79,12 @@
                 <span>This is the current blood stock level of blood facilities in our home town of San Francisco, displayed in days of supply. When you're signed in you can see the data for your area appear on our map!</span>
             </div>
             <div class="col-lg-3">
-                This graph represents the top donors for our home in San Francisco. Compete to be the top lifesaver by becoming a regular donor!
+                <div>
+                    <svg id="splash-leaderboard-panel"></svg>
+                </div>
+                <span>
+                    This graph represents the top donors for our home in San Francisco. Compete to be the top lifesaver by becoming a regular donor!
+                </span>
             </div>
         </div>
     </div>
@@ -94,7 +102,7 @@
                     <br />
                     <p class="text-faded" style="font-size: 1.2em">                    As a hospital, we give you controls to report your blood levels for users to see, as well as tools to set up events like blood drives. By setting your hours of operation and availability, users can quickly and easily make appointments after receiving notification of your needs.
                 </p>
-                <a href="#services" class="page-scroll btn btn-default btn-xl">Wow!</a>
+                <a href="#bloodmap" class="btn btn-default splash-btn-bottom"><p>Check out our map to see more!</p></a>
             </div>
         </div>
     </div>
