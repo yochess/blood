@@ -14,31 +14,7 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
     bloodtype: ''
   };
 
-  ProfileCtrl.bloodTypes = [{
-    display: 'A+',
-    code: 'apos'
-  }, {
-    display: 'A-',
-    code: 'aneg'
-  }, {
-    display: 'B+',
-    code: 'bpos'
-  }, {
-    display: 'A-',
-    code: 'bneg'
-  }, {
-    display: 'AB+',
-    code: 'abpos'
-  }, {
-    display: 'AB-',
-    code: 'abneg'
-  }, {
-    display: 'O+',
-    code: 'opos'
-  }, {
-    display: 'O-',
-    code: 'oneg'
-  }];
+  ProfileCtrl.bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
   ProfileCtrl.hospitals = [];
 
@@ -50,18 +26,14 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
 
   ProfileCtrl.getlatlong = () => {
     let address = document.getElementById('address').value;
-    console.log(address);
     // address = address || 'Ferrol, Galicia, Spain';
     // Initialize the Geocoder
     let geocoder = new google.maps.Geocoder();
     if (geocoder) {
-      console.log(geocoder);
-
       geocoder.geocode({
         'address': address
       }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          console.log(results);
           ProfileCtrl.user.latitude = results[0].geometry.location.lat();
           ProfileCtrl.user.longitude = results[0].geometry.location.lng();
         }
