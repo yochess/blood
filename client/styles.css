@@ -492,6 +492,15 @@ header {
   border: 0.5px solid white;
 }
 
+.profile-button-cancel {
+  background: #222222;
+  color: white;
+  border: 0.5px solid white;
+}
+
+.profile-button-cancel:hover {
+  color: black;
+}
 .profile-button:hover {
   color: gray;
 }
@@ -713,4 +722,30 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: black;
 }
 
+/* Events Styling */
+
+.events h3 {
+  text-align: center;
+}
+
+.events img {
+  float: left;
+  margin-right: 10px;
+}
+
+.profile .events {
+  border: 2px solid #700000;
+}
+
+.history-event p {
+  padding-top: 10px;
+}
+.history-event .time-tag {
+  display: block;
+  text-align: right;
+}
+
+.profile .panel-lower {
+  margin-bottom: 20px;
+}
 
