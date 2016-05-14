@@ -10,6 +10,7 @@
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
+        // if is hospital
         if (!$routeParams.hospitalid) {
           Calendar.getHospitalAppointments().then(res => {
             console.log('1. you are logged in as hospital');
@@ -17,10 +18,12 @@
             CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
             CalendarCtrl.fillHospitalCalendar(res, callback);
           }).catch(err => {
-            console.log('2. you are mostly not logged in as a hospital: ', err);
+            console.log('2. you are not logged in as a hospital: ', err);
             $window.localStorage.setItem('isHospital', '');
             CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
           })
+        // if is donor
+        // within, check if gmail
         } else {
           $window.localStorage.setItem('isHospital', '');
           CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
@@ -39,19 +42,27 @@
       },
       eventClick: (calEvent, jsEvent, view) => {
         if (CalendarCtrl.isHospital) {
-          console.log(calEvent);
+          $window.open(`#/profile/${calEvent.datum.donorId}`, '_blank');
           return;
         }
 
-        if (!CalendarCtrl.isLoggedin) {
-          return console.log('you are not logged in!');
-        }
+        // currently this feature is disabled
+        // if (!CalendarCtrl.isLoggedin) {
+        //   return console.log('you are not logged in!');
+        // }
+
+
         // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
           CalendarCtrl.setView(calEvent);
           $scope.$apply();
           $box1.modal();
+        }
+
+        // same here
+        if (calEvent.title === 'Your appointment') {
+          $window.open(`#/hospital/profile/${$routeParams.hospitalid}`, '_blank');
         }
 
       }
@@ -166,10 +177,16 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
 
       Calendar.postCalendarEvent(startDate, endDate).then(res => {
-        if (res.status === 201) {
-          $calendar.fullCalendar('refetchEvents');
-        }
-      });
+        $calendar.fullCalendar('refetchEvents');
+      }).catch(err => {
+        $calendar.fullCalendar('removeEvents');
+        console.log('the error for not being logged in', err);
+        console.log(startDate);
+        $calendar.fullCalendar('addEventSource', [{
+          title: 'Your appointment',
+          start: startDate
+        }]);
+      })
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
@@ -213,15 +230,13 @@
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      $http.post('/api/appointment', {
-        hospitalId: $routeParams.hospitalid,
-        time: CalendarCtrl.time.start
-      }).then(res => {
-        console.log('appointment res: ', res);
-      }).catch(err => {
-        console.log('error: ', err);
-      })
-
+      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.time.start, 1)
+        .then(res => {
+          console.log('appointment made! ', res);
+        })
+        .catch(err => {
+          console.log('error in making appointment! ', err);
+        });
       // send email to both parties
 
       // share to facebook if checked

@@ -24,13 +24,13 @@ let updateCurrentHospital = (req, res) => {
   Hospital.findOne({where: {id: req.user.id}, include: [Schedule]})
   .then((hospital) => {
     hospital.update(req.body)
-    .then(hospital => {
+    .then(() => {
       req.body.schedules.forEach((schedule) => {
         Schedule.findOne({where: {hospitalId: req.user.id}})
         .then(sch => {
           if(sch) {
             Schedule.update({
-              hospitalId: req.user.id,
+              // hospitalId: req.user.id,
               day: schedule.day,
               openhours: schedule.openhours,
               closehours: schedule.closehours

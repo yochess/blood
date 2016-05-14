@@ -6,6 +6,8 @@ let Hospital = db.Hospital;
 let Appointment = db.Appointment;
 
 let makeAppointment = (req, res) => {
+  console.log('>>', req.user);
+  console.log('>>>', req.body);
   Donor.findOne({where: {id: req.user.id}})
   .then(donor => {
     Appointment.create({time: req.body.time, donorId: donor.id, hospitalId: req.body.hospitalId, type: req.body.type})
