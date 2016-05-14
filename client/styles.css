@@ -69,18 +69,13 @@ header {
 
 /* Services is the section of the splash page that has icons with small descriptions*/
 #services {
-  margin-top: 10%;
-  margin-bottom: 15%;
+  margin: 200px 0;
 }
 /* ----------------------------- */
 
 /* Section of the splash page for data viz */
 
 .data-viz {
-  padding-top: 5%;
-}
-
-.data-viz-header {
   padding-top: 5%;
 }
 
@@ -198,6 +193,11 @@ header {
   height: 125px;
   padding: 20px 20px 0 20px;
   border-radius: 5px 5px 0 0;
+}
+
+.feed-new input[type=text] {
+    color: #333;
+    padding: 5px;
 }
 
 .feed input[type="text"] {
@@ -608,13 +608,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   background-color: #333333;
   text-align: center;
   color: white;
-  padding: 5% 0;
+  padding: 200px 0;
 }
 
 .visualizer {
   width: 60%;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin: auto;
+}
+
+.visualizer p {
+  margin-top: 20px;
 }
 
 .fc-content:hover {
