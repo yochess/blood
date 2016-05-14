@@ -41,6 +41,14 @@
       });
     };
 
+    let postAppointment = (hospitalId, time, type) => {
+      return $http({
+        url: '/api/appointment',
+        method: 'POST',
+        data: {hospitalId, time, type}
+      });
+    }
+
     // this may need to be separated to an auth service
     let getUrl = () => {
       return $http({
@@ -64,7 +72,8 @@
       getToken,
       getUrl,
       postCalendarEvent,
-      getHospitalAppointments
+      getHospitalAppointments,
+      postAppointment
     };
 
   }]);

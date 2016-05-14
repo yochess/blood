@@ -10,6 +10,7 @@
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
+        // if is hospital
         if (!$routeParams.hospitalid) {
           Calendar.getHospitalAppointments().then(res => {
             console.log('1. you are logged in as hospital');
@@ -17,10 +18,12 @@
             CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
             CalendarCtrl.fillHospitalCalendar(res, callback);
           }).catch(err => {
-            console.log('2. you are mostly not logged in as a hospital: ', err);
+            console.log('2. you are not logged in as a hospital: ', err);
             $window.localStorage.setItem('isHospital', '');
             CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
           })
+        // if is donor
+        // within, check if gmail
         } else {
           $window.localStorage.setItem('isHospital', '');
           CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
@@ -39,19 +42,27 @@
       },
       eventClick: (calEvent, jsEvent, view) => {
         if (CalendarCtrl.isHospital) {
-          console.log(calEvent);
+          $window.open(`#/profile/${calEvent.datum.donorId}`, '_blank');
           return;
         }
 
-        if (!CalendarCtrl.isLoggedin) {
-          return console.log('you are not logged in!');
-        }
+        // currently this feature is disabled
+        // if (!CalendarCtrl.isLoggedin) {
+        //   return console.log('you are not logged in!');
+        // }
+
+
         // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
           CalendarCtrl.setView(calEvent);
           $scope.$apply();
           $box1.modal();
+        }
+
+        // same here
+        if (calEvent.title === 'Your appointment') {
+          $window.open(`#/hospital/profile/${$routeParams.hospitalid}`, '_blank');
         }
 
       }
@@ -105,28 +116,32 @@
         }
         let currentDate = new Date();
         let dayIndex, startHour, endHour;
-        CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
-          currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
-          dayIndex = (currentDate.getDay() + 6) % 7;
-          return {
-            currentDate: currentDate,
-            openhour: res.data.schedules[dayIndex].openhours,
-            endhour: res.data.schedules[dayIndex].closehours,
-          };
-        }).filter(data => {
-          return !!data.openhour;
-        }).map(data => {
-          return _.range(data.openhour, data.endhour).map(hour => {
-            return {
-              title: 'Slot Available',
-              start: data.currentDate.setHours(hour, 0, 0, 0),
-              backgroundColor: '#378006'
-            };
-          });
-        }));
-        checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
-        callback(CalendarCtrl.appointments);
 
+        if (!CalendarCtrl.dontMakeAppointments) {
+          CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
+            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+            dayIndex = (currentDate.getDay() + 6) % 7;
+            return {
+              currentDate: currentDate,
+              openhour: res.data.schedules[dayIndex].openhours,
+              endhour: res.data.schedules[dayIndex].closehours,
+            };
+          }).filter(data => {
+            return !!data.openhour;
+          }).map(data => {
+            return _.range(data.openhour, data.endhour).map(hour => {
+              return {
+                title: 'Slot Available',
+                start: data.currentDate.setHours(hour, 0, 0, 0),
+                backgroundColor: '#378006'
+              };
+            });
+          }));
+          checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
+          callback(CalendarCtrl.appointments);
+        } else {
+          callback([]);
+        }
       })
     };
 
@@ -166,10 +181,17 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
 
       Calendar.postCalendarEvent(startDate, endDate).then(res => {
-        if (res.status === 201) {
-          $calendar.fullCalendar('refetchEvents');
-        }
-      });
+        $calendar.fullCalendar('removeEvents');
+        $calendar.fullCalendar('refetchEvents');
+      }).catch(err => {
+        $calendar.fullCalendar('removeEvents');
+        console.log('the error for not being logged in', err);
+        console.log(startDate);
+        $calendar.fullCalendar('addEventSource', [{
+          title: 'Your appointment',
+          start: startDate
+        }]);
+      })
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
@@ -206,6 +228,7 @@
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
 
+      CalendarCtrl.dontMakeAppointments = true;
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
       CalendarCtrl.processRequest($input1, $input2);
     };
@@ -213,15 +236,13 @@
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      $http.post('/api/appointment', {
-        hospitalId: $routeParams.hospitalid,
-        time: CalendarCtrl.time.start
-      }).then(res => {
-        console.log('appointment res: ', res);
-      }).catch(err => {
-        console.log('error: ', err);
-      })
-
+      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.time.start, 1)
+        .then(res => {
+          console.log('appointment made! ', res);
+        })
+        .catch(err => {
+          console.log('error in making appointment! ', err);
+        });
       // send email to both parties
 
       // share to facebook if checked
