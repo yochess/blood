@@ -189,16 +189,15 @@
     };
 
     CalendarCtrl.setView = (calEvent) => {
-      let month = calEvent.start.month();
-      let day = calEvent.start.day();
+      let month = calEvent.start.month() + 1;
+      let date = calEvent.start.date();
       let hour = calEvent.start.hour();
       let minute = calEvent.start.minutes();
       minute = minute < 10 ? minute + '0' : minute;
 
       CalendarCtrl.time.start = calEvent.start;
       CalendarCtrl.time.end = calEvent.end;
-
-      CalendarCtrl.time.print = `${month}/${day} @ ${hour}:${minute}`;
+      CalendarCtrl.time.print = `${month}/${date} @ ${hour}:${minute}`;
     };
 
     CalendarCtrl.firstModal = () => {
