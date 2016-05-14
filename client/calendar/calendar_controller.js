@@ -116,28 +116,32 @@
         }
         let currentDate = new Date();
         let dayIndex, startHour, endHour;
-        CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
-          currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
-          dayIndex = (currentDate.getDay() + 6) % 7;
-          return {
-            currentDate: currentDate,
-            openhour: res.data.schedules[dayIndex].openhours,
-            endhour: res.data.schedules[dayIndex].closehours,
-          };
-        }).filter(data => {
-          return !!data.openhour;
-        }).map(data => {
-          return _.range(data.openhour, data.endhour).map(hour => {
-            return {
-              title: 'Slot Available',
-              start: data.currentDate.setHours(hour, 0, 0, 0),
-              backgroundColor: '#378006'
-            };
-          });
-        }));
-        checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
-        callback(CalendarCtrl.appointments);
 
+        if (!CalendarCtrl.dontMakeAppointments) {
+          CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
+            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+            dayIndex = (currentDate.getDay() + 6) % 7;
+            return {
+              currentDate: currentDate,
+              openhour: res.data.schedules[dayIndex].openhours,
+              endhour: res.data.schedules[dayIndex].closehours,
+            };
+          }).filter(data => {
+            return !!data.openhour;
+          }).map(data => {
+            return _.range(data.openhour, data.endhour).map(hour => {
+              return {
+                title: 'Slot Available',
+                start: data.currentDate.setHours(hour, 0, 0, 0),
+                backgroundColor: '#378006'
+              };
+            });
+          }));
+          checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
+          callback(CalendarCtrl.appointments);
+        } else {
+          callback([]);
+        }
       })
     };
 
@@ -177,6 +181,7 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
 
       Calendar.postCalendarEvent(startDate, endDate).then(res => {
+        $calendar.fullCalendar('removeEvents');
         $calendar.fullCalendar('refetchEvents');
       }).catch(err => {
         $calendar.fullCalendar('removeEvents');
@@ -223,6 +228,7 @@
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
 
+      CalendarCtrl.dontMakeAppointments = true;
       CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
       CalendarCtrl.processRequest($input1, $input2);
     };
