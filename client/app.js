@@ -13,12 +13,22 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
   .when('/profile', {
     templateUrl: 'profile/profile.html',
     controller: 'ProfileController',
-    controllerAs: 'ProfileCtrl'
+    controllerAs: 'ProfileCtrl',
+    resolve: {
+      donor: ['Profile', function(Profile) {
+        return Profile.get();
+      }]
+    }
   })
   .when('/profile/:donorid', {
     templateUrl: '/profile/profile_public.html',
     controller: 'ProfileController',
-    controllerAs: 'ProfileCtrl'
+    controllerAs: 'ProfileCtrl',
+    resolve: {
+      donor: ['$route', 'Profile', function($route, Profile) {
+        return Profile.get($route.current.params.donorid);
+      }]
+    }
   })
   .when('/hospital/signup', {
     templateUrl: 'hospital_auth/signup/signup.html',
@@ -33,12 +43,22 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
   .when('/hospital/profile', {
     templateUrl: '/hospital_profile/profile.html',
     controller: 'HospitalProfileController',
-    controllerAs: 'HospitalProfileCtrl'
+    controllerAs: 'HospitalProfileCtrl',
+    resolve: {
+      currentHospital: ['HospitalProfile', function(HospitalProfile) {
+        return HospitalProfile.get();
+      }]
+    }
   })
   .when('/hospital/profile/:hospitalid', {
     templateUrl: '/hospital_profile/profile_public.html',
     controller: 'HospitalProfileController',
-    controllerAs: 'HospitalProfileCtrl'
+    controllerAs: 'HospitalProfileCtrl',
+    resolve: {
+      currentHospital: ['$route', 'HospitalProfile', function($route, HospitalProfile) {
+        return HospitalProfile.get($route.current.params.hospitalid);
+      }]
+    }
   })
   .when('/donor/login', {
     templateUrl: '/donor_auth/login/login.html',
@@ -73,7 +93,12 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
   .when('/event/:eventId', {
     templateUrl: 'events/event.html',
     controller: 'EventController',
-    controllerAs: 'EventCtrl'
+    controllerAs: 'EventCtrl',
+    resolve: {
+      event: ['$route', 'Event', function($route, Event) {
+        return Event.get($route.current.params.eventId);
+      }]
+    }
   })
   .otherwise({
     redirectTo: '/'

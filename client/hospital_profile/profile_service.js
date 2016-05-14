@@ -1,12 +1,13 @@
 app.factory('HospitalProfile', ['$http', function($http) {
 
   let get = (id) => {
-    let url = id ? `/api/hospital/profile/${id}` : 'api/hospital/profile';
+    let url = id ? `/api/hospital/profile/${id}` : '/api/hospital/profile';
     return $http({
       method: 'GET',
       url: url
     })
     .then((res) => {
+      console.log('res: ', res);
       return res.data;
     });
   };
@@ -28,8 +29,8 @@ app.factory('HospitalProfile', ['$http', function($http) {
       method: 'GET',
       url: `/api/hospital/${hospitalId}/reviews`,
     })
-    .then((resp) => {
-      return resp.data;
+    .then((res) => {
+      return res.data;
     });
   };
 
@@ -39,8 +40,8 @@ app.factory('HospitalProfile', ['$http', function($http) {
       url: `/api/hospital/${hospitalId}/reviews`,
       data: {content, stars}
     })
-    .then((resp) => {
-      return resp.data;
+    .then((res) => {
+      return res.data;
     });
   };
 

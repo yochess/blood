@@ -15,6 +15,10 @@ let getCurrentHospital = (req, res) => {
     include: [{
       model: Event,
       include: [Donor]
+    }, {
+      model: Review,
+      include: [Donor],
+      order: 'createdAt DESC'
     }]
   })
   .then(hospital => res.send(hospital));

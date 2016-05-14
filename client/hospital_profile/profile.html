@@ -3,7 +3,7 @@
     <div class="panel-body">
       <div class="public-view" ng-hide="HospitalProfileCtrl.edit">
         <div class="col-md-6">
-          <img src="{{HospitalProfileCtrl.editObj.photo}}" alt="No Image Provided" onError="this.src = 'assests/hosp.jpg';" class="img-circle center-block img-profile" />
+          <img src="{{HospitalProfileCtrl.hospital.photo}}" alt="No Image Provided" onError="this.src = 'assests/hosp.jpg';" class="img-circle center-block img-profile" />
           <div class="hospital-blood-panel">
             <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
           </div>
@@ -12,23 +12,23 @@
           <div class="table-user-information">
             <div>
               <span class="profile-info-labels">Display Name:</span> <br/>
-              <p{{HospitalProfileCtrl.editObj.name}}</p>
+              <p>{{HospitalProfileCtrl.hospital.name}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Email:</span> <br/>
-              <p>{{HospitalProfileCtrl.editObj.email}}</p>
+              <p>{{HospitalProfileCtrl.hospital.email}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Address:</span>
-              <p>{{HospitalProfileCtrl.editObj.address}}</p>
+              <p>{{HospitalProfileCtrl.hospital.address}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Website:</span><br/>
-              <p>{{HospitalProfileCtrl.editObj.hospitalurl}}</p>
+              <p>{{HospitalProfileCtrl.hospital.hospitalurl}}</p>
             </div>
             <div>
               <span class="profile-info-labels">Phone Number:</span>
-              <p>{{HospitalProfileCtrl.editObj.phonenum}}</p>
+              <p>{{HospitalProfileCtrl.hospital.phonenum}}</p>
             </div>
           </div>
           <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn" style="color: white;">Edit Info</button>
@@ -40,23 +40,23 @@
             <p>Edit Information:</p>
             <p>
               Hospital name
-              <input type="text" ng-model="HospitalProfileCtrl.editObj.name" />
+              <input type="text" ng-model="HospitalProfileCtrl.hospital.name" />
             </p>
             <p>
               Hospital email
-              <input type="email" ng-model="HospitalProfileCtrl.editObj.email" required/>
+              <input type="email" ng-model="HospitalProfileCtrl.hospital.email" required/>
             </p>
             <p>
               Location
-              <input type="text" id="address" ng-model="HospitalProfileCtrl.editObj.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" />
+              <input type="text" id="address" ng-model="HospitalProfileCtrl.hospital.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" />
             </p>
             <p>
               Phone Number
-              <input type="text"  ng-model="HospitalProfileCtrl.editObj.phonenum" />
+              <input type="text"  ng-model="HospitalProfileCtrl.hospital.phonenum" />
             </p>
             <p>
               Website
-              <input type="text"  ng-model="HospitalProfileCtrl.editObj.hospitalurl" />
+              <input type="text"  ng-model="HospitalProfileCtrl.hospital.hospitalurl" />
             </p>
           </div>
           <div class="col-md-6">
@@ -77,7 +77,7 @@
     </div>
     <div class="col-md-3 panel-body panel-lower">
       <div class="events">
-        <div class="event" ng-repeat="event in HospitalProfileCtrl.editObj.events">
+        <div class="event" ng-repeat="event in HospitalProfileCtrl.hospital.events">
           <p>
             You are hosting an event on {{event.time | date:'medium'}}. {{event.donors.length}} donors are currently confirmed to attend.
           </p>
@@ -87,7 +87,7 @@
   </div>
   <div class="col-md-4 friend-col-outer center-block">
     <div class="panel-body reviews">Here's what people have to say about you:
-      <div class="review" ng-repeat="review in HospitalProfileCtrl.reviews">
+      <div class="review" ng-repeat="review in HospitalProfileCtrl.hospital.reviews">
         <h3>{{review.donor.name}}</h3>
         <p>{{review.content}}</p>
       </div>
