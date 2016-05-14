@@ -722,7 +722,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: black;
 }
 
-/* Events Styling */
+/* Events Profile Styling */
 
 .events h3 {
   text-align: center;
@@ -749,3 +749,49 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin-bottom: 20px;
 }
 
+/* ----------------------------- */
+
+
+/* Events Page Styling */
+
+.events-panel{
+  margin: 20px;
+  text-align: center;
+  color:white;
+}
+
+.events-panel p {
+  margin: 5px;
+  font-family: 'Open Sans';
+}
+
+.events-panel h3 {
+  font-family: 'Lato';
+}
+
+.events-donors img {
+  max-width: 70px;
+  max-height: 70px;
+}
+
+.events-donors {
+  border: 2px solid #eeeeee;
+  margin: 15px;
+  padding: 5px;
+  display: inline-block;
+}
+
+.events-donors p {
+  margin-top: 10px;
+}
+.events-panel button{
+  display: block;
+  margin: 0 auto;
+}
+
+.events-donors div {
+  margin: 15px 15px 5px 15px;
+  display: inline-block;
+}
+
+/* ----------------------------- */
