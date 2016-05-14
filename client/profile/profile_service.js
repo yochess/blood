@@ -13,7 +13,6 @@ app.factory('Profile', ['$http', function($http) {
 
 
   let update = (user) => {
-    console.log(user);
     return $http({
       method: 'PUT',
       url: '/api/profile',
