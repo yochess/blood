@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="panel-body panel-lower events">
-      <h3>Upcoming</h3>
+    <h3>Upcoming Events</h3>
       <div class="event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.upcoming">
         <img src="assests/heart.png"/>
         <p>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="panel-body panel-lower events">
-      <h3>History</h3>
+      <h3>Event History</h3>
       <div class="event history-event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.past">
         <div ng-show="{{appointment.type === 1}}">
           <img src="assests/heart.png"/>
