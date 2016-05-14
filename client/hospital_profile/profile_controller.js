@@ -5,6 +5,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
   HospitalProfileCtrl.edit = false;
   HospitalProfileCtrl.Edit = function() {
+    console.log(HospitalProfileCtrl.editObj);
     HospitalProfileCtrl.edit = !HospitalProfileCtrl.edit;
   };
 
