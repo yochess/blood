@@ -41,8 +41,8 @@
               </select>
               <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
               <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" type="button" class="profile-button-cancel btn">
-              <span>Cancel Edit</span>
-            </button>
+                <span>Cancel Edit</span>
+              </button>
             </form>
           </div>
         </div>
@@ -63,19 +63,25 @@
     <div class="panel-body panel-lower events">
       <h3>History</h3>
       <div class="event history-event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.past">
-        <p ng-show="{{appointment.type === 1}}">
+        <div ng-show="{{appointment.type === 1}}">
           <img src="assests/heart.png"/>
-          You donated blood at <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. The clot thickens!
-        </p>
-        <p ng-show="{{appointment.type === 2}}">
+          <p>
+            You donated blood at <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. The clot thickens!
+          </p>
+        </div>
+        <div ng-show="{{appointment.type === 2}}">
           <img src="assests/buddy.png"/>
-          You participated in an event <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. Way to pool your efforts!
-        </p>
-        <p ng-show="{{appointment.type === 3}}">
+          <p>
+            You participated in an event <a ng-href="#hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. Way to pool your efforts!
+          </p>
+        </div>
+        <div ng-show="{{appointment.type === 3}}">
           <img src="assests/medical.png" />
-          You drew blood from a stone and helped a blood-buddy get over his fear of needles!
-        </p>
-         <p class="time-tag"><time>{{appointment.time | date:'medium'}}</time></p>
+          <p>
+            You drew blood from a stone and helped a blood-buddy get over his fear of needles!
+          </p>
+        </div>
+        <p class="time-tag"><time>{{appointment.time | date:'medium'}}</time></p>
       </div>
     </div>
   </div>

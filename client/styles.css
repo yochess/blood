@@ -728,22 +728,24 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   text-align: center;
 }
 
-.events p p{
-  display: inline;
-  text-align: right;
-}
-
 .events img {
   float: left;
   margin-right: 10px;
 }
 
-.history-event img {
-  float: left;
+.profile .events {
+  border: 2px solid #700000;
+}
+
+.history-event p {
+  padding-top: 10px;
 }
 .history-event .time-tag {
   display: block;
+  text-align: right;
 }
-.history-event p {
-  display: inline;
+
+.profile .panel-lower {
+  margin-bottom: 20px;
 }
+
