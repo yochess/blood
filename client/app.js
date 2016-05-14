@@ -100,7 +100,7 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
       }]
     }
   })
-  .when('/bloodbuddy', {
+  .when('/bloodbuddy/:buddyId', {
     templateUrl: 'calendar/blood_buddy.html',
     controller: 'BuddyController',
     controllerAs: 'BuddyCtrl'
