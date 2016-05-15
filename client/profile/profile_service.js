@@ -8,7 +8,8 @@ app.factory('Profile', ['$http', function($http) {
     })
     .then((res) => {
       return res.data;
-    });
+    })
+    .catch(err => console.log(err));
   };
 
 

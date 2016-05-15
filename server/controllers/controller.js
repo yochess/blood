@@ -48,6 +48,8 @@ let Review = sequelize.define('review', {
 
 Review.belongsTo(Donor);
 Review.belongsTo(Hospital);
+Donor.hasMany(Review);
+Hospital.hasMany(Review);
 
 let Schedule = sequelize.define('schedule', {
   day: Sequelize.INTEGER,

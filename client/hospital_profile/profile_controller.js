@@ -1,9 +1,7 @@
-app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$rootScope', '$scope', 'HospitalProfile', function($window, $routeParams, $rootScope, $scope, HospitalProfile) {
+app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$rootScope', '$scope', 'HospitalProfile', 'currentHospital', function($window, $routeParams, $rootScope, $scope, HospitalProfile, currentHospital) {
   let HospitalProfileCtrl = this;
 
-  if ($routeParams.hospitalid) HospitalProfileCtrl.id = $routeParams.hospitalid;
-
-  HospitalProfileCtrl.editObj = {events: []};
+  HospitalProfileCtrl.hospital = currentHospital;
 
   HospitalProfileCtrl.edit = false;
   HospitalProfileCtrl.Edit = function() {
@@ -89,47 +87,15 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
 
 
   HospitalProfileCtrl.update = () => {
-    HospitalProfileCtrl.editObj.schedules = HospitalProfileCtrl.schedule;
-    HospitalProfile.update(HospitalProfileCtrl.editObj)
-    .then(hospital => {HospitalProfileCtrl.editObj = hospital; displayHospital();});
+    HospitalProfileCtrl.hospital.schedules = HospitalProfileCtrl.schedule;
+    HospitalProfile.update(HospitalProfileCtrl.hospital)
+    .then(hospital => {HospitalProfileCtrl.hospital = hospital; displayHospital();});
   };
-
-  let displayHospital = () => {
-    HospitalProfile.get(HospitalProfileCtrl.id)
-    .then((hospital) => {
-      HospitalProfileCtrl.editObj = hospital;
-      $scope.data[0].values[0].value = HospitalProfileCtrl.editObj.opos;
-      $scope.data[0].values[1].value = HospitalProfileCtrl.editObj.oneg;
-      $scope.data[0].values[2].value = HospitalProfileCtrl.editObj.apos;
-      $scope.data[0].values[3].value = HospitalProfileCtrl.editObj.aneg;
-      $scope.data[0].values[4].value = HospitalProfileCtrl.editObj.bpos;
-      $scope.data[0].values[5].value = HospitalProfileCtrl.editObj.bneg;
-      $scope.data[0].values[6].value = HospitalProfileCtrl.editObj.abpos;
-      $scope.data[0].values[7].value = HospitalProfileCtrl.editObj.abneg;
-      getReviews();
-    });
-  };
-
-  HospitalProfileCtrl.reviews = [];
-  let getReviews = () => {
-    if (HospitalProfileCtrl.id || HospitalProfileCtrl.editObj.id) {
-      if(!HospitalProfileCtrl.id) {
-        HospitalProfileCtrl.id = HospitalProfileCtrl.editObj.id;
-      }
-      HospitalProfile.getReviews(HospitalProfileCtrl.id)
-      .then(reviews => HospitalProfileCtrl.reviews = reviews);
-    }
-  };
-
 
   HospitalProfileCtrl.submitReview = () => {
     HospitalProfile.postReview(HospitalProfileCtrl.id, HospitalProfileCtrl.reviewContent)
     .then(getReviews);
   };
-
-
-  displayHospital();
-  getReviews();
 
       ////////////////////////////////////////
       //       BEHOLD, THE FORBIDDEN ZONE.
@@ -163,7 +129,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
         values: [
         {
           "label" : "O+" ,
-          "value" : 6
+          "value" : 8
         },
         {
           "label" : "O-" ,

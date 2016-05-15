@@ -1,18 +1,8 @@
-app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', function($routeParams, Profile, $rootScope) {
+app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', 'donor', function($routeParams, Profile, $rootScope, donor) {
+  console.log('donor: ', donor);
   let ProfileCtrl = this;
 
-  if ($routeParams.donorid) ProfileCtrl.id = $routeParams.donorid;
-
-  ProfileCtrl.user = {
-    uid:'',
-    name: '',
-    email: '',
-    photo:'',
-    address:'',
-    latitude: '',
-    longitude:'',
-    bloodtype: ''
-  };
+  ProfileCtrl.user = donor;
 
   ProfileCtrl.bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -91,7 +81,5 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', f
     let offset = new Date(event.time) - new Date();
     return offset < 0;
   };
-
-  displayUser();
 
 }]);
