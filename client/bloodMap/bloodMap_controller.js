@@ -94,7 +94,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
             elementClick: function(e) {$scope.$apply();}
             }
           },
-        callback: function(e){console.log('! callback !')}
+        callback: function(e){}
       }
     };
 

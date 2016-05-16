@@ -1,6 +1,6 @@
 <div class="container">
   <div class="panel-body events-panel">
-    <p> Hey! There's an event happening at </p><h2>{{EventCtrl.event.hospital.name}}</h2>
+    <p> Hey! There's an event happening at </p><h2><a href="hospital/profile/{{EventCtrl.event.hospital.id}}">{{EventCtrl.event.hospital.name}}</h2></a>
     <p>And it's happening on</p>
     <h3>{{EventCtrl.event.time | date}}</h3> <p> at</p> <h3>{{EventCtrl.event.time | date: 'shortTime'}}</h3>
     <div class="events-donors">

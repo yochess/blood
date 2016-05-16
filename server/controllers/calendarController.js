@@ -25,7 +25,6 @@ let showGoogleEvents = (req, res) => {
       return res.send(500);
     }
     if (response.items.length == 0) {
-      console.log('No upcoming events found in the 1 month.');
       res.send(200);
     } else {
       // this will need to be fixed
@@ -60,13 +59,11 @@ let showHospitalEvents = (req, res) => {
 
 module.exports = {
   showEvents: (req, res) => {
-    // console.log(req.session);
     if (!req.session.tokens) {
       console.log('gmail is not enabled!');
       return res.send(401);
     }
 
-    console.log('user is a donor and gmail token is enabled!');
     showGoogleEvents(req, res);
 
   },

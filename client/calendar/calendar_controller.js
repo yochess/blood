@@ -19,6 +19,33 @@
           CalendarCtrl.googleEvents = [];
           CalendarCtrl.fillCalendar(callback);
         });
+        // if is hospital
+        if (!$routeParams.hospitalid) {
+          Calendar.getHospitalAppointments().then(res => {
+            $window.localStorage.setItem('isHospital', 'hello world');
+            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+            CalendarCtrl.fillHospitalCalendar(res, callback);
+          }).catch(err => {
+            console.log('2. you are not logged in as a hospital: ', err);
+            $window.localStorage.setItem('isHospital', '');
+            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+          })
+        // if is donor
+        // within, check if gmail
+        } else {
+          $window.localStorage.setItem('isHospital', '');
+          CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+          Calendar.getCalendarEvents().then(res => {
+            CalendarCtrl.isLoggedin = true;
+            CalendarCtrl.googleEvents = res.data;
+            CalendarCtrl.fillCalendar(callback);
+          }).catch(err => {
+            console.log('4. you are not logged in gmail');
+            CalendarCtrl.isLoggedin = false;
+            CalendarCtrl.googleEvents = [];
+            CalendarCtrl.fillCalendar(callback);
+          });
+        }
       },
       eventClick: (calEvent, jsEvent, view) => {
         if (CalendarCtrl.isHospital) {
@@ -46,6 +73,17 @@
       }
     });
 
+    CalendarCtrl.fillHospitalCalendar = (res, callback) => {
+      callback(res.data.filter(datum => {
+        return datum.time;
+      }).map(datum => {
+        return {
+          title: `Appointment with ${datum.donor.name}`,
+          start: new Date(datum.time),
+          datum: datum
+        };
+      }));
+    };
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
         let newWindow = $window.open(res.data, 'AuthPage', 'width=500px,height=700px');

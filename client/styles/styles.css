@@ -44,6 +44,11 @@ h1, h2, h3, h4, h5, p, div {
   display: inline-block;
 }
 
+.logopng {
+  width: 100%;
+  max-width: 400px;
+}
+
 /* Overrides for Bootstrap header tags*/
 header {
   position: relative;
@@ -91,6 +96,27 @@ header {
   margin-left: -30px;
   text-align: center;
 }
+
+.first-viz {
+  margin-left: 20%;
+}
+
+#splash-data-viz {
+  background-color: #333333;
+  text-align: center;
+  color: white;
+  padding: 200px 0;
+}
+
+.visualizer {
+  width: 60%;
+  margin: auto;
+}
+
+.visualizer p {
+  margin-top: 20px;
+}
+
 /* Blood Stock Level styles*/
 
 .stockGreeter {
@@ -620,29 +646,9 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   font: 18px sans-serif;
 }
 
-#splash-data-viz {
-  background-color: #333333;
-  text-align: center;
-  color: white;
-  padding: 200px 0;
-}
-
-.visualizer {
-  width: 60%;
-  margin: auto;
-}
-
-.visualizer p {
-  margin-top: 20px;
-}
-
 .fc-content:hover {
   color: yellow;
   cursor: pointer;
-}
-
-.first-viz {
-  margin-left: 20%;
 }
 
 .splash-signup {
@@ -729,7 +735,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: black;
 }
 
-/* Events Profile Styling */
+/* Events Donor Profile Styling */
 
 .events h3 {
   text-align: center;
@@ -802,3 +808,37 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 }
 
 /* ----------------------------- */
+
+/* Hospital Private Profile Events */
+
+.events-hospital-profile {
+  color: white;
+}
+
+.events-hospital-profile p p {
+  display: block;
+}
+
+.events-hospital-profile img {
+  float: left;
+  margin: 2px;
+  margin-right: 10px;
+}
+
+/* ----------------------------- */
+
+/* Map Events area */
+
+.map-events {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+.map-events img {
+  margin: 5px;
+}
+
+.map-events-header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid white;
+}
