@@ -22,7 +22,7 @@
 
 
   <div class="col-md-6">
-    <div class="events"ng-controller="MapEventController as MapEventCtrl">
+    <div class="events map-events" ng-controller="MapEventController as MapEventCtrl">
       <h3 ng-show="MapEventCtrl.events.length === 0">No events in this area</h3>
       <div class="event" ng-repeat="event in MapEventCtrl.events">
         <a ng-href="/event/{{event.id}}"><h3>{{event.hospital.name}}</h3></a>
