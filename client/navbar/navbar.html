@@ -7,6 +7,9 @@
       <a ng-href="{{NavCtrl.isDonor ? '/profile' : '/hospital/profile'}}">Profile</a>
     </li>
     <li>
+      <a ng-show="NavCtrl.isHospital" href="/calendar">Calendar</a>
+    </li>
+    <li>
       <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/login">Log In</a>
       <a ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href="">Logout</a>
     </li>
