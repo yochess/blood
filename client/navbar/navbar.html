@@ -3,30 +3,15 @@
     <li>
       <a href="/bloodmap">Blood Map</a>
     </li>
-    <li>
-      <a href="profile">Profile</a>
+    <li ng-show="NavCtrl.isDonor || NavCtrl.isHospital">
+      <a ng-href="{{NavCtrl.isDonor ? '/profile' : '/hospital/profile'}}">Profile</a>
     </li>
     <li>
-      <a ng-hide="NavCtrl.isLoggedIn" href="/donor/login">Login</a>
-      <a ng-show="NavCtrl.isLoggedIn" ng-click="NavCtrl.logout()" href="">Logout</a>
+      <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/login">Log In</a>
+      <a ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href="">Logout</a>
     </li>
     <li>
-      <a href='/splash'>Splash</a>
-    </li>
-    <li>
-      <a href='/stock'>Blood Stocks</a>
-    </li>
-    <li>
-      <a href='auth/logout'>Logout</a>
-    </li>
-    <li>
-      <a href='/hospital/login'>Hospital Login</a>
-    </li>
-    <li>
-      <a href='/hospital/profile'>Hospital Profile</a>
-    </li>
-    <li>
-      <a href='/calendar'>Calendar</a>
+      <a href="" ng-click="NavCtrl.test()"></a>
     </li>
   </ul>
 

@@ -7,7 +7,6 @@ app.factory('HospitalProfile', ['$http', function($http) {
       url: url
     })
     .then((res) => {
-      console.log('res: ', res);
       return res.data;
     });
   };

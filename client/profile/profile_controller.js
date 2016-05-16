@@ -1,5 +1,4 @@
 app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', 'donor', function($routeParams, Profile, $rootScope, donor) {
-  console.log('donor: ', donor);
   let ProfileCtrl = this;
 
   ProfileCtrl.user = donor;

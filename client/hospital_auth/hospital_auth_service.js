@@ -10,6 +10,7 @@
       .then(res => {
         if (res.status === 200) {
           window.location.assign('/hospital/profile');
+          return res.data;
         } else {
           window.location.assign('/hospital/signup');
         }
@@ -25,6 +26,7 @@
       .then(res => {
         if (res.status === 200) {
           window.location.assign('/hospital/profile');
+          return res.data;
         } else {
           window.location.assign('/hospital/signup');
         }
