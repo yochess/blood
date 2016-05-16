@@ -2,7 +2,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   let HospitalProfileCtrl = this;
 
   HospitalProfileCtrl.hospital = currentHospital;
-
   HospitalProfileCtrl.edit = false;
   HospitalProfileCtrl.Edit = function() {
     HospitalProfileCtrl.edit = !HospitalProfileCtrl.edit;
@@ -78,8 +77,8 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
         'address': address
       }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          HospitalProfileCtrl.editObj.latitude = results[0].geometry.location.lat();
-          HospitalProfileCtrl.editObj.longitude = results[0].geometry.location.lng();
+          HospitalProfileCtrl.hospital.latitude = results[0].geometry.location.lat();
+          HospitalProfileCtrl.hospital.longitude = results[0].geometry.location.lng();
         }
       });
     }
@@ -89,7 +88,7 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
   HospitalProfileCtrl.update = () => {
     HospitalProfileCtrl.hospital.schedules = HospitalProfileCtrl.schedule;
     HospitalProfile.update(HospitalProfileCtrl.hospital)
-    .then(hospital => {HospitalProfileCtrl.hospital = hospital; displayHospital();});
+    .then(hospital => {HospitalProfileCtrl.hospital = hospital;});
   };
 
   HospitalProfileCtrl.submitReview = () => {
@@ -129,35 +128,35 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
         values: [
         {
           "label" : "O+" ,
-          "value" : 8
+          "value" : currentHospital.opos
         },
         {
           "label" : "O-" ,
-          "value" : 5
+          "value" : currentHospital.oneg
         },
         {
           "label" : "A+" ,
-          "value" : 18
+          "value" : currentHospital.apos
         },
         {
           "label" : "A-" ,
-          "value" : 8
+          "value" : currentHospital.aneg
         },
         {
           "label" : "B+" ,
-          "value" : 17
+          "value" : currentHospital.bpos
         },
         {
           "label" : "B-" ,
-          "value" : 7
+          "value" : currentHospital.bneg
         },
         {
           "label" : "AB+" ,
-          "value" : 16
+          "value" : currentHospital.abpos
         },
         {
           "label" : "AB-" ,
-          "value" : 6
+          "value" : currentHospital.abneg
         }
         ]
       }
