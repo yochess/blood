@@ -92,6 +92,14 @@ Appointment.belongsTo(Donor);
 Hospital.hasMany(Appointment);
 Donor.hasMany(Appointment);
 
+let Buddy = sequelize.define('buddy', {
+ time: Sequelize.DATE,
+});
+Buddy.belongsTo(Hospital);
+Buddy.belongsTo(Donor, {as:'bud'});
+Buddy.belongsTo(Donor, {as:'donor'});
+Donor.hasMany(Buddy);
+
 sequelize.sync();
 
 module.exports.Donor = Donor;
@@ -101,3 +109,4 @@ module.exports.Review = Review;
 module.exports.Schedule = Schedule;
 module.exports.Event = Event;
 module.exports.Appointment = Appointment;
+module.exports.Buddy = Buddy;
