@@ -94,10 +94,9 @@ Donor.hasMany(Appointment);
 
 let Buddy = sequelize.define('buddy', {
  time: Sequelize.DATE,
- buddyId:Sequelize.INTEGER
 });
 Buddy.belongsTo(Hospital);
-Buddy.belongsTo(Donor, {as:'buddy'});
+Buddy.belongsTo(Donor, {as:'bud'});
 Buddy.belongsTo(Donor, {as:'donor'});
 Donor.hasMany(Buddy);
 
