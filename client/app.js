@@ -1,6 +1,6 @@
 let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
 
-.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+.config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
   $routeProvider
 
 
@@ -103,4 +103,6 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
   .otherwise({
     redirectTo: '/'
   });
+
+  $locationProvider.html5Mode(true);
 }]);

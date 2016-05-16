@@ -9,9 +9,9 @@
       })
       .then(res => {
         if (res.status === 200) {
-          $window.location.assign('#profile');
+          $window.location.assign('/profile');
         } else {
-          $window.location.assign('#donor/signup');
+          $window.location.assign('/donor/signup');
         }
       })
       .catch(error => {
@@ -27,9 +27,9 @@
       })
       .then(res => {
         if (res.status === 200) {
-          $window.location.assign('#profile');
+          $window.location.assign('/profile');
         } else {
-          $window.location.assign('#donor/signup');
+          $window.location.assign('/donor/signup');
         }
       })
       .catch(error => {

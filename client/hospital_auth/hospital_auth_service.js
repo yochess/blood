@@ -9,9 +9,9 @@
       })
       .then(res => {
         if (res.status === 200) {
-          window.location.assign('#hospital/profile');
+          window.location.assign('/hospital/profile');
         } else {
-          window.location.assign('#hospital/signup');
+          window.location.assign('/hospital/signup');
         }
       });
     };
@@ -24,9 +24,9 @@
       })
       .then(res => {
         if (res.status === 200) {
-          window.location.assign('#hospital/profile');
+          window.location.assign('/hospital/profile');
         } else {
-          window.location.assign('#hospital/signup');
+          window.location.assign('/hospital/signup');
         }
       });
     };

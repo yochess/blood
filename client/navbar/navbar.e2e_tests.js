@@ -1,9 +1,9 @@
 describe('Navigation Bar', () => {
 
-  // '#/' should be renamed to '#/map/' or something
+  // '/' should be renamed to '/map/' or something
   describe('Blood Map Link', () => {
     beforeEach(() => {
-      browser.get('#/');
+      browser.get('/');
     });
 
 
@@ -19,7 +19,7 @@ describe('Navigation Bar', () => {
 
   describe('Profile Link', () => {
     beforeEach(() => {
-      browser.get('#/profile');
+      browser.get('/profile');
     });
 
     it('should render Profile when user is logged in', () => {
@@ -28,13 +28,13 @@ describe('Navigation Bar', () => {
       });
     });
 
-    it('should not render Profile when user is not logged in', () => {    
+    it('should not render Profile when user is not logged in', () => {
     });
   });
 
   describe('Login Link', () => {
     beforeEach(() => {
-      browser.get('#/');
+      browser.get('/');
     });
 
     it('should do something', () => {

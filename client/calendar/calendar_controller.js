@@ -42,7 +42,7 @@
       },
       eventClick: (calEvent, jsEvent, view) => {
         if (CalendarCtrl.isHospital) {
-          $window.open(`#/profile/${calEvent.datum.donorId}`, '_blank');
+          $window.open(`/profile/${calEvent.datum.donorId}`, '_blank');
           return;
         }
 
@@ -62,7 +62,7 @@
 
         // same here
         if (calEvent.title === 'Your appointment') {
-          $window.open(`#/hospital/profile/${$routeParams.hospitalid}`, '_blank');
+          $window.open(`/hospital/profile/${$routeParams.hospitalid}`, '_blank');
         }
 
       }

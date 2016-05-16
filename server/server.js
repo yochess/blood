@@ -25,8 +25,7 @@ let appointmentRouter = require('./routes/appointment.js');
 
 let clientPath = path.resolve(__dirname + '/../client');
 
-app.set('view engine', 'ejs');
-app.set('views', clientPath);
+app.disable('etag');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -46,9 +45,10 @@ app.use('/api/appointment', appointmentRouter);
 app.use('/api/event', eventRouter);
 app.use('/auth', authRouter);
 
-
-app.get('/', function(req, res) {
-  res.render('index');
+app.set('view engine', 'ejs');
+app.set('views', clientPath);
+app.use(function(req, res) {
+    res.render('index');
 });
 
 if (config.production) {

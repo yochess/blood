@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, p, div {
 header {
   position: relative;
   background-position: center;
-  background: url('assests/donor.png') no-repeat;
+  background: url('/assests/donor.png') no-repeat;
   text-align: center;
   color: white;
   text-shadow: 0px 0px 3px #000, -1px -1px #000, 2px 2px #000;

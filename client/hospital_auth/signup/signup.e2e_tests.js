@@ -1,6 +1,6 @@
 describe('Sign up', () => {
   beforeEach(() => {
-    browser.get('#/hospital/signup');
+    browser.get('/hospital/signup');
   });
 
   it('should do something', () => {
