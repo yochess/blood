@@ -28,9 +28,9 @@ const GOOGLE_ID = config.calendarid;
 const GOOGLE_SECRET = config.calendarsecret;
 const GOOGLE_REDIRECT = config.calendarurl;
 const SCOPES = [
-  'https://www.googleapis.com/auth/userinfo.email',
-  'https://www.googleapis.com/auth/userinfo.profile',
-  'https://www.googleapis.com/auth/calendar'
+'https://www.googleapis.com/auth/userinfo.email',
+'https://www.googleapis.com/auth/userinfo.profile',
+'https://www.googleapis.com/auth/calendar'
 ];
 let google = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
@@ -50,22 +50,22 @@ let getAuthUrl = () => {
 
 
 authRouter.route('/url')
-  .get((req, res) => {
-    res.send(getAuthUrl())
-  });
+.get((req, res) => {
+  res.send(getAuthUrl())
+});
 
 authRouter.route('/googleToken')
-  .get((req, res) => {
-    let oauth2Client = getAuthClient();
-    oauth2Client.getToken(req.query.code, (err, tokens) => {
-      if (err) {
-        console.log('an error has occured: ', err);
-        return res.send(401);
-      }
-      oauth2Client.setCredentials(tokens);
-      req.session['tokens'] = tokens;
-      res.send('authenticated!');
-    });
+.get((req, res) => {
+  let oauth2Client = getAuthClient();
+  oauth2Client.getToken(req.query.code, (err, tokens) => {
+    if (err) {
+      console.log('an error has occured: ', err);
+      return res.send(401);
+    }
+    oauth2Client.setCredentials(tokens);
+    req.session['tokens'] = tokens;
+    res.send('authenticated!');
+  });
 });
 // end of google auth routes
 
@@ -157,12 +157,9 @@ authRouter.route('/facebook')
 
 authRouter.route('/facebook/callback')
 .get(passport.authenticate('facebook', {
-   successRedirect : '/',
-   failureRedirect: '/login'
- }),
-  (req, res) => {
-    res.redirect('/');
-  });
+  successRedirect : '/getauth',
+ failureRedirect: '/login'
+}));
 
 authRouter.route('/hospital/login')
 .post(passport.authenticate('hospital-login'),

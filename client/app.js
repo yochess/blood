@@ -103,6 +103,18 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controller: 'BuddyController',
     controllerAs: 'BuddyCtrl'
   })
+  .when('/getauth', {
+    resolve: ['$window', '$location', '$rootScope', 'Profile', function($window, $location, $rootScope, Profile) {
+      Profile.get().then(donor => {
+        if (donor) {
+          $rootScope.NavCtrl.login('donor', donor.id);
+          $location.path('/');
+        } else {
+          $location.path('/donor/login');
+        }
+      });
+    }]
+  })
   .when('/', {
     templateUrl: 'splash/splash.html',
     controller: 'SplashController',
