@@ -10,6 +10,7 @@
       .then(res => {
         if (res.status === 200) {
           $window.location.assign('/profile');
+          return res.data;
         } else {
           $window.location.assign('/donor/signup');
         }
@@ -26,8 +27,10 @@
         data: user
       })
       .then(res => {
+        console.log('res: ', res);
         if (res.status === 200) {
           $window.location.assign('/profile');
+          return res.data;
         } else {
           $window.location.assign('/donor/signup');
         }

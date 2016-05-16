@@ -2,30 +2,39 @@
   app.controller('NavController', ['$window', '$http', function($window, $http) {
     let NavCtrl = this;
     let id = $window.localStorage.getItem('id');
+    let type = $window.localStorage.getItem('type');
 
-    NavCtrl.isLoggedIn = false;
+    NavCtrl.isDonor = false;
+    NavCtrl.isHospital = false;
 
-    NavCtrl.login = () => {
-      // $http({
-      //   method: 'GET',
-      //   url: '/'
-      // })
-      // .then(() => {
-        $window.localStorage.setItem('id', 'something');
-        NavCtrl.isLoggedIn = true;
-      // });
+    if (type === 'donor') NavCtrl.isDonor = true;
+    if (type === 'hospital') NavCtrl.isHospital = true;
+
+    NavCtrl.login = (type, id) => {
+      $window.localStorage.setItem('id', id);
+      $window.localStorage.setItem('type', type);
+      NavCtrl.isLoggedIn = true;
+
+      if (type === 'donor') {
+        NavCtrl.isDonor = true;
+        NavCtrl. isHospital = false;
+      }
+
+      if (type === hospital) {
+        NavCtrl.isDonor = false;
+        NavCtrl.isHospital = false;
+      }
     };
 
     NavCtrl.logout = () => {
-      // $http({
-      //   method: 'GET',
-      //   url: '/'
-      // })
-      // .then(() => {
-        $window.localStorage.setItem('id', '');
-        NavCtrl.isLoggedIn = false;
-        window.location='/auth/logout';
-      // });
+      console.log('logging out');
+      $window.localStorage.setItem('id', '');
+      $window.localStorage.setItem('type', '');
+
+      NavCtrl.isDonor = false;
+      NavCtrl.isHospital = false;
+
+      window.location='/auth/logout';
     };
 
     return NavCtrl;

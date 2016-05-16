@@ -2,8 +2,6 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
 
 .config(['$routeProvider', '$httpProvider', '$locationProvider', function ($routeProvider, $httpProvider, $locationProvider) {
   $routeProvider
-
-
   .when('/bloodmap', {
     templateUrl: 'bloodMap/bloodMap.html',
     controller: 'BloodMapController',
@@ -105,8 +103,20 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controller: 'BuddyController',
     controllerAs: 'BuddyCtrl'
   })
+  .when('/', {
+    templateUrl: 'splash/splash.html',
+    controller: 'SplashController',
+    controllerAs: 'SplashCtrl',
+    resolve: {
+      event: function($location, $window) {
+        if ($window.localStorage.getItem('id')) {
+          $location.path('/bloodmap');
+        }
+      }
+    }
+  })
   .otherwise({
-    redirectTo: '/'
+    redirectTo: '/bloodmap'
   });
 
   $locationProvider.html5Mode(true);

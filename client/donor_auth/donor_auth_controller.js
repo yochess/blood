@@ -6,17 +6,14 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
     DonorAuthCtrl.signup = () => {
       DonorAuth.signup(DonorAuthCtrl.signupObj)
       .then((donor) => {
-        $rootScope.NavCtrl.login();
-
+        $rootScope.NavCtrl.login('donor', donor.id);
       });
      };
 
     DonorAuthCtrl.login = () => {
-      console.log('inside controller');
       DonorAuth.login(DonorAuthCtrl.loginObj)
-      .then((donor) => {
-        $rootScope.NavCtrl.login();
-
-      });   
+      .then(donor => {
+        $rootScope.NavCtrl.login('donor', donor.id);
+      });
     };
   }]);
