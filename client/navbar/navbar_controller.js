@@ -20,7 +20,7 @@
         NavCtrl. isHospital = false;
       }
 
-      if (type === hospital) {
+      if (type === 'hospital') {
         NavCtrl.isDonor = false;
         NavCtrl.isHospital = false;
       }
