@@ -108,11 +108,11 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controller: 'SplashController',
     controllerAs: 'SplashCtrl',
     resolve: {
-      event: function($location, $window) {
+      event: ['$location', '$window', function($location, $window) {
         if ($window.localStorage.getItem('id')) {
           $location.path('/bloodmap');
         }
-      }
+      }]
     }
   })
   .otherwise({
