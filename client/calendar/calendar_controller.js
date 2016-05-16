@@ -4,6 +4,7 @@
     let $calendar = $('#calendar');
 //blood buddy
     CalendarCtrl.buddy= false;
+    let $datetimepicker = $('#datetimepicker').datetimepicker();
     CalendarCtrl.time = {};
 
     $calendar.fullCalendar({

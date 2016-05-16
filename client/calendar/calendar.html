@@ -8,8 +8,8 @@
   <h3>Create an Event!</h3>
     Click here to create a new event
     <form ng-submit="CalendarCtrl.createEvent()">
-        Title: <input type="text" ng-model="CalendarCtrl.title"/>
-        Time: <input type="datetime-local" ng-model="CalendarCtrl.dateTime"/>
+      Title: <input type="text" ng-model="CalendarCtrl.title"/>
+      Time: <input id="datetimepicker" type="text" ng-model="CalendarCtrl.dateTime">
       <button>Schedule it!</button>
     </form>
   </div>
