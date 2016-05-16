@@ -815,9 +815,6 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: white;
 }
 
-.events-hospital-profile p {
-}
-
 .events-hospital-profile p p {
   display: block;
 }
@@ -833,5 +830,14 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 /* Map Events area */
 
 .map-events {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+.map-events img {
+  margin: 5px;
+}
 
+.map-events-header {
+  border-bottom: 1px solid white;
 }
