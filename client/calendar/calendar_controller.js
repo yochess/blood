@@ -25,9 +25,7 @@
           $window.open(`/profile/${calEvent.datum.donorId}`, '_blank');
           return;
         }
-        if (!CalendarCtrl.isLoggedin) {
-          return console.log('you are not logged in!');
-        }
+
         // this should be less hack-ish
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
