@@ -492,6 +492,13 @@ header {
   border: 0.5px solid white;
 }
 
+.facebook-btn {
+  background: transparent;
+  border: none;
+  position: relative;
+  right: 10px;
+}
+
 .profile-button-cancel {
   background: #222222;
   color: white;

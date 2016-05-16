@@ -153,7 +153,7 @@ passport.use('donor-login', new LocalStrategy({usernameField: 'email', passwordF
 
 
 authRouter.route('/facebook')
-.get(passport.authenticate('facebook', {scope: ['email', 'user_friends']}));
+.post(passport.authenticate('facebook', {scope: ['email', 'user_friends']}));
 
 authRouter.route('/facebook/callback')
 .get(passport.authenticate('facebook', {
