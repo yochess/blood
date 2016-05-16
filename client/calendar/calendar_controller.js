@@ -22,9 +22,12 @@
         // if is hospital
         if (!$routeParams.hospitalid) {
           Calendar.getHospitalAppointments().then(res => {
-            $window.localStorage.setItem('isHospital', 'hello world');
-            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-            CalendarCtrl.fillHospitalCalendar(res, callback);
+            Event.getAll().then(events => {
+              console.log('1. you are logged in as hospital');
+              $window.localStorage.setItem('isHospital', 'hello world');
+              CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+              CalendarCtrl.fillHospitalCalendar(res, events, callback);
+            })
           }).catch(err => {
             console.log('2. you are not logged in as a hospital: ', err);
             $window.localStorage.setItem('isHospital', '');
@@ -73,8 +76,9 @@
       }
     });
 
-    CalendarCtrl.fillHospitalCalendar = (res, callback) => {
-      callback(res.data.filter(datum => {
+    CalendarCtrl.fillHospitalCalendar = (res, events, callback) => {
+      // console.log(res.data);
+      let appointments = res.data.filter(datum => {
         return datum.time;
       }).map(datum => {
         return {
@@ -82,8 +86,20 @@
           start: new Date(datum.time),
           datum: datum
         };
-      }));
+      });
+      events = events.filter(datum => {
+        return datum.time;
+      }).map(datum => {
+        return {
+          title: `Event`,
+          start: new Date(datum.time),
+          datum: datum,
+          backgroundColor: 'red'
+        }
+      });
+      callback(appointments.concat(events));
     };
+
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
         let newWindow = $window.open(res.data, 'AuthPage', 'width=500px,height=700px');
@@ -173,15 +189,27 @@
       }
     };
 
-    CalendarCtrl.createEvent = (startDate, endDate) => {
+    CalendarCtrl.createEvent = (startDate, endDate, title) => {
       startDate = startDate || CalendarCtrl.dateTime;
       endDate = endDate || CalendarCtrl.dateTime || startDate;
+      title = title || CalendarCtrl.title;
 
-      Calendar.postCalendarEvent(startDate, endDate).then(res => {
-        if (res.status === 201) {
-          $calendar.fullCalendar('refetchEvents');
+      Calendar.postCalendarEvent(startDate).then(res => {
+        if (!CalendarCtrl.isHospital) {
+          $calendar.fullCalendar('removeEvents');
+          $calendar.fullCalendar('addEventSource', [{
+            title: title,
+            start: startDate
+          }]);
+        } else {
+          $calendar.fullCalendar('addEventSource', [{
+            title: title,
+            start: startDate
+          }]);
         }
-      });
+      }).catch(err => {
+        console.log('you are not logged in!');
+      })
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
@@ -251,7 +279,8 @@
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
 
-      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end);
+      CalendarCtrl.dontMakeAppointments = true;
+      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end, 'Your appointment');
       CalendarCtrl.processRequest($input1, $input2);
     };
 

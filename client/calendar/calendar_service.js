@@ -14,22 +14,13 @@
       });
     };
 
-    let postCalendarEvent = (startDate, endDate) => {
+    let postCalendarEvent = (time) => {
       return $http({
-        url: '/api/calendar',
+        url: '/api/event',
         method: 'POST',
         data: {
-          summary: 'Blood',
-          location: '800 Howard St., San Francisco, CA 94103',
-          description: 'A chance to hear more about Google\'s developer products.',
-          start: {
-            dateTime: startDate,
-            timeZone: 'America/Los_Angeles',
-          },
-          end: {
-            dateTime: endDate,
-            timeZone: 'America/Los_Angeles'
-          }
+          time: time
+          // end: endDate
         }
       });
     };
