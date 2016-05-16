@@ -52,8 +52,13 @@
         }
       },
       eventClick: (calEvent, jsEvent, view) => {
+        console.log('calEvent: ', calEvent);
         if (CalendarCtrl.isHospital) {
-          $window.open(`/profile/${calEvent.datum.donorId}`, '_blank');
+          if (calEvent.datum.donorId) {
+            $window.open(`/profile/${calEvent.datum.donorId}`, '_blank');
+          } else {
+            $window.open(`/event/${calEvent.datum.id}`, '_blank');
+          }
           return;
         }
 
@@ -193,19 +198,23 @@
     CalendarCtrl.createEvent = (startDate, endDate, title) => {
       startDate = startDate || CalendarCtrl.dateTime;
       endDate = endDate || CalendarCtrl.dateTime || startDate;
-      title = title || CalendarCtrl.title;
+      title = title || CalendarCtrl.title || 'New Event';
 
       Calendar.postCalendarEvent(startDate).then(res => {
+        console.log('res is: ', res);
         if (!CalendarCtrl.isHospital) {
           $calendar.fullCalendar('removeEvents');
           $calendar.fullCalendar('addEventSource', [{
             title: title,
+            // datum: res.data,
             start: startDate
           }]);
         } else {
           $calendar.fullCalendar('addEventSource', [{
             title: title,
-            start: startDate
+            start: startDate,
+            datum: res.data,
+            backgroundColor: 'red'
           }]);
         }
       }).catch(err => {

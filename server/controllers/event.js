@@ -37,8 +37,16 @@ let postEvent = (req, res) => {
     ]).then(results => {
       let event = results[0];
       let donor = results[1];
-      event.addDonor(donor)
-      .then(() => res.send(event));
+
+      if (req.session.passport.user.type === 'hospital') {
+        console.log('made event');
+        res.send(event);
+      } else {
+        console.log('made event and donor');
+        event.addDonor(donor)
+        .then(() => res.send(event));
+      }
+
     })
     .catch(err => console.log(err));
   };
