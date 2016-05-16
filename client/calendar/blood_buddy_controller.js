@@ -9,19 +9,19 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', 'Buddy',
   BuddyCtrl.submit = () => {
     Buddy.update($routeParams.buddyId, BuddyCtrl.email)
     .then(buddy => {
-      if(buddy.buddyId !== null){
+      if(buddy.budId !== null){
         BuddyCtrl.found= true;
       } else {
         BuddyCtrl.found= false;
       }
       //get buddy and schedule an appointment for both donor and buddy
     });
-  }
+  };
   let getBuddy = () => {
     Buddy.get($routeParams.buddyId)
     .then(buddy => {
       BuddyCtrl.buddy = buddy;
-      if(buddy.buddyId !== null){
+      if(buddy.budId !== null){
         BuddyCtrl.found= true;
       } else {
         BuddyCtrl.found= false;
