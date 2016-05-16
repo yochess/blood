@@ -18,7 +18,16 @@ let showAppointments = (req, res) => {
     return res.send(401);
   }
 
-  Appointment.findAll({where: {hospitalId: req.session.passport.user.id}, include: [Donor]})
+  Appointment.findAll({
+    where: {
+      hospitalId: req.session.passport.user.id
+    },
+    include: [{
+      model: Donor,
+      attributes: {
+        exclude: ['password', 'email', 'address', 'latitude', 'longitude']
+      }
+    }]})
     .then(appointments => {
       res.send(appointments);
     });
