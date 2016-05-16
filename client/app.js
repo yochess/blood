@@ -104,7 +104,7 @@ let app = angular.module('blood', ['ngRoute', 'nvd3', 'rzModule'])
     controllerAs: 'BuddyCtrl'
   })
   .when('/getauth', {
-    resolve: ['$window', '$location', '$rootScope', 'Profile', function($window, $location, $rootScope, Profile) {
+    resolve: ['$location', '$rootScope', 'Profile', function($location, $rootScope, Profile) {
       Profile.get().then(donor => {
         if (donor) {
           $rootScope.NavCtrl.login('donor', donor.id);
