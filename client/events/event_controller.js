@@ -7,7 +7,6 @@ app.controller('EventController', ['$routeParams', 'Event', 'event', function($r
     Event.get($routeParams.eventId)
     .then(event => {
       EventCtrl.event = event;
-    console.log(event);
   });
   };
 
