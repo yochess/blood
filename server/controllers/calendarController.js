@@ -74,8 +74,9 @@ module.exports = {
       console.log('no tokens present!');
       return res.send(401);
     }
-
+    console.log(req.body);
     authClient.setCredentials(req.session['tokens']);
+    console.log('inserting into google calendar');
     calendar.events.insert({
       auth: authClient,
       calendarId: 'primary',

@@ -200,7 +200,7 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
       title = title || CalendarCtrl.title || 'New Event';
 
-      Calendar.postCalendarEvent(startDate).then(res => {
+      Calendar.postCalendarEvent('Appointment', startDate).then(res => {
         console.log('res is: ', res);
         if (!CalendarCtrl.isHospital) {
           $calendar.fullCalendar('removeEvents');
@@ -218,7 +218,22 @@
           }]);
         }
       }).catch(err => {
-        console.log('you are not logged in!');
+        if (!CalendarCtrl.isHospital) {
+          console.log('you are not logged in gmail!');
+          $calendar.fullCalendar('removeEvents');
+          $calendar.fullCalendar('addEventSource', [{
+            title: title,
+            // datum: res.data,
+            start: startDate
+          }]);
+        } else {
+          $calendar.fullCalendar('addEventSource', [{
+            title: title,
+            // datum: res.data,
+            start: startDate,
+            backgroundColor: 'green'
+          }]);
+        }
       })
     };
 
@@ -290,22 +305,20 @@
       let $input2 = $('.checkbox.input2').find('input');
 
       CalendarCtrl.dontMakeAppointments = true;
-      CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end, 'Your appointment');
       CalendarCtrl.processRequest($input1, $input2);
     };
 
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      $http.post('/api/appointment', {
-        hospitalId: $routeParams.hospitalid,
-        time: CalendarCtrl.time.start
-      }).then(res => {
-        console.log('appointment res: ', res);
-      }).catch(err => {
-        console.log('error: ', err);
-      })
-
+      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.time.start, 1)
+        .then(res => {
+          console.log('appointment made! ', res);
+          CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end, 'Your appointment');
+        })
+        .catch(err => {
+          console.log('error in making appointment! ', err);
+        });
       // send email to both parties
 
       // share to facebook if checked

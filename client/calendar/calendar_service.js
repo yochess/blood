@@ -14,12 +14,19 @@
       });
     };
 
-    let postCalendarEvent = (time) => {
+    let postCalendarEvent = (title, start) => {
       return $http({
-        url: '/api/event',
+        url: '/api/calendar',
         method: 'POST',
         data: {
-          time: time
+          start: {
+            dateTime: start,
+            timeZone: 'America/Los_Angeles',
+          },
+          end: {
+            dateTime: start,
+            timeZone: 'America/Los_Angeles'
+          }
           // end: endDate
         }
       });
