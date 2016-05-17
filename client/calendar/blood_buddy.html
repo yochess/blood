@@ -15,7 +15,7 @@
           <form role="form">
 
            <h3> Share it on FB</h3>
-           <div class="fb-share-button" id="myfb" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></div>
+           <div class="fb-share-button" id="myfb" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" ></div>
 
             <div class="checkbox input3">
               <label><input type="checkbox" /> Post a message</label>
@@ -30,21 +30,22 @@
 
   <!-- <button class="fb-share-button" id="myfb" ng-click="CalendarCtrl.postToFeed()" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button> -->
   <div ng-hide="BuddyCtrl.found">
-
-   <button ng-click="BuddyCtrl.post()" >
- Share this link to find a buddy
-</button>
-  <form ng-submit="BuddyCtrl.submit()">
-  <h3>Join {{BuddyCtrl.buddy.donor.name}} as his bloodbuddy</h3><input type="submit" >
-  </form>
+    <button class="btn-share" ng-click="BuddyCtrl.post()" >
+     Share this link to find a buddy
+    </button>
+    <form ng-submit="BuddyCtrl.submit()">
+    <h3>Join {{BuddyCtrl.buddy.donor.name}} as his bloodbuddy<input type="submit"></h3>
+    <img class="invitelogo" src='assests/bbuddy.png'/>
+    </form>
   </div>
   <div ng-show="BuddyCtrl.found">
   <h3> Found a buddyyy Yayyyy</h3>
+  <img class="thankyoulogo" src='assests/thankyou.png'/>
   </div>
 
 <div class="col-md-6 userInfo-table">
         <div style="color:black">
-        <!-- <img ng-src="{{BuddyCtrl.buddy.donor.photo}}" class="img-circle center-block img-profile"/> -->
+         <!-- <img ng-src={{BuddyCtrl.buddy.donor.photo}} class="img-circle center-block img-profile"/> -->
           <div>
             <span class="profile-info-labels">Donor Name:</span>
             <p>{{BuddyCtrl.buddy.donor.name}}</p>
