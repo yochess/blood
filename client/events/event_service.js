@@ -12,7 +12,8 @@ app.factory('Event', ['$http', function($http) {
   let post = (data) => {
     return $http({
       method: 'POST',
-      url: '/api/event'
+      url: '/api/event',
+      data: data
     });
   }
 

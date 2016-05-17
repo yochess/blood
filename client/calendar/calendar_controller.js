@@ -5,13 +5,18 @@
     let $calendar = $('#calendar');
     let $datetimepicker = $('#datetimepicker').datetimepicker();
 
+    CalendarCtrl.buddy= false;
+    CalendarCtrl.view = {
+      time: {}
+    };
+    CalendarCtrl.isHospital = !!($window.localStorage.getItem('isHospital'));
+
     let donorView = (callback) => {
       $window.localStorage.setItem('isHospital', '');
       CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
       Calendar.getGoogleSchedule().then(googleEvents => {
         fillDonorCalendar(googleEvents, callback);
       }).catch(err => {
-        console.log('you are not logged in google!');
         fillDonorCalendar([], callback);
       });
     };
@@ -29,7 +34,7 @@
           return console.error('invalid hospital id!');
         }
         let currentDate = new Date();
-        if (!CalendarCtrl.dontMakeAppointments) {
+        if (!CalendarCtrl.eventsChecked) {
           let appointments = _.flatten(_.range(31).map(counter => {
             currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
             let dayIndex = (currentDate.getDay() + 6) % 7;
@@ -92,23 +97,108 @@
     let hospitalView = (callback) => {
       Appointment.getAll().then(appointments => {
         Event.getAll().then(events => {
-          console.log('1. you are logged in as hospital');
           $window.localStorage.setItem('isHospital', 'hello world');
           CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-          CalendarCtrl.fillHospitalCalendar(appointments, events, callback);
+          fillHospitalCalendar(appointments, events, callback);
         })
       }).catch(err => {
-        console.log('2. you are not logged in as a hospital: ', err);
+        console.error('you are not logged in as a hospital user', err);
         $window.localStorage.setItem('isHospital', '');
         CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
       })
     };
 
-    CalendarCtrl.buddy= false;
-    CalendarCtrl.view = {
-      time: {}
+    let fillHospitalCalendar = (appointments, events, callback) => {
+      appointments = appointments.filter(data => {
+        return data.time;
+      }).map(data => {
+        return {
+          title: `Appointment with ${data.donor.name}`,
+          start: new Date(data.time),
+          data: data
+        };
+      });
+      events = events.filter(data => {
+        return data.time;
+      }).map(data => {
+        return {
+          title: `Event`,
+          start: new Date(data.time),
+          data: data,
+          backgroundColor: 'red'
+        }
+      });
+      callback(appointments.concat(events));
     };
-    CalendarCtrl.isHospital = !!($window.localStorage.getItem('isHospital'));
+
+    let pushToGoogle = (data) => {
+      Calendar.postToGoogle(data).then(res => {
+        $calendar.fullCalendar('removeEvents');
+        $calendar.fullCalendar('addEventSource', [{
+          title: data.summary,
+          start: data.start.dateTime
+        }]);
+      }).catch(err => {
+        console.error('unable to sync to google', err);
+        $calendar.fullCalendar('removeEvents');
+        $calendar.fullCalendar('addEventSource', [{
+          title: data.summary,
+          start: data.start.dateTime
+        }]);
+      });
+    };
+
+
+    let processInput = (input1, input2) => {
+      // save appointment
+      Appointment.post({
+        hospitalId: hospitalid,
+        time: CalendarCtrl.view.time.start,
+        type: 1
+      }).then(res => {
+        pushToGoogle({
+          summary: 'Your appointment',
+          start: {
+            dateTime: CalendarCtrl.view.time.start,
+            timeZone: 'America/Los_Angeles'
+          },
+          end: {
+            dateTime: CalendarCtrl.view.time.start,
+            timeZone: 'America/Los_Angeles'
+          }
+        });
+      })
+      .catch(err => {
+        console.error('error in making appointment! ', err);
+      });
+
+      // share to facebook if checked
+      if (input1.is(':checked')) {
+        console.log('todo: share on facebook');
+      };
+
+      // save event if checked
+      if (input2.is(':checked')) {
+        CalendarCtrl.createEvent({
+          id: hospitalid,
+          time: CalendarCtrl.view.time.start
+        });
+      }
+    }
+
+    let setView = (calEvent) => {
+      let month = calEvent.start.month() + 1;
+      let date = calEvent.start.date();
+      let hour = calEvent.start.hour();
+      let minute = calEvent.start.minutes();
+      minute = minute < 10 ? minute + '0' : minute;
+
+      CalendarCtrl.view.time.start = calEvent.start;
+      CalendarCtrl.view.time.end = calEvent.end;
+      CalendarCtrl.view.time.print = `${month}/${date} @ ${hour}:${minute}`;
+    };
+
+
 
     $calendar.fullCalendar({
       timezone: 'local',
@@ -119,10 +209,10 @@
       eventClick: (calEvent, jsEvent, view) => {
         console.log('calEvent: ', calEvent);
         if (CalendarCtrl.isHospital) {
-          if (calEvent.datum.donorId) {
-            $window.open(`/profile/${calEvent.datum.donorId}`, '_blank');
+          if (calEvent.data.donorId) {
+            $window.open(`/profile/${calEvent.data.donorId}`, '_blank');
           } else {
-            $window.open(`/event/${calEvent.datum.id}`, '_blank');
+            $window.open(`/event/${calEvent.data.id}`, '_blank');
           }
           return;
         }
@@ -131,7 +221,7 @@
         if (calEvent.title === 'Slot Available') {
           let $box1 = $('.modal.box1');
           let $box3 = $('.modal.box3');
-          CalendarCtrl.setView(calEvent);
+          setView(calEvent);
           $scope.$apply();
   //blood buddy
           if(CalendarCtrl.buddy){
@@ -146,29 +236,6 @@
         }
       }
     });
-
-    CalendarCtrl.fillHospitalCalendar = (appointments, events, callback) => {
-      appointments = appointments.filter(datum => {
-        return datum.time;
-      }).map(datum => {
-        return {
-          title: `Appointment with ${datum.donor.name}`,
-          start: new Date(datum.time),
-          datum: datum
-        };
-      });
-      events = events.filter(datum => {
-        return datum.time;
-      }).map(datum => {
-        return {
-          title: `Event`,
-          start: new Date(datum.time),
-          datum: datum,
-          backgroundColor: 'red'
-        }
-      });
-      callback(appointments.concat(events));
-    };
 
     CalendarCtrl.googleSignin = () => {
       Calendar.getUrl().then(res => {
@@ -189,69 +256,24 @@
       $calendar.fullCalendar('refetchEvents');
     };
 
-    CalendarCtrl.createEvent = (startDate, endDate, title) => {
-      startDate = startDate || CalendarCtrl.dateTime;
-      endDate = endDate || CalendarCtrl.dateTime || startDate;
-      title = title || CalendarCtrl.title || 'New Event';
-
-      let data = {
-        summary: 'Your appointment',
-        start: {
-          dateTime: startDate,
-          timeZone: 'America/Los_Angeles'
-        },
-        end: {
-          dateTime: startDate,
-          timeZone: 'America/Los_Angeles'
-        }
-      };
-
+    CalendarCtrl.createEvent = (data) => {
       if (!CalendarCtrl.isHospital) {
-        Calendar.postToGoogle(data).then(res => {
-          $calendar.fullCalendar('removeEvents');
-          $calendar.fullCalendar('addEventSource', [{
-            title: title,
-            // datum: res.data,
-            start: startDate
-          }]);
+        Event.post(data).then(res => {
+          if (!CalendarCtrl.eventsChecked) {
+            $calendar.fullCalendar('refetchEvents');
+          }
+        }).catch(err => {
+          console.error('error in createEvent', err);
         })
-        .catch(err => {
-          console.log('you are not logged in gmail!');
-          $calendar.fullCalendar('removeEvents');
-          $calendar.fullCalendar('addEventSource', [{
-            title: title,
-            // datum: err.data,
-            start: startDate,
-            // backgroundColor: 'yellow'
-          }]);
-        });
       } else {
         Event.post({
-          hospitalId: hospitalid,
           time: CalendarCtrl.dateTime
-        }).then(data => {
-          $calendar.fullCalendar('addEventSource', [{
-            title: title,
-            start: CalendarCtrl.dateTime,
-            datum: data,
-            backgroundColor: 'red'
-          }]);
+        }).then(res => {
+          $calendar.fullCalendar('refetchEvents');
         }).catch(err => {
           console.error('error in createEvent', err);
         })
       }
-    };
-
-    CalendarCtrl.setView = (calEvent) => {
-      let month = calEvent.start.month() + 1;
-      let date = calEvent.start.date();
-      let hour = calEvent.start.hour();
-      let minute = calEvent.start.minutes();
-      minute = minute < 10 ? minute + '0' : minute;
-
-      CalendarCtrl.view.time.start = calEvent.start;
-      CalendarCtrl.view.time.end = calEvent.end;
-      CalendarCtrl.view.time.print = `${month}/${date} @ ${hour}:${minute}`;
     };
 
     CalendarCtrl.firstModal = () => {
@@ -303,42 +325,9 @@
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
 
-      CalendarCtrl.dontMakeAppointments = true;
-      CalendarCtrl.processRequest($input1, $input2);
+      CalendarCtrl.eventsChecked = true;
+      processInput($input1, $input2);
     };
-
-    // this will need refactoring and modularizing!!
-    CalendarCtrl.processRequest = ($input1, $input2) => {
-      // save appointment
-      Appointment.post({
-        hospitalId: hospitalid,
-        time: CalendarCtrl.view.time.start,
-        type: 1
-      }).then(res => {
-          console.log('appointment made! ', res);
-          CalendarCtrl.createEvent(CalendarCtrl.view.time.start, CalendarCtrl.view.time.end, 'Your appointment');
-        })
-        .catch(err => {
-          console.log('error in making appointment! ', err);
-        });
-
-      // share to facebook if checked
-      if ($input1.is(':checked')) {
-        console.log('todo: share on facebook');
-      };
-
-      // save event if checked
-      if ($input2.is(':checked')) {
-        $http.post('/api/event', {
-          hospitalId: hospitalid,
-          time: CalendarCtrl.view.time.start
-        }).then(res => {
-          console.log('event res: ', res);
-        }).catch(err => {
-          console.log('error: ', err);
-        });
-      }
-    }
 
 
   }]);

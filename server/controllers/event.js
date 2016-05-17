@@ -12,7 +12,8 @@ const FIFTYSIXDAYS = 5E9; // basically
 let getEvents = (req, res) => {
   Event.findAll({
     where: {
-      hospitalId: req.session.passport.user.id
+      hospitalId: req.user.id,
+      hostId: null
     }
   })
   .then(events => {
@@ -22,14 +23,11 @@ let getEvents = (req, res) => {
 
 let postEvent = (req, res) => {
   console.log('in controller');
-  let hostId;
-  if (req.session.passport && req.session.passport.user.type === 'donor') {
-    hostId = req.session.passport.user.id
-  }
+  let hostId = req.user.type === 'donor' ? req.user.id : null;
   Promise.all([
     Event.create({
       time: req.body.time,
-      hospitalId: req.body.hospitalId || req.session.passport.user.id,
+      hospitalId: req.body.id || req.user.id,
       hostId: hostId // null if hospital
     }),
     Donor.findOne({
@@ -44,7 +42,7 @@ let postEvent = (req, res) => {
       let event = results[0];
       let donor = results[1];
 
-      if (req.session.passport.user.type === 'hospital') {
+      if (req.user.type === 'hospital') {
         console.log('made event');
         res.send(event);
       } else {
