@@ -3,6 +3,7 @@ let eventRouter = require('express').Router();
 let eventControllers = require('../controllers/event.js');
 
 eventRouter.route('/')
+.get(eventControllers.getEvents)
 .post(eventControllers.postEvent);
 
 eventRouter.route('/geo')

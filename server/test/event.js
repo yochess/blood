@@ -16,14 +16,18 @@ function buildResponse() {
 describe('Events', function() {
   describe('postEvent', function() {
     let testDonor;
+    let testHospital
 
     before(function(done) {
-      Donor.create({name: 'testdonor'})
-      .then(donor => {
-        testDonor = donor;
-        done();
+      Promise.all([
+        Donor.create({name: 'testdonor'}),
+        Hospital.create({name: 'testhospital'})
+        ]).then(results => {
+          testDonor = results[0];
+          testHospital = results[1];
+          done();
+        })
       });
-    });
 
     it('should post an event', function(done) {
       let response = buildResponse();
@@ -31,7 +35,8 @@ describe('Events', function() {
         method: 'POST',
         url: '/',
         body: {
-          time: new Date().toUTCString()
+          time: new Date().toUTCString(),
+          hospitalId: testHospital.id
         }
       });
 
@@ -47,6 +52,7 @@ describe('Events', function() {
 
     after(function() {
       Donor.destroy({where: {name: 'testdonor'}});
+      Hospital.destroy({where: {name: 'testhospital'}});
     });
   });
 
@@ -140,26 +146,26 @@ describe('Events', function() {
           testDonor = results[1];
           done();
         });
-    });
+      });
 
     it('should add donor to event', function(done) {
       let response = buildResponse();
-        let request  = http_mocks.createRequest({
-          method: 'POST',
-          url: '/' + testEvent.id,
-          params: {
-            id: testEvent.id
-          }
-        });
+      let request  = http_mocks.createRequest({
+        method: 'POST',
+        url: '/' + testEvent.id,
+        params: {
+          id: testEvent.id
+        }
+      });
 
-        request.user = {id: testDonor.id};
+      request.user = {id: testDonor.id};
 
-        response.on('end', function() {
-          expect(response.statusCode).to.equal(200);
-          done();
-        });
+      response.on('end', function() {
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
 
-        eventControllers.joinEvent(request, response);
+      eventControllers.joinEvent(request, response);
     });
 
     after(function() {

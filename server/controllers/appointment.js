@@ -14,13 +14,13 @@ let makeAppointment = (req, res) => {
 };
 
 let showAppointments = (req, res) => {
-  if (!req.session.passport || (req.session.passport.user.type !== 'hospital')) {
+  if (req.user.type !== 'hospital') {
     return res.send(401);
   }
 
   Appointment.findAll({
     where: {
-      hospitalId: req.session.passport.user.id
+      hospitalId: req.user.id
     },
     include: [{
       model: Donor,
