@@ -27,8 +27,9 @@ app.factory('Profile', ['$http', function($http) {
         bloodtype: user.bloodtype
       }
     })
-    .then((resp) => {
-      return resp.data;
+    .then((res) => {
+      console.log('res: ', res.data);
+      return res.data;
     });
   };
 

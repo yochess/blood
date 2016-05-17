@@ -38,7 +38,28 @@ let getCurrentHospital = (req, res) => {
 };
 
 let updateCurrentHospital = (req, res) => {
-  Hospital.findOne({where: {id: req.user.id}, include: [Schedule]})
+  Hospital.findOne({
+    where: {
+      id: req.user.id
+    },
+    include: [{
+      model: Event,
+      include: [{
+        model: Donor,
+        attributes: {
+          exclude: ['email', 'password', 'address', 'latitude', 'longitude']
+        }
+      }]
+    }, {
+      model: Review,
+      include: [{
+        model: Donor,
+        attributes: {
+          exclude: ['email', 'password', 'address', 'latitude', 'longitude']
+        }
+      }],
+    }, Schedule]
+  })
   .then((hospital) => {
     hospital.update(req.body)
     .then(() => {

@@ -49,7 +49,31 @@ let updateCurrentDonor = (req, res) => {
     },
     attributes: {
       exclude: ['password']
-    }
+    },
+    include: [{
+      model: Event,
+      include: [{
+        model: Hospital,
+        attributes: {
+          exclude: ['email']
+        }
+      }]
+    }, {
+      model: Donor,
+      as: 'friends',
+      through: 'friends',
+      attributes: {
+        exclude: ['email', 'password', 'address', 'latitude', 'longitude']
+      }
+    }, {
+      model: Appointment,
+      include: [{
+        model: Hospital,
+        attributes: {
+          exclude: ['email']
+        }
+      }]
+    }]
   })
   .then(user => {
     user.update(req.body)

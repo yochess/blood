@@ -245,7 +245,8 @@ header {
   border-bottom: 1px solid #eee;
 }
 
-.poster-name {
+.poster-name, .poster-name:hover {
+  color: #eee;
   font-weight: bold;
 }
 
@@ -886,19 +887,19 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   z-index: 99;
 }
 
-  .navbar {
+.navbar {
   min-height: 0px;
 }
 
 @media only screen and (max-width: 780px) {
-   .navbar {
-    width: 100vw;
-    position: relative;
-    z-index: 99;
-    text-align: center;
-  }
-  .nav li a {
-    padding: 25px 25px;
-    font-size: 1.5em;
-  }
+ .navbar {
+  width: 100vw;
+  position: relative;
+  z-index: 99;
+  text-align: center;
+}
+.nav li a {
+  padding: 25px 25px;
+  font-size: 1.5em;
+}
 }
