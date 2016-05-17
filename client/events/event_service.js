@@ -9,6 +9,13 @@ app.factory('Event', ['$http', function($http) {
     });
   };
 
+  let post = (data) => {
+    return $http({
+      method: 'POST',
+      url: '/api/event'
+    });
+  }
+
   let getAll = () => {
     return $http({
       method: 'GET',
@@ -26,5 +33,5 @@ app.factory('Event', ['$http', function($http) {
     });
   };
 
-  return {get, getAll, join};
+  return {get, post, getAll, join};
 }]);

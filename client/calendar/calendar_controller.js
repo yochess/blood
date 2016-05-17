@@ -1,8 +1,108 @@
 (() => {
-  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy' ,function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy) {
+  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
     let CalendarCtrl = this;
+    let hospitalid = $routeParams.hospitalid
     let $calendar = $('#calendar');
     let $datetimepicker = $('#datetimepicker').datetimepicker();
+
+    let donorView = (callback) => {
+      $window.localStorage.setItem('isHospital', '');
+      CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+      Calendar.getGoogleSchedule().then(googleEvents => {
+        fillDonorCalendar(googleEvents, callback);
+      }).catch(err => {
+        console.log('you are not logged in google!');
+        fillDonorCalendar([], callback);
+      });
+    };
+
+    let fillDonorCalendar = (googleEvents, callback) => {
+      $calendar.fullCalendar('removeEvents');
+      $calendar.fullCalendar('addEventSource', googleEvents);
+      getAppointmentData(googleEvents, callback);
+    };
+
+    let getAppointmentData = (googleEvents, callback) => {
+      HospitalProfile.get(hospitalid).then(data => {
+        if (!data) {
+          callback(null);
+          return console.error('invalid hospital id!');
+        }
+        let currentDate = new Date();
+        if (!CalendarCtrl.dontMakeAppointments) {
+          let appointments = _.flatten(_.range(31).map(counter => {
+            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+            let dayIndex = (currentDate.getDay() + 6) % 7;
+            return {
+              currentDate: currentDate,
+              openhour: data.schedules[dayIndex].openhours,
+              endhour: data.schedules[dayIndex].closehours,
+            };
+          }).filter(data => {
+            return !!data.openhour;
+          }).map(data => {
+            return _.range(data.openhour, data.endhour).map(hour => {
+              return {
+                title: 'Slot Available',
+                start: data.currentDate.setHours(hour, 0, 0, 0),
+                backgroundColor: '#378006'
+              };
+            });
+          }));
+          checkOverlap(appointments, googleEvents);
+          callback(appointments);
+        } else {
+          callback([]);
+        }
+      });
+    };
+
+    let checkOverlap = (appointments, googleEvents) => {
+      for (let googleEvent of googleEvents) {
+        let isOverlap = false;
+        let startIndex = 0;
+        let endIndex = appointments.length -1;
+        let midIndex, appointment, start, end;
+
+        while (!isOverlap && (startIndex <= endIndex)) {
+          midIndex = Math.floor((startIndex + endIndex) / 2);
+          startTime = new Date(googleEvent.start).getTime();
+          endTime = new Date(googleEvent.end).getTime();
+          appointmentTime = appointments[midIndex].start;
+
+          if((appointmentTime >= startTime) && (appointmentTime <= endTime)) {
+            isOverlap = true;
+          } else if (appointmentTime < startTime) {
+            startIndex = midIndex + 1;
+          } else {
+            endIndex = midIndex - 1;
+          }
+        }
+
+        if (isOverlap) {
+          removeEventData(appointments, midIndex);
+        }
+      }
+    };
+
+    let removeEventData = (appointments, index) => {
+      appointments.splice(index, 1);
+    };
+
+    let hospitalView = (callback) => {
+      Appointment.getAll().then(appointments => {
+        Event.getAll().then(events => {
+          console.log('1. you are logged in as hospital');
+          $window.localStorage.setItem('isHospital', 'hello world');
+          CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+          CalendarCtrl.fillHospitalCalendar(appointments, events, callback);
+        })
+      }).catch(err => {
+        console.log('2. you are not logged in as a hospital: ', err);
+        $window.localStorage.setItem('isHospital', '');
+        CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
+      })
+    };
 
     CalendarCtrl.buddy= false;
     CalendarCtrl.view = {
@@ -14,35 +114,7 @@
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
-        if (!$routeParams.hospitalid) {
-          Calendar.getHospitalAppointments().then(res => {
-            Event.getAll().then(events => {
-              console.log('1. you are logged in as hospital');
-              $window.localStorage.setItem('isHospital', 'hello world');
-              CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-              CalendarCtrl.fillHospitalCalendar(res, events, callback);
-            })
-          }).catch(err => {
-            console.log('2. you are not logged in as a hospital: ', err);
-            $window.localStorage.setItem('isHospital', '');
-            CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-          })
-        // if is donor
-        // within, check if gmail
-        } else {
-          $window.localStorage.setItem('isHospital', '');
-          CalendarCtrl.isHospital = $window.localStorage.getItem('isHospital');
-          Calendar.getCalendarEvents().then(res => {
-            CalendarCtrl.isLoggedin = true;
-            CalendarCtrl.googleEvents = res.data;
-            CalendarCtrl.fillCalendar(callback);
-          }).catch(err => {
-            console.log('4. you are not logged in gmail');
-            CalendarCtrl.isLoggedin = false;
-            CalendarCtrl.googleEvents = [];
-            CalendarCtrl.fillCalendar(callback);
-          });
-        }
+        hospitalid ? donorView(callback) : hospitalView(callback);
       },
       eventClick: (calEvent, jsEvent, view) => {
         console.log('calEvent: ', calEvent);
@@ -70,13 +142,13 @@
         }
         // same here
         if (calEvent.title === 'Your appointment') {
-          $window.open(`/hospital/profile/${$routeParams.hospitalid}`, '_blank');
+          $window.open(`/hospital/profile/${hospitalid}`, '_blank');
         }
       }
     });
 
-    CalendarCtrl.fillHospitalCalendar = (res, events, callback) => {
-      let appointments = res.data.filter(datum => {
+    CalendarCtrl.fillHospitalCalendar = (appointments, events, callback) => {
+      appointments = appointments.filter(datum => {
         return datum.time;
       }).map(datum => {
         return {
@@ -85,8 +157,6 @@
           datum: datum
         };
       });
-      console.log('appointments: ', appointments);
-      console.log('events: ', events);
       events = events.filter(datum => {
         return datum.time;
       }).map(datum => {
@@ -115,81 +185,8 @@
       });
     };
 
-    CalendarCtrl.fillCalendar = (callback) => {
-      // this is hacky currently and can be optimized
-      $calendar.fullCalendar('removeEvents');
-      $calendar.fullCalendar('addEventSource', CalendarCtrl.googleEvents);
-      CalendarCtrl.getAppointmentData(CalendarCtrl.checkOverlap, callback);
-    };
-
     CalendarCtrl.reload = () => {
       $calendar.fullCalendar('refetchEvents');
-    };
-
-    CalendarCtrl.getAppointmentData = (checkOverlap, callback) => {
-      Calendar.getHospitalProfile($routeParams.hospitalid).then(res => {
-        if (!res.data) {
-          callback(null);
-          return console.log('no hospital id in params!');
-        }
-        let currentDate = new Date();
-        let dayIndex, startHour, endHour;
-        if (!CalendarCtrl.dontMakeAppointments) {
-          CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
-            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
-            dayIndex = (currentDate.getDay() + 6) % 7;
-            return {
-              currentDate: currentDate,
-              openhour: res.data.schedules[dayIndex].openhours,
-              endhour: res.data.schedules[dayIndex].closehours,
-            };
-          }).filter(data => {
-            return !!data.openhour;
-          }).map(data => {
-            return _.range(data.openhour, data.endhour).map(hour => {
-              return {
-                title: 'Slot Available',
-                start: data.currentDate.setHours(hour, 0, 0, 0),
-                backgroundColor: '#378006'
-              };
-            });
-          }));
-          checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
-          callback(CalendarCtrl.appointments);
-        } else {
-          callback([]);
-        }
-      })
-    };
-
-    CalendarCtrl.checkOverlap = (appointments, googleEvents) => {
-      for (let googleEvent of googleEvents) {
-        let isOverlap = false;
-        let startIndex = 0;
-        let endIndex = appointments.length -1;
-        let midIndex, appointment, start, end;
-
-        while (!isOverlap && (startIndex <= endIndex)) {
-          midIndex = Math.floor((startIndex + endIndex) / 2);
-          startTime = new Date(googleEvent.start).getTime();
-          endTime = new Date(googleEvent.end).getTime();
-          appointmentTime = appointments[midIndex].start;
-
-          if((appointmentTime >= startTime) && (appointmentTime <= endTime)) {
-            isOverlap = true;
-          } else if (appointmentTime < startTime) {
-            startIndex = midIndex + 1;
-          } else if (appointmentTime > endTime) {
-            endIndex = midIndex - 1;
-          } else {
-            break;
-          }
-        }
-
-        if (isOverlap) {
-          CalendarCtrl.removeEventData(appointments, midIndex);
-        }
-      }
     };
 
     CalendarCtrl.createEvent = (startDate, endDate, title) => {
@@ -197,8 +194,20 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
       title = title || CalendarCtrl.title || 'New Event';
 
+      let data = {
+        summary: 'Your appointment',
+        start: {
+          dateTime: startDate,
+          timeZone: 'America/Los_Angeles'
+        },
+        end: {
+          dateTime: startDate,
+          timeZone: 'America/Los_Angeles'
+        }
+      };
+
       if (!CalendarCtrl.isHospital) {
-        Calendar.postCalendarAppointment('Appointment', startDate).then(res => {
+        Calendar.postToGoogle(data).then(res => {
           $calendar.fullCalendar('removeEvents');
           $calendar.fullCalendar('addEventSource', [{
             title: title,
@@ -217,62 +226,20 @@
           }]);
         });
       } else {
-        $http.post('/api/event', {
-          hospitalId: $routeParams.hospitalid,
+        Event.post({
+          hospitalId: hospitalid,
           time: CalendarCtrl.dateTime
-        }).then(res => {
-          console.log('event res: ', res);
+        }).then(data => {
           $calendar.fullCalendar('addEventSource', [{
             title: title,
             start: CalendarCtrl.dateTime,
-            datum: res.data,
+            datum: data,
             backgroundColor: 'red'
           }]);
         }).catch(err => {
-          console.log('error: ', err);
-        });
+          console.error('error in createEvent', err);
+        })
       }
-
-
-      // Calendar.postCalendarAppointment('Appointment', startDate).then(res => {
-      //   if (!CalendarCtrl.isHospital) {
-      //     $calendar.fullCalendar('removeEvents');
-      //     $calendar.fullCalendar('addEventSource', [{
-      //       title: title,
-      //       // datum: res.data,
-      //       start: startDate
-      //     }]);
-      //   } else {
-      //     $calendar.fullCalendar('addEventSource', [{
-      //       title: title,
-      //       start: startDate,
-      //       datum: res.data,
-      //       backgroundColor: 'red'
-      //     }]);
-      //   }
-      // }).catch(err => {
-      //   if (!CalendarCtrl.isHospital) {
-      //     console.log('you are not logged in gmail!');
-      //     $calendar.fullCalendar('removeEvents');
-      //     $calendar.fullCalendar('addEventSource', [{
-      //       title: title,
-      //       // datum: err.data,
-      //       start: startDate,
-      //       // backgroundColor: 'yellow'
-      //     }]);
-      //   } else {
-      //     $calendar.fullCalendar('addEventSource', [{
-      //       title: title,
-      //       // datum: res.data,
-      //       start: startDate,
-      //       backgroundColor: 'green'
-      //     }]);
-      //   }
-      // })
-    };
-
-    CalendarCtrl.removeEventData = (events, index) => {
-      CalendarCtrl.appointments.splice(index, 1);
     };
 
     CalendarCtrl.setView = (calEvent) => {
@@ -297,7 +264,7 @@
 
       $box2.modal();
     };
-//blood buddy
+
     CalendarCtrl.buddyoneModal = () => {
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
@@ -314,7 +281,7 @@
       let $input1 = $('.checkbox.input1').find('input');
       $("#fb-share-button").show();
       let $input3 = $('.checkbox.input3').find('input');
-      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, $routeParams.hospitalid, $input3);
+      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, hospitalid, $input3);
     };
     CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
     {
@@ -331,8 +298,6 @@
       });
     };
 
-    //blood buddy
-
     CalendarCtrl.secondModal = () => {
 
       let $input1 = $('.checkbox.input1').find('input');
@@ -345,15 +310,17 @@
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.view.time.start, 1)
-        .then(res => {
+      Appointment.post({
+        hospitalId: hospitalid,
+        time: CalendarCtrl.view.time.start,
+        type: 1
+      }).then(res => {
           console.log('appointment made! ', res);
           CalendarCtrl.createEvent(CalendarCtrl.view.time.start, CalendarCtrl.view.time.end, 'Your appointment');
         })
         .catch(err => {
           console.log('error in making appointment! ', err);
         });
-      // send email to both parties
 
       // share to facebook if checked
       if ($input1.is(':checked')) {
@@ -363,7 +330,7 @@
       // save event if checked
       if ($input2.is(':checked')) {
         $http.post('/api/event', {
-          hospitalId: $routeParams.hospitalid,
+          hospitalId: hospitalid,
           time: CalendarCtrl.view.time.start
         }).then(res => {
           console.log('event res: ', res);

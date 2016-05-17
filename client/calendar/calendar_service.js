@@ -1,51 +1,22 @@
 (() => {
   app.service('Calendar', ['$http', function($http) {
-    let getCalendarEvents = () => {
+    let getGoogleSchedule = () => {
       return $http({
         url: '/api/calendar',
         method: 'GET'
+      })
+      .then(res => {
+        return res.data;
       });
     };
 
-    let getHospitalAppointments = () => {
-      return $http({
-        url: '/api/appointment',
-        method: 'GET'
-      });
-    };
-
-    let postCalendarAppointment = (title, start) => {
+    let postToGoogle = (data) => {
       return $http({
         url: '/api/calendar',
         method: 'POST',
-        data: {
-          start: {
-            dateTime: start,
-            timeZone: 'America/Los_Angeles',
-          },
-          end: {
-            dateTime: start,
-            timeZone: 'America/Los_Angeles'
-          }
-          // end: endDate
-        }
+        data: data
       });
     };
-
-    let getHospitalProfile = (hospitalId) => {
-      return $http({
-        url: `/api/hospital/profile/${hospitalId}`,
-        method: 'GET'
-      });
-    };
-
-    let postAppointment = (hospitalId, time, type) => {
-      return $http({
-        url: '/api/appointment',
-        method: 'POST',
-        data: {hospitalId, time, type}
-      });
-    }
 
     // this may need to be separated to an auth service
     let getUrl = () => {
@@ -64,17 +35,7 @@
       });
     };
 
-
-
-    return {
-      getCalendarEvents,
-      getHospitalProfile,
-      getToken,
-      getUrl,
-      postCalendarAppointment,
-      getHospitalAppointments,
-      postAppointment
-    };
+    return {getGoogleSchedule, getToken, getUrl, postToGoogle};
 
   }]);
 })();
