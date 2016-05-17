@@ -297,48 +297,14 @@
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
       console.log($routeParams.hospitalid);
-      Buddy.requestBuddy(CalendarCtrl.time.start, $routeParams.hospitalid)
+      Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
       .then(buddy => {
         console.log('buddyRequest',buddy);
-        let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+        let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
       });
-      // CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid);
 
-      // $inputs.each((index, input) => {
-      //   input.checked = false;
-      // });
-
-
-
-    // CalendarCtrl.buddytwoModal = () => {
-    //   //share on fb
-    //   let $input1 = $('.checkbox.input1').find('input');
-
-    //   let $input3 = $('.checkbox.input3').find('input');
-    //   if ($input3.is(':checked')) {
-    //      let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
-    //      Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-    //    };
-    //   //CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
-    // };
-
-    // CalendarCtrl.buddyRequest = (start, hospitalId) =>
-    // {
-    //   Buddy.requestBuddy(start,hospitalId)
-    //   .then(buddy => {
-    //     // if ($input3.is(':checked')) {
-    //     //  let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
-    //     //  Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-    //    // };
-    //    console.log('buddyRequest',buddy);
-    //      $window.location.assign(`#bloodbuddy/${buddy.id}`);
-
-
-
-
-      // });
     };
 
 
