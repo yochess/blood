@@ -176,11 +176,11 @@
           summary: 'Your appointment',
           start: {
             dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'UTC'
           },
           end: {
             dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'UTC'
           }
         });
       })
