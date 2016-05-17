@@ -13,8 +13,12 @@
     </div>
     <div class="feed-content">
       <div class="post clearfix" ng-repeat="post in FeedCtrl.posts">
-        <img ng-src="{{post.donor.photo}}" alt="Poster Photo">
-        <a class="poster-name" ng-href="{{post.donor ? '/profile/' + post.donor.id : '/hospital/profile/' + post.hospital.id}}">{{post.donor.name || post.hospital.name}}</a>
+        <a ng-href="{{post.donor ? '/profile/' + post.donor.id : '/hospital/profile/' + post.hospital.id}}">
+          <img ng-src="{{post.donor.photo}}" alt="Poster Photo" />
+        </a>
+        <a class="poster-name" ng-href="{{post.donor ? '/profile/' + post.donor.id : '/hospital/profile/' + post.hospital.id}}">
+          {{post.donor.name || post.hospital.name}}
+        </a>
         <p>{{post.content}}</p>
       </div>
     </div>
@@ -22,7 +26,7 @@
 
   <div class="col-md-6">
     <div class="panel-body map-events" ng-controller="MapEventController as MapEventCtrl">
-    <h3 class="map-events-header">Events happening nearby:</h3>
+      <h3 class="map-events-header">Events happening nearby:</h3>
       <h3 ng-show="MapEventCtrl.events.length === 0">No events in this area</h3>
       <div class="event" ng-repeat="event in MapEventCtrl.events">
         <a ng-href="/event/{{event.id}}"><h3>{{event.hospital.name}}</h3></a>
