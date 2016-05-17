@@ -55,7 +55,7 @@ let updateBuddy = (req, res) => {
     {
       model: Hospital,
       attributes: {
-        exclude: ['email', 'password']
+        exclude: ['password']
       }
     }]
   })

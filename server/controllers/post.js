@@ -31,12 +31,12 @@ let getPostsByLocation = (req, res) => {
     include: [{
       model: Donor,
       attributes: {
-        exclude: ['email', 'password']
+        exclude: ['email']
       }
     }, {
       model: Hospital,
       attributes: {
-        exclude: ['email', 'password']
+        exclude: ['email']
       }
     }],
     limit: limit,

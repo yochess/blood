@@ -80,7 +80,7 @@ let getEventsByLocation = (req, res) => {
         }
       },
       attributes: {
-        exclude: ['password', 'email']
+        exclude: ['password']
       }
     }, {
       model: Donor,
@@ -105,7 +105,7 @@ let getEventById = (req, res) => {
     }, {
       model: Hospital,
       attributes: {
-        exclude: ['email', 'password']
+        exclude: ['email']
       }
     }]
   })
