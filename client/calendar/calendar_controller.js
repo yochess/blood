@@ -1,7 +1,7 @@
 (() => {
   app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
     let CalendarCtrl = this;
-    let hospitalId = $routeParams.hospitalid
+    let hospitalId = $routeParams.hospitalid;
     let $calendar = $('#calendar');
     let $datetimepicker = $('#datetimepicker').datetimepicker();
 
@@ -291,42 +291,6 @@
     };
 
 //blood buddy
-// CalendarCtrl.postToFeed =() =>{
-
-
-
-// console.log("Post to feed");
-
-// let link = "http://127.0.0.1:8080/bloodbuddy/2";
-
-// document.getElementById('myfb').setAttribute('href', link);
-
-// //$(".fb-share-button").attr('data-href', link);
-// // FB.init({appId: 1702618600026769, status: true, cookie: true});
-
-// //       function postToFeed() {
-
-// //         // calling the API ...
-// //         var obj = {
-// //           method: 'feed',
-// //           redirect_uri: 'https://bloodshare.io/bloodmap',
-// //           link: 'https://bloodshare.io/bloodmap',
-// //           picture: 'http://fbrell.com/f8.jpg',
-// //           name: 'Facebook Dialogs',
-// //           caption: 'Reference Documentation',
-// //           description: 'Using Dialogs to interact with people.'
-// //         };
-
-// //         function callback(response) {
-// //           document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
-// //         }
-
-// //         FB.ui(obj, callback);
-// //       };
-
-
-
-// };
 
     CalendarCtrl.buddyoneModal = () => {
 
@@ -345,6 +309,7 @@
       // $inputs.each((index, input) => {
       //   input.checked = false;
       // });
+
 
 
     // CalendarCtrl.buddytwoModal = () => {
@@ -375,6 +340,7 @@
 
       // });
     };
+
 
     CalendarCtrl.secondModal = () => {
 
