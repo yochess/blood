@@ -79,7 +79,7 @@
       <div class="events-hospital-profile">
         <div class="event" ng-repeat="event in HospitalProfileCtrl.hospital.events">
         <img src="assests/heart.png"/>
-          <p> You are hosting an event on {{event.time | date}}, at {{event.time | date: 'shortTime'}}. </p>
+          <p> You are hosting <a ng-href="event/{{event.id}}">an event</a> on {{event.time | date}}, at {{event.time | date: 'shortTime'}}. </p>
             <p>{{event.donors.length === 1 ? '1 donor is' : event.donors.length +' donors are'}} currently confirmed to attend.</p>
           </p>
         </div>
