@@ -27,7 +27,7 @@ let postEvent = (req, res) => {
   Promise.all([
     Event.create({
       time: req.body.time,
-      hospitalId: req.body.id || req.user.id,
+      hospitalId: req.body.hospitalId || req.user.id,
       hostId: hostId // null if hospital
     }),
     Donor.findOne({

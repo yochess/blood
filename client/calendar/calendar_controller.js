@@ -180,7 +180,7 @@
       // save event if checked
       if (input2.is(':checked')) {
         CalendarCtrl.createEvent({
-          id: hospitalid,
+          hospitalid: hospitalid,
           time: CalendarCtrl.view.time.start
         });
       }
