@@ -34,10 +34,10 @@ Appointment.findAll().then(appointments => {
 
 function email(donor, hospital, appointment) {
   console.log('sending mail!');
-
-  let day = moment(appointment.time).format('dddd');
-  let date = moment(appointment.time).format('MMMM Do YYYY');
-  let time = moment(appointment.time).format('h:ss a');
+  let localTime = moment.utc(appointment.time).toDate();
+  let day = moment(localTime).format('dddd');
+  let date = moment(localTime).format('MMMM Do YYYY');
+  let time = moment(localTime).format('h:ss a');
 
   let mailOptions1 = {
     from: 'britishchickenblood@gmail.com',
