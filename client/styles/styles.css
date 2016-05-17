@@ -222,8 +222,8 @@ header {
 }
 
 .feed-new input[type=text] {
-    color: #333;
-    padding: 5px;
+  color: #333;
+  padding: 5px;
 }
 
 .feed input[type="text"] {
@@ -305,9 +305,9 @@ header {
   float:right;
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: right;
- }
+}
 
- #iw_container {
+#iw_container {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 11px;
 }
@@ -501,16 +501,21 @@ header {
   height: 52px;
   border: 1px solid #555;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .profile .friend a {
+  display: block;
+  margin-top: 15px;
   color: white;
 }
 
 .profile .friend img {
-  height: 50px;
+  width: 90px;
+  float: left;
   margin-right: 15px;
 }
+
 
 .profile-button {
   background: #700000;
@@ -684,16 +689,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
  .visualizer {
   /*width: 30%;*/
   margin: 10px auto;
- }
- .first-viz {
+}
+.first-viz {
   margin-bottom: 40px;
   margin-right: 50px;
- }
- #fillgauge2 {
+}
+#fillgauge2 {
   margin: 0 auto;
   text-align: center;
   width: 100%;
- }
+}
 .first-viz {
   margin: 0 auto;
   margin-bottom: 40px;
