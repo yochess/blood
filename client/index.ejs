@@ -2,7 +2,18 @@
 <html>
 <head>
   <title>Bloodshare</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<meta property="og:title" content="Blood"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://bloodshare.io"/>
+<meta property="og:image" content="http://theblogreaders.com/wp-content/uploads/2015/08/donate-blood_01.jpg"/>
+<meta property="og:site_name" content="Blood Share"/>
+<!-- <meta property="fb:admins" content="USER_ID"/> -->
+<meta property="fb:app_id" content=1702618600026769 />
+<meta property="og:description" content="Join as bloodbuddy and donate blood"/>
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.1/fullcalendar.min.css" />
@@ -13,6 +24,7 @@
   <link rel="stylesheet" href="/styles/styles.css">
   <link rel="shortcut icon" href="assests/favicon.ico" />
   <base href="/">
+
 </head>
 <body ng-app='blood'>
 <div id="index-top-bar">
@@ -75,14 +87,50 @@
   <% } %>
 
   <!-- Load Facebook SDK for JavaScript -->
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    //js.src = "//connect.facebook.net/en_US/all.js";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  }(document, 'script', 'facebook-jssdk'));
+
+window.fbAsyncInit = function() {
+  FB.init({appId: 1702618600026769, status: true, cookie: true,
+xfbml: true});
+};
+
+ </script>
+
+<a href="https://www.facebook.com/v2.6/dialog/feed?app_id=1702618600026769&caption=Join%20me%20as%20bloodbuddy&display=popup&e2e=%7B%7D&link=https%3A%2F%2Fbloodshare.io%2F&locale=en_US&name=BlooodSharrrre!&picture=http://lorempixel.com/1200/630/&next=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df2f8700a72b4c44%26domain%3D127.0.0.1%26origin%3Dhttp%253A%252F%252F127.0.0.1%253A8080%252Ff2c5966ca4a77d%26relation%3Dopener%26frame%3Df20af1dced16a6c%26result%3D%2522xxRESULTTOKENxx%2522&sdk=joey&version=v2.6">Check share</a>
+
+<button onclick="gogogo()">Share me, please</button>
+<script>
+function gogogo() {
+  FB.ui({
+  method: 'share',
+  "app_id": "1702618600026769",
+  href: 'https://bloodshare.io/',
+}, function(response){});
+
+  FB.ui({
+    method: 'feed',
+    appId: 1702618600026769,
+    redirect_uri: 'https://bloodshare.io/',
+    link: 'https://bloodshare.io/',
+    name: 'BlooodSharrrre!',
+    caption: 'Join me as bloodbuddy',
+  });
+}
+</script>
+
+
+
+
+
+
 </body>
 </html>
 

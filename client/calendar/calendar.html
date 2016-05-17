@@ -36,10 +36,7 @@
   </p>
   <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
 
-  <div class="fb-share-button"
-    data-href="http://52.39.22.12:8080"
-    data-layout="button_count">
- </div>
+  <button class="fb-share-button" id="myfb" ng-click="CalendarCtrl.postToFeed()" href="http://127.0.0.1:8080/bloodbuddy/4" data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button>
 
   <!-- <button ng-click="CalendarCtrl.automateDates()">Let Us Pick Dates!</button> -->
   <div id="calendar"></div>
@@ -98,6 +95,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <p>Event on {{CalendarCtrl.view.time.print}}?</p>
           <h4 class="modal-title">Select Options</h4>
+
         </div>
         <div class="modal-body">
           <form role="form">
@@ -131,10 +129,11 @@
             <div class="checkbox input1">
               <label><input type="checkbox" />Share on facebook </label>
             </div>
-            <div class="fb-share-button"
+           <!--  <div class="fb-share-button"
               data-href="http://52.39.22.12:8080/#/"
               data-layout="button_count">
-           </div>
+           </div> -->
+           <button class="fb-share-button" id="myfb" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button>
 
             <div class="checkbox input3">
               <label><input type="checkbox" /> Post a message</label>

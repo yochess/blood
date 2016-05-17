@@ -1,8 +1,41 @@
 <div>
   <h2>Blood Buddy</h2>
+
+  <div class="modal box4 fade" id="confirm-modal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p>Event on {{BuddyCtrl.buddy.time}}</p>
+          <h4 class="modal-title">Share the link to find a buddy</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+
+           <h3> Share it on FB</h3>
+           <div class="fb-share-button" id="myfb" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></div>
+
+            <div class="checkbox input3">
+              <label><input type="checkbox" /> Post a message</label>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="BuddyCtrl.buddytwoModal()">Find a buddy</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <button class="fb-share-button" id="myfb" ng-click="CalendarCtrl.postToFeed()" ng-href={{$window.location.href}} data-layout="button_count" data-mobile-iframe="false" width=10 height=50></button> -->
   <div ng-hide="BuddyCtrl.found">
+
+   <button ng-click="BuddyCtrl.post()" >
+ Share this link to find a buddy
+</button>
   <form ng-submit="BuddyCtrl.submit()">
-  <h3>Join as buddy</h3><input type="submit" >
+  <h3>Join {{BuddyCtrl.buddy.donor.name}} as his bloodbuddy</h3><input type="submit" >
   </form>
   </div>
   <div ng-show="BuddyCtrl.found">

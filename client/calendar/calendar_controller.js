@@ -1,7 +1,7 @@
 (() => {
   app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
     let CalendarCtrl = this;
-    let hospitalId = $routeParams.hospitalid
+    let hospitalId = $routeParams.hospitalid;
     let $calendar = $('#calendar');
     let $datetimepicker = $('#datetimepicker').datetimepicker();
 
@@ -290,38 +290,23 @@
       $box2.modal();
     };
 
+//blood buddy
+
     CalendarCtrl.buddyoneModal = () => {
+
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
-
-      $inputs.each((index, input) => {
-        input.checked = false;
-      });
-
-      $box4.modal();
-    };
-
-    CalendarCtrl.buddytwoModal = () => {
-      //share on fb
-      let $input1 = $('.checkbox.input1').find('input');
-      $("#fb-share-button").show();
-      let $input3 = $('.checkbox.input3').find('input');
-      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, hospitalId, $input3);
-    };
-    CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
-    {
-      Buddy.requestBuddy(start,hospitalId)
+      console.log($routeParams.hospitalid);
+      Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
       .then(buddy => {
-        if ($input3.is(':checked')) {
-         let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
-         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-       };
+        console.log('buddyRequest',buddy);
+        let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+        Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
-
-
-
       });
+
     };
+
 
     CalendarCtrl.secondModal = () => {
 
