@@ -36,8 +36,7 @@
               <label for="location">Location:</label>
               <input type="text" name="location" id="address" ng-model="ProfileCtrl.user.address" name="address" ng-change="ProfileCtrl.getlatlong()"/>
               <label for="bloodtype">Blood Type:</label>
-              <select name="bloodtype" ng-model="ProfileCtrl.user.bloodtype">
-                <option ng-repeat="type in ProfileCtrl.bloodTypes" value="{{type}}">{{type}}</option>
+              <select name="bloodtype" ng-model="ProfileCtrl.user.bloodtype" ng-options="type for type in ProfileCtrl.bloodTypes">
               </select>
               <input type="submit" id="submit" value="Submit" class="btn profile-button"/>
               <button ng-show="ProfileCtrl.edit" ng-click="ProfileCtrl.Edit()" type="button" class="profile-button-cancel btn">
@@ -49,7 +48,7 @@
       </div>
     </div>
     <div class="panel-body panel-lower events">
-    <h3>Upcoming Events</h3>
+      <h3>Upcoming Events</h3>
       <div class="event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.upcoming">
         <img src="assests/heart.png"/>
         <p>
