@@ -71,6 +71,8 @@ app.controller('ProfileController', ['$routeParams' , 'Profile', '$rootScope', '
     console.log(ProfileCtrl.hospitals);
   };
 
+  findFavoriteHospitals(ProfileCtrl.user);
+
   ProfileCtrl.upcoming = event => {
     let offset = new Date(event.time) - new Date();
     return offset > 0;
