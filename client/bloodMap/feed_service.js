@@ -17,6 +17,7 @@ app.factory('Feed', ['$http', function($http) {
       data: {content, location}
     })
     .then((resp) => {
+      console.log(resp.data);
       return resp.data;
     });
   };
