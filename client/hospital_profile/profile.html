@@ -77,7 +77,7 @@
     </div>
     <div class="col-md-3 panel-body panel-lower">
       <div class="events-hospital-profile">
-        <div class="event" ng-repeat="event in HospitalProfileCtrl.editObj.events">
+        <div class="event" ng-repeat="event in HospitalProfileCtrl.hospital.events">
         <img src="assests/heart.png"/>
           <p> You are hosting an event on {{event.time | date}}, at {{event.time | date: 'shortTime'}}. </p>
             <p>{{event.donors.length === 1 ? '1 donor is' : event.donors.length +' donors are'}} currently confirmed to attend.</p>
@@ -87,9 +87,9 @@
     </div>
   </div>
   <div class="col-md-4 friend-col-outer center-block">
-    <div class="panel-body reviews">Here's what people have to say about you:
-      <div class="review" ng-repeat="review in HospitalProfileCtrl.hospital.reviews">
-        <h3>{{review.donor.name}}</h3>
+    <div class="panel-body reviews"><h3>Reviews of your hospital:</h3>
+      <div class="review" ng-repeat="review in HospitalProfileCtrl.hospital.reviews.slice().reverse()">
+        <a href="profile/{{HospitalProfileCtrl.hospital.reviews.donor.id}}"><h4>{{review.donor.name}}:</h4></a>
         <p>{{review.content}}</p>
       </div>
     </div>
