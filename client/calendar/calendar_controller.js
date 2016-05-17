@@ -290,37 +290,90 @@
       $box2.modal();
     };
 
+//blood buddy
+// CalendarCtrl.postToFeed =() =>{
+
+
+
+// console.log("Post to feed");
+
+// let link = "http://127.0.0.1:8080/bloodbuddy/2";
+
+// document.getElementById('myfb').setAttribute('href', link);
+
+// //$(".fb-share-button").attr('data-href', link);
+// // FB.init({appId: 1702618600026769, status: true, cookie: true});
+
+// //       function postToFeed() {
+
+// //         // calling the API ...
+// //         var obj = {
+// //           method: 'feed',
+// //           redirect_uri: 'https://bloodshare.io/bloodmap',
+// //           link: 'https://bloodshare.io/bloodmap',
+// //           picture: 'http://fbrell.com/f8.jpg',
+// //           name: 'Facebook Dialogs',
+// //           caption: 'Reference Documentation',
+// //           description: 'Using Dialogs to interact with people.'
+// //         };
+
+// //         function callback(response) {
+// //           document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+// //         }
+
+// //         FB.ui(obj, callback);
+// //       };
+
+
+
+// };
+
     CalendarCtrl.buddyoneModal = () => {
+
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
-
-      $inputs.each((index, input) => {
-        input.checked = false;
-      });
-
-      $box4.modal();
-    };
-
-    CalendarCtrl.buddytwoModal = () => {
-      //share on fb
-      let $input1 = $('.checkbox.input1').find('input');
-      $("#fb-share-button").show();
-      let $input3 = $('.checkbox.input3').find('input');
-      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, hospitalId, $input3);
-    };
-    CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
-    {
-      Buddy.requestBuddy(start,hospitalId)
+      console.log($routeParams.hospitalid);
+      Buddy.requestBuddy(CalendarCtrl.time.start, $routeParams.hospitalid)
       .then(buddy => {
-        if ($input3.is(':checked')) {
-         let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
-         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-       };
+        console.log('buddyRequest',buddy);
+        let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+        Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
-
-
-
       });
+      // CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid);
+
+      // $inputs.each((index, input) => {
+      //   input.checked = false;
+      // });
+
+
+    // CalendarCtrl.buddytwoModal = () => {
+    //   //share on fb
+    //   let $input1 = $('.checkbox.input1').find('input');
+
+    //   let $input3 = $('.checkbox.input3').find('input');
+    //   if ($input3.is(':checked')) {
+    //      let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+    //      Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+    //    };
+    //   //CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
+    // };
+
+    // CalendarCtrl.buddyRequest = (start, hospitalId) =>
+    // {
+    //   Buddy.requestBuddy(start,hospitalId)
+    //   .then(buddy => {
+    //     // if ($input3.is(':checked')) {
+    //     //  let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+    //     //  Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+    //    // };
+    //    console.log('buddyRequest',buddy);
+    //      $window.location.assign(`#bloodbuddy/${buddy.id}`);
+
+
+
+
+      // });
     };
 
     CalendarCtrl.secondModal = () => {
