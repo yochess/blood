@@ -14,7 +14,7 @@
       });
     };
 
-    let postCalendarEvent = (title, start) => {
+    let postCalendarAppointment = (title, start) => {
       return $http({
         url: '/api/calendar',
         method: 'POST',
@@ -71,7 +71,7 @@
       getHospitalProfile,
       getToken,
       getUrl,
-      postCalendarEvent,
+      postCalendarAppointment,
       getHospitalAppointments,
       postAppointment
     };

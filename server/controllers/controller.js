@@ -75,6 +75,7 @@ let Event = sequelize.define('event', {
 
 Event.belongsTo(Hospital);
 Hospital.hasMany(Event);
+Event.belongsTo(Donor, {as: 'host'});
 Event.belongsToMany(Donor, {through: 'donorsevents'});
 Donor.belongsToMany(Event, {through: 'donorsevents'});
 

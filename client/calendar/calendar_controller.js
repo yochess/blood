@@ -2,25 +2,18 @@
   app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy' ,function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy) {
     let CalendarCtrl = this;
     let $calendar = $('#calendar');
-//blood buddy
-    CalendarCtrl.buddy= false;
     let $datetimepicker = $('#datetimepicker').datetimepicker();
-    CalendarCtrl.time = {};
+
+    CalendarCtrl.buddy= false;
+    CalendarCtrl.view = {
+      time: {}
+    };
+    CalendarCtrl.isHospital = !!($window.localStorage.getItem('isHospital'));
 
     $calendar.fullCalendar({
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
-        Calendar.getCalendarEvents().then(res => {
-          CalendarCtrl.isLoggedin = true;
-          CalendarCtrl.googleEvents = res.data;
-          CalendarCtrl.fillCalendar(callback);
-        }).catch(err => {
-          CalendarCtrl.isLoggedin = false;
-          CalendarCtrl.googleEvents = [];
-          CalendarCtrl.fillCalendar(callback);
-        });
-        // if is hospital
         if (!$routeParams.hospitalid) {
           Calendar.getHospitalAppointments().then(res => {
             Event.getAll().then(events => {
@@ -83,7 +76,6 @@
     });
 
     CalendarCtrl.fillHospitalCalendar = (res, events, callback) => {
-      // console.log(res.data);
       let appointments = res.data.filter(datum => {
         return datum.time;
       }).map(datum => {
@@ -93,6 +85,8 @@
           datum: datum
         };
       });
+      console.log('appointments: ', appointments);
+      console.log('events: ', events);
       events = events.filter(datum => {
         return datum.time;
       }).map(datum => {
@@ -140,28 +134,31 @@
         }
         let currentDate = new Date();
         let dayIndex, startHour, endHour;
-        CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
-          currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
-          dayIndex = (currentDate.getDay() + 6) % 7;
-          return {
-            currentDate: currentDate,
-            openhour: res.data.schedules[dayIndex].openhours,
-            endhour: res.data.schedules[dayIndex].closehours,
-          };
-        }).filter(data => {
-          return !!data.openhour;
-        }).map(data => {
-          return _.range(data.openhour, data.endhour).map(hour => {
+        if (!CalendarCtrl.dontMakeAppointments) {
+          CalendarCtrl.appointments = _.flatten(_.range(31).map(counter => {
+            currentDate = new Date(currentDate.getTime() + (1000 * 60 * 60 * 24));
+            dayIndex = (currentDate.getDay() + 6) % 7;
             return {
-              title: 'Slot Available',
-              start: data.currentDate.setHours(hour, 0, 0, 0),
-              backgroundColor: '#378006'
+              currentDate: currentDate,
+              openhour: res.data.schedules[dayIndex].openhours,
+              endhour: res.data.schedules[dayIndex].closehours,
             };
-          });
-        }));
-        checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
-        callback(CalendarCtrl.appointments);
-
+          }).filter(data => {
+            return !!data.openhour;
+          }).map(data => {
+            return _.range(data.openhour, data.endhour).map(hour => {
+              return {
+                title: 'Slot Available',
+                start: data.currentDate.setHours(hour, 0, 0, 0),
+                backgroundColor: '#378006'
+              };
+            });
+          }));
+          checkOverlap(CalendarCtrl.appointments, CalendarCtrl.googleEvents);
+          callback(CalendarCtrl.appointments);
+        } else {
+          callback([]);
+        }
       })
     };
 
@@ -200,41 +197,78 @@
       endDate = endDate || CalendarCtrl.dateTime || startDate;
       title = title || CalendarCtrl.title || 'New Event';
 
-      Calendar.postCalendarEvent('Appointment', startDate).then(res => {
-        console.log('res is: ', res);
-        if (!CalendarCtrl.isHospital) {
+      if (!CalendarCtrl.isHospital) {
+        Calendar.postCalendarAppointment('Appointment', startDate).then(res => {
           $calendar.fullCalendar('removeEvents');
           $calendar.fullCalendar('addEventSource', [{
             title: title,
             // datum: res.data,
             start: startDate
           }]);
-        } else {
-          $calendar.fullCalendar('addEventSource', [{
-            title: title,
-            start: startDate,
-            datum: res.data,
-            backgroundColor: 'red'
-          }]);
-        }
-      }).catch(err => {
-        if (!CalendarCtrl.isHospital) {
+        })
+        .catch(err => {
           console.log('you are not logged in gmail!');
           $calendar.fullCalendar('removeEvents');
           $calendar.fullCalendar('addEventSource', [{
             title: title,
-            // datum: res.data,
-            start: startDate
+            // datum: err.data,
+            start: startDate,
+            // backgroundColor: 'yellow'
           }]);
-        } else {
+        });
+      } else {
+        $http.post('/api/event', {
+          hospitalId: $routeParams.hospitalid,
+          time: CalendarCtrl.dateTime
+        }).then(res => {
+          console.log('event res: ', res);
           $calendar.fullCalendar('addEventSource', [{
             title: title,
-            // datum: res.data,
-            start: startDate,
-            backgroundColor: 'green'
+            start: CalendarCtrl.dateTime,
+            datum: res.data,
+            backgroundColor: 'red'
           }]);
-        }
-      })
+        }).catch(err => {
+          console.log('error: ', err);
+        });
+      }
+
+
+      // Calendar.postCalendarAppointment('Appointment', startDate).then(res => {
+      //   if (!CalendarCtrl.isHospital) {
+      //     $calendar.fullCalendar('removeEvents');
+      //     $calendar.fullCalendar('addEventSource', [{
+      //       title: title,
+      //       // datum: res.data,
+      //       start: startDate
+      //     }]);
+      //   } else {
+      //     $calendar.fullCalendar('addEventSource', [{
+      //       title: title,
+      //       start: startDate,
+      //       datum: res.data,
+      //       backgroundColor: 'red'
+      //     }]);
+      //   }
+      // }).catch(err => {
+      //   if (!CalendarCtrl.isHospital) {
+      //     console.log('you are not logged in gmail!');
+      //     $calendar.fullCalendar('removeEvents');
+      //     $calendar.fullCalendar('addEventSource', [{
+      //       title: title,
+      //       // datum: err.data,
+      //       start: startDate,
+      //       // backgroundColor: 'yellow'
+      //     }]);
+      //   } else {
+      //     $calendar.fullCalendar('addEventSource', [{
+      //       title: title,
+      //       // datum: res.data,
+      //       start: startDate,
+      //       backgroundColor: 'green'
+      //     }]);
+      //   }
+      // })
     };
 
     CalendarCtrl.removeEventData = (events, index) => {
@@ -248,9 +282,9 @@
       let minute = calEvent.start.minutes();
       minute = minute < 10 ? minute + '0' : minute;
 
-      CalendarCtrl.time.start = calEvent.start;
-      CalendarCtrl.time.end = calEvent.end;
-      CalendarCtrl.time.print = `${month}/${date} @ ${hour}:${minute}`;
+      CalendarCtrl.view.time.start = calEvent.start;
+      CalendarCtrl.view.time.end = calEvent.end;
+      CalendarCtrl.view.time.print = `${month}/${date} @ ${hour}:${minute}`;
     };
 
     CalendarCtrl.firstModal = () => {
@@ -280,14 +314,14 @@
       let $input1 = $('.checkbox.input1').find('input');
       $("#fb-share-button").show();
       let $input3 = $('.checkbox.input3').find('input');
-      CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
+      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, $routeParams.hospitalid, $input3);
     };
     CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
     {
       Buddy.requestBuddy(start,hospitalId)
       .then(buddy => {
         if ($input3.is(':checked')) {
-         let content = "Looking for a buddy on" + " " + CalendarCtrl.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+         let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
          Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
        };
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
@@ -311,10 +345,10 @@
     // this will need refactoring and modularizing!!
     CalendarCtrl.processRequest = ($input1, $input2) => {
       // save appointment
-      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.time.start, 1)
+      Calendar.postAppointment($routeParams.hospitalid, CalendarCtrl.view.time.start, 1)
         .then(res => {
           console.log('appointment made! ', res);
-          CalendarCtrl.createEvent(CalendarCtrl.time.start, CalendarCtrl.time.end, 'Your appointment');
+          CalendarCtrl.createEvent(CalendarCtrl.view.time.start, CalendarCtrl.view.time.end, 'Your appointment');
         })
         .catch(err => {
           console.log('error in making appointment! ', err);
@@ -328,11 +362,14 @@
 
       // save event if checked
       if ($input2.is(':checked')) {
-        $http.post('/api/event', {hospitalId: $routeParams.hospitalid}).then(res => {
+        $http.post('/api/event', {
+          hospitalId: $routeParams.hospitalid,
+          time: CalendarCtrl.view.time.start
+        }).then(res => {
           console.log('event res: ', res);
         }).catch(err => {
           console.log('error: ', err);
-        })
+        });
       }
     }
 

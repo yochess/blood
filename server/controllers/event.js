@@ -21,10 +21,16 @@ let getEvents = (req, res) => {
 };
 
 let postEvent = (req, res) => {
+  console.log('in controller');
+  let hostId;
+  if (req.session.passport && req.session.passport.user.type === 'donor') {
+    hostId = req.session.passport.user.id
+  }
   Promise.all([
     Event.create({
       time: req.body.time,
-      hospitalId: req.body.hospitalId || req.session.passport.user.id
+      hospitalId: req.body.hospitalId || req.session.passport.user.id,
+      hostId: hostId // null if hospital
     }),
     Donor.findOne({
       where: {
