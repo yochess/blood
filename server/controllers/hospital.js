@@ -13,7 +13,7 @@ let getCurrentHospital = (req, res) => {
       id: req.user.id
     },
     attributes: {
-      exclude: ['email', 'password']
+      exclude: ['password']
     },
     include: [{
       model: Event,
@@ -74,7 +74,7 @@ let getHospitalById = (req, res) => {
       id: req.params.id
     },
     attributes: {
-      exclude: ['email', 'password']
+      exclude: ['password']
     },
     include: [Schedule]
   })
@@ -91,7 +91,7 @@ let getHospitalsByLocation = (req, res) => {
       longitude: {$gt: queries.minLong, $lt: queries.maxLong}
     },
     attributes: {
-      exclude: ['email', 'password']
+      exclude: ['password']
     },
     include: [Schedule]
   })
