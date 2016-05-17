@@ -5,7 +5,6 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
   };
 BuddyCtrl.post =() => {
 let $box4 = $('.modal.box4');
-
  $box4.modal();
 };
 
@@ -15,7 +14,7 @@ let $box4 = $('.modal.box4');
 
       let $input3 = $('.checkbox.input3').find('input');
       if ($input3.is(':checked')) {
-         let content = "Looking for a buddy on" + " " + BuddyCtrl.buddy.time +" " + "http://localhost:8080/#bloodbuddy/"+ BuddyCtrl.buddy.id ;
+         let content = "Looking for a buddy on" + " " + BuddyCtrl.buddy.time +" " + "https://bloodshare.io/bloodbuddy/"+ BuddyCtrl.buddy.id ;
          Feed.submit(content, {latitude: BuddyCtrl.buddy.donor.latitude, longitude: BuddyCtrl.buddy.donor.longitude});
        };
       //CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
@@ -29,13 +28,11 @@ let $box4 = $('.modal.box4');
       } else {
         BuddyCtrl.found= false;
       }
-      //get buddy and schedule an appointment for both donor and buddy
     });
   };
   let getBuddy = () => {
     Buddy.get($routeParams.buddyId)
     .then(buddy => {
-
       BuddyCtrl.buddy = buddy;
       if(buddy.budId !== null){
         BuddyCtrl.found= true;
@@ -45,7 +42,6 @@ let $box4 = $('.modal.box4');
   });
 
   };
-
 
   getBuddy();
 }]);

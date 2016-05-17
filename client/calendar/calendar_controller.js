@@ -202,7 +202,6 @@
     };
 
 
-
     $calendar.fullCalendar({
       timezone: 'local',
       displayEventEnd: true,
@@ -210,7 +209,6 @@
         hospitalId ? donorView(callback) : hospitalView(callback);
       },
       eventClick: (calEvent, jsEvent, view) => {
-        console.log('calEvent: ', calEvent);
         if (CalendarCtrl.isHospital) {
           if (calEvent.data.donorId) {
             $window.location.assign(`/profile/${calEvent.data.donorId}`);
@@ -226,7 +224,7 @@
           let $box3 = $('.modal.box3');
           setView(calEvent);
           $scope.$apply();
-  //blood buddy
+         //blood buddy
           if(CalendarCtrl.buddy){
             $box3.modal();
           } else {
@@ -282,11 +280,9 @@
     CalendarCtrl.firstModal = () => {
       let $box2 = $('.modal.box2');
       let $inputs = $('.modal').find('input');
-
       $inputs.each((index, input) => {
         input.checked = false;
       });
-
       $box2.modal();
     };
 
@@ -296,11 +292,9 @@
 
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
-      console.log($routeParams.hospitalid);
       Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
       .then(buddy => {
-        console.log('buddyRequest',buddy);
-        let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "http://localhost:8080/#bloodbuddy/"+buddy.id ;
+        let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "https://bloodshare.io/bloodbuddy/"+buddy.id ;
         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
          $window.location.assign(`#bloodbuddy/${buddy.id}`);
       });
@@ -309,10 +303,8 @@
 
 
     CalendarCtrl.secondModal = () => {
-
       let $input1 = $('.checkbox.input1').find('input');
       let $input2 = $('.checkbox.input2').find('input');
-
       CalendarCtrl.eventsChecked = true;
       processInput($input1, $input2);
     };

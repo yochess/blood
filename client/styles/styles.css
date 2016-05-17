@@ -903,3 +903,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   font-size: 1.5em;
 }
 }
+
+.btn-share{
+  background-color: #3b5998;
+  color: white;
+}
+
+.invitelogo , .thankyoulogo{
+  width:150px;
+  height:150px;
+  left: 50%;
+  top: 50%;
+}
+
