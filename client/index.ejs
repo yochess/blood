@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Bloodshare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.1/fullcalendar.min.css" />
@@ -14,7 +15,13 @@
   <base href="/">
 </head>
 <body ng-app='blood'>
-  <navbar class='navbar navbar-default'></navbar>
+<div id="index-top-bar">
+    <span class="pull-left" data-toggle="collapse" data-target=".nav-pills">
+        <span class="glyphicon glyphicon-menu-hamburger fa-3x" style="font-size: 1.5em;"></span>
+
+    </span>
+ Blood Share</div>
+  <navbar class='navbar navbar-default pull-left'></navbar>
   <div id='main'>
     <div ng-view></div>
   </div>
