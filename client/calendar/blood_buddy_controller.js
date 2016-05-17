@@ -1,7 +1,5 @@
 app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootScope','Buddy','Calendar','Feed', function($window,  $scope,$routeParams, $rootScope, Buddy, Calendar, Feed) {
   let BuddyCtrl = this;
-  //BuddyCtrl.found = false;
-console.log($window.location.href);
   BuddyCtrl.buddy = {
     name: 'Blood Buddy'
   };
@@ -18,8 +16,6 @@ let $box4 = $('.modal.box4');
       let $input3 = $('.checkbox.input3').find('input');
       if ($input3.is(':checked')) {
          let content = "Looking for a buddy on" + " " + BuddyCtrl.buddy.time +" " + "http://localhost:8080/#bloodbuddy/"+ BuddyCtrl.buddy.id ;
-         console.log(BuddyCtrl.buddy);
-         console.log($rootScope.latitude,$rootScope.longitude);
          Feed.submit(content, {latitude: BuddyCtrl.buddy.donor.latitude, longitude: BuddyCtrl.buddy.donor.longitude});
        };
       //CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
