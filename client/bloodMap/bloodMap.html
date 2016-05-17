@@ -14,7 +14,7 @@
     <div class="feed-content">
       <div class="post clearfix" ng-repeat="post in FeedCtrl.posts">
         <img ng-src="{{post.donor.photo}}" alt="Poster Photo">
-        <span class="poster-name">{{post.donor.name || post.hospital.name}}</span>
+        <a class="poster-name" ng-href="{{post.donor ? '/profile/' + post.donor.id : '/hospital/profile/' + post.hospital.id}}">{{post.donor.name || post.hospital.name}}</a>
         <p>{{post.content}}</p>
       </div>
     </div>
