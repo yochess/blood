@@ -176,11 +176,11 @@
           summary: 'Your appointment',
           start: {
             dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'UTC'
           },
           end: {
             dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'UTC'
           }
         });
       })
@@ -213,9 +213,9 @@
         console.log('calEvent: ', calEvent);
         if (CalendarCtrl.isHospital) {
           if (calEvent.data.donorId) {
-            $window.open(`/profile/${calEvent.data.donorId}`, '_blank');
+            $window.location.assign(`/profile/${calEvent.data.donorId}`);
           } else {
-            $window.open(`/event/${calEvent.data.id}`, '_blank');
+            $window.location.assign(`/event/${calEvent.data.id}`);
           }
           return;
         }
@@ -235,7 +235,7 @@
         }
         // same here
         if (calEvent.title === 'Your appointment') {
-          $window.open(`/hospital/profile/${hospitalId}`, '_blank');
+          $window.location.assign(`/hospital/profile/${hospitalId}`);
         }
       }
     });

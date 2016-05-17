@@ -187,6 +187,7 @@ authRouter.route('/donor/signup')
 
 authRouter.route('/logout')
 .get((req, res) => {
+  req.session.destroy()
   req.logout();
   res.redirect('/');
 });
