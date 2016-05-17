@@ -1,22 +1,18 @@
-<div id="navbar">
-  <ul class='nav navbar-nav'>
+<div id="navbar" class="container-fullwidth">
+  <ul class='nav nav-pills nav-stacked collapse'>
     <li>
-      <a href="/bloodmap">Blood Map</a>
+      <a href="/bloodmap"><span class="glyphicon glyphicon-tint menu-tint"></span>Blood Map</a>
     </li>
     <li ng-show="NavCtrl.isDonor || NavCtrl.isHospital">
-      <a ng-href="{{NavCtrl.isDonor ? '/profile' : '/hospital/profile'}}">Profile</a>
+      <a ng-href="{{NavCtrl.isDonor ? '/profile' : '/hospital/profile'}}"><span class="glyphicon glyphicon-user"></span>Profile</a>
     </li>
     <li>
-      <a ng-show="NavCtrl.isHospital" href="/calendar">Calendar</a>
+      <a ng-show="NavCtrl.isHospital" href="/calendar"><span class="glyphicon glyphicon-calendar"></span>Calendar</a>
     </li>
     <li>
-      <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/login">Log In</a>
-      <a ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href="">Logout</a>
-    </li>
-    <li>
-      <a href="" ng-click="NavCtrl.test()"></a>
+      <a ng-hide="NavCtrl.isDonor || NavCtrl.isHospital" href="/donor/login"><span class="glyphicon glyphicon-log-in"></span>Log In</a>
+      <a ng-show="NavCtrl.isDonor || NavCtrl.isHospital" ng-click="NavCtrl.logout()" href=""><span class="glyphicon glyphicon-remove"></span>Logout</a>
     </li>
   </ul>
-
 </div>
 

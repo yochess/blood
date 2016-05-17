@@ -176,7 +176,7 @@ header {
 }
 
 .navbar > .nav > li > a:hover {
-  color: gray;
+  color: red;
 }
 
 .navbar {
@@ -830,6 +830,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin-right: 10px;
 }
 
+.review {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+
+.reviews h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
 /* ----------------------------- */
 
 /* Map Events area */
@@ -846,4 +856,48 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 .map-events-header {
   padding-bottom: 15px;
   border-bottom: 1px solid white;
+}
+
+/* ----------------------------- */
+
+
+/* Navbar Styling */
+
+#index-top-bar {
+  color: white;
+  background-color: #700000;
+  padding: 15px;
+}
+
+.glyphicon {
+  margin-left: -5px;
+  margin-right: 15px;
+  font-size: 1.2em;
+}
+
+.glyphicon-burger-menu {
+  font-size: 1.5em;
+}
+
+.navbar {
+  border: none;
+  position: fixed;
+  z-index: 99;
+}
+
+  .navbar {
+  min-height: 0px;
+}
+
+@media only screen and (max-width: 780px) {
+   .navbar {
+    width: 100vw;
+    position: relative;
+    z-index: 99;
+    text-align: center;
+  }
+  .nav li a {
+    padding: 25px 25px;
+    font-size: 1.5em;
+  }
 }
