@@ -67,7 +67,7 @@
         let isOverlap = false;
         let startIndex = 0;
         let endIndex = appointments.length -1;
-        let midIndex, appointment, start, end;
+        let midIndex, appointment, startTime, endTime;
 
         while (!isOverlap && (startIndex <= endIndex)) {
           midIndex = Math.floor((startIndex + endIndex) / 2);
