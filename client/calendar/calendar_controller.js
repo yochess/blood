@@ -1,7 +1,7 @@
 (() => {
   app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
     let CalendarCtrl = this;
-    let hospitalid = $routeParams.hospitalid
+    let hospitalId = $routeParams.hospitalid
     let $calendar = $('#calendar');
     let $datetimepicker = $('#datetimepicker').datetimepicker();
 
@@ -28,7 +28,7 @@
     };
 
     let getAppointmentData = (googleEvents, callback) => {
-      HospitalProfile.get(hospitalid).then(data => {
+      HospitalProfile.get(hospitalId).then(data => {
         if (!data) {
           callback(null);
           return console.error('invalid hospital id!');
@@ -150,11 +150,27 @@
 
 
     let processInput = (input1, input2) => {
+      let type = 1;
+
+      // share to facebook if checked
+      if (input1.is(':checked')) {
+        console.log('todo: share on facebook');
+      };
+
+      // save event if checked
+      if (input2.is(':checked')) {
+        type = 2;
+        CalendarCtrl.createEvent({
+          hospitalId: hospitalId,
+          time: CalendarCtrl.view.time.start
+        });
+      }
+
       // save appointment
       Appointment.post({
-        hospitalId: hospitalid,
+        hospitalId: hospitalId,
         time: CalendarCtrl.view.time.start,
-        type: 1
+        type: type
       }).then(res => {
         pushToGoogle({
           summary: 'Your appointment',
@@ -171,19 +187,6 @@
       .catch(err => {
         console.error('error in making appointment! ', err);
       });
-
-      // share to facebook if checked
-      if (input1.is(':checked')) {
-        console.log('todo: share on facebook');
-      };
-
-      // save event if checked
-      if (input2.is(':checked')) {
-        CalendarCtrl.createEvent({
-          hospitalid: hospitalid,
-          time: CalendarCtrl.view.time.start
-        });
-      }
     }
 
     let setView = (calEvent) => {
@@ -204,7 +207,7 @@
       timezone: 'local',
       displayEventEnd: true,
       events: (start, end, timezone, callback) => {
-        hospitalid ? donorView(callback) : hospitalView(callback);
+        hospitalId ? donorView(callback) : hospitalView(callback);
       },
       eventClick: (calEvent, jsEvent, view) => {
         console.log('calEvent: ', calEvent);
@@ -232,7 +235,7 @@
         }
         // same here
         if (calEvent.title === 'Your appointment') {
-          $window.open(`/hospital/profile/${hospitalid}`, '_blank');
+          $window.open(`/hospital/profile/${hospitalId}`, '_blank');
         }
       }
     });
@@ -303,7 +306,7 @@
       let $input1 = $('.checkbox.input1').find('input');
       $("#fb-share-button").show();
       let $input3 = $('.checkbox.input3').find('input');
-      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, hospitalid, $input3);
+      CalendarCtrl.buddyRequest(CalendarCtrl.view.time.start, hospitalId, $input3);
     };
     CalendarCtrl.buddyRequest = (start, hospitalId, $input3) =>
     {

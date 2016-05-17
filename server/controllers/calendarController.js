@@ -28,7 +28,6 @@ let showGoogleEvents = (req, res) => {
       res.send(200);
     } else {
       // this will need to be fixed
-      // i currently dunno the behavior of the start and end properties
       let events = response.items.filter(event => {
         // perhaps this is never true
         if (!event.end) {
@@ -52,10 +51,6 @@ let showGoogleEvents = (req, res) => {
     }
   });
 };
-
-let showHospitalEvents = (req, res) => {
-  Event.findAll()
-}
 
 module.exports = {
   showEvents: (req, res) => {
