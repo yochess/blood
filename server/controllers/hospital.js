@@ -12,12 +12,25 @@ let getCurrentHospital = (req, res) => {
     where: {
       id: req.user.id
     },
+    attributes: {
+      exclude: ['email', 'password']
+    },
     include: [{
       model: Event,
-      include: [Donor]
+      include: [{
+        model: Donor,
+        attributes: {
+          exclude: ['email', 'password', 'address', 'latitude', 'longitude']
+        }
+      }]
     }, {
       model: Review,
-      include: [Donor],
+      include: [{
+        model: Donor,
+        attributes: {
+          exclude: ['email', 'password', 'address', 'latitude', 'longitude']
+        }
+      }],
       order: 'createdAt DESC'
     }]
   })
@@ -34,7 +47,6 @@ let updateCurrentHospital = (req, res) => {
         .then(sch => {
           if(sch) {
             Schedule.update({
-              // hospitalId: req.user.id,
               day: schedule.day,
               openhours: schedule.openhours,
               closehours: schedule.closehours
@@ -57,7 +69,15 @@ let updateCurrentHospital = (req, res) => {
 };
 
 let getHospitalById = (req, res) => {
-  Hospital.findOne({where: {id: req.params.id}, include: [Schedule]})
+  Hospital.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: {
+      exclude: ['email', 'password']
+    },
+    include: [Schedule]
+  })
   .then(hospital => {
     res.send(hospital);
   });
@@ -65,10 +85,16 @@ let getHospitalById = (req, res) => {
 
 let getHospitalsByLocation = (req, res) => {
   let queries = url.parse(req.url, true).query;
-  Hospital.findAll({where: {
-    latitude: {$gt: queries.minLat, $lt: queries.maxLat},
-    longitude: {$gt: queries.minLong, $lt: queries.maxLong}
-  }, include: [Schedule]})
+  Hospital.findAll({
+    where: {
+      latitude: {$gt: queries.minLat, $lt: queries.maxLat},
+      longitude: {$gt: queries.minLong, $lt: queries.maxLong}
+    },
+    attributes: {
+      exclude: ['email', 'password']
+    },
+    include: [Schedule]
+  })
   .then(hospitals => {
     res.send(hospitals);
   });
@@ -76,8 +102,15 @@ let getHospitalsByLocation = (req, res) => {
 
 let getHospitalReviews = (req, res) => {
   Review.findAll({
-    where: {hospitalId: req.params.id},
-    include: [Donor],
+    where: {
+      hospitalId: req.params.id
+    },
+    include: [{
+      model: Donor,
+      attributes: {
+        exclude: ['email', 'password', 'address', 'longitude', 'latitude']
+      }
+    }],
     order: 'createdAt DESC'
   })
   .then(reviews => res.send(reviews));

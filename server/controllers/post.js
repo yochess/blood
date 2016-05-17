@@ -28,7 +28,17 @@ let getPostsByLocation = (req, res) => {
         $gt: lastUpdated
       }
     },
-    include: [Donor, Hospital],
+    include: [{
+      model: Donor,
+      attributes: {
+        exclude: ['email', 'password']
+      }
+    }, {
+      model: Hospital,
+      attributes: {
+        exclude: ['email', 'password']
+      }
+    }],
     limit: limit,
     order: 'createdAt DESC'
   })

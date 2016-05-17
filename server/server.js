@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(clientPath));
-app.use(session({secret: 'lolwut', key: 'sid'}));
+app.use(session({secret: config.sessionsecret, key: config.sessionkey}));
 app.use(passport.initialize());
 app.use(passport.session());
 

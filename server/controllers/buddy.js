@@ -21,10 +21,16 @@ let getBuddy = (req, res) => {
     {id: req.params.id},
     include: [{
       model: Donor,
-      as: 'donor'
+      as: 'donor',
+      attributes: {
+        exclude: ['password', 'email', 'address', 'latitude', 'longitude']
+      }
     }, {
       model: Donor,
-      as: 'bud'
+      as: 'bud',
+      attributes: {
+        exclude: ['password', 'email', 'address', 'latitude', 'longitude']
+      }
     },
     Hospital]})
   .then(buddy => res.send(buddy));
@@ -35,12 +41,24 @@ let updateBuddy = (req, res) => {
   Buddy.findOne({where: {id: req.params.id},
     include: [{
       model: Donor,
-      as: 'donor'
+      as: 'donor',
+      attributes: {
+        exclude: ['password', 'email', 'address', 'latitude', 'longitude']
+      }
     }, {
       model: Donor,
-      as: 'bud'
+      as: 'bud',
+      attributes: {
+        exclude: ['password', 'email', 'address', 'latitude', 'longitude']
+      }
     },
-    Hospital]})
+    {
+      model: Hospital,
+      attributes: {
+        exclude: ['email', 'password']
+      }
+    }]
+  })
   .then(buddy => {
     Promise.all([
       Appointment.create({time: buddy.time, donorId: buddy.donorId, hospitalId: buddy.hospitalId, type: 3}),
