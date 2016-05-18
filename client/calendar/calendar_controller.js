@@ -1,5 +1,5 @@
 (() => {
-  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
+  app.controller('CalendarController', ['$scope','$rootScope', '$controller', '$http', '$window', '$routeParams','$location', 'Calendar', 'Event', 'Feed', 'Buddy', 'HospitalProfile', 'Appointment', function($scope, $rootScope, $controller, $http, $window, $routeParams, $location, Calendar, Event,Feed,Buddy, HospitalProfile, Appointment) {
     let CalendarCtrl = this;
     let hospitalId = $routeParams.hospitalid;
     let $calendar = $('#calendar');
@@ -293,11 +293,12 @@
 
       let $box4 = $('.modal.box4');
       let $inputs = $('.modal').find('input');
+      console.log($routeParams.hospitalid);
       Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
       .then(buddy => {
-        let content = "Looking for a buddy on" + " " + CalendarCtrl.view.time.print +" " + "https://bloodshare.io/bloodbuddy/"+buddy.id ;
+        let content = `Looking for a buddy on ${CalendarCtrl.view.time.print}  https://bloodshare.io/bloodbuddy/${buddy.id}` ;
         Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-        $window.location.assign(`#bloodbuddy/${buddy.id}`);
+        $location.path(`/bloodbuddy/${buddy.id}`);
       });
 
     };
