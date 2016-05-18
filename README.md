@@ -27,6 +27,7 @@
 |                 |        |                                     |                                            | maxLong: Maximum longitude to search |
 
 ### Hospital Profiles
+
 | Endpoint                 | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
 |--------------------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
 |/api/hospital/profile     | GET    | Currently logged in hospital's profile | -                                             | -                                    |
@@ -42,7 +43,6 @@
 
 ### Events
 
-### Hospital Profiles
 | Endpoint      | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
 |---------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
 |/api/event     | GET    | Currently logged in hospital's events  | -                                             | -                                    |
@@ -56,6 +56,13 @@
 |               |        |                                        |                                               | maxLong: Maximum longitude to search |
 
 ### Appointments
+
+| Endpoint        | Action | Returns                                      | Side Effect                             | Parameters/Req Body                    |
+|-----------------|--------|----------------------------------------------|-----------------------------------------|----------------------------------------|
+|/api/appointment | GET    | Currently logged in hospital's appointments  | -                                       | -                                      |
+|/api/appointment | POST   | Created appointment                          | Creates appointment for logged in donor | time: Appointment time                 |
+|                 |        |                                              |                                         | hospitalId: Id of appointment hospital |
+|                 |        |                                              |                                         | type: Appointment type <ul><li>1: Regular Appointment</li><li>2: Appointent with event</li><li>Appointment with bloodbuddy</li></ul> |
 
 ### Feed Posts
 
