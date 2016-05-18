@@ -4,15 +4,28 @@
 
 ## Contributors:
 
-  Vinitha S Raja
+  [Vinitha S Raja](https://github.com/vinithasraja/)
 
-  John Boucherie
+  [John Boucherie](https://github.com/jboucherie/)
 
-  Drake Wang
+  [Drake Wang](https://github.com/yochess/)
 
-  Travis Baratacart
+  [Travis Baratacart](https://github.com/travisbaratcart/)
 
-## Installation
+## Getting Started
+
+1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
+2. Install [Node and NPM](https://nodejs.org/en/)
+3. Install Bower
+```
+$ npm install -g bower
+```
+3. Install dependencies
+```
+$ npm install
+$ bower install
+```
+4. Create serverconfig.js in root directory which exports the following:
 
 ## File Structure
 
