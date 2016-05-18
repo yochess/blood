@@ -80,8 +80,14 @@
 
 | Endpoint     | Action | Returns                   | Side Effect                                   | Parameters/Req Body                  |
 |--------------|--------|---------------------------|-----------------------------------------------|--------------------------------------|
-|/api/calendar | GET    | ?                         | -                                             | ?                                    |
-|/api/calendar | POST   | ?                         | ?                                             | ?                                    |
+|/api/calendar | GET    | Google Appointments       | Updates calendar with google appointments     | title: appointment title             |
+|              |        |                           |                                               | id: appointment id                   |
+|              |        |                           |                                               | start: start date                    |
+|              |        |                           |                                               | url: link to google appointment      |
+|              |        |                           |                                               |                                      |
+|/api/calendar | POST   | -                         | Create google appointment                     | summary: appointment title           |
+|              |        |                           |                                               | start: start time                    |
+|              |        |                           |                                               | end: end time                        |
 
 ### Blood Buddy Requests
 
