@@ -17,14 +17,19 @@
 1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
 2. Install [Node and NPM](https://nodejs.org/en/)
 3. Install Bower
+
     ```
     $ npm install -g bower
     ```
+
 4. Install dependencies
+
     ```
     $ npm install
+
     $ bower install
     ```
+
 5. Create serverconfig.js in root directory which exports the following:
  fbapikey: Facebook API key
     * fbapisecret: Facebook API secret
