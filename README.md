@@ -12,6 +12,53 @@
 
   Travis Baratacart
 
+## Installation
+
+## File Structure
+
+```
+bloodshare
+  |
+  + client
+  | |
+  | + assets
+  | |
+  | + [feature]
+  | | |
+  | | -- [feature].html
+  | | |
+  | | -- [feature]_controller.js
+  | | |
+  | | -- [feature]_service.js
+  | |
+  | + styles
+  | | |
+  | | -- styles.css
+  | |
+  | -- app.js
+  | |
+  | -- index.ejs
+  |
+  + server
+  | |
+  | + routes
+  | | |
+  | | -- [route].js
+  | |
+  | + controllers
+  | | |
+  | | -- [route].js
+  | |
+  | + test
+  | | |
+  | | -- [route].js
+  | |
+  | -- server.js
+  |
+  -- serverconfig.js
+
+```
+
 ## Api Endpoints
 
 ### Donor Profiles
