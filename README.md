@@ -26,14 +26,14 @@ $ npm install
 $ bower install
 ```
 5. Create serverconfig.js in root directory which exports the following:
-- fbapikey: Facebook API key
-- fbapisecret: Facebook API secret
-- sqluid: MySQL login username
-- sqlpw: MySQL login password
-- calendarsecret: Google Calendar API secret
-- calendarurl: Google Calendar callback url
-- sessionsecret: Secret used for sessions
-- sessionkey: Key used for sessions
+ fbapikey: Facebook API key
+    * fbapisecret: Facebook API secret
+    * sqluid: MySQL login username
+    * sqlpw: MySQL login password
+    * calendarsecret: Google Calendar API secret
+    * calendarurl: Google Calendar callback url
+    * sessionsecret: Secret used for sessions
+    * sessionkey: Key used for sessions
 
 ## File Structure
 
