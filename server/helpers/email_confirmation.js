@@ -4,17 +4,15 @@ let controllers = require('../controllers/controller.js');
 let config = require('../../serverconfig.js');
 let moment = require('moment');
 let timezone = require('node-google-timezone');
-
-let Sequelize = require('sequelize');
-
+let transporter = nodemailer.createTransport(`smtps://britishchickenblood@gmail.com:${config.emailpw}@smtp.gmail.com`);
 
 let Donor = controllers.Donor;
 let Hospital = controllers.Hospital;
 let Appointment = controllers.Appointment;
 
-let transporter = nodemailer.createTransport(`smtps://britishchickenblood@gmail.com:${config.emailpw}@smtp.gmail.com`);
-
 const TIME_INTERVAL = 1000 * 60 * 5;
+
+
 
 
 Appointment.findAll().then(appointments => {
