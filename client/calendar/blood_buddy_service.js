@@ -14,7 +14,7 @@ app.factory('Buddy', ['$http', function($http) {
       method: 'POST',
       url: '/api/bloodbuddy',
       data: {
-        hospitalid: hospitalid,
+        hospitalId: hospitalid,
         time: starttime
       }
     })
