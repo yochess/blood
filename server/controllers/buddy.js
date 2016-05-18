@@ -11,7 +11,7 @@ let requestBuddy = (req, res) => {
   Buddy.create({
     time: req.body.time,
     donorId: donorId,
-    hospitalId: req.body.hospitalid})
+    hospitalId: req.body.hospitalId})
   .then(buddy => res.send(buddy));
 };
 
