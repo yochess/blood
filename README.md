@@ -1,6 +1,6 @@
 # Bloodshare
 
-Contributors:
+## Contributors:
 
   Vinitha S Raja
 
