@@ -4,20 +4,17 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
     name: 'Blood Buddy'
   };
 BuddyCtrl.post =() => {
-let $box4 = $('.modal.box4');
- $box4.modal();
+  let $box4 = $('.modal.box4');
+   $box4.modal();
 };
 
   BuddyCtrl.buddytwoModal = () => {
       //share on fb
-      let $input1 = $('.checkbox.input1').find('input');
-
       let $input3 = $('.checkbox.input3').find('input');
       if ($input3.is(':checked')) {
          let content = "Looking for a buddy on" + " " + BuddyCtrl.buddy.time +" " + "https://bloodshare.io/bloodbuddy/"+ BuddyCtrl.buddy.id ;
-         Feed.submit(content, {latitude: BuddyCtrl.buddy.donor.latitude, longitude: BuddyCtrl.buddy.donor.longitude});
-       };
-      //CalendarCtrl.buddyRequest(CalendarCtrl.time.start, $routeParams.hospitalid, $input3);
+         Feed.submit(content, {latitude: BuddyCtrl.buddy.hospital.latitude, longitude: BuddyCtrl.buddy.hospital.longitude});
+      };
     };
 
   BuddyCtrl.submit = () => {
