@@ -42,6 +42,19 @@
 
 ### Events
 
+### Hospital Profiles
+| Endpoint      | Action | Returns                                | Side Effect                                   | Parameters/Req Body                  |
+|---------------|--------|----------------------------------------|-----------------------------------------------|--------------------------------------|
+|/api/event     | GET    | Currently logged in hospital's events  | -                                             | -                                    |
+|/api/event     | POST   | Created event                          | Adds event to hospital                        | time: event time                     |
+|               |        |                                        |                                               | hospitalId: id of hosting hospital   |
+|/api/event/:id | GET    | Event by id and participants           |                                               |                                      |
+|/api/event/:id | POST   | Event by id and participants           | Logged in donor joins event                   | -                                    |
+|/api/event/geo | GET    | Events in a certain area               | -                                             | minLat: Minimum latitude to search   |
+|               |        |                                        |                                               | minLong: Minimum longitude to search |
+|               |        |                                        |                                               | maxLat: Maximum latitude to search   |
+|               |        |                                        |                                               | maxLong: Maximum longitude to search |
+
 ### Appointments
 
 ### Feed Posts
