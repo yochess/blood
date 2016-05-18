@@ -1,7 +1,10 @@
 # Bloodshare
 
-Contributors
+Contributors:
   Vinitha S Raja
+
   John Boucherie
+
   Drake Wang
+
   Travis Baratacart
