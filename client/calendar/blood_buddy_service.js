@@ -19,7 +19,6 @@ app.factory('Buddy', ['$http', function($http) {
       }
     })
     .then((resp) => {
-      console.log(requestBuddy);
       return resp.data;
     });
   };
