@@ -4,13 +4,86 @@
 
 ## Contributors:
 
-  Vinitha S Raja
+  [Vinitha S Raja](https://github.com/vinithasraja/)
 
-  John Boucherie
+  [John Boucherie](https://github.com/jboucherie/)
 
-  Drake Wang
+  [Drake Wang](https://github.com/yochess/)
 
-  Travis Baratacart
+  [Travis Baratacart](https://github.com/travisbaratcart/)
+
+## Getting Started
+
+1. Install [MySQL](https://dev.mysql.com/downloads/installer/)
+2. Install [Node and NPM](https://nodejs.org/en/)
+3. Install Bower
+
+    ```
+    $ npm install -g bower
+    ```
+
+4. Install dependencies
+
+    ```
+    $ npm install
+
+    $ bower install
+    ```
+
+5. Create serverconfig.js in root directory which exports the following:
+ fbapikey: Facebook API key
+    * fbapisecret: Facebook API secret
+    * sqluid: MySQL login username
+    * sqlpw: MySQL login password
+    * calendarsecret: Google Calendar API secret
+    * calendarurl: Google Calendar callback url
+    * sessionsecret: Secret used for sessions
+    * sessionkey: Key used for sessions
+
+## File Structure
+
+```
+bloodshare
+  |
+  + client
+  | |
+  | + assets
+  | |
+  | + [page]
+  | | |
+  | | -- [page].html
+  | | |
+  | | -- [page]_controller.js
+  | | |
+  | | -- [page]_service.js
+  | |
+  | + styles
+  | | |
+  | | -- styles.css
+  | |
+  | -- app.js
+  | |
+  | -- index.ejs
+  |
+  + server
+  | |
+  | + routes
+  | | |
+  | | -- [route].js
+  | |
+  | + controllers
+  | | |
+  | | -- [route].js
+  | |
+  | + test
+  | | |
+  | | -- [route].js
+  | |
+  | -- server.js
+  |
+  -- serverconfig.js
+
+```
 
 ## Api Endpoints
 
