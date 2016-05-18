@@ -236,14 +236,13 @@ header {
 }
 
 #iw_container{
-  border-color: #4cae4c;
-  width: 200px;
+  width: 310px;
 
 }
 
 #iw_container .iw_title {
  font-family: 'Open Sans Condensed', sans-serif;
- font-size: 12px;
+ font-size: 1.3em;
  font-weight: 200;
  text-align: center;
  padding: 4px;
@@ -259,8 +258,8 @@ header {
   text-align: center;
 }
 
-.iw_title, .iw_content{
-  width:240;
+.iw_title {
+  width: 310px;
 }
 /*
 #iw_container .iw_content{
@@ -268,23 +267,31 @@ header {
  }*/
 
  #iw_container .btn-default {
-  color: #fff;
-  background-color:#595959;
-  border-color: #700000;
+  color: white;
+  background-color:#700000;
+  border-color: #eee;
   font-size: 10px;
-  text-align: left;
   width: 100px;
   height:30px;
-  float: right;
   right: 115px;
+  margin-top: 3px;
+}
 
+#iw_container .btn-default a {
+  color: white;
+  margin-left: -9px;
+  font-size: 1.1em;
 }
 
 .iw_content{
-  font-size: 10px;
-  float:right;
+  width: 180px;
+  font-size: 1.1em;
   font-family: 'Open Sans Condensed', sans-serif;
-  text-align: right;
+  text-align: left;
+}
+
+.iw_content a {
+  color: #65B6FB;
 }
 
 #iw_container {
@@ -292,17 +299,26 @@ header {
   font-size: 11px;
 }
 
+.gmnoprint {
+  display: none;
+}
 
+.gm-style-cc {
+  display: none;
+}
 .gm-style-iw {
  position: relative;
  top: 0px ;
- font-size: 8px;
- background-color: #fff7e6;
+ font-size: 1.1em;
+ background-color: #333333;
  border: 1px solid rgba(72, 181, 233, 0.6);
  border-radius: 15px;
  border: 2px solid #700000;
- width: 200px  !important;
+ width: 310px  !important;
  overflow: hidden !important;
+ font-family: 'Open Sans Condensed', sans-serif;
+
+ color: white;
  line-height: 1.35;
 }
 
@@ -345,8 +361,9 @@ header {
 #street{
   border:1px solid #700000 ;
   float:left;
-  width: 50%;
-  height: 100%;
+  width: 120px;
+  height: 120px;
+  margin-top: 5px;
 }
 
 /* ----------------------------- */
@@ -384,9 +401,15 @@ header {
 
 
 .iwf{
-  border:1px solid #700000 ;
-  width:50%;
+  width:180px;
   float:right;
+  text-align: center;
+  margin-top: 3px;
+}
+
+.iwf >button {
+  text-align: center;
+  float: none;
 }
 
 #street img, #street a {
@@ -897,17 +920,23 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   background-color: #700000;
 }
 
-@media only screen and (max-width: 780px) {
+.navbar-collapse {
+  float: right;
+}
+
+@media only screen and (max-width: 767px) {
  .navbar {
-  width: 100vw;
-  position: relative;
-  z-index: 99;
-  text-align: center;
-}
-.nav li a {
-  padding: 25px 25px;
-  font-size: 1.5em;
-}
+    position: relative;
+    z-index: 99;
+    text-align: center;
+  }
+  .nav li a {
+    padding: 25px 25px;
+    font-size: 1.5em;
+  }
+  .navbar-collapse {
+    float: none;
+  }
 }
 
 .btn-share{

@@ -40,23 +40,23 @@
             <p>Edit Information:</p>
             <p>
               Hospital name
-              <input type="text" ng-model="HospitalProfileCtrl.hospital.name" />
+              <input type="text" ng-model="HospitalProfileCtrl.hospital.name" ng-model-options="{ updateOn: 'submit'}" />
             </p>
             <p>
               Hospital email
-              <input type="email" ng-model="HospitalProfileCtrl.hospital.email" required/>
+              <input type="email" ng-model="HospitalProfileCtrl.hospital.email" ng-model-options="{ updateOn: 'submit'}" required/>
             </p>
             <p>
               Location
-              <input type="text" id="address" ng-model="HospitalProfileCtrl.hospital.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" />
+              <input type="text" id="address" ng-model="HospitalProfileCtrl.hospital.address" name="address" ng-change="HospitalProfileCtrl.getlatlong()" ng-model-options="{ updateOn: 'submit'}"/>
             </p>
             <p>
               Phone Number
-              <input type="text"  ng-model="HospitalProfileCtrl.hospital.phonenum" />
+              <input type="text"  ng-model="HospitalProfileCtrl.hospital.phonenum" ng-model-options="{ updateOn: 'submit'}"/>
             </p>
             <p>
               Website
-              <input type="text"  ng-model="HospitalProfileCtrl.hospital.hospitalurl" />
+              <input type="text"  ng-model="HospitalProfileCtrl.hospital.hospitalurl" ng-model-options="{ updateOn: 'submit'}" />
             </p>
           </div>
           <div class="col-md-6">
@@ -71,7 +71,7 @@
             </p>
           </div>
           <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Submit</button>
-          <button ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
+          <button type="button" ng-click="HospitalProfileCtrl.Edit()" class="profile-button btn">Cancel Edit</button>
         </form>
       </div>
     </div>
