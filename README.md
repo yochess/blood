@@ -12,6 +12,32 @@
 
   Travis Baratacart
 
+## Api Endpoints
+
+### Donor Profiles
+
+| Endpoint    | Action | Returns | Side Effect |      Parameters/Req Body                        |
+|-------------|--------|---------------------|-------------------------------------|-------------|
+|/api/profile | GET    | Currently logged in donor's profile| - | - |
+|/api/profile | PUT    |  Currently logged in donor's profile | Update currently logged in donor's profile | Profile fields to change |
+|/api/profile/:id | GET | Donor profile by id | - | - |
+|/api/geo     | GET    | Donors who live in a certain area | -  | minLat: Minimum latitude to search |
+|             |        | | | minLong: Minimum longitude to search |
+|             |        | | |maxLat: Maximum latitude to search   |
+|             |        | | |maxLong: Maximum longitude to search |
+
+### Hospital Profiles
+
+### Events
+
+### Appointments
+
+### Feed Posts
+
+### Calendar
+
+### Blood Buddy Requests
+
 ## License:
 
 MIT
