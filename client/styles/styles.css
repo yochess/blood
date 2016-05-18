@@ -881,7 +881,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 }
 
 .navbar {
-  margin: -1px -1px -1px 2px;
+  margin: -1px -1px -1px 0px;
   background-color: #700000;
   border: none;
   z-index: 99;
