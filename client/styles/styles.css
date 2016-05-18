@@ -959,6 +959,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   border: none;
 }
 
+.modal-content {
+  color: black;
+}
+
 @media only screen and (max-width: 780px) {
   #calendar > .panel-body {
     text-align: center;
