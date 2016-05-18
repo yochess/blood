@@ -85,6 +85,13 @@
 
 ### Blood Buddy Requests
 
+| Endpoint           | Action | Returns                             | Side Effect                                            | Parameters/Req Body                    |
+|--------------------|--------|-------------------------------------|--------------------------------------------------------|----------------------------------------|
+|/api/bloodbuddy     | POST   | Blood buddy request info            | Creates new blood buddy request for logged in donor    | time: Desired appointment time         |
+|                    |        |                                     |                                                        | hospitalId: id of appointment hospital |
+|/api/bloodbuddy/:id | GET    | Blood buddy request info by id      | -                                                      | -                                      |
+|/api/bloodbuddy/:id | PUT    | Blood buddy request info by id      | Creates appointments for requester and logged in donor | -                                      |
+
 ## License:
 
 MIT
