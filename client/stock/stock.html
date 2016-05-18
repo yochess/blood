@@ -1,18 +1,19 @@
+<div class="stocks container">
+  <div class="panel-body">
+    <div class='stockGreeter'>
+      <span>
+        Hello, Hospital! Here are the current blood stock levels we have for you.
 
-<div class="container stocks panel-body">
-  <div class='stockGreeter'>
-    <span>
-      Hello, Hospital! Here are the current blood stock levels we have for you.
-
-      Need to make an update? Click on a bar to select that type, then edit it here:
-    </span>
-    <div style='text-align: center;'>
-      {{StockCtrl.currentSelectedType}}
+        Need to make an update? Click on a bar to select that type, then edit it here:
+      </span>
+      <div style='text-align: center;'>
+        {{StockCtrl.currentSelectedType}}
+      </div>
+      <input type="text" ng-model="StockCtrl.setLevel" class="stocks-setlevel"/>
+      <button ng-click="StockCtrl.setTypeLevel()" class="btn profile-button">Set Level</button>
     </div>
-    <input type="text" ng-model="StockCtrl.setLevel" class="stocks-setlevel"/>
-    <button ng-click="StockCtrl.setTypeLevel()" class="btn profile-button">Set Level</button>
-  </div>
-  <div class="bloodstocks-levels">
-    <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+    <div class="bloodstocks-levels">
+      <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
+    </div>
   </div>
 </div>
