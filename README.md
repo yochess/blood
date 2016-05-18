@@ -66,6 +66,16 @@
 
 ### Feed Posts
 
+| Endpoint | Action | Returns                             | Side Effect                              | Parameters/Req Body                       |
+|----------|--------|-------------------------------------|------------------------------------------|-------------------------------------------|
+|/api/post | GET    | Currently logged in donor's profile | -                                        | minLat: Minimum latitude to search        |
+|          |        |                                     |                                          | minLong: Minimum longitude to search      |
+|          |        |                                     |                                          | maxLat: Maximum latitude to search        |
+|          |        |                                     |                                          | maxLong: Maximum longitude to search      |
+|/api/post | POST   | Currently logged in donor's profile | Post to feed as currently logged in user | content: Post Text                        |
+|          |        |                                     |                                          | latitude: latitude associated with post   |
+|          |        |                                     |                                          | longitude: longitude associated with post |
+
 ### Calendar
 
 ### Blood Buddy Requests
