@@ -1,31 +1,32 @@
 <div id="calendar-container" class="calendar">
   <div class="panel-body">
-  <div ng-hide="CalendarCtrl.isHospital">
-  <h3>Schedule an Appointment!</h3>
-  </div>
-  <div ng-show="CalendarCtrl.isHospital">
-  <h3>Create an Event!</h3>
-    Click here to create a new event
-    <form ng-submit="CalendarCtrl.createEvent()">
-      <!-- Title: <input type="text" ng-model="CalendarCtrl.title"/> -->
-      Time: <input id="datetimepicker" type="text" ng-model="CalendarCtrl.dateTime">
-      <button>Schedule it!</button>
-    </form>
-  </div>
-
-
-
-<!--Start Blood Buddy -->
-
-<span>
- <h5>Only finalize appointment if a blood buddy joins me: <input type="checkbox" class="checkbox checkbox-inline" ng-model="CalendarCtrl.buddy" />   </h5>
-</span>
-<!--End Blood Buddy -->
-  <div ng-hide="CalendarCtrl.isHospital" class="calendar-google-zone">
-
-  <span> Sync with Google calendar! </span>
-    <button ng-click="CalendarCtrl.googleSignin()" class="btn profile-button">Google Sign-in</button>
+    <div ng-hide="CalendarCtrl.isHospital">
+      <h3>Schedule an Appointment!</h3>
     </div>
+    <div class="hospital-scheduler" ng-show="CalendarCtrl.isHospital">
+      <h3>Create an Event!</h3>
+      <p>Use the form below to make an event</p>
+      <form ng-submit="CalendarCtrl.createEvent()">
+        <!-- Title: <input type="text" ng-model="CalendarCtrl.title"/> -->
+        Select time and date: <input id="datetimepicker" type="text" ng-model="CalendarCtrl.dateTime">
+        <button class="btn profile-button">Schedule it!</button>
+      </form>
+    </div>
+
+
+
+    <!--Start Blood Buddy -->
+
+    <span ng-hide="CalendarCtrl.isHospital">
+     <h5>Only finalize appointment if a blood buddy joins me: <input type="checkbox" class="checkbox checkbox-inline" ng-model="CalendarCtrl.buddy" />   </h5>
+   </span>
+
+   <!--End Blood Buddy -->
+   <div ng-hide="CalendarCtrl.isHospital" class="calendar-google-zone">
+
+    <span> Sync with Google calendar! </span>
+    <button ng-click="CalendarCtrl.googleSignin()" class="btn profile-button">Google Sign-in</button>
+  </div>
   <div id="calendar"></div>
 
   <!-- Modal -->
@@ -51,7 +52,7 @@
 
 
   <!-- blood buddy box 3 -->
-   <div class="modal box3 fade" id="confirm-modal" role="dialog">
+  <div class="modal box3 fade" id="confirm-modal" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
