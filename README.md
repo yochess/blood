@@ -78,6 +78,11 @@
 
 ### Calendar
 
+| Endpoint     | Action | Returns                   | Side Effect                                   | Parameters/Req Body                  |
+|--------------|--------|---------------------------|-----------------------------------------------|--------------------------------------|
+|/api/calendar | GET    | ?                         | -                                             | ?                                    |
+|/api/calendar | POST   | ?                         | ?                                             | ?                                    |
+
 ### Blood Buddy Requests
 
 ## License:
