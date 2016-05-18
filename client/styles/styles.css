@@ -162,34 +162,12 @@ header {
 /* ----------------------------- */
 
 /* re-colors navbar to match site theme */
-.navbar{
-  margin: -1px -1px -1px -1px;
-  background-color: #700000
-}
 
-.navbar > .nav > li > a {
-  color: white;
-}
-
-.navbar > .nav > li > a:focus{
-  color: red;
-}
-
-.navbar > .nav > li > a:hover {
-  color: red;
-}
-
-.navbar {
-  border-radius: 0 !important;
-}
 
 /* ----------------------------- */
 
 /* Controls styling for bloodmap page */
 
-.map-page {
-  margin-top: 30px;
-}
 
 #googleMap {
   width: 100%;
@@ -356,7 +334,8 @@ header {
 }
 
 .event img {
-  width: 40px;
+  width: 50px;
+  height: 50px;
   padding: 2px;
   font-size: 8px;
   background-color: #fff7e6;
@@ -382,9 +361,6 @@ header {
   fill: white !important;
 }
 
-.hospital-profile, .profile {
-  margin-top: 20px;
-}
 .panel-body .hospital-blood-panel text, .nvd3 .nv-multibarHorizontal .nv-groups text, #splash-blood-panel text, .stocks text {
   fill: white !important;
 }
@@ -613,7 +589,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 .login-panel {
   width: 90%;
   max-width: 450px;
-  margin: 50px auto;
+  margin: 0 auto;
   color: white;
 }
 
@@ -731,7 +707,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 .stocks {
   color: white;
   fill: white;
-  margin: 3% auto;
+  margin: 0 auto;
 }
 
 .bloodstocks-levels {
@@ -882,13 +858,43 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 }
 
 .navbar {
+  margin: -1px -1px -1px 2px;
+  background-color: #700000;
   border: none;
-  position: fixed;
   z-index: 99;
+  color: white;
+  min-height: 0px;
+  width: 100%;
+  border-radius: 0 !important;
 }
 
-.navbar {
-  min-height: 0px;
+.navbar-default {
+  color: white;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+.navbar .navbar-brand {
+  color: white;
+}
+
+.navbar .nav >li >a {
+  color: white;
+}
+
+.navbar .nav >li >a:hover {
+  color: red;
+}
+
+.navbar .nav > li > a:focus {
+  color: red;
+}
+.navbar .navbar-toggle:hover {
+  background-color: #333333;
+}
+
+.navbar .navbar-toggle:focus {
+  background-color: #700000;
 }
 
 @media only screen and (max-width: 780px) {
@@ -922,10 +928,13 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 .calendar {
   color: white;
   text-align: center;
-  margin: 25px auto;
+  margin: 0 auto;
   width: 80%;
 }
 
+.hospital-scheduler {
+  margin: 15px;
+}
 .fc-unthemed .fc-today {
   color: white;
   background-color: #700000;
@@ -976,3 +985,14 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 }
 
+/* Get stuff off the navbars back already, jeez. */
+
+#donor-login, #donor-signup, #hospital-login, #hospital-signup {
+  padding-top: 100px;
+}
+
+.hospital-profile, .profile, .map-page, .calendar, .stocks {
+  padding-top: 70px;
+}
+
+/* ----------------------------- */
