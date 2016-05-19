@@ -14,6 +14,21 @@ function buildResponse() {
 }
 
 describe('BloodBuddy', function() {
+  // var testDonor;
+  // var testHospital;
+  // before(function(done) {
+  //     Promise.all([
+  //       Donor.create({name: 'testdonor'}),
+  //       Hospital.create({name: 'testhospital'})
+  //       ]).then(results => {
+  //         testDonor = results[0];
+  //         testHospital = results[1];
+  //         done();
+  //       });
+  //     });
+
+
+
   describe('requestBuddy', function() {
     //Need Hospital and donor information to create request
     let testDonor;
@@ -55,8 +70,45 @@ describe('BloodBuddy', function() {
     });
 
   });
-  it('should show the buddy request information on page', function(done) {
+
+  describe('getBuddy', function() {
+    let testBuddy;
+
+    let testDonor;
+    let testHospital;
+    before(function(done) {
+      Promise.all([
+        Donor.create({name: 'testdonor'}),
+        Hospital.create({name: 'testhospital', latitude: 30, longitude:-100})
+        ]).then(results => {
+          testDonor = results[0];
+          testHospital = results[1];
+          Buddy.create({ hospitalId: testHospital.id, time: new Date().toUTCString(), donorId: testDonor.id})
+          .then(buddy => {
+            testBuddy =buddy;
+            done();
+          });
+        });
+      });
 
 
+    it('should show the buddy request information on page', function(done) {
+      let response = buildResponse();
+      let request = http_mocks.createRequest({
+        method: 'GET',
+        url: '/' + testBuddy.id,
+        params: {
+          id : testBuddy.id
+        }
+      });
+
+      response.on('end', function() {
+        console.log(response._getData());
+        expect(response._getData().id).to.equal(testBuddy.id);
+        expect(response._getData().hospital.latitude).to.not.be.null;
+        done();
+      });
+      buddyControllers.getBuddy(request,response);
+    });
   });
 });
