@@ -4,6 +4,10 @@ h1, h2, h3, h4, h5, p, div {
   line-height: 1.5;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 .col-lg-4 {
   /*float: none;*/
 }
