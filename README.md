@@ -1,4 +1,5 @@
 # Bloodshare
+<img src="/misc/grey.png" alt="bloodshare logo" width="250" />
 
 [![Build Status](https://travis-ci.org/britishchicken/blood.svg?branch=master)](https://travis-ci.org/britishchicken/blood)
 
