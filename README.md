@@ -14,6 +14,7 @@
 * [Tech Stack](#tech-stack)
 * [API Endpoints](#api-endpoints)
 * [Contributors](#contributors)
+# [Contributing](#contributing)
 * [License](#license)
 
 ## Getting Started
@@ -50,7 +51,7 @@
     ```javascript
     export default GeolocationMarker;
     ```
-Consider submitting a pull request for [Issue #196](https://github.com/britishchicken/blood/issues/196), so that we can remove this line.
+Consider submitting a pull request for [Issue #196](https://github.com/britishchicken/blood/issues/196), so that we can remove this step.
 
 ### Testing
 
@@ -221,6 +222,9 @@ bloodshare
   [Drake Wang](https://github.com/yochess/)
 
   [Travis Baratacart](https://github.com/travisbaratcart/)
+
+## Contributing
+Please refer to our [contributing guidelines](/CONTRIBUTING.md) for information about contributing to Bloodshare.
 
 ## License:
 
