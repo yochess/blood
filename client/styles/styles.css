@@ -1030,13 +1030,50 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 }
 
+/* ----------------------------- */
+
+/* Blood Buddy page styling */
+
+.blood-buddy {
+  color: white;
+}
+
+.blood-buddy-right {
+  border: 2px solid #700000;
+  text-align: right;
+}
+
+.blood-buddy-right-inner {
+  text-align: center;
+}
+
+.blood-buddy-description {
+  font-size: 1.1em;
+  border: 2px solid #700000;
+  margin-top: 20px;
+}
+
+.blood-buddy-photo {
+  height: 300px;
+  width: 300px;
+  border: 2px solid #700000;
+}
+
+.blood-buddy-name {
+  color: #5692e1;
+  padding-left: 10%;
+}
+
+/* ----------------------------- */
+
+
 /* Get stuff off the navbars back already, jeez. */
 
 #donor-login, #donor-signup, #hospital-login, #hospital-signup {
   padding-top: 100px;
 }
 
-.hospital-profile, .profile, .map-page, .calendar, .stocks {
+.hospital-profile, .profile, .map-page, .calendar, .stocks, .blood-buddy {
   padding-top: 70px;
 }
 
