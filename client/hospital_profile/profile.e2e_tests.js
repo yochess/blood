@@ -1,16 +1,17 @@
 'use strict'
 const time = browser.params.time;
 const hash = browser.params.hash;
+let navbar = element(by.id('navbar'));
 
 describe('Hospital Profile', () => {
   let profileViewEl = element(by.css('.public-view'));
 
-  //logged in
+  //not logged in
   describe('User is not logged in as hospital', () => {
     it('should display nothing', () => {
       expect(profileViewEl.isPresent()).toBeFalsy();
     });
-  });//end logged in
+  });//end not logged in
 
 
   //not logged in
@@ -21,9 +22,12 @@ describe('Hospital Profile', () => {
     beforeAll(() => {
       let loginEl = element(by.id('hospital-login'));
       browser.get('/hospital/login');
-      loginEl.element(by.model('HospitalAuthCtrl.loginObj.email')).sendKeys(`test${time}@test.com`);
+      loginEl.element(by.model('HospitalAuthCtrl.loginObj.email')).sendKeys(`test${time}@hospital.com`);
       loginEl.element(by.model('HospitalAuthCtrl.loginObj.password')).sendKeys(hash);
       loginEl.element(by.css('.btn.profile-button')).click();
+    });
+    afterAll(() => {
+      navbar.element(by.css('[name="logout-btn"]')).click();
     });
 
     it('should display a profile view', () => {
@@ -94,6 +98,5 @@ describe('Hospital Profile', () => {
         //pending...
       });
     });
-
   });//end not logged in
 });
