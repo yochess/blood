@@ -18,7 +18,7 @@ let getCurrentDonor = (req, res) => {
       include: [{
         model: Hospital,
         attributes: {
-          exclude: ['email']
+          exclude: ['password']
         }
       }]
     }, {
@@ -33,7 +33,7 @@ let getCurrentDonor = (req, res) => {
       include: [{
         model: Hospital,
         attributes: {
-          exclude: ['email']
+          exclude: ['password']
         }
       }]
     }]})
@@ -55,7 +55,7 @@ let updateCurrentDonor = (req, res) => {
       include: [{
         model: Hospital,
         attributes: {
-          exclude: ['email']
+          exclude: ['password']
         }
       }]
     }, {
@@ -70,7 +70,7 @@ let updateCurrentDonor = (req, res) => {
       include: [{
         model: Hospital,
         attributes: {
-          exclude: ['email']
+          exclude: ['password']
         }
       }]
     }]
