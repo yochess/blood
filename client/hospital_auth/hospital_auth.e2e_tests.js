@@ -2,7 +2,9 @@
 describe('Hospital Auth', () => {
   let navbar = element(by.id('navbar'));
   let time = browser.params.time;
-
+  console.log(time);
+  let hash = browser.params.hash;
+  console.log(hash);
   // signup page
   describe('Signup Page', () => {
     let signupEl = element(by.id('hospital-signup'));
@@ -13,18 +15,12 @@ describe('Hospital Auth', () => {
     beforeEach(() => {
       browser.get('/hospital/signup');
     });
-    afterAll(() => {
-      element(by.css('[name="logout-btn"]')).click();
-    });
 
     //login link
     describe('Login Link', () => {
       it('should redirect user to login page', () => {
-        signupEl.element(by.css('.signup-text'))
-          .element(by.css('a')).click(); // hrefs to login page
-          browser.getLocationAbsUrl().then(url => {
-            expect(url).toEqual('/hospital/login');
-          });
+        signupEl.element(by.css('.signup-text')).element(by.css('a')).click(); //hrefs to login page
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/login');
       });
     });//end login link
 
@@ -32,20 +28,17 @@ describe('Hospital Auth', () => {
     describe('Signup Form', () => {
       it('should redirect user to hospital profile page on successful signup', () => {
         emailInputEl.sendKeys(`test${time}@test.com`);
-        passwordInputEl.sendKeys('test');
+        passwordInputEl.sendKeys(hash);
         signupBtnEl.click();
-        browser.getLocationAbsUrl().then(url => {
-          expect(url).toEqual('/hospital/profile');
-        });
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/profile');
+        element(by.css('[name="logout-btn"]')).click(); //logout
       });
 
       it('should not redirect user on unsuccessful signup should', () => {
         emailInputEl.sendKeys(`test${time}@test.com`);
         passwordInputEl.sendKeys('lol');
         signupBtnEl.click();
-        browser.getLocationAbsUrl().then(url => {
-          expect(url).toEqual('/hospital/signup');
-        });
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/signup');
       });
     });//end successful signup
   });//end signup page
@@ -62,9 +55,7 @@ describe('Hospital Auth', () => {
     describe('Signup Link', () => {
       it('should redirect user to signup page', () => {
         loginEl.element(by.css('a')).click(); // hrefs to signup page
-        browser.getLocationAbsUrl().then(url => {
-          expect(url).toEqual('/hospital/signup');
-        });
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/signup');
       });
     });//end signup link
 
@@ -76,20 +67,17 @@ describe('Hospital Auth', () => {
 
       it('should redirect user to profile page on successful login', () => {
         emailInputEl.sendKeys(`test${time}@test.com`);
-        passwordInputEl.sendKeys('test');
+        passwordInputEl.sendKeys(hash);
         loginBtnEl.click();
-        browser.getLocationAbsUrl().then(url => {
-          expect(url).toEqual('/hospital/profile');
-        });
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/profile');
+        element(by.css('[name="logout-btn"]')).click();
       });
 
       it('should not redirect user to profile page on unsuccessful', () => {
         emailInputEl.sendKeys(`test${time}@test.com`);
         passwordInputEl.sendKeys('lol');
         loginBtnEl.click();
-        browser.getLocationAbsUrl().then(url => {
-          expect(url).toEqual('/hospital/login');
-        });
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/login');
       });
     });//end login form
   });//end login page
