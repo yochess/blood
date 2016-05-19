@@ -1,9 +1,9 @@
 'use strict'
 const time = browser.params.time;
 const hash = browser.params.hash;
+let navbar = element(by.id('navbar'));
 
 describe('Hospital Auth', () => {
-  let navbar = element(by.id('navbar'));
   //signup page
   describe('Signup Page', () => {
     let signupEl = element(by.id('hospital-signup'));
@@ -26,15 +26,15 @@ describe('Hospital Auth', () => {
     //signup form
     describe('Signup Form', () => {
       it('should redirect user to hospital profile page on successful signup', () => {
-        emailInputEl.sendKeys(`test${time}@test.com`);
+        emailInputEl.sendKeys(`test${time}@hospital.com`);
         passwordInputEl.sendKeys(hash);
         signupBtnEl.click();
         expect(browser.getLocationAbsUrl()).toBe('/hospital/profile');
         element(by.css('[name="logout-btn"]')).click(); //logout
       });
 
-      it('should not redirect user on unsuccessful signup should', () => {
-        emailInputEl.sendKeys(`test${time}@test.com`);
+      it('should not redirect user on unsuccessful signup', () => {
+        emailInputEl.sendKeys(`test${time}@hospital.com`);
         passwordInputEl.sendKeys('lol');
         signupBtnEl.click();
         expect(browser.getLocationAbsUrl()).toBe('/hospital/signup');
@@ -64,19 +64,19 @@ describe('Hospital Auth', () => {
       let passwordInputEl = loginEl.element(by.model('HospitalAuthCtrl.loginObj.password'));
       let loginBtnEl = loginEl.element(by.css('.btn.profile-button'));
 
-      it('should redirect user to profile page on successful login', () => {
-        emailInputEl.sendKeys(`test${time}@test.com`);
-        passwordInputEl.sendKeys(hash);
-        loginBtnEl.click();
-        expect(browser.getLocationAbsUrl()).toBe('/hospital/profile');
-        element(by.css('[name="logout-btn"]')).click();
-      });
-
       it('should not redirect user to profile page on unsuccessful', () => {
-        emailInputEl.sendKeys(`test${time}@test.com`);
+        emailInputEl.sendKeys(`test${time}@hospital.com`);
         passwordInputEl.sendKeys('lol');
         loginBtnEl.click();
         expect(browser.getLocationAbsUrl()).toBe('/hospital/login');
+      });
+
+      it('should redirect user to profile page on successful login', () => {
+        emailInputEl.sendKeys(`test${time}@hospital.com`);
+        passwordInputEl.sendKeys(hash);
+        loginBtnEl.click();
+        expect(browser.getLocationAbsUrl()).toBe('/hospital/profile');
+        navbar.element(by.css('[name="logout-btn"]')).click();
       });
     });//end login form
   });//end login page
