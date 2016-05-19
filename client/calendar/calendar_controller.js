@@ -134,10 +134,7 @@
     let pushToGoogle = (data) => {
       Calendar.postToGoogle(data).then(res => {
         $calendar.fullCalendar('removeEvents');
-        $calendar.fullCalendar('addEventSource', [{
-          title: data.summary,
-          start: data.start.dateTime
-        }]);
+        $calendar.fullCalendar('refetchEvents');
       }).catch(err => {
         console.error('unable to sync to google', err);
         $calendar.fullCalendar('removeEvents');
@@ -172,17 +169,19 @@
         time: CalendarCtrl.view.time.start,
         type: type
       }).then(res => {
-        pushToGoogle({
-          summary: 'Your appointment',
-          start: {
-            dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'UTC'
-          },
-          end: {
-            dateTime: CalendarCtrl.view.time.start,
-            timeZone: 'UTC'
-          }
-        });
+        HospitalProfile.get(hospitalId).then(hospital => {
+          pushToGoogle({
+            summary: `Appointment with \n${hospital.name}`,
+            start: {
+              dateTime: CalendarCtrl.view.time.start,
+              timeZone: 'UTC'
+            },
+            end: {
+              dateTime: CalendarCtrl.view.time.start,
+              timeZone: 'UTC'
+            }
+          });
+        })
       })
       .catch(err => {
         console.error('error in making appointment! ', err);
@@ -190,15 +189,22 @@
     }
 
     let setView = (calEvent) => {
+      let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
       let month = calEvent.start.month() + 1;
       let date = calEvent.start.date();
       let hour = calEvent.start.hour();
+      let day = calEvent.start.day();
       let minute = calEvent.start.minutes();
+      let amPm = hour >= 12 ? 'pm' : 'am';
+
+      hour = hour > 12 ? hour - 12 : hour;
       minute = minute < 10 ? minute + '0' : minute;
+
 
       CalendarCtrl.view.time.start = calEvent.start;
       CalendarCtrl.view.time.end = calEvent.end;
-      CalendarCtrl.view.time.print = `${month}/${date} @ ${hour}:${minute}`;
+      CalendarCtrl.view.time.print = `${days[day]}, ${month}/${date} at ${hour}:${minute} ${amPm}`;
     };
 
 
@@ -209,6 +215,7 @@
         hospitalId ? donorView(callback) : hospitalView(callback);
       },
       eventClick: (calEvent, jsEvent, view) => {
+        console.log(calEvent);
         if (CalendarCtrl.isHospital) {
           if (calEvent.data.donorId) {
             $window.location.assign(`/profile/${calEvent.data.donorId}`);
