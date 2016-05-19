@@ -33,7 +33,7 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
     Buddy.get($routeParams.buddyId)
     .then(buddy => {
       BuddyCtrl.buddy = buddy;
-      if (parseInt(BuddyCtrl.buddy.id) === parseInt($window.localStorage.getItem('id'))) {
+      if (parseInt(BuddyCtrl.buddy.donor.id) === parseInt($window.localStorage.getItem('id'))) {
         BuddyCtrl.visitorIsDonor = true;
       }
       if(buddy.budId !== null){
