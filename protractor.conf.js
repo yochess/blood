@@ -1,6 +1,6 @@
 // Protractor configuration
 
-/*  Make sure to run 
+/*  Make sure to run
       $ webdriver-manager update
       $ webdriver-manager start
 
@@ -18,7 +18,7 @@ exports.config = {
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
-  // add more dependencies 
+  // add more dependencies
   specs: [
     'client/**/*.e2e_tests.js'
 
@@ -30,6 +30,9 @@ exports.config = {
   capabilities: {
     browserName: 'firefox'
   },
+  params: {
+    time: new Date().getTime()
+  }
   // jasmineNodeOpts: {
   //   defaultTimeoutInterval: 30000
   // }
