@@ -118,7 +118,6 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
               elementClick: function(e) {$scope.$apply();}
             }
           },
-          callback: function(e){console.log('! callback !')}
         }
       };
 
