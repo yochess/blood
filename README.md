@@ -3,6 +3,10 @@
 
 [![Build Status](https://travis-ci.org/britishchicken/blood.svg?branch=master)](https://travis-ci.org/britishchicken/blood)
 
+Bloodshare is an application which seeks to make the process of donating blood as simple and engaging as possible.
+Bloodcenters can input their blood stocks and scheduling info, and donors can check which bloodcenters in the area need their blood and make appointments.
+Social features  allow donors to schedule and recruit for events, as well as search for a blood buddy if they are new and afraid of needles.
+
 ## Example Use
 
 <img src="/misc/demo.gif" alt="Example use case of bloodshare">
@@ -10,11 +14,13 @@
 ## Contents
 
 * [Getting Started](#getting-started)
+    * [Installation](#installation)
+    * [Testing](#testing)
 * [File Structure](#file-structure)
 * [Tech Stack](#tech-stack)
 * [API Endpoints](#api-endpoints)
 * [Contributors](#contributors)
-# [Contributing](#contributing)
+* [Contributing](#contributing)
 * [License](#license)
 
 ## Getting Started
@@ -55,6 +61,22 @@ Consider submitting a pull request for [Issue #196](https://github.com/britishch
 
 ### Testing
 
+#### Local
+1. Install Karma and Karma cli by running
+    ```
+    $ npm install -g karma
+    $ npm install -g karma-cli
+    ```
+
+1. Run tests locally by running
+    ```
+    $ npm test
+    ```
+
+#### Continuous Integration (TravisCI)
+
+Our master repository makes use of [TravisCI](https://travis-ci.org/) for continuous integration.
+To use TravisCI for your local development, sign in to [TravisCI](https://travis-ci.org/) with your github and link your forked repository.
 
 ## Tech Stack
 
