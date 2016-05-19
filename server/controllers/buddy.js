@@ -63,11 +63,12 @@ let updateBuddy = (req, res) => {
     Promise.all([
       Appointment.create({time: buddy.time, donorId: buddy.donorId, hospitalId: buddy.hospitalId, type: 3}),
       Appointment.create({time: buddy.time, donorId: req.user.id, hospitalId: buddy.hospitalId, type: 3}),
-      Buddy.update({
+      buddy.update({
         budId: req.user.id
-      } ,{where: {id: req.params.id}})
-      ])
-    .then((buddy) =>res.send(buddy));
+      })])
+    .then(results => {
+      res.send(results[2]);
+    });
   });
 };
 
