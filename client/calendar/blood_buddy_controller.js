@@ -3,6 +3,7 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
   BuddyCtrl.buddy = {
     name: 'Blood Buddy'
   };
+  BuddyCtrl.visitorIsDonor = false;
   BuddyCtrl.post =() => {
     let $box4 = $('.modal.box4');
      $box4.modal();
@@ -32,6 +33,9 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
     Buddy.get($routeParams.buddyId)
     .then(buddy => {
       BuddyCtrl.buddy = buddy;
+      if (parseInt(BuddyCtrl.buddy.id) === parseInt($window.localStorage.getItem('id'))) {
+        BuddyCtrl.visitorIsDonor = true;
+      }
       if(buddy.budId !== null){
         BuddyCtrl.found= true;
       } else {
