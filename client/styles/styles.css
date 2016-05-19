@@ -657,6 +657,14 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   cursor: pointer;
 }
 
+.splash header {
+  min-height: 100vh;
+}
+
+.splash .service-box {
+  margin: 20px 0;
+}
+
 .splash-signup {
   border: 2px solid #700000;
   height: 60px;
@@ -684,12 +692,15 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin: 0 auto;
 }
 
-
+.splash-btn-bottom {
+  margin-top: 40px;
+  padding: 1.5em 2em;
+}
 
 @media only screen and (max-width: 1000px) {
  .visualizer {
   /*width: 30%;*/
-  margin: 10px auto;
+  margin: 50px auto;
 }
 .first-viz {
   margin-bottom: 40px;
@@ -710,16 +721,8 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   .visualizer {
     width: 80%;
     max-width: 300px;
+    margin: 50px auto;
   }
-}
-.splash-btn-bottom {
-  margin-top: 50px;
-  height: 50px;
-}
-
-.splash-btn-bottom p {
-  margin-top: 6px;
-  font-size: 1.2em;
 }
 
 .nv-legend-symbol {
@@ -779,7 +782,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color:white;
 }
 
-.events-panel p {
+.events-panel  {
   margin: 5px;
   font-family: 'Open Sans';
 }
@@ -935,17 +938,17 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 @media only screen and (max-width: 767px) {
  .navbar {
-    position: relative;
-    z-index: 99;
-    text-align: center;
-  }
-  .nav li a {
-    padding: 25px 25px;
-    font-size: 1.5em;
-  }
-  .navbar-collapse {
-    float: none;
-  }
+  position: relative;
+  z-index: 99;
+  text-align: center;
+}
+.nav li a {
+  padding: 25px 25px;
+  font-size: 1.5em;
+}
+.navbar-collapse {
+  float: none;
+}
 }
 
 .btn-share{
