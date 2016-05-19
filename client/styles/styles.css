@@ -1061,7 +1061,7 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .blood-buddy-name {
   color: #5692e1;
-  text-align: center;
+  padding-left: 10%;
 }
 
 /* ----------------------------- */

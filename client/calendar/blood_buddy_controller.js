@@ -32,8 +32,6 @@ app.controller('BuddyController', ['$window' , '$scope','$routeParams', '$rootSc
     Buddy.get($routeParams.buddyId)
     .then(buddy => {
       BuddyCtrl.buddy = buddy;
-            console.log(BuddyCtrl.buddy);
-
       if(buddy.budId !== null){
         BuddyCtrl.found= true;
       } else {
