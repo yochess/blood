@@ -232,12 +232,12 @@
           setView(calEvent);
           $scope.$apply();
          //blood buddy
-          if(CalendarCtrl.buddy){
-            $box3.modal();
-          } else {
-            $box1.modal();
-          }
+         if(CalendarCtrl.buddy){
+          $box3.modal();
+        } else {
+          $box1.modal();
         }
+      }
         // same here
         if (calEvent.title === 'Your appointment') {
           $window.location.assign(`/hospital/profile/${hospitalId}`);
@@ -281,7 +281,7 @@
           $calendar.fullCalendar('refetchEvents');
         }).catch(err => {
           console.error('error in createEvent', err);
-        })
+        });
       }
     };
 
@@ -296,28 +296,30 @@
 
 //blood buddy
 
-    CalendarCtrl.buddyoneModal = () => {
+CalendarCtrl.buddyoneModal = () => {
 
-      let $box4 = $('.modal.box4');
-      let $inputs = $('.modal').find('input');
-      console.log($routeParams.hospitalid);
-      Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
-      .then(buddy => {
-        let content = `Looking for a buddy on ${CalendarCtrl.view.time.print}  https://bloodshare.io/bloodbuddy/${buddy.id}` ;
-        Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-        $location.path(`/bloodbuddy/${buddy.id}`);
-      });
+  let $box4 = $('.modal.box4');
+  let $inputs = $('.modal').find('input');
+  Buddy.requestBuddy(CalendarCtrl.view.time.start, $routeParams.hospitalid)
+  .then(buddy => {
+    let content = `Looking for a buddy on ${CalendarCtrl.view.time.print}  https://bloodshare.io/bloodbuddy/${buddy.id}` ;
+    Feed.submit(content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
+    $('.modal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $location.path(`/bloodbuddy/${buddy.id}`);
+  });
 
-    };
-
-
-    CalendarCtrl.secondModal = () => {
-      let $input1 = $('.checkbox.input1').find('input');
-      let $input2 = $('.checkbox.input2').find('input');
-      CalendarCtrl.eventsChecked = true;
-      processInput($input1, $input2);
-    };
+};
 
 
-  }]);
+CalendarCtrl.secondModal = () => {
+  let $input1 = $('.checkbox.input1').find('input');
+  let $input2 = $('.checkbox.input2').find('input');
+  CalendarCtrl.eventsChecked = true;
+  processInput($input1, $input2);
+};
+
+
+}]);
 })();
