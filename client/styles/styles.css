@@ -859,6 +859,15 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   border-bottom: 1px solid white;
 }
 
+.donor-chart {
+  padding: 15px;
+}
+
+.donor-chart h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 /* ----------------------------- */
 
 
