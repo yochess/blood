@@ -1,11 +1,10 @@
 'use strict'
+const time = browser.params.time;
+const hash = browser.params.hash;
+
 describe('Hospital Auth', () => {
   let navbar = element(by.id('navbar'));
-  let time = browser.params.time;
-  console.log(time);
-  let hash = browser.params.hash;
-  console.log(hash);
-  // signup page
+  //signup page
   describe('Signup Page', () => {
     let signupEl = element(by.id('hospital-signup'));
     let emailInputEl = signupEl.element(by.model('HospitalAuthCtrl.signupObj.email'));

@@ -20,6 +20,7 @@ exports.config = {
 
   // add more dependencies
   specs: [
+    'client/hospital_auth/hospital_auth.e2e_tests.js',
     'client/**/*.e2e_tests.js'
 
 
@@ -31,7 +32,8 @@ exports.config = {
     browserName: 'firefox'
   },
   params: {
-    time: new Date().getTime()
+    time: new Date().getTime(),
+    hash: Math.random().toString(36).slice(2)
   }
   // jasmineNodeOpts: {
   //   defaultTimeoutInterval: 30000
