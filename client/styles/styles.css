@@ -1038,7 +1038,19 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   color: white;
 }
 
+.blood-buddy-left {
+  margin-top: 15px;
+}
+
+.blood-buddy-bottom {
+  margin-top: 15px;
+}
+
+.blood-buddy-found {
+  margin: 15px;
+}
 .blood-buddy-right {
+  margin: 15px;
   border: 2px solid #700000;
   text-align: right;
 }
@@ -1047,21 +1059,45 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   text-align: center;
 }
 
+.blood-buddy-right-inner h4 {
+  margin: 15px;
+}
+
+.blood-buddy-right button {
+  margin: 5px;
+}
 .blood-buddy-description {
   font-size: 1.1em;
   border: 2px solid #700000;
-  margin-top: 20px;
+  padding: 20px;
 }
 
 .blood-buddy-photo {
-  height: 300px;
-  width: 300px;
+  width: 100%;
+  height: 100%;
+  max-width: 285px;
+  max-height: 285px;
   border: 2px solid #700000;
 }
 
 .blood-buddy-name {
   color: #5692e1;
-  padding-left: 10%;
+  display: inline;
+}
+
+.blood-buddy-info-labels {
+  color: #6e99e1;
+}
+
+.btn-share {
+  margin: 15px 0;
+}
+
+@media only screen and (max-width: 991px) {
+  .blood-buddy-photo {
+    max-height:250px;
+    max-width: 250px;
+  }
 }
 
 /* ----------------------------- */
