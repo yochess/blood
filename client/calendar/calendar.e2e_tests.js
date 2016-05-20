@@ -18,7 +18,7 @@ describe('Calendar', () => {
     calendarNavEl.click();
   });
 
-  describe('Hospital Event Creation', () => {
+  xdescribe('Hospital Event Creation', () => {
     it('should be possible', () => {
       let now = new Date();
       let lastWeek = new Date(now.getTime() - (1000 * 60 * 60 * 24 * 7));
@@ -32,7 +32,7 @@ describe('Calendar', () => {
     });
   });
 
-  describe('Donor View', () => {
+  xdescribe('Donor View', () => {
 
   });
 });
