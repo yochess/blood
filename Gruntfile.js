@@ -18,7 +18,7 @@ grunt.initConfig({
       separator: ';',
     },
     dist: {
-      src: ['client/app.js', 'client/*/*_controller.js', 'client/*/*_service.js'],
+      src: ['client/lib/geolocation-marker/src/geolocation-marker.js', 'client/app.js', 'client/*/*_controller.js', 'client/*/*_service.js'],
       dest: 'client/dist/build.js',
     },
   },
