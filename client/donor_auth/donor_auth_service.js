@@ -27,7 +27,6 @@
         data: user
       })
       .then(res => {
-        console.log('res: ', res);
         if (res.status === 200) {
           $window.location.assign('/profile');
           return res.data;
