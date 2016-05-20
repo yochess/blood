@@ -20,14 +20,17 @@ exports.config = {
 
   // add more dependencies
   specs: [
-    // 'client/hospital_auth/hospital_auth.e2e_tests.js',
-    // 'client/donor_auth/donor_auth.e2e_tests.js',
-    // 'client/**/*.e2e_tests.js'
-
+    // MANDATORY FILES TO RUN
+    'client/hospital_auth/hospital_auth.e2e_tests.js',
     'client/donor_auth/donor_auth.e2e_tests.js',
-    'client/profile/profile.e2e_tests.js'
 
+    // optional tests (can be ran independently)
+    // 'client/calendar/calendar.e2e_tests.js',
+    'client/hospital_profile/profile.e2e_tests.js',
+    'client/profile/profile.e2e_tests.js',
+    'client/navbar/navbar.e2e_tests.js',
 
+    // 'client/**/*.e2e_tests.js'
   ],
 
   capabilities: {
