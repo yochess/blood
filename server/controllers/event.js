@@ -22,7 +22,6 @@ let getEvents = (req, res) => {
 };
 
 let postEvent = (req, res) => {
-  console.log('in controller');
   let hostId = req.user.type === 'donor' ? req.user.id : null;
   Promise.all([
     Event.create({

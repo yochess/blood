@@ -43,13 +43,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       .call(chart);
   };
 
-  // $scope.$watch('$scope.donordata', function() {
-  //     update();
-  // });
-
-
   $scope.$on('chartinit', update);
-
 
   let initializeMaps = function () {
 
@@ -195,7 +189,6 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
     .then(function (list) {
       BloodMapCtrl.hospitals = [];
       BloodMapCtrl.hospitals = list;
-      // setZoom(BloodMapCtrl.map, BloodMapCtrl.hospitals);
 
       //Each time new hospitals are loaded in, reset all blood
       //level data to 0.

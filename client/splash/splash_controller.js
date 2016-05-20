@@ -22,9 +22,10 @@ app.controller('SplashController', ['$routeParams', '$scope', function($routePar
         },
         discretebar: {
           dispatch: {
-            elementClick: function(e) {$scope.$apply();}
+            elementClick: function(e) {$scope.$apply();
             }
-          },
+          }
+        }
       }
     };
 
