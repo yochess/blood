@@ -214,6 +214,10 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         $scope.data[0].values[6].value += BloodMapCtrl.hospitals[i].abpos;
         $scope.data[0].values[7].value += BloodMapCtrl.hospitals[i].abneg;
       }
+
+      for(var k = 0; k <= 7; k++) {
+        $scope.data[0].values[k].value = ($scope.data[0].values[k].value / BloodMapCtrl.hospitals.length)
+      }
       setMarkers(BloodMapCtrl.map, BloodMapCtrl.hospitals);
     })
     .catch(function (error) {

@@ -616,6 +616,13 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   }
 }
 
+@media only screen and (max-width: 1091px) {
+  .userInfo-table {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 .hospital-profile svg.nvd3-svg {
   width: 115% !important;
   position: relative;
@@ -685,6 +692,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin: 20px 0;
 }
 
+@media only screen and (max-width: 991px) {
+  .services-wrapper {
+    margin: 0 auto;
+  }
+  .services {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+}
+
 .splash-signup {
   border: 2px solid #700000;
   height: 60px;
@@ -714,7 +731,8 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .splash-btn-bottom {
   margin-top: 40px;
-  padding: 1.5em 2em;
+  font-size: 1.3em;
+  padding: 1.2em 1.7em;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -987,6 +1005,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   text-align: center;
   margin: 0 auto;
   width: 80%;
+}
+
+#datetimepicker {
+  color: black;
 }
 
 .hospital-scheduler {
