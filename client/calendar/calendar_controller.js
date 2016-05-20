@@ -215,7 +215,6 @@
         hospitalId ? donorView(callback) : hospitalView(callback);
       },
       eventClick: (calEvent, jsEvent, view) => {
-        console.log(calEvent);
         if (CalendarCtrl.isHospital) {
           if (calEvent.data.donorId) {
             $window.location.assign(`/profile/${calEvent.data.donorId}`);

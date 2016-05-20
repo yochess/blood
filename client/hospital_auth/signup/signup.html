@@ -16,6 +16,7 @@
       <input class="center-block form-control login-input" type="password" ng-model="HospitalAuthCtrl.signupObj.password" required/>
       <button class="center-block btn profile-button">Sign up!</button>
     </form>
+    <p class="error" ng-show="HospitalAuthCtrl.signupError">That email address has already been registered</p>
     <p class="signup-text">Already have an account? <a href="/hospital/login"> Go here!</a></p>
   </div>
 </div>

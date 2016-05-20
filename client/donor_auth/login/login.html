@@ -16,9 +16,10 @@
       <input class="center-block form-control login-input" type="password" ng-model="DonorAuthCtrl.loginObj.password" required/>
       <button class="center-block btn profile-button">Login</button>
     </form>
+    <p class="error" ng-show="DonorAuthCtrl.loginError">Your username or password are incorrect.</p>
     <form action="/auth/facebook" method="post">
       <button type="submit" class="center-block facebook-btn">
-        <img class="facebutton-img" src="../assests/facebutton3.png"/>Log in with Facebook
+        <img class="facebutton-img" src="/assests/facebutton3.png"/>Log in with Facebook
       </button>
     </form>
     <p>

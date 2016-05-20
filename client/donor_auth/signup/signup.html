@@ -16,9 +16,10 @@
       <input class="center-block form-control login-input" type="password" ng-model="DonorAuthCtrl.signupObj.password" required/>
       <button class="center-block btn profile-button">Sign up!</button>
     </form>
+    <p class="error" ng-show="DonorAuthCtrl.signupError">That email address has already been registered</p>
     <form action="/auth/facebook" method="post">
       <button type="submit" class="center-block facebook-btn">
-        <img class="facebutton-img" src="../assests/facebutton3.png"/>Log in with Facebook
+        <img class="facebutton-img" src="/assests/facebutton3.png"/>Log in with Facebook
       </button>
     </form>
     <p class="signup-text"> Already have an account? <a href="/donor/login">Go here!</a></p>

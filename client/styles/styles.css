@@ -16,7 +16,10 @@ html, body {
   background-color: #700000;
 }
 
-
+.error {
+  margin-top: 5px;
+  color: #F52B2B;
+}
 
 .clearfix:after {
   clear: both;

@@ -10,6 +10,7 @@
         <input name="post-content" id="post-content" type="text" ng-model="FeedCtrl.content">
         <input type="submit">
       </form>
+      <p class="error" ng-show="FeedCtrl.feedError">You must be logged in to do that</p>
     </div>
     <div class="feed-content">
       <div class="post clearfix" ng-repeat="post in FeedCtrl.posts">

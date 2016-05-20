@@ -7,13 +7,15 @@ app.controller('DonorAuthController', ['$window','$rootScope', '$http', 'DonorAu
       DonorAuth.signup(DonorAuthCtrl.signupObj)
       .then((donor) => {
         $rootScope.NavCtrl.login('donor', donor.id);
-      });
+      })
+      .catch(() => DonorAuthCtrl.signupError = true);
      };
 
     DonorAuthCtrl.login = () => {
       DonorAuth.login(DonorAuthCtrl.loginObj)
       .then(donor => {
         $rootScope.NavCtrl.login('donor', donor.id);
-      });
+      })
+      .catch(() => DonorAuthCtrl.loginError = true);
     };
   }]);
