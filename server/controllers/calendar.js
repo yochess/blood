@@ -55,7 +55,6 @@ let showGoogleEvents = (req, res) => {
 module.exports = {
   showEvents: (req, res) => {
     if (!req.session.tokens) {
-      console.log('gmail is not enabled!');
       return res.send(401);
     }
 
