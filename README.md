@@ -53,12 +53,6 @@ Social features  allow donors to schedule and recruit for events, as well as sea
     - sessionsecret: Secret used for sessions
     - sessionkey: Key used for sessions
 
-6. In client/lib/geolocation-marker/src/geolocation-marker.js, remove the last line:
-    ```javascript
-    export default GeolocationMarker;
-    ```
-Consider submitting a pull request for [Issue #196](https://github.com/britishchicken/blood/issues/196), so that we can remove this step.
-
 ### Testing
 
 #### Local
