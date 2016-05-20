@@ -63,6 +63,7 @@ let updateCurrentHospital = (req, res) => {
   .then((hospital) => {
     hospital.update(req.body)
     .then(() => {
+      if(req.body.schedules){
       req.body.schedules.forEach((schedule) => {
         Schedule.findOne({where: {hospitalId: req.user.id}})
         .then(sch => {
@@ -84,6 +85,7 @@ let updateCurrentHospital = (req, res) => {
         });
 
       });
+    }
     })
     .then(() => res.send(hospital));
   });
