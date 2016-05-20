@@ -91,10 +91,17 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
     .then(hospital => {HospitalProfileCtrl.hospital = hospital;});
   };
 
+  HospitalProfileCtrl.getReviews = () => {
+    HospitalProfile.getReviews(currentHospital.id)
+    .then(reviews => HospitalProfileCtrl.hospital.reviews = reviews);
+  }
+
   HospitalProfileCtrl.submitReview = () => {
-    HospitalProfile.postReview(HospitalProfileCtrl.id, HospitalProfileCtrl.reviewContent)
-    .then(getReviews);
+    HospitalProfile.postReview(parseInt(HospitalProfileCtrl.hospital.id), HospitalProfileCtrl.reviewContent)
+    .then(HospitalProfileCtrl.getReviews);
   };
+
+  HospitalProfileCtrl.getReviews();
 
       ////////////////////////////////////////
       //       BEHOLD, THE FORBIDDEN ZONE.
@@ -127,35 +134,35 @@ app.controller('HospitalProfileController', ['$window', '$routeParams' ,  '$root
         values: [
         {
           "label" : "O+" ,
-          "value" : currentHospital.opos
+          "value" : HospitalProfileCtrl.hospital.opos
         },
         {
           "label" : "O-" ,
-          "value" : currentHospital.oneg
+          "value" : HospitalProfileCtrl.hospital.oneg
         },
         {
           "label" : "A+" ,
-          "value" : currentHospital.apos
+          "value" : HospitalProfileCtrl.hospital.apos
         },
         {
           "label" : "A-" ,
-          "value" : currentHospital.aneg
+          "value" : HospitalProfileCtrl.hospital.aneg
         },
         {
           "label" : "B+" ,
-          "value" : currentHospital.bpos
+          "value" : HospitalProfileCtrl.hospital.bpos
         },
         {
           "label" : "B-" ,
-          "value" : currentHospital.bneg
+          "value" : HospitalProfileCtrl.hospital.bneg
         },
         {
           "label" : "AB+" ,
-          "value" : currentHospital.abpos
+          "value" : HospitalProfileCtrl.hospital.abpos
         },
         {
           "label" : "AB-" ,
-          "value" : currentHospital.abneg
+          "value" : HospitalProfileCtrl.hospital.abneg
         }
         ]
       }

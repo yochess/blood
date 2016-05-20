@@ -326,6 +326,9 @@ header {
  line-height: 1.35;
 }
 
+.donor-chart-header {
+  color: white;
+}
 
 .profile .events {
   margin-top: 20px;
@@ -338,7 +341,12 @@ header {
 
 .map-page .donor-chart {
   margin-top: 20px;
-  border: 1px solid #700000;
+  background-color: #333333;
+  border: 2px solid #700000;
+}
+
+.donor-chart .nvd3-svg {
+  fill: white;
 }
 
 .event {
@@ -445,6 +453,11 @@ header {
 
 .profile-table {
   color: white;
+}
+
+.friends-report {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .profile label {
@@ -1015,6 +1028,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .modal-content {
   color: black;
+}
+
+.btn-confirm {
+  background-color: #700000;
 }
 
 @media only screen and (max-width: 780px) {
