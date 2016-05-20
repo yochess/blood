@@ -239,8 +239,10 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       //Assign the top 5 donors donotion count to the $scope.data[0].values[i].value
       if(donors.length > 0) {
         for(let i=0; i< donors.length; i++){
-          $scope.donordata[0].values[i].value = donors[i].appointments.length;
-          $scope.donordata[0].values[i].label = donors[i].name;
+          if(donors[i].appointments.length > 0) {
+            $scope.donordata[0].values[i].value = donors[i].appointments.length;
+            $scope.donordata[0].values[i].label = donors[i].name;
+          }
         }
         update();
       }
