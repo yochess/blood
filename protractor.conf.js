@@ -14,7 +14,7 @@
 
 exports.config = {
   // allScriptsTimeout: 11000,
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://bloodshare.io',
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
