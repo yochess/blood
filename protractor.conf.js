@@ -44,7 +44,7 @@ exports.config = {
   onPrepare: function() {
     browser.driver.manage().window().maximize();
     browser.get('http://localhost:8080');
-  },
+  }
 
   // jasmineNodeOpts: {
   //   defaultTimeoutInterval: 30000
