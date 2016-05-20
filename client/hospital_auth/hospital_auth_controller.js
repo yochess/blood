@@ -13,7 +13,7 @@ app.controller('HospitalAuthController', ['$window','$routeParams' , '$rootScope
       $rootScope.NavCtrl.login('hospital', hospital.id);
     })
     .catch(err => {
-      console.error(err);
+      HospitalAuthCtrl.signupError = true;
     });
   };
 
@@ -25,7 +25,7 @@ app.controller('HospitalAuthController', ['$window','$routeParams' , '$rootScope
       $rootScope.NavCtrl.login('hospital', hospital.id);
     })
     .catch(err => {
-      console.error(err);
+      HospitalAuthCtrl.loginError = true;
     });
   };
 }]);

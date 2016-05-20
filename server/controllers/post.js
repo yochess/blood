@@ -46,6 +46,10 @@ let getPostsByLocation = (req, res) => {
 };
 
 let postPost = (req, res) => {
+  if (!req.user) {
+    res.status(401).end();
+    return;
+  }
   let donorId = req.user.type === 'donor' ? req.user.id : null;
   let hospitalId = req.user.type === 'hospital' ? req.user.id : null;
   Post.create({

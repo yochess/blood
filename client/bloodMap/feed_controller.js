@@ -14,8 +14,11 @@ app.controller('FeedController', ['$scope', '$rootScope','Feed', function($scope
   setInterval(updatePosts, 5000);
 
   FeedCtrl.submit = () => {
-    Feed.submit(FeedCtrl.content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude});
-    updatePosts();
+    Feed.submit(FeedCtrl.content, {latitude: $rootScope.latitude, longitude: $rootScope.longitude})
+    .then(updatePosts)
+    .catch(() => {
+      FeedCtrl.feedError = true;
+    });
     FeedCtrl.content = '';
   };
 }]);
