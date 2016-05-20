@@ -84,23 +84,23 @@ app.controller('SplashController', ['$routeParams', '$scope', function($routePar
                key: " ",
                values: [
                    {
-                       "label" : "Drake" ,
+                       "label" : "Travis Baratcart" ,
                        "value" : 15
                    } ,
                    {
-                       "label" : "Calendar" ,
+                       "label" : "Vinitha S Raja" ,
+                       "value" : 9
+                   } ,
+                   {
+                       "label" : "Drake Wang" ,
                        "value" : 8
                    } ,
                    {
-                       "label" : "Two dogs" ,
-                       "value" : 6
+                       "label" : "John Boucherie" ,
+                       "value" : 8
                    } ,
                    {
-                       "label" : "A bird" ,
-                       "value" : 3
-                   } ,
-                   {
-                       "label" : "UI Directive" ,
+                       "label" : "Calendar" ,
                        "value" : 2
                    }
                ]
