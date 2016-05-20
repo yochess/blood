@@ -28,7 +28,6 @@ app.factory('Profile', ['$http', function($http) {
       }
     })
     .then((res) => {
-      console.log('res: ', res.data);
       return res.data;
     });
   };
