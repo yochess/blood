@@ -39,8 +39,12 @@ exports.config = {
   params: {
     time: new Date().getTime(),
     hash: Math.random().toString(36).slice(2)
+  },
+  jasmineNodeOpts: {
+    showColors: true,
+    isVerbose: true,
+    realtimeFailure: true,
+    includeStackTrace: true,
+    defaultTimeoutInterval: 30000
   }
-  // jasmineNodeOpts: {
-  //   defaultTimeoutInterval: 30000
-  // }
 };
