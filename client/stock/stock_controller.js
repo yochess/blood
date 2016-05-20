@@ -31,8 +31,7 @@ app.controller('StockController', ['$routeParams', '$http', "$scope", function($
                       $scope.$apply();
                     }
                   }
-                },
-                callback: function(e){console.log('! callback !')}
+                }
             }
         };
 

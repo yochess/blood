@@ -27,7 +27,6 @@
     };
 
     NavCtrl.logout = () => {
-      console.log('logging out');
       $window.localStorage.setItem('id', '');
       $window.localStorage.setItem('type', '');
 

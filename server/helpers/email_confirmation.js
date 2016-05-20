@@ -13,17 +13,12 @@ let Appointment = controllers.Appointment;
 const TIME_INTERVAL = 1000 * 60 * 5;
 
 
-
-
 Appointment.findAll().then(appointments => {
   let currentTime = new Date().getTime();
-
   for (let appointment of appointments) {
-// console.log(appointment.hospitalId + ' and ' + appointment.donorId);
     Hospital.findOne({where: {id: appointment.hospitalId}}).then(hospital => {
       Donor.findOne({where: {id: appointment.donorId}}).then(donor => {
         let appointmentTime = appointment.createdAt.getTime();
-
         if (appointmentTime + TIME_INTERVAL > currentTime) {
           email(donor, hospital, appointment);
         }
@@ -88,23 +83,14 @@ function email(donor, hospital, appointment) {
       ].join('')
     };
 
-    console.log('utc time: ', appointment.time);
-    console.log('sending mail!');
-    console.log('local time: ', localTime);
-
     transporter.sendMail(mailOptions1, function(error, info) {
-        console.log('info: ', info);
-        console.log('error: ', error);
         if (error) {
           console.error(error);
         }
-        console.log('Messages sent to donor: ' + info.response);
         transporter.sendMail(mailOptions2, function(error, info) {
           if (error) {
             console.error(error);
           }
-          console.log('Messages sent hospital: ' + info.response);
-          console.log('ALL DONE!');
         });
       });
   });

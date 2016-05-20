@@ -21,7 +21,7 @@ let showGoogleEvents = (req, res) => {
     orderBy: 'startTime'
   }, (err, response) => {
     if (err) {
-      console.log('There was an error on the server side: ' + err);
+      console.log(err);
       return res.send(500);
     }
     if (response.items.length == 0) {
@@ -31,7 +31,7 @@ let showGoogleEvents = (req, res) => {
       let events = response.items.filter(event => {
         // perhaps this is never true
         if (!event.end) {
-          console.log('!!!!!no end date: ', event);
+          console.error('No end time');
         }
         return event.end;
       });
@@ -55,7 +55,6 @@ let showGoogleEvents = (req, res) => {
 module.exports = {
   showEvents: (req, res) => {
     if (!req.session.tokens) {
-      console.log('gmail is not enabled!');
       return res.send(401);
     }
 
@@ -66,7 +65,6 @@ module.exports = {
   addEvent: (req, res) => {
     let authClient = getAuthClient();
     if (!req.session.tokens) {
-      console.log('no tokens present!');
       return res.send(401);
     }
 
