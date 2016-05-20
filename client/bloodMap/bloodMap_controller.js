@@ -204,7 +204,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
 
       //For each hospital, add their blood stocks to the data object
       //so we can get the total for every hospital in the area.
-      for(var i = 0; i < BloodMapCtrl.hospitals.length; i++) {
+      for(let i = 0; i < BloodMapCtrl.hospitals.length; i++) {
         $scope.data[0].values[0].value += BloodMapCtrl.hospitals[i].opos;
         $scope.data[0].values[1].value += BloodMapCtrl.hospitals[i].oneg;
         $scope.data[0].values[2].value += BloodMapCtrl.hospitals[i].apos;
@@ -215,7 +215,7 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
         $scope.data[0].values[7].value += BloodMapCtrl.hospitals[i].abneg;
       }
 
-      for(var k = 0; k <= 7; k++) {
+      for(let k = 0; k <= 7; k++) {
         $scope.data[0].values[k].value = ($scope.data[0].values[k].value / BloodMapCtrl.hospitals.length)
       }
       setMarkers(BloodMapCtrl.map, BloodMapCtrl.hospitals);

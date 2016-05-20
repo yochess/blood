@@ -50,7 +50,7 @@
     <div class="panel-body panel-lower events">
       <h3>Upcoming Events</h3>
       <div class="event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.upcoming">
-        <img src="assests/heart.png"/>
+        <img src="/assests/heart.png"/>
         <p>
           You have an appointment to donate blood at <a ng-href="hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>.
         </p>
@@ -63,19 +63,19 @@
       <h3>Event History</h3>
       <div class="event history-event" ng-repeat="appointment in ProfileCtrl.user.appointments | filter:ProfileCtrl.past">
         <div ng-show="{{appointment.type === 1}}">
-          <img src="assests/heart.png"/>
+          <img src="/assests/heart.png"/>
           <p>
             You donated blood at <a ng-href="/hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. The clot thickens!
           </p>
         </div>
         <div ng-show="{{appointment.type === 2}}">
-          <img src="assests/buddy.png"/>
+          <img src="/assests/buddy.png"/>
           <p>
             You participated in an event <a ng-href="/hospital/profile/{{appointment.hospital.id}}">{{appointment.hospital.name}}</a>. Way to pool your efforts!
           </p>
         </div>
         <div ng-show="{{appointment.type === 3}}">
-          <img src="assests/medical.png" />
+          <img src="/assests/medical.png" />
           <p>
             You drew blood from a stone and helped a blood-buddy get over his fear of needles!
           </p>
