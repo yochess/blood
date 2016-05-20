@@ -15,7 +15,7 @@
 exports.config = {
   // allScriptsTimeout: 11000,
   baseUrl: 'http://localhost:8080',
-  framework: 'jasmine',
+  framework: 'jasmine2',
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
   // add more dependencies
