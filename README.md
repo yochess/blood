@@ -1,7 +1,7 @@
 # Bloodshare
 <img src="/misc/grey.png" alt="bloodshare logo" width="250" />
 
-[![Build Status](https://travis-ci.org/britishchicken/blood.svg?branch=master)](https://travis-ci.org/britishchicken/blood)
+[![Build Status](https://travis-ci.org/britishchicken/blood.svg?branch=master)](https://travis-ci.org/britishchicken/blood) [![Coverage Status](https://coveralls.io/repos/github/britishchicken/blood/badge.svg?branch=master)](https://coveralls.io/github/britishchicken/blood?branch=master)
 
 Bloodshare is an application which seeks to make the process of donating blood as simple and engaging as possible.
 Bloodcenters can input their blood stocks and scheduling info, and donors can check which bloodcenters in the area need their blood and make appointments.
