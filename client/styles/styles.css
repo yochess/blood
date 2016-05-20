@@ -616,6 +616,13 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   }
 }
 
+@media only screen and (max-width: 1091px) {
+  .userInfo-table {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 .hospital-profile svg.nvd3-svg {
   width: 115% !important;
   position: relative;
@@ -685,6 +692,16 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   margin: 20px 0;
 }
 
+@media only screen and (max-width: 991px) {
+  .services-wrapper {
+    margin: 0 auto;
+  }
+  .services {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+}
+
 .splash-signup {
   border: 2px solid #700000;
   height: 60px;
@@ -714,7 +731,8 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 .splash-btn-bottom {
   margin-top: 40px;
-  padding: 1.5em 2em;
+  font-size: 1.3em;
+  padding: 1.2em 1.7em;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -797,14 +815,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 /* Events Page Styling */
 
 .events-panel{
-  margin: 20px;
+  font-family: 'Open Sans';
+  margin-bottom: 20px;
   text-align: center;
   color:white;
-}
-
-.events-panel  {
-  margin: 5px;
-  font-family: 'Open Sans';
 }
 
 .events-panel h3 {
@@ -993,6 +1007,10 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
   width: 80%;
 }
 
+#datetimepicker {
+  color: black;
+}
+
 .hospital-scheduler {
   margin: 15px;
 }
@@ -1125,11 +1143,11 @@ rzslider .rz-pointer, rzslider .rz-bar.rz-selection {
 
 /* Get stuff off the navbars back already, jeez. */
 
-#donor-login, #donor-signup, #hospital-login, #hospital-signup {
+#donor-login, #donor-signup, #hospital-login, #hospital-signup{
   padding-top: 100px;
 }
 
-.hospital-profile, .profile, .map-page, .calendar, .stocks, .blood-buddy {
+.hospital-profile, .profile, .map-page, .calendar, .stocks, .blood-buddy, .events-page {
   padding-top: 70px;
 }
 

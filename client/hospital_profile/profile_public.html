@@ -3,7 +3,7 @@
     <div class="panel-body">
       <div class="public-view" ng-hide="HospitalProfileCtrl.edit">
         <div class="col-md-6">
-          <img src="{{HospitalProfileCtrl.hospital.photo}}" alt="No Image Provided" onError="this.src = 'assests/hosp.jpg';" class="img-circle center-block img-profile" />
+          <img src="{{HospitalProfileCtrl.hospital.photo}}" alt="No Image Provided" onError="this.src = '/assests/hosp.jpg';" class="img-circle center-block img-profile" />
           <div class="hospital-blood-panel">
             <nvd3 options="options" data="data" forceY='[50, 20]' api="api"></nvd3>
           </div>
@@ -38,7 +38,7 @@
       <div class="events-hospital-profile">
       <h2 class='text-center'>Upcoming Events</h2>
         <div class="event" ng-repeat="event in HospitalProfileCtrl.hospital.events">
-        <img src="assests/heart.png"/>
+        <img src="/assests/heart.png"/>
           <p> You are hosting <a ng-href="event/{{event.id}}">an event</a> on {{event.time | date}}, at {{event.time | date: 'shortTime'}}. </p>
             <p>{{event.donors.length === 1 ? '1 donor is' : event.donors.length +' donors are'}} currently confirmed to attend.</p>
           </p>
