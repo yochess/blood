@@ -7,8 +7,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - node ./server/controllers/controller.js
-  - nohup bash -c "./nodemodules/protractor/bin/webdriver-manager start 2>&1 &"
-  - sleep 5
+  - ./node_modules/protractor/bin/webdriver-manager update
 
 addons:
   firefox: latest
