@@ -45,7 +45,7 @@ describe('Hospital Profile', () => {
       let submitBtnEl = editViewEl.element(by.css('.submit-button'));
       let cancelBtnEl = editViewEl.element(by.css('.cancel-button'));
 
-      let goodInfoData = {
+      const goodInfoData = {
         name: 'magic hospital',
         email: 'magichospital@mail.com',
         address: '944 Market St, San Francisco, CA 94102',
@@ -53,7 +53,7 @@ describe('Hospital Profile', () => {
         hospitalurl: 'www.magichospital.com'
       };
 
-      let badInfoData = {
+      const badInfoData = {
         name: 'hacker hospital',
         email: 'hackerhospital@mail.com',
         // address: '123 fake st',
@@ -93,10 +93,11 @@ describe('Hospital Profile', () => {
       });
     });//end edit info
 
-    xdescribe('Edit Blood Levels', () => {
-      it('should update blood level', () => {
+    //edit blood level
+    describe('Edit Blood Levels', () => {
+      xit('should update blood level', () => {
         //pending...
       });
-    });
+    });//end edit blood level
   });//end not logged in
 });

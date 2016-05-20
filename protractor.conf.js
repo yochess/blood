@@ -20,11 +20,12 @@ exports.config = {
 
   // add more dependencies
   specs: [
-    'client/hospital_auth/hospital_auth.e2e_tests.js',
+    // 'client/hospital_auth/hospital_auth.e2e_tests.js',
+    // 'client/donor_auth/donor_auth.e2e_tests.js',
+    // 'client/**/*.e2e_tests.js'
+
     'client/donor_auth/donor_auth.e2e_tests.js',
-    'client/**/*.e2e_tests.js'
-
-
+    'client/profile/profile.e2e_tests.js'
 
 
   ],
