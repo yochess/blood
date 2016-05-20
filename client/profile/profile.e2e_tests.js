@@ -1,10 +1,8 @@
 'use strict'
-const time = browser.params.time;
-const hash = browser.params.hash;
-let navbar = element(by.id('navbar'));
-
-
 describe('Donor Profile', () => {
+  const time = browser.params.time;
+  const hash = browser.params.hash;
+  let navbar = element(by.id('navbar'));
   let userViewEl = element(by.css('.panel-body.user-view'));
 
   beforeAll(() => {
@@ -19,9 +17,9 @@ describe('Donor Profile', () => {
   });
 
   //logged in
-  describe('User is logged in as a donor', () => {
+  describe('when user is logged in as a donor', () => {
     //edit profile
-    describe('Edit Profile', () => {
+    describe('on Edit Profile', () => {
       let editFormEl = userViewEl.element(by.css('.simple-form.profile-edit-form'));
       let editBtnEl = userViewEl.element(by.css('.profile-button.btn.edit-button'));
       let submitBtnEl = userViewEl.element(by.css('.profile-button-submit.btn'));
@@ -39,6 +37,12 @@ describe('Donor Profile', () => {
         address: 'bad st.'
       };
       const badBloodTypeData = 'O-';
+
+      afterAll(() => {
+        editBtnEl.click();
+        editFormEl.element(by.model('ProfileCtrl.user.email')).clear().sendKeys(`test${time}@donor.com`);
+        submitBtnEl.click();
+      });
 
       it('should display edit view on click', () => {
         expect(editFormEl.isDisplayed()).toBeFalsy();
@@ -73,7 +77,7 @@ describe('Donor Profile', () => {
     });//end edit profile
 
     //profile view
-    describe('Events View', () => {
+    describe('on Events View', () => {
       let upcomingEventsEl = element(by.css('.panel-body.panel-lower.events'));
 
       xit('should render upcoming events', () => {
@@ -83,7 +87,7 @@ describe('Donor Profile', () => {
       });
     });
 
-    describe('Friends and Favorite Hospital View', () => {
+    describe('on Friends and Favorite Hospital View', () => {
       xit('should render friends', () => {
       });
       xit('should render favorite hopsitals', () => {

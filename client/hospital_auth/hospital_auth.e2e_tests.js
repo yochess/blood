@@ -1,11 +1,10 @@
 'use strict'
-const time = browser.params.time;
-const hash = browser.params.hash;
-let navbar = element(by.id('navbar'));
-
 describe('Hospital Auth', () => {
+  const time = browser.params.time;
+  const hash = browser.params.hash;
+  let navbar = element(by.id('navbar'));
   //signup page
-  describe('Signup Page', () => {
+  describe('Signup', () => {
     let signupEl = element(by.id('hospital-signup'));
     let emailInputEl = signupEl.element(by.model('HospitalAuthCtrl.signupObj.email'));
     let passwordInputEl = signupEl.element(by.model('HospitalAuthCtrl.signupObj.password'));
@@ -43,7 +42,7 @@ describe('Hospital Auth', () => {
   });//end signup page
 
   //login page
-  describe('Login Page', () => {
+  describe('Login', () => {
     let loginEl = element(by.id('hospital-login'));
 
     beforeEach(() => {
