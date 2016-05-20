@@ -43,10 +43,8 @@ let postEvent = (req, res) => {
       let donor = results[1];
 
       if (req.user.type === 'hospital') {
-        console.log('made event');
         res.send(event);
       } else {
-        console.log('made event and donor');
         event.addDonor(donor)
         .then(() => res.send(event));
       }
