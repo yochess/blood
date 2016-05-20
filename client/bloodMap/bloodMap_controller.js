@@ -43,9 +43,10 @@ app.controller('BloodMapController', ['$window','$routeParams' , '$rootScope', '
       .call(chart);
   };
 
-  $scope.$watch('$scope.donordata', function() {
-      update();
-  });
+  // $scope.$watch('$scope.donordata', function() {
+  //     update();
+  // });
+
 
   $scope.$on('chartinit', update);
 
