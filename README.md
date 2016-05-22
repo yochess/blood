@@ -143,6 +143,10 @@ bloodshare
 
 ```
 
+## Database Schema
+
+<img src="/misc/db_schema.png" alt="database shema" />
+
 ## Api Endpoints
 
 ### Donor Profiles
