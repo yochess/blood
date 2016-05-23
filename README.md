@@ -7,6 +7,8 @@ Bloodshare is an application which seeks to make the process of donating blood a
 Bloodcenters can input their blood stocks and scheduling info, and donors can check which bloodcenters in the area need their blood and make appointments.
 Social features  allow donors to schedule and recruit for events, as well as search for a blood buddy if they are new and afraid of needles.
 
+[Deployed Link](https://bloodshare.io)
+
 ## Example Use
 
 <img src="/misc/demo.gif" alt="Example use case of bloodshare">
