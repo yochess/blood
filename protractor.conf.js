@@ -37,13 +37,13 @@ exports.config = {
   ],
 
   capabilities: {
-    // 'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    // build: process.env.TRAVIS_BUILD_NUMBER,
-    // name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
+    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    build: process.env.TRAVIS_BUILD_NUMBER,
+    name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
     browserName: 'firefox'
-    // shardTestFiles: true,
-    // maxInstances: 1,
-    // seleniumVersion: '2.46.0'
+    shardTestFiles: true,
+    maxInstances: 1,
+    seleniumVersion: '2.46.0'
   },
   params: {
     time: new Date().getTime(),
