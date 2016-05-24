@@ -40,7 +40,7 @@ exports.config = {
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     build: process.env.TRAVIS_BUILD_NUMBER,
     name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
-    browserName: 'firefox'
+    browserName: 'firefox',
     shardTestFiles: true,
     maxInstances: 1,
     seleniumVersion: '2.46.0'
