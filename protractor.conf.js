@@ -14,7 +14,6 @@
 
 exports.config = {
   // allScriptsTimeout: 11000,
-  // baseUrl: 'http://localhost:8080',
   sauceUser: process.env.SAUCE_USERNAME,
   sauceKey: process.env.SAUCE_ACCESS_KEY,
   // baseUrl: 'http://' + (process.env.CI ? 'blood' : 'localhost') + ':8080',
@@ -38,19 +37,19 @@ exports.config = {
   ],
 
   capabilities: {
-    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    build: process.env.TRAVIS_BUILD_NUMBER,
-    name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
-    browserName: 'firefox',
-    shardTestFiles: true,
-    maxInstances: 5,
-    seleniumVersion: '2.46.0'
+    // 'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    // build: process.env.TRAVIS_BUILD_NUMBER,
+    // name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
+    browserName: 'firefox'
+    // shardTestFiles: true,
+    // maxInstances: 1,
+    // seleniumVersion: '2.46.0'
   },
   params: {
     time: new Date().getTime(),
     hash: Math.random().toString(36).slice(2)
+  },
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 30000
   }
-  // jasmineNodeOpts: {
-  //   defaultTimeoutInterval: 30000
-  // }
 };

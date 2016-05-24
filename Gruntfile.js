@@ -38,7 +38,7 @@ grunt.initConfig({
     server: {
       options: {
         hostname: 'localhost',
-        port: 9876,
+        port: 8080,
         base: '.'
       }
     }
