@@ -33,16 +33,15 @@ grunt.initConfig({
       }
     }
   },
-
-  connect: {
-    server: {
-      options: {
-        hostname: 'localhost',
-        port: 8080,
-        base: '.'
-      }
-    }
-  },
+  // connect: {
+  //   server: {
+  //     options: {
+  //       hostname: 'localhost',
+  //       port: 8080,
+  //       base: '.'
+  //     }
+  //   }
+  // },
   protractor_webdriver: {
     webDriverStart: {
       options: {
@@ -79,5 +78,6 @@ grunt.loadNpmTasks('grunt-protractor-webdriver');
 // Default task(s).
 grunt.registerTask('default', ['concat', 'babel', 'uglify']);
 grunt.registerTask('test:travis', ['connect', 'protractor_webdriver:webDriverStart', 'protractor:travis']);
+grunt.registerTask('test:travis', ['protractor_webdriver:webDriverStart', 'protractor:travis']);
 
 };

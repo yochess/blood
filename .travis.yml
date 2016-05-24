@@ -11,6 +11,7 @@ before_script:
 - "./node_modules/protractor/bin/webdriver-manager update"
 - node server/server.js
 script:
+- nodemon server/server.js
 - npm run test-travis
 addons:
   sauce_connect: true
@@ -33,6 +34,8 @@ node_js:
 services:
 - mysql
 before_install:
+- openssl aes-256-cbc -K $encrypted_073344a26ea2_key -iv $encrypted_073344a26ea2_iv
+  -in serverconfig.js.enc -out serverconfig.js -d
 - touch serverconfig.js
 - mysql -u root -e 'create database blood;'
 after_success:
