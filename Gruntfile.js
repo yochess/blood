@@ -58,15 +58,9 @@ grunt.initConfig({
       noColor: false,
       args: { }
     },
-    test: {
-      options: {
-        configFile: './protractor.conf.js',
-        args: { }
-      }
-    },
     travis: {
       options: {
-        configFile: './protractor_travis_conf.js',
+        configFile: './protractor.conf.js',
         args: { }
       }
     }
@@ -84,6 +78,6 @@ grunt.loadNpmTasks('grunt-protractor-webdriver');
 
 // Default task(s).
 grunt.registerTask('default', ['concat', 'babel', 'uglify']);
-grunt.registerTask('test:travis', ['connect', 'protractor_webdriver:webDriverStart', 'protractor:test']);
+grunt.registerTask('test:travis', ['connect', 'protractor_webdriver:webDriverStart', 'protractor:travis']);
 
 };
