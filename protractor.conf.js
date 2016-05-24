@@ -17,7 +17,8 @@ exports.config = {
   // baseUrl: 'http://localhost:8080',
   sauceUser: process.env.SAUCE_USERNAME,
   sauceKey: process.env.SAUCE_ACCESS_KEY,
-  baseUrl: 'http://' + (process.env.CI ? 'blood' : 'localhost') + ':8080',
+  // baseUrl: 'http://' + (process.env.CI ? 'blood' : 'localhost') + ':8080',
+  baseUrl: 'http://localhost:8080',
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -37,9 +38,13 @@ exports.config = {
   ],
 
   capabilities: {
+    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    build: process.env.TRAVIS_BUILD_NUMBER,
+    name: 'ng-pattern-restrict Firefox build ' + process.env.TRAVIS_BUILD_NUMBER,
     browserName: 'firefox',
-    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER ? process.env.TRAVIS_JOB_NUMBER : null,
-    name: 'blood'
+    shardTestFiles: true,
+    maxInstances: 5,
+    seleniumVersion: '2.46.0'
   },
   params: {
     time: new Date().getTime(),
