@@ -14,7 +14,10 @@
 
 exports.config = {
   // allScriptsTimeout: 11000,
-  baseUrl: 'https://bloodshare.io',
+  // baseUrl: 'http://localhost:8080',
+  sauceUser: process.env.SAUCE_USERNAME,
+  sauceKey: process.env.SAUCE_ACCESS_KEY,
+  baseUrl: 'http://' + (process.env.CI ? 'blood' : 'localhost') + ':8080',
   framework: 'jasmine',
   seleniumAddress: 'http://localhost:4444/wd/hub',
 
@@ -34,17 +37,15 @@ exports.config = {
   ],
 
   capabilities: {
-    browserName: 'firefox'
+    browserName: 'firefox',
+    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER ? process.env.TRAVIS_JOB_NUMBER : null,
+    name: 'blood'
   },
   params: {
     time: new Date().getTime(),
     hash: Math.random().toString(36).slice(2)
-  },
-  jasmineNodeOpts: {
-    showColors: true,
-    isVerbose: true,
-    realtimeFailure: true,
-    includeStackTrace: true,
-    defaultTimeoutInterval: 30000
   }
+  // jasmineNodeOpts: {
+  //   defaultTimeoutInterval: 30000
+  // }
 };
