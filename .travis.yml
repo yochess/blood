@@ -22,7 +22,7 @@ addons:
     - gcc-4.8
       - g++-4.8
 env:
-  # matrix:
+  matrix:
   - CXX=g++-4.8
   global:
   - secure: Pt1bDPwbxNshKuTGoaavdTJ7EENYOXLwsG6IupOh+jwdZWueHQH+lZTOo9ndC4sCn00VmaIhHpMYHY3EYj9BHiuRyTwt5l3sotBwz3PcMbxqHz5+w4lZlerK20/bT0eL9/biG/TQLvMvvXRH+P8vv6dSE9xoMciICJZn8T6VZMYn9OgHLed3kyJYQjf9FvcgjGRFKSgTilQl7uhv5HVCrZNXBV50ilIfNNQl1Wyhs3XiRvZiCVtmxlFq/uoWHxC2/L28/GOJ38G92atS7dCWwCBfDp19Mdg0Ypn+KviLcpqT2hfW3K4Un/vEgF+dLqBhWxZr+OrlJZmabrOIrlN9VJO1LwRE24J+MYCUewLNKW8zsrDDnao5bvGSZaO5uQEoAhbrsJkqpHN7zC74mrl7I1mwCI8ZMSotXsy1J8jqKVzN/4/hY/znHWoM2IfU7evyBgGdFdfCa7Dz/G/pdaZJvU0Ax1S/XePLj1RwyWWiPrDfHUVGkN259vNR3UNVh93b95FDYmCsaNWjdOgmcUtU8aaLOHlwxiXn2u77LjZH/lbiRjVHXYYBZpC5emq5MjQvZKTBOqL4NnGauyJOrfxApiTo2o3rOxrYJu8jPHxa2W1Yk08EvHAP5jmq0x3FLTaoOMLXOB2cyNW8vrg30E7Wl94fzv6B1ylKyjVlO0F0598=
